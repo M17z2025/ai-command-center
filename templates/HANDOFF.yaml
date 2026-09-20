@@ -1,0 +1,15 @@
+repository: owner/repo
+task_id: ""
+objective: ""
+current_state: ""
+acceptance_criteria: []
+constraints: []
+relevant_paths:
+  - discover
+environment_variables: []
+test_commands: []
+deployment:
+  in_scope: false
+  target: ""
+known_blockers: []
+security_notes: []
