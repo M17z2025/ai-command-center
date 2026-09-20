@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sigma Project Manifest",
+  "type": "object",
+  "required": ["schema_version", "project", "product", "stack", "commands", "deployment", "security"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "project": {
+      "type": "object",
+      "required": ["name", "repository", "lifecycle"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "product_owner": {"type": "string"},
+        "lifecycle": {"enum": ["active", "maintenance", "paused", "archived", "discovered"]},
+        "priority": {"enum": ["critical", "high", "normal", "low"]}
+      },
+      "additionalProperties": true
+    },
+    "product": {"type": "object"},
+    "stack": {"type": "object"},
+    "commands": {"type": "object"},
+    "deployment": {"type": "object"},
+    "security": {"type": "object"}
+  },
+  "additionalProperties": true
+}
