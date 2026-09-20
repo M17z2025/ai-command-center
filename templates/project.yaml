@@ -1,0 +1,54 @@
+schema_version: 1
+project:
+  name: ""
+  repository: "owner/repo"
+  product_owner: ""
+  lifecycle: "active"
+  priority: "normal"
+
+product:
+  purpose: ""
+  users: []
+  critical_flows: []
+
+stack:
+  frontend: ""
+  backend: ""
+  database: ""
+  auth: ""
+  storage: ""
+  hosting: ""
+  package_manager: ""
+
+commands:
+  install: ""
+  dev: ""
+  build: ""
+  lint: ""
+  typecheck: ""
+  test: ""
+  test_integration: ""
+
+deployment:
+  provider: ""
+  production_url: ""
+  production_branch: "main"
+  instructions: "docs/deployment.md"
+
+security:
+  multi_tenant: false
+  rls_required: false
+  financial_data: false
+  health_data: false
+  legal_data: false
+  pii: false
+
+documentation:
+  architecture: "docs/architecture.md"
+  status: "PROJECT_STATUS.md"
+
+integrations: []
+environment_variables: []
+
+constraints: []
+definition_of_done_additions: []
