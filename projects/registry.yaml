@@ -1,0 +1,142 @@
+schema_version: 1
+command_center:
+  name: "Sigma Development Command Center"
+  repository: "M17z2025/ai-command-center"
+
+defaults:
+  owner: "M17z2025"
+  contract_manifest: ".sigma/project.yaml"
+  status_file: "PROJECT_STATUS.md"
+  agent_file: "AGENTS.md"
+
+projects:
+  - name: "Sigma Development Command Center"
+    repository: "M17z2025/ai-command-center"
+    lifecycle: active
+    category: control-plane
+
+  - name: "Mi7z Web"
+    repository: "M17z2025/mi7z-web"
+    lifecycle: active
+    category: platform
+
+  - name: "Alysha AI Platform"
+    repository: "M17z2025/alisha-ai-platform"
+    lifecycle: active
+    category: ai-assistant
+
+  - name: "Alysha OS"
+    repository: "M17z2025/alisha-os"
+    lifecycle: discovered
+    category: ai-assistant
+    notes: "Relationship to alisha-ai-platform must be recorded before consolidation or archival."
+
+  - name: "Alysha Repository Automation"
+    repository: "M17z2025/alisha-repository-automation"
+    lifecycle: discovered
+    category: automation
+
+  - name: "Invoiceit by Mi7z"
+    repository: "M17z2025/invoiceit-by-mi7z"
+    lifecycle: active
+    category: business-app
+
+  - name: "Lycia Zambia"
+    repository: "M17z2025/lycia-zambia"
+    lifecycle: active
+    category: marketplace
+
+  - name: "Marketit"
+    repository: "M17z2025/umarketit"
+    lifecycle: active
+    category: marketing
+
+  - name: "Total Mining Intelligence"
+    repository: "M17z2025/total-mining-intelligence"
+    lifecycle: active
+    category: mining-intelligence
+
+  - name: "BodyFit"
+    repository: "M17z2025/mybodyfit"
+    lifecycle: active
+    category: health-fitness
+
+  - name: "Tattooit"
+    repository: "M17z2025/tattooit"
+    lifecycle: active
+    category: marketplace
+
+  - name: "Legalit"
+    repository: "M17z2025/legalit"
+    lifecycle: active
+    category: legal-tech
+
+  - name: "Signit by Mi7z"
+    repository: "M17z2025/signit-by-mi7z"
+    lifecycle: active
+    category: e-signature
+
+  - name: "Humanit"
+    repository: "M17z2025/ihumanit"
+    lifecycle: active
+    category: ai-assistant
+
+  - name: "Designit AI Platform"
+    repository: "M17z2025/designit-ai-platform"
+    lifecycle: active
+    category: development-platform
+
+  - name: "Synergy AI Pay"
+    repository: "M17z2025/synergy-ai-pay"
+    lifecycle: discovered
+    category: fintech
+
+  - name: "Synergy Alliance Holdings"
+    repository: "M17z2025/synergy-alliance-holdings"
+    lifecycle: discovered
+    category: corporate
+
+  - name: "Lycia Limited"
+    repository: "M17z2025/lycia-limited"
+    lifecycle: active
+    category: corporate
+
+  - name: "Nexus Hosting"
+    repository: "M17z2025/nexushosting"
+    lifecycle: discovered
+    category: hosting
+
+  - name: "Mi7z"
+    repository: "M17z2025/mi7z"
+    lifecycle: discovered
+    category: corporate
+
+  - name: "Imotion"
+    repository: "M17z2025/imoition"
+    lifecycle: discovered
+    category: product
+
+  - name: "Vinci Gateway"
+    repository: "M17z2025/vinci-gateway"
+    lifecycle: discovered
+    category: infrastructure
+
+  - name: "CSK Mega Structures"
+    repository: "M17z2025/csk-mega-structures"
+    lifecycle: discovered
+    category: product
+
+  - name: "Aurelius"
+    repository: "M17z2025/Aurelius"
+    lifecycle: discovered
+    category: product
+
+  - name: "Mi7z Play Foundation"
+    repository: "M17z2025/Mi7z_play_foundation"
+    lifecycle: discovered
+    category: foundation
+
+  - name: "Mi7z Core Intelligence"
+    repository: "M17z2025/mi7z_core_Intelliegence"
+    lifecycle: discovered
+    category: ai-platform
