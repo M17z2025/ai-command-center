@@ -99,3 +99,32 @@ Each run should record:
 ## Production boundary
 
 Automatic code preparation and review can be continuous. Production deployment should follow each project's deployment policy and explicit approval requirements for high-risk systems.
+
+
+## Current implementation phase — read-only discovery
+
+Issue #9 implements the first executable runner slice without granting product mutation authority.
+
+`scripts/sigma_runner_discovery.py`:
+- reads `projects/registry.yaml`;
+- gathers repository metadata, manifest/status presence, open issue/PR counts and latest commit evidence;
+- uses GitHub REST GET requests only and raises before any non-GET request can reach the network;
+- reports inaccessible/private repositories explicitly instead of guessing;
+- writes JSON and Markdown discovery evidence;
+- does not select, modify, merge or deploy product work.
+
+Run all registered repositories:
+
+```bash
+python scripts/sigma_runner_discovery.py
+```
+
+Limit discovery to one or more exact registry repositories:
+
+```bash
+python scripts/sigma_runner_discovery.py --repository M17z2025/ai-command-center
+```
+
+For private managed repositories, supply a least-privilege read token at runtime through `SIGMA_GITHUB_TOKEN`. The token value must never be committed. GitHub Actions may use an appropriately scoped `GITHUB_TOKEN` where repository access is sufficient.
+
+This phase is **not** the autonomous implementation runner described by issue #2. Work selection, branch/PR mutation, CI repair loops, independent user-test orchestration and merge/release policies remain later reviewed phases.
