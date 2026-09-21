@@ -6,12 +6,12 @@ Production/default branch: `main`
 
 ## Working
 
-- Command-center self-contract hardening is in PR #7 / issue #6: the branch adds `.sigma/project.yaml`, `.env.example`, architecture/deployment docs and fail-closed validation for canonical Sigma User Tester artefacts. Exact-head CI evidence is still required before this task can be called complete.
+- Command-center self-contract hardening is complete via PR #7 / issue #6. Exact head `543805a1930ffb6ec8ebc675a4ff139b5aedf527` passed Sigma control-plane validation run `35630046094` and was squash-merged as `03bb45babb4f083b5825c7cb576bcc1bf14fb231`.
 - Sigma User Tester browser certification is **not applicable to PR #7 itself** because the command center has no end-user application runtime; this does not weaken the mandatory tester gate for applicable managed-product releases.
 - Central Sigma agent contract, development loop, security baseline, definition of done, project registry, templates and review protocol are present.
 - Global development directive and repository-control model are present.
 - Sigma Full User Tester is mandatory for material user-facing completion on an approved deployed preview/staging candidate; implementing agents cannot self-certify final user acceptance.
-- GitHub Actions control-plane validation is configured. The previously reviewed status commit `6c5388ece9965ee1cb14fbb05b631ef33601d9bd` passed Sigma control-plane validation run `35585807968`.
+- GitHub Actions control-plane validation is configured and now enforces the command-center self-contract plus canonical Sigma User Tester artefacts. PR #7 exact head passed run `35630046094` before merge.
 - Master adoption issue #1 and autonomous-runner issue #2 remain active.
 - Verified Sigma contract/status baseline currently exists for `M17z2025/mi7z-web`, `M17z2025/alisha-ai-platform`, `M17z2025/invoiceit-by-mi7z`, `M17z2025/umarketit` and `M17z2025/ihumanit`.
 
@@ -19,7 +19,7 @@ Production/default branch: `main`
 
 | Project | Sigma classification | Highest-priority executable next task |
 | --- | --- | --- |
-| Sigma Command Center | READY for control-plane use; owner decisions remain | Continue contract adoption; owner/admin to decide public visibility and AutoHedge dedicated-repository provisioning. |
+| Sigma Command Center | READY for control-plane use; self-contract enforced; owner decisions remain | Advance autonomous-runner issue #2 with a safe read-only/dry-run first slice; owner/admin decisions on public visibility and AutoHedge remain separate blockers. |
 | Mi7z Web | CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED | Repair the two bounded PR #2 TypeScript errors, upgrade CI-flagged vulnerable `next@15.5.3`, then obtain same-head dependency audit/typecheck/build/Playwright evidence. |
 | Alysha AI Platform | RC2 source READY; trusted release BLOCKED; main protection BLOCKED on owner/admin | Apply validated `main` protection/ruleset under issue #470; separately commission/prove approved VPS/Cloudflare HTTPS mobile API origin before trusted RC2 signing/R2 release. |
 | Invoiceit by Mi7z | CHANGES REQUIRED / SECURITY WORK IN PROGRESS | Close P0 issue #3 across the full protected direct-mutation inventory with backend tenant+capability enforcement and negative tests; verify issue #4 numbering candidate separately. |
@@ -112,7 +112,7 @@ Legalit and Lycia Limited have durable status files but remain outside the verif
 
 ## Next three command-center actions
 
-1. Complete PR #7 exact-head control-plane validation and review; merge only if the new self-contract/User Tester drift gates pass.
+1. Advance autonomous-runner issue #2 from architecture-only documentation to a safe executable dry-run/read-only slice that selects repository-backed work without making product changes.
 2. Owner/admin: apply Alysha issue #470 `main` protection using universal `quality`, while preserving RC2 release boundaries; separately keep trusted RC2 signing blocked until ingress proof.
 3. Drive Mi7z Web PR #2 bounded type/security repair and continue remaining repository adoption/security-quality orders with exact-head evidence and independent Sigma Full User Tester coverage where applicable.
 
