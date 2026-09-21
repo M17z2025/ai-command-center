@@ -46,7 +46,7 @@ jobs:
         run: ${{ inputs.test_command }}
       - name: Upload Sigma tester evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sigma-user-test-evidence
           if-no-files-found: warn
