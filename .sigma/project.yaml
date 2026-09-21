@@ -36,7 +36,7 @@ commands:
   build: ""
   lint: ""
   typecheck: ""
-  test: "python scripts/validate_control_plane.py"
+  test: "python -m unittest discover -s tests -p 'test_*.py' && python scripts/validate_control_plane.py"
   test_integration: "python scripts/validate_control_plane.py"
 
 deployment:
@@ -63,11 +63,13 @@ integrations:
   - "GitHub"
   - "GitHub Actions"
 
-environment_variables: []
+environment_variables:
+  - SIGMA_GITHUB_TOKEN
 
 constraints:
   - "Product source code remains in product repositories; Sigma stores control-plane state and rules."
   - "No secrets, credentials, customer data or production tokens in this repository, issues, logs or screenshots."
+  - "Autonomous runner phase 1 is read-only discovery and must reject non-GET GitHub API operations."
   - "Repository evidence overrides chat memory for project state."
   - "Material changes use branches and pull requests."
   - "Destructive production actions and security-control reductions require explicit owner approval."
