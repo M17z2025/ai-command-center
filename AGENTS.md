@@ -44,6 +44,14 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
 
+## Mandatory Sigma Full User Tester
+
+Every material user-facing development must pass the independent Sigma Full User Tester before it can be called complete or release-ready. Read `docs/SIGMA_FULL_USER_TESTER.md` and use `templates/SIGMA_USER_TEST_REPORT.md`.
+
+The tester must operate the deployed preview/staging product through a real browser as an end user, not infer usability from source code. It must cover all applicable critical journeys, relevant roles, desktop/mobile browser coverage, negative/error paths, and provide an explicit UX assessment plus evidence. A blocked or untested critical journey is not a pass.
+
+The implementing agent cannot self-certify user acceptance. The tester is a separate assurance role. Product repositories should expose a complete Playwright user-journey suite and may call the reusable `.github/workflows/sigma-full-user-test.yml` workflow from this command center.
+
 ## Required completion output
 
 Every material task must leave:
