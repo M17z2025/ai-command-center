@@ -1,0 +1,57 @@
+name: Sigma Full User Test
+
+on:
+  workflow_call:
+    inputs:
+      base_url:
+        description: Deployed preview or staging URL to test
+        required: true
+        type: string
+      test_command:
+        description: Command that executes the repository complete user-journey suite
+        required: false
+        default: npx playwright test
+        type: string
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Deployed preview or staging URL to test
+        required: true
+        type: string
+      test_command:
+        description: Complete Playwright user-journey command
+        required: false
+        default: npx playwright test
+
+permissions:
+  contents: read
+
+jobs:
+  full-user-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SIGMA_TEST_BASE_URL: ${{ inputs.base_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Run complete Sigma user journeys
+        run: ${{ inputs.test_command }}
+      - name: Upload Sigma tester evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sigma-user-test-evidence
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            playwright-report/
+            test-results/
+            sigma-user-test-report.*
