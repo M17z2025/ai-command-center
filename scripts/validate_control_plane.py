@@ -20,6 +20,8 @@ REQUIRED = [
     "projects/registry.yaml",
     "templates/project.yaml",
     "templates/SIGMA_USER_TEST_REPORT.md",
+    "scripts/sigma_runner_discovery.py",
+    "tests/test_sigma_runner_discovery.py",
     "schemas/project-manifest.schema.json",
     "docs/OPERATING_MODEL.md",
     "docs/DEVELOPMENT_LOOP.md",
