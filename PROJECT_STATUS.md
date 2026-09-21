@@ -6,6 +6,8 @@ Production/default branch: `main`
 
 ## Working
 
+- Command-center self-contract hardening is in PR #7 / issue #6: the branch adds `.sigma/project.yaml`, `.env.example`, architecture/deployment docs and fail-closed validation for canonical Sigma User Tester artefacts. Exact-head CI evidence is still required before this task can be called complete.
+- Sigma User Tester browser certification is **not applicable to PR #7 itself** because the command center has no end-user application runtime; this does not weaken the mandatory tester gate for applicable managed-product releases.
 - Central Sigma agent contract, development loop, security baseline, definition of done, project registry, templates and review protocol are present.
 - Global development directive and repository-control model are present.
 - Sigma Full User Tester is mandatory for material user-facing completion on an approved deployed preview/staging candidate; implementing agents cannot self-certify final user acceptance.
@@ -110,9 +112,9 @@ Legalit and Lycia Limited have durable status files but remain outside the verif
 
 ## Next three command-center actions
 
-1. Owner/admin: apply Alysha issue #470 `main` protection using universal `quality`, while preserving RC2 release boundaries; separately keep trusted RC2 signing blocked until ingress proof.
-2. Drive Mi7z Web PR #2 bounded type/security repair plus Invoiceit/Marketit/Humanit security-quality orders to exact-head evidence.
-3. Continue remaining repository adoption, prioritising Lycia Zambia and Designit state baselines, while enforcing independent Sigma Full User Tester evidence for material user-facing completion.
+1. Complete PR #7 exact-head control-plane validation and review; merge only if the new self-contract/User Tester drift gates pass.
+2. Owner/admin: apply Alysha issue #470 `main` protection using universal `quality`, while preserving RC2 release boundaries; separately keep trusted RC2 signing blocked until ingress proof.
+3. Drive Mi7z Web PR #2 bounded type/security repair and continue remaining repository adoption/security-quality orders with exact-head evidence and independent Sigma Full User Tester coverage where applicable.
 
 ## Verification boundary
 
