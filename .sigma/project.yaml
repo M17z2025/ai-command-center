@@ -1,0 +1,78 @@
+schema_version: 1
+project:
+  name: "Sigma Development Command Center"
+  repository: "M17z2025/ai-command-center"
+  product_owner: "M17z2025"
+  lifecycle: "active"
+  priority: "high"
+
+product:
+  purpose: "Portfolio-level engineering control plane for the Mi7z/Lycia software portfolio."
+  users:
+    - "Product owner"
+    - "Sigma agents"
+    - "ChatGPT and implementation agents"
+    - "Developers and reviewers"
+  critical_flows:
+    - "Resolve managed products from projects/registry.yaml"
+    - "Read product contracts and status before development"
+    - "Create repository-backed implementation handoffs and work orders"
+    - "Enforce security, verification and definition-of-done gates"
+    - "Require independent Sigma User Tester evidence for applicable user-facing releases"
+    - "Preserve auditable portfolio state in GitHub"
+
+stack:
+  frontend: "None - control-plane repository"
+  backend: "Python 3.12 validation scripts and GitHub automation"
+  database: "None"
+  auth: "GitHub repository permissions"
+  storage: "Git repository and GitHub Actions artifacts"
+  hosting: "GitHub"
+  package_manager: "pip"
+
+commands:
+  install: "pip install -r requirements-control.txt"
+  dev: ""
+  build: ""
+  lint: ""
+  typecheck: ""
+  test: "python scripts/validate_control_plane.py"
+  test_integration: "python scripts/validate_control_plane.py"
+
+deployment:
+  provider: "GitHub"
+  production_url: "https://github.com/M17z2025/ai-command-center"
+  production_branch: "main"
+  instructions: "docs/deployment.md"
+
+security:
+  multi_tenant: false
+  rls_required: false
+  financial_data: false
+  health_data: false
+  legal_data: false
+  pii: false
+
+documentation:
+  architecture: "docs/architecture.md"
+  deployment: "docs/deployment.md"
+  status: "PROJECT_STATUS.md"
+  user_tester: "docs/SIGMA_USER_TESTER.md"
+
+integrations:
+  - "GitHub"
+  - "GitHub Actions"
+
+environment_variables: []
+
+constraints:
+  - "Product source code remains in product repositories; Sigma stores control-plane state and rules."
+  - "No secrets, credentials, customer data or production tokens in this repository, issues, logs or screenshots."
+  - "Repository evidence overrides chat memory for project state."
+  - "Material changes use branches and pull requests."
+  - "Destructive production actions and security-control reductions require explicit owner approval."
+
+definition_of_done_additions:
+  - "Sigma control-plane validation passes on the exact change head."
+  - "The command-center self-manifest and required governance artefacts remain schema-valid/present."
+  - "Applicable user-facing product releases retain independent Sigma User Tester evidence; this control-plane repository has no browser UI to certify."
