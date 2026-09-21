@@ -46,7 +46,7 @@ If a required artefact is missing, create or repair it as part of the work rathe
 
 ## Mandatory Sigma Full User Tester
 
-Every material user-facing development must pass the independent Sigma Full User Tester before it can be called complete or release-ready. Read `docs/SIGMA_FULL_USER_TESTER.md` and use `templates/SIGMA_USER_TEST_REPORT.md`.
+Every material user-facing development must pass the independent Sigma Full User Tester before it can be called complete or release-ready. Read `docs/SIGMA_USER_TESTER.md` and use `templates/SIGMA_USER_TEST_REPORT.md`.
 
 The tester must operate the deployed preview/staging product through a real browser as an end user, not infer usability from source code. It must cover all applicable critical journeys, relevant roles, desktop/mobile browser coverage, negative/error paths, and provide an explicit UX assessment plus evidence. A blocked or untested critical journey is not a pass.
 
