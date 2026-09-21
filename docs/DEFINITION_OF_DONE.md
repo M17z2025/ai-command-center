@@ -43,3 +43,16 @@ A task is Done only when all applicable conditions are satisfied.
 - Issue/PR reflects actual state.
 - `PROJECT_STATUS.md` is updated.
 - Remaining work is explicitly recorded rather than hidden in chat or memory.
+
+
+## Sigma real-user certification
+For every user-facing web application or user-facing web change:
+- Sigma User Tester has exercised the deployed build through a real browser.
+- All applicable critical journeys and user roles are covered end-to-end.
+- Responsive/mobile behaviour and applicable Chromium/Firefox/WebKit coverage are evidenced.
+- Failures include reproducible evidence and GitHub issues.
+- The tester provides a first-time-user usability assessment, not only technical assertions.
+- No blocker or critical Sigma User Tester defect remains open.
+- A partial test run is never represented as a full PASS.
+
+See `docs/SIGMA_USER_TESTER.md`.
