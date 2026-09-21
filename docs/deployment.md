@@ -33,7 +33,11 @@ A workflow invocation is not a PASS by itself: the resulting report must cover a
 
 ## Environment variables
 
-The command-center validation path currently requires no repository-specific environment variables. `.env.example` therefore contains no variable names.
+The command-center validation path itself requires no secret.
+
+Runner phase-1 discovery may optionally use `SIGMA_GITHUB_TOKEN` to read managed repositories that are not publicly accessible. Supply it only at runtime and prefer a least-privilege GitHub App installation token with read access to the required repository metadata/contents/issues/pull requests. The discovery client rejects non-GET GitHub API operations.
+
+GitHub Actions may expose `GITHUB_TOKEN` automatically; its effective repository access remains constrained by GitHub permissions and does not prove cross-repository access.
 
 Managed products document their own required environment variable **names only** in their repositories.
 
