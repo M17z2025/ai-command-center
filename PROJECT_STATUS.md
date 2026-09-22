@@ -15,18 +15,18 @@ Production/default branch: `main`
 
 | Project | Classification | Highest-priority executable next task |
 | --- | --- | --- |
-| Sigma Command Center | READY for supervisory use; runner phase 1 CHANGES REQUIRED | Synchronise/rebase PR #10 onto current `main`, preserve GET-only discovery, then require fresh exact-head tests/control-plane CI and `mergeable:true`. |
+| Sigma Command Center | READY for supervisory use; runner phase 1 CHANGES REQUIRED | PR #10 is mergeable but still 3 commits behind current `main`; synchronize/rebase, preserve GET-only discovery, then require fresh exact-head tests/control-plane CI before READY. |
 | Mi7z Web | CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED | Fix the two PR #2 TypeScript errors, upgrade vulnerable `next@15.5.3`, then pass dependency audit, typecheck, build and Playwright on one exact head. |
-| Alysha AI Platform | RC2 source READY; trusted release BLOCKED; branch protection OWNER-BLOCKED | Preserve exact PR #390 RC1→RC2 lineage; continue bounded current-main hardening while the approved Cloudflare→VPS HTTPS mobile API origin is commissioned. |
+| Alysha AI Platform | RC2 source READY; trusted release BLOCKED; branch protection OWNER-BLOCKED; Supabase history reconciliation IN PROGRESS | Preserve exact PR #390 lineage; synchronize/reverify PR #601, then continue bounded read-only migration classification while the approved Cloudflare→VPS HTTPS mobile API origin is commissioned. |
 | Invoiceit by Mi7z | CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED | Create safe two-tenant/restricted-user fixtures, prove hostile direct SDK/function/read authorization under issue #3, and add exact-head CI. |
-| Lycia Zambia | CHANGES REQUIRED / CONTRACT + CI + USER VERIFICATION MISSING | Complete issue #1 contract/status/CI/tests; verify/source-track new Markets claims; run deployed Sigma Full User Tester before release-ready claims. |
-| Marketit | CHANGES REQUIRED / SECURITY MIGRATION REQUIRED | Migrate tenant/brand RLS starting with Brand and credential/publishing entities; drive 168 strict isolation findings to zero/approved exceptions with hostile tests. |
+| Lycia Zambia | CHANGES REQUIRED / CONTRACT + CI + CONTENT + USER VERIFICATION MISSING | Complete issue #1 contract/status/CI/tests; verify/source-track all Markets claims including Botswana/DRC/Angola/Ghana; run deployed Sigma Full User Tester before release-ready claims. |
+| Marketit | CHANGES REQUIRED / SECURITY MIGRATION REQUIRED | Remove remaining tenant-blind PublishingQueue reads, audit credential/connection service-role paths, then migrate entity-native RLS and drive 168 strict isolation findings to zero/approved exceptions with hostile tests. |
 | Total Mining Intelligence | CHANGES REQUIRED | Complete issue #1 contract/status/data-provenance/security baseline; no GitHub Actions run currently exists. |
 | BodyFit | CHANGES REQUIRED | Complete issue #1 contract/status/privacy/integration baseline; no GitHub Actions run currently exists. |
 | Tattooit | CHANGES REQUIRED | Complete issue #1 contract/status/role/ownership/upload baseline; no GitHub Actions run currently exists. |
 | Legalit | CHANGES REQUIRED / SECURITY WORK IN PROGRESS | Complete `.sigma/project.yaml` and CI/tests, then prove cross-organisation OrgMember/conflict-scope isolation and return-to safety. |
 | Signit by Mi7z | CHANGES REQUIRED | Complete issue #1 contract/status/document/signature/audit authorization baseline; no GitHub Actions run currently exists. |
-| Humanit | CHANGES REQUIRED — VOICE RESTORATION PRIORITY | Synchronise PR #17 with current `main`, rerun exact-head Quality Gate, then prove connected-account GA `gpt-realtime` session creation before enabling/publishing Voice. |
+| Humanit | VOICE SOURCE CANDIDATE READY FOR MERGE REVIEW; PRODUCTION VOICE BLOCKED | PR #17 exact head is green and currently mergeable; merge through normal review, then prove connected-account GA `gpt-realtime` session creation before enabling/publishing Voice. |
 | Designit AI Platform | CHANGES REQUIRED for Sigma state; reviewed CI green | Complete issue #93 fact-based contract/status baseline while preserving reviewed main CI success `35519447903` at `70b422c...`. |
 | Lycia Limited | CHANGES REQUIRED | Clear typecheck debt, add tests/CI and negative authorization proof, then complete governance plus executed HMRC/Shufti/SMTP evidence. |
 
@@ -34,21 +34,38 @@ Production/default branch: `main`
 
 ### Sigma runner phase 1
 
-PR #10 remains open at `2f829b032170ee2391aa1665e3e1609631ab94f2`, but GitHub now reports it not mergeable against current `main`. Historical exact-head run `35630753627` passed, but that is no longer sufficient for merge readiness after branch divergence. Issue #9 is now **CHANGES REQUIRED — BRANCH SYNCHRONISATION REQUIRED**. The phase-1 GET/read-only authority boundary must not be broadened during synchronisation. Parent issue #2 remains open.
+PR #10 remains open at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh GitHub evidence now reports `mergeable:true`, but comparison against current `main` is still **diverged: 9 ahead / 3 behind**. Historical exact-head control-plane run `35630753627` passed. Issue #9 remains **CHANGES REQUIRED — CURRENT-MAIN SYNCHRONISATION + FRESH CI REQUIRED** because the merge result has not been revalidated on the current control-plane baseline. The GET/read-only authority boundary must not be broadened. Parent issue #2 remains open.
 
-### Alysha
+### Alysha — migration-history reconciliation materially advanced
 
-Three bounded documentation/security-contract units completed with exact-head green evidence:
+The RC2 release boundary is unchanged: PR #390 remains the exact signed-RC1→RC2 source lineage and trusted signing/publication remains blocked until the approved Cloudflare→VPS public HTTPS mobile API ingress exists and passes the governed live preflight. `main` protection under issue #470 and physical Samsung/Sigma User Tester acceptance remain separate gates.
 
-- PR #561 completed the server-only mobile environment contract; head `990b79ad...` passed Mobile API Type Safety `35682231172` and Web Quality `35682230956`, then merged as `c7dd25b...`. Issue #560 is closed.
-- PR #563 refreshed the stale README/current architecture; head `0d15a16a...` passed Web Quality `35682499437`, then merged as `9cad9256...`.
-- PR #564 recorded those facts durably in `PROJECT_STATUS.md`; head `a8fc8a2e...` passed Web Quality `35682718198` and merged as `d971f2d0e8bb6228b93f11b057b59d24772a6fa1`.
+Separately, Issue #577 Supabase source-history reconciliation has materially advanced through read-only evidence:
+- 39 remote production-ledger entries / 47 local migration files;
+- 23 same-name version mismatches / 13 remote-only / 21 local-only;
+- provenance is pinned for all 13 remote-only entries and all 23 same-name mismatches;
+- PR #598 produced initial byte classification **1 exact / 22 non-exact**;
+- PR #603 refined the bounded byte evidence to **1 exact / 10 terminal-LF-only / 12 unresolved-content-difference** and exact-head Web Quality run `35712190929` passed before merge.
 
-The release boundary did not change: PR #390 remains the exact RC1→RC2 lineage. Trusted signing/publication must not run until the approved Cloudflare→VPS public HTTPS mobile API ingress exists and passes the governed live preflight. The paused Vercel-backed `alisha.mi7z.com` route remains forbidden. `main` protection under issue #470 and physical Samsung/Sigma User Tester acceptance remain separate gates.
+Issue #600 / PR #601 addresses exactly two release-critical mobile-call unresolved pairs. PR #601 exact head `7115d36...` passed Web Quality run `35710901770`, but GitHub currently reports it not mergeable against the newer `main`; it must be synchronized and reverified before merge. No production migration repair/reset/DDL/history mutation is authorised.
 
-### Lycia Zambia
+### Humanit — source merge gate improved
 
-Current `main` includes `dfacd49ab925bb41e33cb83fafe695394c6260e5`, adding `/markets`, `/markets/:slug`, desktop/mobile Markets navigation and regional pages for Tanzania, Côte d'Ivoire, Mauritania and Dubai. `.sigma/project.yaml` and `PROJECT_STATUS.md` are still missing; GitHub Actions reports zero runs; `package.json` has build/lint/typecheck but no application test command. The public Markets content contains jurisdiction, mining, investment, logistics and commercial-status claims that require source/date evidence or clearly non-factual positioning. Issue #1 now requires contract/status, CI/tests, claim verification, authorization review and independent deployed Sigma User Tester evidence.
+PR #17 (`Align Humanit Voice with GA realtime architecture`) remains at exact head `01b2a940930a5c8d0cf81061c92eba9220fccc81`. Humanit Quality Gate run `35565519670` passed and fresh GitHub evidence reports the PR `mergeable:true`. The source candidate is therefore **READY FOR MERGE REVIEW**.
+
+Production Voice remains **BLOCKED** until the connected production-approved OpenAI account successfully creates a GA `gpt-realtime` session, the Base44 Voice route/alias is enabled only after that proof, Base44 is published, and focused mobile/Sigma user testing passes. Source/CI is not live Voice evidence.
+
+### Marketit — validation green, isolation blocker unchanged but hardening advanced
+
+Latest security-tested functional head is `72e623d70ab6880d0e835de9df0a83abf69b954b`; status-only `main` is `27943d889cdf45060cd31ef640a141d0d461c97e`. Exact functional-head evidence: 12/12 access-control tests PASS, typecheck PASS, lint PASS, production build PASS, high/critical dependency audit PASS, and GitHub Actions run `35694276281` SUCCESS.
+
+Connection/publishing read paths have been tightened, manual fake-connected state removed, global provider flags restricted and queue transitions governed. However, the strict tenant-security audit still reports **168 tenant-isolation findings** across the entity layer. Marketit remains **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED**.
+
+### Lycia Zambia — unsupported Markets expansion increased
+
+Current `main` is `0fcf4b0690ab678348794f1087f7bbfc4fd9c6ac`, adding DRC, Angola and Ghana after Botswana and the earlier Tanzania/Côte d'Ivoire/Mauritania/Dubai pages. Fresh checks still show `.sigma/project.yaml` and `PROJECT_STATUS.md` missing, and the latest head has zero GitHub Actions workflow runs.
+
+The expanded pages contain material mineral-production, jurisdiction, logistics, licensing/compliance, investment and Lycia operational-status statements. Issue #1 now requires source/date evidence for factual claims and internal business evidence for Lycia-specific relationship/market-entry claims, or truthful rewriting as intent/non-factual positioning. This remains a legal/reputational release risk until verified.
 
 ### Secure DX Zambia — outside registry pending repository designation
 
@@ -59,9 +76,7 @@ Genuine certification remains blocked by the absence of independent authenticate
 ### Unchanged material blockers
 
 - **Mi7z Web:** PR #2 still fails typecheck on two bounded errors and CI flags vulnerable `next@15.5.3`; build/Playwright remain gated behind repair.
-- **Invoiceit:** source authorization hardening is substantial, but two-tenant/restricted-user runtime proof, numbering concurrency proof and exact-head GitHub CI are still missing; typecheck debt remains 1,158 errors.
-- **Marketit:** general CI is green but the strict tenant audit still reports **168 tenant-isolation findings**.
-- **Humanit:** PR #17's historical exact-head gate is green, but the PR remains non-mergeable against current `main`; live Voice remains disabled until synchronized source and a real connected-account GA realtime session are proven.
+- **Invoiceit:** source authorization hardening is substantial, but two-tenant/restricted-user runtime proof, numbering concurrency proof and exact-head GitHub CI are still missing; typecheck debt remains visible.
 - **Legalit:** status exists; `.sigma/project.yaml`, CI/test harness and hostile organisation/conflict/redirect proof remain missing.
 - **Lycia Limited:** contract/status exist; build/lint pass, typecheck/CI/tests and HMRC/Shufti/SMTP/governance proof remain incomplete.
 - **Designit:** reviewed main CI remains green; durable `PROJECT_STATUS.md` is still missing under issue #93.
@@ -75,7 +90,7 @@ Genuine certification remains blocked by the absence of independent authenticate
 4. Secure DX durable repository — designate/create one private product repo, then add it to Sigma without replacing the existing Base44 app.
 5. Secure DX four-role certification — obtain independent non-production Client/Rider/Filing Agent identities/sessions.
 6. AutoHedge — requires a dedicated repository rather than merging its production branch into the Mi7z corporate application.
-7. Humanit Voice — connected-account GA realtime proof plus Base44 publish/mobile smoke remain external runtime gates after source synchronisation.
+7. Humanit Voice — connected-account GA realtime proof plus Base44 publish/mobile smoke remain external runtime gates after source merge.
 
 ## Security / data risks
 
@@ -83,7 +98,8 @@ Genuine certification remains blocked by the absence of independent authenticate
 - Mi7z Web's vulnerable Next.js release remains a release blocker.
 - Invoiceit still needs direct hostile runtime authorization proof despite strong source hardening.
 - Marketit's 168 tenant-isolation findings remain the dominant data-separation risk.
-- Lycia Zambia's new Markets pages contain factual jurisdiction/business claims without repository-level source/date evidence; treat as legal/reputational content risk until verified.
+- Lycia Zambia's expanded Markets pages contain factual jurisdiction/business claims without repository-level source/date evidence; treat as legal/reputational content risk until verified.
+- Alysha Supabase migration reconciliation must remain read-only until a separately reviewed production-history action is explicitly owner/admin approved.
 - Legalit still needs hostile cross-organisation/conflict-scope proof.
 - Humanit Voice must not be enabled from source tests alone.
 - User-flow testing does not substitute for direct hostile authorization/security tests.
@@ -97,8 +113,8 @@ Legalit and Lycia Limited have durable status but remain outside fully verified 
 
 ## Next command-center actions
 
-1. Synchronise runner PR #10 and obtain fresh exact-head control-plane evidence before merge review.
-2. Drive the highest security/product orders: Alysha owner/infrastructure gates plus safe bounded hardening; Invoiceit hostile tenant authorization; Marketit RLS migration; Humanit Voice synchronization/runtime proof.
+1. Synchronize runner PR #10 with current `main` and obtain fresh exact-head control-plane evidence before merge review.
+2. Drive the highest security/product orders: Alysha PR #601/source-history reconciliation plus owner/infrastructure gates; Invoiceit hostile tenant authorization; Marketit RLS migration; Humanit source merge then runtime Voice proof.
 3. Complete Lycia Zambia contract/CI/content verification and continue remaining adoption with exact-head evidence and Sigma Full User Tester coverage where required.
 
 ## Verification boundary
