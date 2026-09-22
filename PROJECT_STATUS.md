@@ -2,112 +2,93 @@
 
 Last updated: 2026-09-22
 Repository: `M17z2025/ai-command-center`
-Production/default branch: `main`
+Default branch: `main`
 
-## Control-plane state
+## Control-plane rules
 
-- Sigma's operating model, development loop, security baseline, definition of done, registry, review protocol and cross-repository control instructions are present.
-- Material user-facing work requires the independent Sigma Full User Tester on an approved deployed preview/staging candidate; source/CI alone is not final user acceptance.
-- Master adoption issue #1 and autonomous-runner parent issue #2 remain active.
-- Verified Sigma contract/status baselines currently exist for Mi7z Web, Alysha, Invoiceit, Marketit and Humanit.
+Repository evidence overrides chat history. Product code stays in product repositories. Material development uses issue/branch/PR review, secrets are never committed, security controls are not weakened to make tests pass, multi-tenant products require hostile isolation evidence, and destructive/production-impacting actions remain owner-gated. Material user-facing READY claims additionally require the independent Sigma Full User Tester on an approved deployed preview/staging candidate.
 
-## Active-project review
+## Active portfolio
 
-| Project | Classification | Highest-priority executable next task |
+| Project | Sigma classification | Highest-priority executable next task |
 | --- | --- | --- |
-| Sigma Command Center | READY for supervisory use; runner phase 1 CHANGES REQUIRED | Synchronize PR #10 with current `main`, preserve its GET-only discovery boundary, then obtain fresh exact-head tests/control-plane CI and `mergeable:true` before READY. |
-| Mi7z Web | CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED | Fix PR #2's two bounded TypeScript errors, upgrade vulnerable `next@15.5.3`, then pass dependency audit, typecheck, build and Playwright on one exact head. |
-| Alysha AI Platform | RC2 source READY; trusted release BLOCKED; branch protection OWNER-BLOCKED; Supabase history reconciliation IN PROGRESS | Merge green status PR #633 through normal review, then complete the final raw-unresolved pair `post_execution_evidence_db_guard_v1` and reconstruct 13 remote-only source migrations from proven evidence only; preserve frozen PR #390 and the read-only/no-production-mutation boundary; commission approved Cloudflare→VPS HTTPS ingress separately. |
-| Invoiceit by Mi7z | CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED | Create safe two-tenant/restricted-user fixtures, prove hostile direct SDK/function/read authorization under issue #3, and add exact-head CI. |
-| Lycia Zambia | CHANGES REQUIRED / CONTRACT + CI + CONTENT + USER VERIFICATION MISSING | Complete issue #1 contract/status/CI/tests; verify/source-track all Markets claims; run deployed Sigma Full User Tester before release-ready claims. |
-| Marketit | CHANGES REQUIRED / SECURITY MIGRATION REQUIRED | Remove remaining tenant-blind publishing/credential paths, migrate entity-native RLS, and drive the 168 strict isolation findings to zero/approved exceptions with hostile tests. |
-| Total Mining Intelligence | CHANGES REQUIRED | Complete issue #1 contract/status/data-provenance/security baseline; no GitHub Actions evidence currently changes this classification. |
-| BodyFit | CHANGES REQUIRED | Complete issue #1 contract/status/privacy/integration baseline; no GitHub Actions evidence currently changes this classification. |
-| Tattooit | CHANGES REQUIRED | Complete issue #1 contract/status/role/ownership/upload baseline; no GitHub Actions evidence currently changes this classification. |
-| Legalit | CHANGES REQUIRED / SECURITY WORK IN PROGRESS | Complete `.sigma/project.yaml` and CI/tests, then prove cross-organisation OrgMember/conflict-scope isolation and return-to safety. |
-| Signit by Mi7z | CHANGES REQUIRED | Complete issue #1 contract/status/document/signature/audit authorization baseline; no GitHub Actions evidence currently changes this classification. |
-| Humanit | VOICE SOURCE CANDIDATE READY FOR MERGE REVIEW; PRODUCTION VOICE BLOCKED | PR #17 exact head remains open, non-draft and mergeable; merge through normal review, then prove connected-account GA `gpt-realtime` session creation before enabling/publishing Voice. |
-| Designit AI Platform | CHANGES REQUIRED for Sigma state; reviewed CI green | Complete issue #93 fact-based contract/status baseline while preserving reviewed CI evidence. |
-| Lycia Limited | CHANGES REQUIRED | Clear typecheck debt, add tests/CI and negative authorization proof, then complete governance plus executed HMRC/Shufti/SMTP evidence. |
+| Sigma Development Command Center | READY for supervisory use; runner phase 1 **CHANGES REQUIRED** | Rebase/synchronise PR #10 with current `main`, preserve GET-only discovery, rerun unit/control-plane CI on the new exact head, then require mergeable + green before READY. |
+| Mi7z Web | **CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED** | Fix PR #2's two TypeScript errors, upgrade vulnerable `next@15.5.3`, then obtain exact-head dependency audit + typecheck + build + Playwright. |
+| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase source evidence **COMPLETE**; final DB reconciliation **BLOCKED ON PREVIEW** | Continue safe executable app-layer hardening under issue #694 while owner/spend decision #661 commissions a distinct Supabase Preview. Do not touch production migration history or PR #390 lineage. |
+| Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B + restricted-user fixtures, prove hostile direct-call read/write authorization, finish read-side capability audit, and add exact-head CI. |
+| Lycia Zambia | **CHANGES REQUIRED / CONTENT-COMPLIANCE + CONTRACT/CI RISK** | Stop adding unsourced factual market claims, build claim-level source/date evidence, add `.sigma/project.yaml` + `PROJECT_STATUS.md` + CI/tests, then perform deployed user/security verification. |
+| Marketit | **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** | Protect `PlatformConnections`/`CredentialSetupSessions`, continue entity-native RLS migration, hostile-test service-role paths, and reduce 168 isolation findings to zero/approved exceptions with exact-head CI. |
+| Total Mining Intelligence | **CHANGES REQUIRED** | Complete issue #1 contract/status/data-provenance/security baseline and establish exact-head quality evidence. |
+| BodyFit | **CHANGES REQUIRED** | Complete issue #1 contract/status/privacy/health-integration baseline and exact-head verification. |
+| Tattooit | **CHANGES REQUIRED** | Complete issue #1 contract/status/role/ownership/upload baseline and exact-head verification. |
+| Legalit | **CHANGES REQUIRED / SECURITY WORK IN PROGRESS** | Add `.sigma/project.yaml` and CI/tests, then prove cross-organisation OrgMember/conflict-scope isolation and safe return navigation. |
+| Signit by Mi7z | **CHANGES REQUIRED** | Complete issue #1 contract/status/document-signature/audit authorization baseline and exact-head verification. |
+| Humanit | Voice source candidate **READY FOR MERGE REVIEW**; production Voice **BLOCKED** | Merge PR #17 through normal review, then prove a connected-account GA `gpt-realtime` session before enabling/publishing Voice and running mobile user acceptance. |
+| Designit AI Platform | **CHANGES REQUIRED for Sigma state**; reviewed CI green | Complete issue #93 fact-based contract/status baseline without regressing the current quality evidence. |
+| Lycia Limited | **CHANGES REQUIRED** | Clear typecheck debt, add tests/CI + negative authorization proof, then verify HMRC/Shufti/SMTP and governance evidence. |
 
-## Material findings — 22 September 2026
+## Material review — 22 September 2026
 
-### Alysha — Supabase source-history reconciliation materially advanced again
+### Alysha — source-history evidence completed; safe Preview is now the hard gate
 
-Issue #577 remains read-only and production mutation remains prohibited. Current audited inventory is unchanged at 39 remote production-ledger entries, 47 local migration files, 23 same-name version mismatches, 13 remote-only entries and 21 local-only entries.
+Issue #577 now records the Supabase source-evidence phase **complete**: all 23 same-name mismatches reviewed, all 13 originally remote-only migrations reconstructed from durable production/source evidence, all 21 baseline local-only migrations conservatively classified, and aggregate reconciliation contract PR #663 merged green. Historical application remains unresolved where evidence does not prove it; no production DDL, replay, repair/reset/merge or history mutation occurred.
 
-The raw-byte classification remains **1 exact / 10 terminal-LF-only / 12 unresolved-content-difference**. A separate bounded source-history layer now proves entry-specific executable/source-history equivalence for **12 version-mismatch entries**. **11 of the 12 raw-unresolved entries** are covered by that bounded proof layer because `mobile_call_provider_sip_only` was already raw `terminal-LF-only`. The genuinely raw-unresolved source-history review queue is therefore now **1 pair**: `post_execution_evidence_db_guard_v1`.
+Final migration-chain reconciliation is now **BLOCKED ON SAFE SUPABASE PREVIEW**. Issue #661 confirms only production `main` currently exists and branch creation can incur cost, so creation of a distinct non-production Preview requires an explicit owner/spend decision. Production `main` must not be used as substitute Preview evidence.
 
-PR #632 proved bounded source-history equivalence for `operating_memory_live_drift_guard_v2` using fresh SELECT-only production statement evidence. Exact final head `5ba9951e20f6c5737e78d8fd890dbcea24133342` passed ALYSHA Web Quality run `35746377013` and merged as `3e5e604c7c7b74224bc6d66f10ecd415ca9b77be`. No production migration/history mutation occurred.
+Three forward security candidates remain safely staged outside the active migration chain and have green exact-head Web Quality evidence: PR #664 (trigger-function EXECUTE ACL least privilege), PR #667 (task/job authority immutability), and PR #668 (current-model decision/runtime scope integrity). They are source-prepared only and are not apply-ready until Preview proves them and a separate production owner/admin gate is satisfied.
 
-Status-only PR #633 is open, non-draft and mergeable at exact head `0709c419e05b7a5145e03f8c419eede1496650e3`. ALYSHA Web Quality run `35747093622` completed **SUCCESS** on that exact head. Sigma classifies PR #633 **READY FOR NORMAL MERGE REVIEW** provided its head does not change. Its patch records the #632 proof and fresh SELECT-only provenance for the final pair without falsely claiming equivalence.
+Application/mobile-call hardening has also continued. PR #693 merged after exact-head Mobile API Type Safety and Web Quality both passed; it bounds authenticated task-scoped MCP request envelopes before call-task lookup/persistence. The next executable P1 is issue #694: bound authenticated `POST /api/mobile/v1/calls` request parsing and persisted call constraints without weakening mobile auth/lifecycle/provider authority.
 
-The final pair has recorded local version `20260812182500`, production-ledger version `20260813233033`, exactly one production statement, local raw SHA-256 `d759ab3ebe9882adc5ec05c7b2d14379d577b8af67c54e3fad75236f64bd9593` and production statement SHA-256 `b456307e4bd84e9776720f4230ac65bcba704d4f6ac74c1a9093346c4af521c0`. Classification must remain unresolved unless an entry-specific bounded relationship or material executable difference is demonstrated.
+RC2 remains separately blocked: PR #390 source candidate is still READY, but trusted signing/publication requires the commissioned Cloudflare→VPS HTTPS mobile API origin. `main` branch protection remains owner/admin-blocked under issue #470.
 
-After that final pair, the next safe database work is reconstruction of the **13 remote-only source migrations** from authoritative production/durable-source evidence only, followed by an isolated source-only reconciliation candidate with Supabase Preview plus ALYSHA Web Quality. Production `migration repair`, reset, merge, DDL or migration-history mutation remains owner/admin-gated and is not authorised by this review.
+### Lycia Zambia — public factual expansion increased the release risk
 
-The RC2 release boundary is unchanged: PR #390 remains the exact signed-RC1→RC2 source lineage and trusted signing/publication remains blocked until the approved Cloudflare→VPS public HTTPS mobile API ingress exists and passes the governed live preflight. `main` protection under issue #470 and physical Samsung/Sigma User Tester acceptance remain separate gates.
+Latest `main` is `fa744e1661cd15cbac720e23f38ee46f1501ea3`. New country/Dubai content adds specific mining, trade-volume, tax/free-zone, FATF/AML, logistics, economic, risk-grade and Lycia operational-status claims. The repository still has no `.sigma/project.yaml`, no `PROJECT_STATUS.md`, and the exact latest head has zero GitHub workflow runs. A generic disclaimer is not claim-level evidence. Issue #1 has been updated to require a source/date claim register, verification of Lycia-specific operational claims, contract/status/CI/tests and independent user acceptance before READY.
 
-### Sigma runner phase 1
+### Marketit — meaningful boundary hardening, but the dominant isolation blocker remains
 
-PR #10 remains the safe read-only discovery candidate. Its historical exact-head control-plane evidence is green, but it has diverged from newer `main` status/control-plane commits. Issue #9 remains **CHANGES REQUIRED — CURRENT-MAIN SYNCHRONISATION + FRESH CI REQUIRED**. The GET/read-only authority boundary must not be broadened. Parent issue #2 remains open.
+Latest status commit `6316f49f00b0c6f9bf8bc997f4be4004710bb50a` records security-tested functional head `051c03732102d20738a6f420cd586b289f9f9e9e`: local tests 15/15, typecheck, lint, production build and high/critical dependency audit pass. All direct frontend `PublishingQueue` reads are now routed through protected controls; API authorisation visibility/creation is more tightly capability-scoped; placeholder production callback domains were removed.
 
-### Humanit Voice
+However, exact-head GitHub Actions evidence for `051c037...` is absent and the strict security audit still reports **168 tenant-isolation findings**. Issue #1 has been updated; Marketit remains **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED**.
 
-PR #17 remains open, non-draft and currently reports `mergeable:true` at exact head `01b2a940930a5c8d0cf81061c92eba9220fccc81`. Its source candidate remains READY FOR MERGE REVIEW based on the previously recorded green exact-head Humanit Quality Gate. Production Voice remains BLOCKED until the connected production-approved OpenAI account successfully creates a GA `gpt-realtime` session, Base44 Voice is enabled/published only after that proof, and focused mobile/Sigma user testing passes.
+### Invoiceit — further source hardening landed, runtime proof still blocks READY
 
-### Marketit
+Latest status head `2b6586ecceb73f82c7c2406ec4359fb18d4b524b` records new escaping for identified core invoice/quote/statement/receipt/reminder email/document HTML, protected `documents.view` audit-history reads, safer currency fallback and more jurisdiction-neutral labels. Exact latest-head GitHub workflow lookup still returns zero runs. Safe runtime still lacks two independent tenants/restricted users, so hostile authorization cannot yet be proven. Issue #3 has been refreshed and remains **CHANGES REQUIRED**.
 
-Latest recorded security-tested functional head remains `72e623d70ab6880d0e835de9df0a83abf69b954b`; status-only `main` is `27943d889cdf45060cd31ef640a141d0d461c97e`. Recorded exact functional-head evidence is green for access-control tests, typecheck, lint, production build and high/critical dependency audit. The strict tenant-security audit still reports **168 tenant-isolation findings**, so Marketit remains **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED**.
+### Humanit
 
-### Lycia Zambia
+PR #17 remains open, non-draft and mergeable at exact head `01b2a940930a5c8d0cf81061c92eba9220fccc81`; its Humanit Quality Gate is green. Source candidate is READY FOR MERGE REVIEW. Production Voice remains BLOCKED until the connected production-approved OpenAI account proves GA `gpt-realtime` session creation, followed by controlled Base44 enable/publish and mobile acceptance.
 
-Current `main` remains `0fcf4b0690ab678348794f1087f7bbfc4fd9c6ac`, including Botswana, DRC, Angola and Ghana on top of the earlier Tanzania/Côte d'Ivoire/Mauritania/Dubai Markets pages. `.sigma/project.yaml`, `PROJECT_STATUS.md`, exact-head CI and an automated application test harness remain unproven/missing under issue #1. Material mining/jurisdiction/logistics/licensing/investment and Lycia operational-status statements remain legal/reputational release risks until source/date or internal business evidence exists.
+### Sigma runner
 
-## Unchanged material blockers
+PR #10 remains open/non-draft/mergeable at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`, but it is still diverged from `main` (9 commits ahead / 7 behind at this review point). Historical exact-head CI is not sufficient for the current merge result. Issue #9 remains **CHANGES REQUIRED — CURRENT-MAIN SYNCHRONISATION + FRESH CI**. Its GET/read-only authority boundary must remain unchanged.
 
-- **Mi7z Web:** PR #2 still fails typecheck on two bounded errors and CI flags vulnerable `next@15.5.3`; build/Playwright remain gated behind repair.
-- **Invoiceit:** source authorization hardening is substantial, but two-tenant/restricted-user runtime proof, numbering concurrency proof and exact-head GitHub CI remain missing.
-- **Legalit:** status exists; `.sigma/project.yaml`, CI/test harness and hostile organisation/conflict/redirect proof remain missing.
-- **Lycia Limited:** contract/status exist; build/lint pass, while typecheck/CI/tests and HMRC/Shufti/SMTP/governance proof remain incomplete.
-- **Designit:** reviewed CI is green; durable project-status/contract adoption remains incomplete under its Sigma order.
-- **TMI, BodyFit, Tattooit, Signit:** no new evidence changes their onboarding classifications.
+## Unchanged owner / infrastructure gates
 
-## Blocked / owner decisions
+1. Alysha issue #661 — explicit owner/spend approval to commission a distinct Supabase Preview branch.
+2. Alysha issue #470 — repository-admin branch protection/ruleset activation for `main`.
+3. Alysha RC2 — commissioned Cloudflare→VPS public HTTPS origin before trusted Android signing/publication.
+4. Sigma issue #4 — command-center public/private visibility decision; public metadata exposure remains a governance risk even though no secret is recorded.
+5. AutoHedge — dedicated private product repository required; do not merge its production branch into Mi7z corporate `main`.
+6. Secure DX — dedicated product repository/registry entry and independent role fixtures remain required before durable Sigma certification.
+7. Humanit Voice — connected-account GA realtime proof and publish/device test gate.
 
-1. Alysha `main` branch protection — issue #470 remains owner/repository-admin action.
-2. Alysha RC2 production ingress — approved Cloudflare→VPS public HTTPS origin required before trusted signing/publication.
-3. Sigma command-center visibility — repository remains public; issue #4 recommends an explicit private/public owner decision because portfolio/engineering metadata is exposed.
-4. Secure DX durable repository — designate/create one private product repo, then add it to Sigma without replacing the existing Base44 app.
-5. Secure DX four-role certification — obtain independent non-production Client/Rider/Filing Agent identities/sessions.
-6. AutoHedge — requires a dedicated repository rather than merging its production branch into the Mi7z corporate application.
-7. Humanit Voice — connected-account GA realtime proof plus Base44 publish/mobile smoke remain external runtime gates after source merge.
+## Security / data risk summary
 
-## Security / data risks
-
-- Never place secrets, credentials or customer data in Sigma issues/status files.
+- Marketit's 168 tenant-isolation findings remain the largest confirmed portfolio data-separation backlog.
+- Invoiceit has strong source hardening but still lacks hostile two-tenant/restricted-user runtime proof and exact-head CI.
+- Lycia Zambia now carries increased legal/reputational content risk from unsourced public tax/regulatory/trade/mining/business-status claims.
 - Mi7z Web's vulnerable Next.js release remains a release blocker.
-- Invoiceit still needs direct hostile runtime authorization proof despite strong source hardening.
-- Marketit's 168 tenant-isolation findings remain the dominant data-separation risk.
-- Lycia Zambia's expanded Markets pages contain factual jurisdiction/business claims without repository-level source/date evidence; treat as legal/reputational content risk until verified.
-- Alysha Supabase migration reconciliation must remain read-only until a separately reviewed production-history action is explicitly owner/admin approved.
-- Legalit still needs hostile cross-organisation/conflict-scope proof.
-- Humanit Voice must not be enabled from source tests alone.
-- User-flow testing does not substitute for direct hostile authorization/security tests.
-- Destructive/production-impacting actions remain approval-gated.
+- Alysha production migration/history mutation remains prohibited without Preview evidence and explicit owner/admin approval.
+- Legalit still lacks hostile cross-organisation/conflict-scope proof.
+- User/browser smoke never substitutes for direct hostile authorization/security testing.
 
 ## Adoption state
 
-Verified baseline: Mi7z Web, Alysha, Invoiceit, Marketit and Humanit.
+Verified contract/status baseline: Mi7z Web, Alysha, Invoiceit, Marketit and Humanit.
 
-Legalit and Lycia Limited have durable status but remain outside fully verified adoption pending remaining contract/quality evidence. Lycia Zambia, TMI, BodyFit, Tattooit, Signit and Designit retain repository-local onboarding orders. Secure DX remains outside the registry until a dedicated repository is designated.
-
-## Next command-center actions
-
-1. Synchronize runner PR #10 with current `main` and obtain fresh exact-head control-plane evidence before merge review.
-2. Drive the highest security/product orders: Alysha final raw-unresolved pair then remote-only source reconstruction while owner/infrastructure gates remain blocked; Invoiceit hostile tenant authorization; Marketit RLS migration; Humanit source merge then runtime Voice proof.
-3. Complete Lycia Zambia contract/CI/content verification and continue remaining adoption with exact-head evidence and Sigma Full User Tester coverage where required.
+Legalit and Lycia Limited have durable status but incomplete Sigma adoption. Lycia Zambia, TMI, BodyFit, Tattooit, Signit and Designit retain repository-local onboarding orders. No evidence found in this review changes those classifications.
 
 ## Verification boundary
 
-A Sigma classification applies only to the evidence stated for that repository/task. It does not imply production deployment, live-account verification, physical-device acceptance or full user-journey acceptance unless those gates are explicitly recorded.
+READY/CHANGES REQUIRED/BLOCKED applies only to the exact repository/task evidence stated here. It does not imply production deployment, live-account success, physical-device acceptance, legal/compliance approval or complete end-user acceptance unless those gates are explicitly evidenced.
