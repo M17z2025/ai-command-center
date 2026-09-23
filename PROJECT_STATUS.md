@@ -35,9 +35,9 @@ PR #19 (`P0: Rebuild and consolidate Humanize writing engine V2`) merged to `mai
 
 The merged source consolidates principal Humanize routes around `humanizeChunk`, defaults to preserve/infer source voice, uses meaning-first reconstruction, retains common safeguards across Fast/Standard/Deep, adds an independent critic + bounded repair pass, protected-detail checks, long-document chunking, streamlined writing controls and a versioned synthetic quality corpus.
 
-This is **READY / COMPLETE IN SOURCE**, not complete user-facing release evidence. Pre-merge issue evidence explicitly said Base44 still used the previous Humanize code and that Base44 deployment, Sigma Full User Tester and human-preference/corpus validation were still outstanding. Issue #18 was auto-closed by the merge despite those unchecked acceptance criteria; Sigma reopened and rewrote issue #18 so durable state now requires deployment, full user testing, fixed-corpus fact/meaning checks and blind human-preference evidence before customer-quality resolution is claimed. Humanit's `PROJECT_STATUS.md` was also refreshed on `main`.
+This is **READY / COMPLETE IN SOURCE**, not complete user-facing release evidence. Pre-merge issue evidence explicitly said Base44 still used the previous Humanize code and that Base44 deployment, Sigma Full User Tester and human-preference/corpus validation were still outstanding. Issue #18 was auto-closed by the merge despite those unchecked acceptance criteria; Sigma reopened and rewrote issue #18 so durable state now requires deployment, full user testing, fixed-corpus fact/meaning checks and blind human-preference evidence before customer-quality resolution is claimed. Humanit's `PROJECT_STATUS.md` was refreshed on `main`.
 
-The independent Voice track has changed state after the Humanize merge: PR #17 remains at `01b2a940930a5c8d0cf81061c92eba9220fccc81` with historical successful Quality Gate `35565519670`, but fresh GitHub evidence now reports `mergeable:false` against the newer `main`. Issue #16 now requires synchronization, fresh exact-head CI and `mergeable:true` before Voice source READY. Production Voice remains **BLOCKED** until connected-account GA `gpt-realtime` session proof, controlled Base44 route enable/publish, mobile acceptance and Sigma user testing.
+The independent Voice track changed state after the Humanize merge: PR #17 remains at `01b2a940930a5c8d0cf81061c92eba9220fccc81` with historical successful Quality Gate `35565519670`, but fresh GitHub evidence reports `mergeable:false` against the newer `main`. Issue #16 now requires synchronization, fresh exact-head CI and `mergeable:true` before Voice source READY. Production Voice remains **BLOCKED** until connected-account GA `gpt-realtime` session proof, controlled Base44 route enable/publish, mobile acceptance and Sigma user testing.
 
 ### Invoiceit — direct tenant SDK read/write bypass is substantially closed in source; hostile runtime proof remains the P0 gate
 
@@ -53,7 +53,7 @@ Current repository status records **28/28** local regressions plus typecheck, li
 
 ### Alysha — preview cleanup truthfulness candidate is exact-head green and mergeable
 
-Safe main-line hardening continued after the prior review through merged issues/PRs #921/#922, #924/#925 and #927/#928. Current product status records the latest completed merged unit as #927/#928, which bounds sandbox preview rollback diagnostics and passed ALYSHA Web Quality Gate `35919756774`.
+Safe main-line hardening continued through merged issues/PRs #921/#922, #924/#925 and #927/#928. Current product status records the latest completed merged unit as #927/#928, which bounds sandbox preview rollback diagnostics and passed ALYSHA Web Quality Gate `35919756774`.
 
 New issue #930 / draft PR #931 addresses the next rollback-cleanup truthfulness boundary. Exact head `c694e014509ebb6f2a456e3d1ba74d82ec9f4cb5` is `mergeable:true` and ALYSHA Web Quality Gate run `35920578806` completed **SUCCESS**. The implementation attempts branch reset even after preview cancellation failure, suppresses raw cancel/reset provider diagnostics, emits only stable `preview-delivery-cleanup-unconfirmed` when cleanup cannot be confirmed, and avoids attaching normal rollback evidence in that state. Sigma classifies this **READY — SOURCE/CI SCOPE ONLY** pending normal review/promotion from draft and merge.
 
@@ -61,9 +61,9 @@ RC2 trusted release remains independently **BLOCKED** on explicitly commissioned
 
 ### Sigma runner — structurally mergeable again, but still too stale for READY
 
-PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh GitHub evidence now reports `mergeable:true`, removing the former conflict condition, but comparison against current command-center `main` `a4bb81fba9b2cc11ad59f49f813ad02d91ed6430` is still **diverged, 9 commits ahead / 16 behind** with merge base `1e08e65ca704e4f4efb3f99c4df26cfb37f0df9d`. Historical exact-head control-plane run `35630753627` passed, but predates those sixteen newer main commits.
+PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh GitHub evidence reports `mergeable:true`, removing the former conflict condition, but the branch is still materially diverged and substantially behind current `main`. Historical exact-head control-plane run `35630753627` passed, but predates the newer command-center baseline and cannot certify the eventual synchronized merge result.
 
-Issue #9 now truthfully records **CHANGES REQUIRED**: synchronize with current `main`, preserve GET-only/no-guessing and newer portfolio/control-plane state, then obtain fresh exact-head unit/control-plane CI and reconfirm `mergeable:true` before READY.
+Issue #9 contains the latest exact comparison evidence and remains **CHANGES REQUIRED**: synchronize with then-current `main`, preserve GET-only/no-guessing and all newer portfolio/control-plane state, obtain fresh exact-head unit/control-plane CI and reconfirm `mergeable:true` before READY.
 
 ### Unchanged active repositories
 
