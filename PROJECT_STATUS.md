@@ -14,7 +14,7 @@ Repository evidence overrides chat history. Product code stays in product reposi
 | --- | --- | --- |
 | Sigma Development Command Center | READY for supervisory use; runner phase 1 **CHANGES REQUIRED** | Synchronise PR #10 with current `main`, resolve the non-mergeable divergence while preserving GET-only discovery, then rerun exact-head unit/control-plane CI and require `mergeable:true`. |
 | Mi7z Web | **CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED** | Fix PR #2's two TypeScript errors, upgrade vulnerable `next@15.5.3`, then obtain exact-head dependency audit + typecheck + build + Playwright. |
-| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase source evidence **COMPLETE**; final DB reconciliation **BLOCKED ON PREVIEW**; main-line hardening **ACTIVE** | PR #823 / issue #821 is **READY FOR MERGE REVIEW** for the bounded dialler-only API cleanup. Separately, owner/spend gate #661 is required for a distinct Supabase Preview; trusted RC2 release remains blocked on commissioned Cloudflare→VPS HTTPS ingress. Do not touch PR #390 lineage or production migration history. |
+| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase source evidence **COMPLETE**; final DB reconciliation **BLOCKED ON PREVIEW**; main-line hardening **CHANGES REQUIRED / VERIFICATION PENDING** | Issue #868 / PR #869: complete exact-head Mobile Android Validation; only if it passes and the head remains unchanged/mergeable, move the draft candidate to READY FOR MERGE REVIEW. Separately, owner/spend gate #661 is required for a distinct Supabase Preview and trusted RC2 remains blocked on commissioned Cloudflare→VPS HTTPS ingress. Do not touch PR #390 lineage or production migration history. |
 | Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B + restricted-user fixtures, prove hostile direct-call read/write authorization, finish read-side capability audit, and add exact-head CI. |
 | Lycia Zambia | **CHANGES REQUIRED / CONTENT-COMPLIANCE + CONTRACT/CI RISK** | Stop adding unsourced factual market claims, build claim-level source/date evidence, add `.sigma/project.yaml` + `PROJECT_STATUS.md` + CI/tests, then perform deployed user/security verification. |
 | Marketit | **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** | Continue entity-native RLS migration and hostile service-role/entity tests; reduce **167** isolation findings to zero/approved exceptions while preserving exact-head CI. |
@@ -29,31 +29,29 @@ Repository evidence overrides chat history. Product code stays in product reposi
 
 ## Material review — 23 September 2026
 
-### Alysha — dialler-only handset authority hardening materially advanced
+### Alysha — one mobile security unit completed; next bounded unit is verification-pending
 
-Issue #819 / PR #820 is **READY / COMPLETE in source**. The change aligns Realtime `call_contact` with the established Android dialler-only authority: no call-SIM selection is passed before `ACTION_DIAL`, owner confirmation wording now reflects a dialler handoff, and SMS retains its separately scoped line-selection behaviour. Exact head `543a61b02b0e5e31f1770819f27f9e553cec34a5` passed Web Quality `35842861230`, Mobile API Type Safety `35842861168`, Mobile Android Validation `35842861155`, Carrier-call PR Guard `35842857631`, SIP-only PR Guard `35842857600`, and No-Twilio-Fallback PR Guard `35842857599` before merge `950acdfaa3e4287db7f85236f6154dbebd93652b`.
+Issue #865 / PR #866 is **READY / COMPLETE in source** and merged as `7b2b160390c70a3df7416e56862c8ad49dd6efa2`. The exact candidate `26105785866b9cd4507869a2523fec49056c5c3c` passed the recorded Web Quality, Mobile API Type Safety and Mobile Android Validation gates before merge. It replaces unbounded per-tool raw-thread execution with a single no-queue device-action lane, fails overlapping work closed, suppresses late results after teardown and avoids reflecting raw device exceptions. This remains source/CI evidence only; it does not certify physical Samsung device actions.
 
-The follow-on issue #821 / PR #823 removes the now-obsolete `subscriptionId` parameter from `PhoneActionExecutor.placeCall(...)` so the API no longer implies carrier/SIM authority that ALYSHA deliberately does not possess. Exact head `b9b8e6e0b22f28acb5d494b47954b7a3c34e906c` is non-draft, `mergeable:true`, and passed Web Quality `35844229721`, Mobile API Type Safety `35844229712`, Mobile Android Validation `35844229717`, plus the carrier/SIP/no-Twilio guards. Sigma classified it **READY FOR MERGE REVIEW — source/CI scope only**. The external Vercel commit status says `Account is blocked`; this is not an accepted ALYSHA runtime/deployment gate and does not alter the explicit no-new-Vercel production boundary.
+The next finding is issue #868 / PR #869, exact head `b719ae2bb1b38c820732b8bdd4e0a7b436056f25`, open/draft/`mergeable:true`. Source review confirms finite Unicode-aware action-field bounds are applied before executable contact/app/URL/message side effects and server-returned `CALL_CONTACT`/`SEND_SMS` construction, with rejection rather than truncation. Exact-head Web Quality `35879446348`, Mobile API Type Safety `35879446287`, SIP-only `35879446394`, no-Twilio `35879446291` and no Samsung carrier-call `35879446335` are successful. Mobile Android Validation `35879446220` is still **in progress** at the latest read, so the candidate is **CHANGES REQUIRED / VERIFICATION PENDING**, not READY. Issue #868 now records the exact verification order and protected boundaries.
 
 RC2 remains separately blocked: PR #390 source candidate is READY, but trusted signing/publication still requires the commissioned Cloudflare→VPS HTTPS mobile API origin. Supabase final reconciliation remains owner/spend-blocked on a distinct safe Preview under issue #661; production migration/history mutation remains prohibited. `main` branch protection remains owner/repository-admin-blocked under issue #470.
 
-### Marketit — functional CI is now exact-head green; tenant isolation remains the release blocker
+### Marketit — functional CI remains green; tenant isolation remains the release blocker
 
-Current default-branch head is status-only `dc446e7d61f8ade6122424fb3082df5b5ff75c5a`. Latest security-tested functional head `01a6e045a286bb2b1908878dfe92809261b7d208` passes `npm test` **19/19**, typecheck, lint, production build and high/critical dependency audit. GitHub Actions CI run #162 (`35829233806`) is **SUCCESS** on that exact functional head.
-
-Security hardening now routes `PublishingQueue`, `APIAuthorisationRequests`, `PlatformConnections` and `CredentialSetupSessions` away from direct frontend access and adds stronger service-role/admin boundaries. The strict tenant-security audit nevertheless still fails: 243 schemas scanned, 173 tenant/brand-bearing, 7 with user-scoped RLS, and **167 tenant-isolation findings remain**. Classification stays **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED**. Issue #1 has been refreshed with the current entity-native RLS/service-role/hostile-test order.
+Latest security-tested functional head `01a6e045a286bb2b1908878dfe92809261b7d208` passes 19/19 tests, typecheck, lint, production build and high/critical dependency audit; CI run `35829233806` is successful. The strict tenant-security audit nevertheless still reports **167 tenant-isolation findings**. Classification remains **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** and issue #1 remains the durable RLS/service-role/hostile-test order.
 
 ### Sigma runner — still non-mergeable against current main
 
-PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh comparison against pre-status-update `main` `18ff5930ab9a6c1d5cc73954033fe8bd3fafe155` reports **diverged, 9 commits ahead / 9 behind**, with `mergeable:false`. Historical green CI cannot certify the current merge result. Issue #9 remains **CHANGES REQUIRED** and has been refreshed: synchronize with then-current `main`, preserve GET/read-only/no-guessing boundaries, rerun exact-head unit/control-plane CI, and require `mergeable:true` before READY. Because this status update itself advances `main`, issue #9 is the durable source for the newest divergence count.
+PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`, `mergeable:false`. Fresh pre-status-update comparison against `main` reports **diverged, 9 commits ahead / 10 behind**. Historical green CI cannot certify the current merge result. Issue #9 remains **CHANGES REQUIRED**: synchronize with then-current `main`, preserve GET/read-only/no-guessing boundaries, rerun exact-head unit/control-plane CI, and require `mergeable:true` before READY. This status commit itself advances `main`; issue #9 must carry the newest post-commit divergence count.
 
 ### Humanit — source candidate remains READY; production Voice remains blocked
 
-PR #17 remains open, non-draft and **mergeable:true** at exact head `01b2a940930a5c8d0cf81061c92eba9220fccc81`. Humanit Quality Gate run `35565519670` remains successful. Source candidate is READY FOR MERGE REVIEW. Production Voice remains BLOCKED until the connected production-approved OpenAI account proves GA `gpt-realtime` session creation, followed by controlled Base44 enable/publish, mobile acceptance and applicable Sigma Full User Tester evidence.
+PR #17 remains open, non-draft and `mergeable:true` at exact head `01b2a940930a5c8d0cf81061c92eba9220fccc81`. The recorded Humanit Quality Gate remains successful. Source candidate stays READY FOR MERGE REVIEW. Production Voice remains BLOCKED until the connected production-approved OpenAI account proves GA `gpt-realtime` session creation, followed by controlled Base44 enable/publish, mobile acceptance and applicable Sigma Full User Tester evidence.
 
-### Invoiceit / Lycia Zambia / remaining active repositories
+### Remaining active repositories
 
-No commit, issue or PR updates were found after the preceding command-center review for Mi7z Web, Invoiceit, Lycia Zambia, TMI, BodyFit, Tattooit, Legalit, Signit, Humanit, Designit or Lycia Limited. Their recorded classifications and repository-local development orders therefore remain unchanged rather than being guessed forward. Invoiceit still lacks hostile two-tenant/restricted-user runtime proof and exact-head CI; Lycia Zambia still lacks a claim-level evidence register and Sigma contract/CI baseline; Mi7z Web still carries the vulnerable Next.js/typecheck release blocker; Legalit still lacks hostile cross-organisation/conflict-scope proof.
+No new commit evidence after the preceding control review was found for Mi7z Web, Invoiceit, Lycia Zambia, TMI, BodyFit, Tattooit, Legalit, Signit, Humanit, Designit or Lycia Limited. The organisation-wide issue/PR freshness scan likewise produced no new material state for those repositories. Their recorded classifications and repository-local orders therefore remain unchanged rather than being guessed forward.
 
 ## Owner / infrastructure gates
 
@@ -67,11 +65,11 @@ No commit, issue or PR updates were found after the preceding command-center rev
 
 ## Security / data risk summary
 
-- Marketit's **167** tenant-isolation findings remain the largest confirmed portfolio data-separation backlog despite exact-head green functional CI.
+- Marketit's **167** tenant-isolation findings remain the largest confirmed portfolio data-separation backlog despite green functional CI.
 - Invoiceit has strong source hardening but still lacks hostile two-tenant/restricted-user runtime proof and exact-head CI.
 - Lycia Zambia carries material legal/reputational risk from unsourced public tax/regulatory/trade/mining/business-status claims.
 - Mi7z Web's vulnerable Next.js release remains a release blocker.
-- Alysha's current dialler-only authority candidate is source/CI READY, but production migration/history mutation remains prohibited without Preview evidence and explicit owner/admin approval; RC2 trusted release remains blocked on commissioned Cloudflare→VPS ingress.
+- Alysha PR #869 is fail-closed source hardening but remains verification-pending until exact-head Android validation completes; production migration/history mutation remains prohibited without Preview evidence and explicit owner/admin approval, and RC2 trusted release remains blocked on commissioned Cloudflare→VPS ingress.
 - Legalit still lacks hostile cross-organisation/conflict-scope proof.
 - User/browser smoke never substitutes for direct hostile authorization/security testing.
 
