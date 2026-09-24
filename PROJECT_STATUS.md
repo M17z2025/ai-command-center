@@ -14,7 +14,7 @@ Repository evidence overrides chat history. Product code stays in product reposi
 | --- | --- | --- |
 | Sigma Development Command Center | Supervisory control plane **READY**; runner phase 1 **CHANGES REQUIRED**; default-branch governance **BLOCKED — OWNER/ADMIN** | Synchronise PR #10 with current `main`, preserve GET-only/no-guessing discovery, rerun exact-head unit/control-plane CI and re-confirm `mergeable:true`. Separately, owner/admin issue #14 must protect `main`. |
 | Mi7z Web | **CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED** | Fix PR #2's two TypeScript errors, upgrade vulnerable `next@15.5.3`, then obtain exact-head dependency audit + typecheck + production build + Playwright evidence. |
-| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase final reconciliation **BLOCKED ON PREVIEW**; PR #1063 **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE** | Review/merge PR #1063 while exact-head evidence remains valid. Owner gates #388/#661/#470 remain independent and unchanged. |
+| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase final reconciliation **BLOCKED ON PREVIEW**; PR #1063 canonical source/CI **READY FOR NORMAL MERGE REVIEW**, external Vercel status **RED** | Review PR #1063 from the canonical green GitHub gates; do not claim all-green combined status. If repository policy requires Vercel green, treat merge as blocked on the external account condition rather than bypassing it. Owner gates #388/#661/#470 remain independent. |
 | Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B plus restricted non-Master fixtures and run hostile direct-call/entity authorization tests; add exact-head CI. |
 | Lycia Zambia | **CHANGES REQUIRED / CONTENT-COMPLIANCE + CONTRACT/CI RISK** | Stop adding unsourced factual market claims, build claim-level source/date evidence, add `.sigma/project.yaml` + `PROJECT_STATUS.md` + CI/tests, then perform deployed user/security verification. |
 | Marketit | **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** | Harden `Website`, `WebsiteChangeRegister` and `WebsitePublishingDraft` tenant boundaries, continue service-role hostile tests, and reduce **156** audit findings to zero/approved exceptions while preserving exact-head CI. |
@@ -29,15 +29,21 @@ Repository evidence overrides chat history. Product code stays in product reposi
 
 ## Material review — 24 September 2026
 
-### Alysha — current bounded candidate is READY for normal merge review
+### Alysha — canonical gates green; external Vercel status remains red
 
-`main` is currently `a976b709031ce73e576266a6530d13351a854490`, after PR #1060 source hardening and PR #1062 durable-status refresh.
+Current ALYSHA `main` is `ac5a23e6bfd0e3269e9fa9504d45da4fedb7f472` after status-only PR #1065. The latest bounded functional hardening on `main` remains PR #1060 / Issue #1059, which is **READY / COMPLETE IN SOURCE** for its scope. Exact candidate `bc7b493b5f4016f8e722cc1e3b9b16d67f7ea9b0` passed ALYSHA Web Quality run `35979920145` and merged as `adf7957481e1c724967cacf5eb998790eab951fa`.
 
-PR #1060 / Issue #1059 is **READY / COMPLETE IN SOURCE** for its bounded scope. Exact candidate `bc7b493b5f4016f8e722cc1e3b9b16d67f7ea9b0` passed ALYSHA Web Quality run `35979920145` and merged as `adf7957481e1c724967cacf5eb998790eab951fa`. The reusable R2 verifier now rejects blank/whitespace-only access-key and secret-key values before provider I/O without broadening diagnostics or authority.
+PR #1063 / Issue #1061 is open/non-draft at exact head `11398cbfcaa4b9cc6a44b420e0d986b643c21d0a`. Canonical exact-head evidence is green:
 
-PR #1063 / Issue #1061 is now **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE ONLY** at exact head `11398cbfcaa4b9cc6a44b420e0d986b643c21d0a`. GitHub reports `mergeable:true`; the PR is non-draft. Exact-head ALYSHA Web Quality run `35980874162` and Mobile API Type Safety run `35980874169` both completed **SUCCESS**. The change is limited to confirmed human/operator-facing signer labels plus a regression that preserves compatibility-critical internal systemd/principal/path identifiers.
+- ALYSHA Web Quality run `35980874162`: **SUCCESS**;
+- ALYSHA Mobile API Type Safety run `35980874169`: **SUCCESS**;
+- fresh raw PR metadata after later status-only `main` movement reports `mergeable:true`, `rebaseable:true`, `mergeable_state:"unstable"`.
 
-This does not change ALYSHA's production gates: Issue #388 commissioned Cloudflare HTTPS → VPS ingress is still required before trusted RC2 signing/publication; Issue #661 still requires explicit owner/spend approval for a distinct safe Supabase Preview branch; Issue #470 remains repository-admin branch-protection work; physical Samsung acceptance remains separate.
+The combined GitHub commit status is nevertheless **FAILURE** because the sole external `Vercel` status reports **`Account is blocked.`** This condition also appears on the current status-only `main` commit. It is not an ALYSHA canonical quality-gate failure and does not confer or represent RC2 production authority. Vercel is not the RC2 production path. However, Sigma must not call the combined status green, and if repository policy requires that Vercel context to pass, merge is externally BLOCKED until the owner/account policy is resolved rather than bypassed.
+
+The PR itself is limited to three confirmed human/operator-facing signer labels plus a focused regression preserving compatibility-critical internal systemd/principal/path identifiers. No service cadence, signer authority, package identity, R2, database, deployment or production infrastructure change is included.
+
+ALYSHA's principal production gates remain unchanged: Issue #388 commissioned Cloudflare HTTPS → VPS ingress before trusted RC2 signing/publication; Issue #661 explicit owner/spend approval for a distinct safe Supabase Preview branch; Issue #470 repository-admin branch protection; physical Samsung acceptance after trusted publication.
 
 ### Marketit — exact CI green; tenant-isolation backlog improved but remains material
 
@@ -61,11 +67,11 @@ Humanit's `PROJECT_STATUS.md` was refreshed through status PR #24. Its exact sta
 
 Humanize V2 remains READY / COMPLETE IN SOURCE but not fully user-certified; Issue #18 still requires deployed Sigma user testing plus fixed-corpus/human-preference validation. Voice PR #17 remains stale/non-mergeable against newer `main` and must be synchronized with fresh exact-head CI before any separate connected-account GA realtime proof and live enablement.
 
-### Sigma autonomous runner — mergeability improved, synchronization still required
+### Sigma autonomous runner — materially behind current main
 
-PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh comparison against command-center `main` `6da6af90e080732c15d87b686ecbca3a74b7ecf2` reports **diverged**, with the runner branch **9 commits ahead / 20 commits behind**. GitHub currently reports PR #10 **mergeable:true**, so the prior merge-conflict state is not current.
+PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh comparison against command-center `main` `f62252a46b9432bf5f3b8822e77a26284c1b5a04` reports **diverged**, with the runner branch **9 commits ahead / 22 commits behind**. The previous direct PR read reported `mergeable:true`, but that must be re-confirmed after synchronization.
 
-Historical exact-head control-plane run `35630753627` succeeded, but it predates the 20 newer `main` commits and cannot certify the synchronized result. Issue #9 is current: synchronize while preserving the GET-only/non-mutating/no-guessing boundary, then obtain fresh exact-head unit/control-plane CI and re-confirm mergeability before READY.
+Historical exact-head control-plane run `35630753627` succeeded, but it predates the 22 newer `main` commits and cannot certify the synchronized result. Issue #9 is current: synchronize while preserving the GET-only/non-mutating/no-guessing boundary, then obtain fresh exact-head unit/control-plane CI and re-confirm mergeability before READY.
 
 ### Other active repositories
 
@@ -76,11 +82,12 @@ Fresh default-branch commit review found no new repository evidence requiring a 
 1. Alysha #388 — commissioned Cloudflare→VPS public HTTPS origin before trusted Android signing/publication.
 2. Alysha #661 — explicit owner/spend approval for distinct Supabase Preview.
 3. Alysha #470 — repository-admin branch protection/ruleset activation.
-4. Sigma #14 — repository-admin branch protection/ruleset activation for command-center `main`.
-5. Sigma #4 — command-center public/private visibility decision; current public visibility exposes portfolio engineering metadata even though no secret is recorded.
-6. AutoHedge — dedicated private product repository required before Sigma production governance.
-7. Secure DX — dedicated product repository/registry entry and independent role fixtures required before durable Sigma certification.
-8. Humanit Voice — connected-account GA realtime proof plus publish/device/user-test gate after PR #17 synchronization/merge.
+4. Alysha external Vercel status — account currently reports `Account is blocked.`; owner/account action is required only if preview/merge policy still depends on that non-authoritative integration. Do not add spend or restore production Vercel authority automatically.
+5. Sigma #14 — repository-admin branch protection/ruleset activation for command-center `main`.
+6. Sigma #4 — command-center public/private visibility decision; current public visibility exposes portfolio engineering metadata even though no secret is recorded.
+7. AutoHedge — dedicated private product repository required before Sigma production governance.
+8. Secure DX — dedicated product repository/registry entry and independent role fixtures required before durable Sigma certification.
+9. Humanit Voice — connected-account GA realtime proof plus publish/device/user-test gate after PR #17 synchronization/merge.
 
 ## Security / data risk summary
 
@@ -92,6 +99,7 @@ Fresh default-branch commit review found no new repository evidence requiring a 
 - Mi7z Web's vulnerable Next.js release remains a release blocker.
 - Tattooit's service-role roster repair remains uncertified without hostile authorization tests and exact-head CI.
 - Legalit still lacks hostile cross-organisation/conflict-scope proof.
+- ALYSHA's external Vercel commit status is red because the account is blocked; this does not restore Vercel as production authority but may affect preview/merge policy if still configured as required.
 - ALYSHA `main` and Sigma command-center `main` remain unprotected at repository-settings level until their owner/admin gates are applied.
 - User/browser smoke never substitutes for direct hostile authorization/security testing.
 
