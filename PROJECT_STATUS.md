@@ -12,55 +12,64 @@ Repository evidence overrides chat history. Product code stays in product reposi
 
 | Project | Sigma classification | Highest-priority executable next task |
 | --- | --- | --- |
-| Sigma Development Command Center | Supervisory control plane **READY**; runner phase 1 **CHANGES REQUIRED**; default-branch governance **BLOCKED — OWNER/ADMIN** | Synchronise PR #10 with current `main`, resolve conflict, preserve GET-only/no-guessing discovery, rerun exact-head unit/control-plane CI and require `mergeable:true`. Separately, owner/admin issue #14 must protect `main`. |
+| Sigma Development Command Center | Supervisory control plane **READY**; runner phase 1 **CHANGES REQUIRED**; default-branch governance **BLOCKED — OWNER/ADMIN** | Synchronise PR #10 with current `main`, preserve GET-only/no-guessing discovery, rerun exact-head unit/control-plane CI and re-confirm `mergeable:true`. Separately, owner/admin issue #14 must protect `main`. |
 | Mi7z Web | **CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED** | Fix PR #2's two TypeScript errors, upgrade vulnerable `next@15.5.3`, then obtain exact-head dependency audit + typecheck + production build + Playwright evidence. |
-| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase final reconciliation **BLOCKED ON PREVIEW**; PR #1006 **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE** | Review/merge PR #1006 while exact-head evidence remains valid, then execute Issue #1005; owner gates #388/#661/#470 remain independent. |
-| Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B + restricted non-Master fixtures and run hostile direct-call/entity authorization tests; add exact-head CI. |
+| Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase final reconciliation **BLOCKED ON PREVIEW**; PR #1063 **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE** | Review/merge PR #1063 while exact-head evidence remains valid. Owner gates #388/#661/#470 remain independent and unchanged. |
+| Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B plus restricted non-Master fixtures and run hostile direct-call/entity authorization tests; add exact-head CI. |
 | Lycia Zambia | **CHANGES REQUIRED / CONTENT-COMPLIANCE + CONTRACT/CI RISK** | Stop adding unsourced factual market claims, build claim-level source/date evidence, add `.sigma/project.yaml` + `PROJECT_STATUS.md` + CI/tests, then perform deployed user/security verification. |
-| Marketit | **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** | Harden remaining `domainMarketingEngine` project-ID/service-role paths, migrate justified project entities to safe RLS, add hostile tests, obtain fresh exact-head CI and reduce **165** audit findings to zero/approved exceptions. |
+| Marketit | **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED** | Harden `Website`, `WebsiteChangeRegister` and `WebsitePublishingDraft` tenant boundaries, continue service-role hostile tests, and reduce **156** audit findings to zero/approved exceptions while preserving exact-head CI. |
 | Total Mining Intelligence | **CHANGES REQUIRED** | Complete issue #1 contract/status/data-provenance/security baseline and establish exact-head quality evidence. |
 | BodyFit | **CHANGES REQUIRED** | Complete issue #1 contract/status/privacy/health-integration baseline and exact-head verification. |
 | Tattooit | **CHANGES REQUIRED / BASELINE CANDIDATE UNVERIFIED** | Add exact-head CI plus hostile cross-studio/cross-role authorization tests for PR #2's service-role roster repair before merge/certification. |
 | Legalit | **CHANGES REQUIRED / SECURITY WORK IN PROGRESS** | Add `.sigma/project.yaml` and CI/tests, then prove cross-organisation OrgMember/conflict-scope isolation and safe return navigation. |
 | Signit by Mi7z | **CHANGES REQUIRED** | Complete issue #1 contract/status/document-signature/audit authorization baseline and exact-head verification. |
-| Humanit | Humanize V2 source/CI **READY / COMPLETE IN SOURCE**; Humanize release **CHANGES REQUIRED**; Voice source **CHANGES REQUIRED**; production Voice **BLOCKED** | Deploy merged Humanize V2 to approved Base44 preview/staging, run Sigma Full User Tester + fixed human-preference/corpus validation; independently synchronise/revalidate Voice PR #17 against current `main`. |
+| Humanit | Revision source/CI **READY / COMPLETE IN SOURCE**; Revision release **CHANGES REQUIRED**; Humanize V2 source/CI **READY / COMPLETE IN SOURCE**; Humanize release **CHANGES REQUIRED**; Voice source **CHANGES REQUIRED**; production Voice **BLOCKED** | Deploy merged Revision and Humanize V2 source to approved Base44 preview/staging, run Sigma Full User Tester and required quality/resource checks; independently synchronise/revalidate Voice PR #17 against current `main`. |
 | Designit AI Platform | **CHANGES REQUIRED for Sigma state**; reviewed CI green | Complete issue #93 fact-based contract/status baseline without regressing current quality evidence. |
 | Lycia Limited | **CHANGES REQUIRED** | Clear typecheck debt, add tests/CI + negative authorization proof, then verify HMRC/Shufti/SMTP and governance evidence. |
 
 ## Material review — 24 September 2026
 
-### Alysha — six bounded hardening units completed; project-governance success validation is READY for review
+### Alysha — current bounded candidate is READY for normal merge review
 
-Fresh repository evidence records six merged bounded hardening units after the prior portfolio snapshot:
+`main` is currently `a976b709031ce73e576266a6530d13351a854490`, after PR #1060 source hardening and PR #1062 durable-status refresh.
 
-- PR #993 / Issue #991 — release-evidence GitHub reads now have a fixed server-side deadline. Exact candidate `a2d792d69a53a9b9d118b09762f5727c20b363c7`; Web Quality run `35950175120`: **SUCCESS**; merged as `6530928abc53a7ea556961d06f2a0b8f7810f12c`.
-- PR #995 / Issue #994 — GitHub Actions OIDC/runtime-control JSON responses are bounded before acceptance. Exact candidate `6e913ebe7301b6a8353034ba7119e762b1b07827`; run `35950792582`: **SUCCESS**; merged as `f2b61970953d553a38c1621b8a6afb8f9c173f22`.
-- PR #997 / Issue #996 — Samsung/mobile evidence UI catches transport failure and bounds owner-visible error presentation. Exact candidate `1ede618982e459ffc8548d83c7ce11dd85fc7d89`; run `35951168267`: **SUCCESS**; merged as `ef1ec6ee077bf76a40a5f8376fc40199caaae181`.
-- PR #999 / Issue #998 — autonomy-budget error/blocker presentation is closed-vocabulary. Exact candidate `da9fffc116079c213f50179776d507f0b10e4646`; run `35952021267`: **SUCCESS**; merged as `324e7e928e6afd0f261179a62c13b9589a5eb9c2`.
-- PR #1001 / Issue #1000 — owner-visible project-intake branding gaps corrected to `ALYSHA` / `Alysha` while compatibility/internal identifiers were preserved. Exact candidate `276f23d6827622875ded47fc641287d1d0235fac`; run `35952417009`: **SUCCESS**; merged as `28872e7fcc6cba0036eb8fb366da9c7935195f54`.
-- PR #1003 / Issue #1002 — high-risk owner approval UI no longer reflects arbitrary API failure text. Exact candidate `650b32cae77000dc3db03e86ca0c950cfac78919`; run `35952794770`: **SUCCESS**; merged as `fbf0da6863e2721e6909b48d2723c10fd8ed624c`.
+PR #1060 / Issue #1059 is **READY / COMPLETE IN SOURCE** for its bounded scope. Exact candidate `bc7b493b5f4016f8e722cc1e3b9b16d67f7ea9b0` passed ALYSHA Web Quality run `35979920145` and merged as `adf7957481e1c724967cacf5eb998790eab951fa`. The reusable R2 verifier now rejects blank/whitespace-only access-key and secret-key values before provider I/O without broadening diagnostics or authority.
 
-These are **READY / COMPLETE IN SOURCE** only for their bounded scopes. None prove production deployment or physical Samsung acceptance and none alter PR #390's exact RC1→RC2 lineage.
+PR #1063 / Issue #1061 is now **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE ONLY** at exact head `11398cbfcaa4b9cc6a44b420e0d986b643c21d0a`. GitHub reports `mergeable:true`; the PR is non-draft. Exact-head ALYSHA Web Quality run `35980874162` and Mobile API Type Safety run `35980874169` both completed **SUCCESS**. The change is limited to confirmed human/operator-facing signer labels plus a regression that preserves compatibility-critical internal systemd/principal/path identifiers.
 
-Issue #1004 now has candidate PR #1006 at exact head `90b4f43c1d0e20d0c5a3f9addf4badc065e400b9`. GitHub reports it open, non-draft and mergeable. Exact-head ALYSHA Web Quality run `35953308901` completed **SUCCESS** through dependency controls, lint, TypeScript, unit/security regressions and production build. Sigma therefore classifies PR #1006 **READY FOR NORMAL MERGE REVIEW — SOURCE/CI SCOPE ONLY**. It must not be represented as deployed user acceptance.
+This does not change ALYSHA's production gates: Issue #388 commissioned Cloudflare HTTPS → VPS ingress is still required before trusted RC2 signing/publication; Issue #661 still requires explicit owner/spend approval for a distinct safe Supabase Preview branch; Issue #470 remains repository-admin branch-protection work; physical Samsung acceptance remains separate.
 
-Issue #1005 remains the next bounded response-truthfulness unit: operating-memory owner UI must validate its narrow 2xx success contract (`pending-owner-approval` / `approved` / `revoked` plus `memoryId`) and fail closed on malformed, unknown or mismatched response identity instead of displaying arbitrary `payload.status`.
+### Marketit — exact CI green; tenant-isolation backlog improved but remains material
 
-The principal ALYSHA owner/infrastructure blockers are unchanged: #388 commissioned Cloudflare HTTPS → VPS ingress before trusted RC2 signing/publication; #661 explicit owner/spend approval for a distinct safe Supabase Preview branch; #470 repository-admin protection/ruleset activation for `main`, which remains unprotected.
+Current exact security-tested functional head is `b1549a9d0763bc20ef5090c10b22f379cabf7ad3`. GitHub Actions CI run #219 (`35967452653`) completed **SUCCESS** on that exact head. Repository status records **43/43** regression tests passing, plus typecheck, lint, production build and high/critical dependency audit green with 0 high / 0 critical advisories.
 
-### Sigma autonomous runner — conflict blocker persists
+Canonical Brand/organisation/project authorization has expanded across multiple service-role and publishing/credential paths. The strict tenant-security audit has improved from 165 to **156 findings** across tenant/brand-scoped schemas, with user-scoped RLS coverage now recorded on 18 entities. This is meaningful progress but still a significant data-isolation risk; Marketit remains **CHANGES REQUIRED / SECURITY MIGRATION REQUIRED**.
 
-PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. A direct comparison against command-center `main` `bcca0b531170a8176875bf0b223f477b69631456` immediately before this status refresh reported **diverged**, with the PR branch **9 commits ahead / 19 commits behind**, and GitHub reported **mergeable:false**. This status-only update itself advances `main`, so the durable conclusion is intentionally expressed as **materially behind and non-mergeable**, rather than pretending the divergence count is immutable.
+Issue #1 now orders the next bounded migration around `Website`, `WebsiteChangeRegister` and `WebsitePublishingDraft`, hostile cross-tenant/entity/service-role tests, repeated strict audits and exact-head CI. No production-ready claim is permitted until the isolation backlog is zero or explicitly reviewed/approved exceptions and deployed Sigma user testing passes.
 
-Historical exact-head control-plane run `35630753627` succeeded, but it predates newer `main` and cannot certify the eventual synchronized result. Issue #9 contains the development order: synchronize/conflict-resolve while preserving GET-only/no-guessing, then obtain fresh exact-head unit/control-plane CI and `mergeable:true` before READY.
+### Humanit — GCSE/A-Level Revision source is complete; deployed acceptance remains open
 
-### Sigma default-branch governance — owner/admin action required
+Three Revision units are merged to `main` with exact-head Humanit Quality Gate success:
 
-Current GitHub branch metadata reports command-center `main` as `protected:false`, with required-status enforcement off. The repository already has universal PR workflow `Sigma control-plane validation` / job `validate`. Issue #14 now records the safe branch-protection/ruleset order: require PR flow and the canonical validation check, block force push/deletion, avoid a single-owner reviewer deadlock, and do not grant broad bot bypass. Classification: **BLOCKED — OWNER / REPOSITORY-ADMIN ACTION REQUIRED**.
+- PR #21, `55cd791b973723a5303505dbea584a2af3843942`, run `35959133911`: **SUCCESS** — active revision system, methods, Study Plan metadata and Subject Tutor handoff.
+- PR #22, `568aa146e225aeaa08dbb18769481ef0012f35bc`, run `35963468904`: **SUCCESS** — Revision exposed as a first-class Study destination/mobile entry point.
+- PR #23, `ce3bac3a5f350210b3f16559889b81da82d51f03`, run `35965127492`: **SUCCESS** — subject-grouped GCSE resources without inventing unavailable Padlet URLs.
+
+Sigma classifies these units **READY / COMPLETE IN SOURCE**. User-facing Revision release remains **CHANGES REQUIRED** until the merged candidate is synced to an approved Base44 preview/staging target and independently exercised by Sigma Full User Tester across GCSE/A-Level, mobile/desktop, applicable roles, resources, Study Plan/Tutor handoff and failure/empty/loading paths. Issue #20 contains the release order.
+
+Humanit's `PROJECT_STATUS.md` was refreshed through status PR #24. Its exact status candidate `57fcfbbf210250f8b6701616c4d4bd0012caf4ef` passed Humanit Quality Gate run `35983915664` and was merged as `c298f6d151bc85d8b3a3a85100c2aa53b1d664c3`.
+
+Humanize V2 remains READY / COMPLETE IN SOURCE but not fully user-certified; Issue #18 still requires deployed Sigma user testing plus fixed-corpus/human-preference validation. Voice PR #17 remains stale/non-mergeable against newer `main` and must be synchronized with fresh exact-head CI before any separate connected-account GA realtime proof and live enablement.
+
+### Sigma autonomous runner — mergeability improved, synchronization still required
+
+PR #10 remains open/non-draft at exact head `2f829b032170ee2391aa1665e3e1609631ab94f2`. Fresh comparison against command-center `main` `6da6af90e080732c15d87b686ecbca3a74b7ecf2` reports **diverged**, with the runner branch **9 commits ahead / 20 commits behind**. GitHub currently reports PR #10 **mergeable:true**, so the prior merge-conflict state is not current.
+
+Historical exact-head control-plane run `35630753627` succeeded, but it predates the 20 newer `main` commits and cannot certify the synchronized result. Issue #9 is current: synchronize while preserving the GET-only/non-mutating/no-guessing boundary, then obtain fresh exact-head unit/control-plane CI and re-confirm mergeability before READY.
 
 ### Other active repositories
 
-Fresh cross-repository commit review after the prior command-center snapshot found no new default-branch commits for Mi7z Web, Invoiceit, Lycia Zambia, Marketit, Total Mining Intelligence, BodyFit, Tattooit, Legalit, Signit, Humanit, Designit AI Platform or Lycia Limited. Their prior evidence-backed classifications and repository-local orders remain unchanged; Sigma does not invent progress from absence of evidence.
+Fresh default-branch commit review found no new repository evidence requiring a classification change for Mi7z Web, Invoiceit, Lycia Zambia, Total Mining Intelligence, BodyFit, Tattooit, Legalit, Signit, Designit AI Platform or Lycia Limited. Their existing issue orders remain the highest-priority executable work. Sigma does not infer progress from missing evidence.
 
 ## Owner / infrastructure gates
 
@@ -75,15 +84,15 @@ Fresh cross-repository commit review after the prior command-center snapshot fou
 
 ## Security / data risk summary
 
-- Marketit's **165** tenant-isolation findings remain the largest confirmed portfolio data-separation backlog.
+- Marketit's **156** tenant-isolation findings remain the largest confirmed portfolio data-separation backlog despite measurable improvement.
 - Invoiceit still lacks hostile two-tenant/restricted-user runtime proof and exact-head CI.
-- Humanize V2 source is merged, but customer-quality resolution still requires deployed Sigma Full User Tester and fixed quality/preference evidence.
+- Humanit Revision and Humanize source work is merged, but user-facing completion still requires deployed Sigma Full User Tester evidence; Humanize additionally requires fixed quality/preference evidence.
 - Humanit Voice PR #17 requires synchronization/fresh CI before live enablement.
 - Lycia Zambia carries legal/reputational risk from unsourced public tax/regulatory/trade/mining/business-status claims.
 - Mi7z Web's vulnerable Next.js release remains a release blocker.
 - Tattooit's service-role roster repair remains uncertified without hostile authorization tests and exact-head CI.
 - Legalit still lacks hostile cross-organisation/conflict-scope proof.
-- ALYSHA `main` and Sigma command-center `main` are both unprotected at repository-settings level until their respective owner/admin gates are applied.
+- ALYSHA `main` and Sigma command-center `main` remain unprotected at repository-settings level until their owner/admin gates are applied.
 - User/browser smoke never substitutes for direct hostile authorization/security testing.
 
 ## Verification boundary
