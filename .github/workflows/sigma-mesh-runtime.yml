@@ -7,6 +7,8 @@ on:
       - "scripts/sigma_mesh_runtime.py"
       - "tests/test_sigma_mesh_runtime.py"
       - "headquarters/mesh/**"
+      - "deploy/sigma-stack/**"
+      - "scripts/sigma_live_probe.py"
       - ".github/workflows/sigma-mesh-runtime.yml"
   push:
     branches: [main]
