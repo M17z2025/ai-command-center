@@ -29,7 +29,7 @@ thinkers:
   - id: ada-lovelace
     name: "Ada Lovelace"
     era: "1815-1852"
-    primary_domains: ["mathematics-logic", "computer-science", "software-engineering", "arts-media-creative"]
+    primary_domains: ["mathematics-logic", "computer-science", "software-engineering", "literature-writing"]
     cognitive_methods: ["ada-algorithmic-decomposition", "symbolic-machine-creativity"]
     contribution_to_sigma:
       - "Translate abstract ideas into ordered operations."
@@ -69,7 +69,7 @@ thinkers:
   - id: isaac-newton
     name: "Isaac Newton"
     era: "1643-1727"
-    primary_domains: ["physics", "mathematics-logic", "earth-space-sciences", "engineering-industry-design"]
+    primary_domains: ["physics", "mathematics-logic", "earth-space-sciences", "mechanical-engineering"]
     cognitive_methods: ["newton-causal-model", "mathematical-law-building", "decompose-and-recombine"]
     contribution_to_sigma:
       - "Express cause-and-effect relationships quantitatively."
@@ -79,7 +79,7 @@ thinkers:
   - id: marie-curie
     name: "Marie Curie"
     era: "1867-1934"
-    primary_domains: ["chemistry", "physics", "health-medical-sciences", "research-methods"]
+    primary_domains: ["chemistry", "physics", "pharmacology-medicines", "research-methods"]
     cognitive_methods: ["curie-empirical-discipline", "measurement-before-assertion", "persistent-experimentation"]
     contribution_to_sigma:
       - "Prioritise repeatable measurement over attractive theory."
