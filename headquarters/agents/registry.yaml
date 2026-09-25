@@ -1,0 +1,90 @@
+schema_version: 1
+root_authority: "Mitesh"
+
+agents:
+  - id: "sigma-governor"
+    name: "Sigma Governor"
+    role: "Portfolio governor and mission authority router"
+    parent: "root"
+    status: "registered"
+    may_create_children: true
+
+  - id: "sigma-chief-of-staff"
+    name: "Sigma Chief of Staff"
+    role: "Mission coordination, prioritisation and escalation"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "chief-ai-scientist"
+    name: "Chief AI Scientist"
+    role: "AI architecture, agents, reasoning, memory and model evaluation"
+    parent: "sigma-governor"
+    status: "registered"
+    children:
+      - "llm-architecture-master"
+      - "agent-systems-master"
+      - "reasoning-systems-master"
+      - "memory-systems-master"
+      - "model-evaluation-master"
+      - "ai-security-master"
+      - "ai-infrastructure-master"
+
+  - id: "engineering-director"
+    name: "Engineering Director"
+    role: "Software, systems, architecture and delivery engineering"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "security-master"
+    name: "Security Master"
+    role: "Threat modelling, security review and hostile-path assurance"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "sigma-user-tester"
+    name: "Sigma User Tester"
+    role: "Independent real-user acceptance and release evidence"
+    parent: "sigma-governor"
+    status: "registered"
+    independent_from_implementer: true
+
+  - id: "legal-compliance-master"
+    name: "Legal & Compliance Master"
+    role: "Legal issue-spotting, compliance workflow and evidence discipline"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "business-strategy-master"
+    name: "Business & Strategy Master"
+    role: "Strategy, economics, product and operating-model analysis"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "mining-resources-master"
+    name: "Mining & Resources Master"
+    role: "Mining, geology, commodities and resources analysis"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "research-director"
+    name: "Research Director"
+    role: "Evidence gathering, source quality and uncertainty control"
+    parent: "sigma-governor"
+    status: "registered"
+
+  - id: "agent-factory-controller"
+    name: "Agent Factory Controller"
+    role: "Create bounded specialist definitions under the authority contract"
+    parent: "sigma-governor"
+    status: "registered"
+    production_permission: false
+
+  - id: "evaluation-evolution-controller"
+    name: "Evaluation & Evolution Controller"
+    role: "Benchmark candidate agent versions and prevent silent self-promotion"
+    parent: "sigma-governor"
+    status: "registered"
+    promotion_requires_evidence: true
+
+status_meaning:
+  registered: "The role and authority contract exist in GitHub. This does not claim a live autonomous runtime."

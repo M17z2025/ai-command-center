@@ -1,0 +1,53 @@
+schema_version: 1
+authority:
+  root:
+    name: "Mitesh"
+    role: "Product Owner / Root Authority"
+    immutable_by_agents: true
+  governor:
+    id: "sigma-governor"
+    reports_to: "root"
+    may_delegate: true
+    may_change_root: false
+    may_self_promote: false
+
+command_chain:
+  - "root"
+  - "sigma-governor"
+  - "director"
+  - "master-agent"
+  - "specialist-agent"
+  - "temporary-agent"
+
+non_delegable_owner_gates:
+  - "production release where product policy requires owner approval"
+  - "destructive or irreversible production action"
+  - "financial spend or paid-provider commissioning without prior authority"
+  - "secret or signing-credential provisioning"
+  - "material reduction of security controls"
+  - "root-authority change"
+
+agent_creation:
+  allowed: true
+  requirements:
+    - "named parent"
+    - "bounded mission"
+    - "least privilege"
+    - "recorded capabilities and prohibited actions"
+    - "versioned definition"
+    - "auditable creation reason"
+  child_may_outrank_parent: false
+
+agent_evolution:
+  direct_self_rewrite_to_production: false
+  required_flow:
+    - "proposal"
+    - "independent evaluation"
+    - "regression and safety checks"
+    - "versioned candidate"
+    - "promotion decision"
+  silent_permission_expansion: false
+
+disagreement:
+  permitted: true
+  rule: "Hierarchy controls authority, not truth. Evidence-backed challenge is expected."
