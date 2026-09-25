@@ -2,6 +2,14 @@
 
 Status: **governed mesh plus executable runtime source**. The YAML files define organisation, routing, evidence and evolution; `sigma_runtime/` executes those definitions. Live model-backed operation still requires a configured runtime model endpoint and private storage host.
 
+## Canonical owner trigger
+
+**ask sigma mesh**
+
+This phrase invokes **Full Mesh mode** in any Sigma-connected conversation or handoff, including a newly started chat. The Mission Router must perform a full leader relevance scan, route relevant experts, select useful Thinker methods, run independent analysis, cross-expert challenge, Independent Critic, Evidence Verifier, bounded repair and final synthesis.
+
+The trigger is portable because the rule is stored in the Sigma master source of truth rather than relying on one conversation's memory. It does not bypass any owner-gated authority or safety boundary.
+
 ## Purpose
 
 Sigma uses a governed **Agentic AI Mesh / application-level Mixture of Experts**:
