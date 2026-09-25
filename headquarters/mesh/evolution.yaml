@@ -1,0 +1,72 @@
+schema_version: 1
+evolution_policy_id: sigma-controlled-evolution-v1
+
+goal: "Improve capability, routing and reliability without uncontrolled self-modification or permission expansion."
+
+memory_layers:
+  mission_working_memory:
+    persistence: "mission-scoped"
+    privacy: "private runtime"
+  reviewed_lessons:
+    persistence: "durable after evaluation"
+    privacy: "public only if non-sensitive; otherwise private runtime"
+  domain_knowledge_indexes:
+    persistence: "versioned"
+    requirements: ["provenance", "update date", "licensing/usage compliance", "removal/correction path"]
+  agent_definitions:
+    persistence: "versioned in governance source"
+    promotion_controlled: true
+
+learning_loop:
+  - "mission result"
+  - "independent critic findings"
+  - "verification outcome"
+  - "postmortem"
+  - "lesson extraction"
+  - "candidate change"
+  - "benchmark"
+  - "adversarial evaluation"
+  - "regression and safety checks"
+  - "promotion or rejection"
+  - "rollback target retained"
+
+candidate_types:
+  - "prompt/procedure change"
+  - "routing rule change"
+  - "new permanent specialist proposal"
+  - "knowledge-source update"
+  - "tool-use policy change"
+  - "evaluation benchmark change"
+
+promotion_requirements:
+  - "candidate has a version and change rationale"
+  - "candidate cannot evaluate or promote itself"
+  - "baseline comparison exists"
+  - "relevant regression tests pass"
+  - "safety/security checks pass"
+  - "permission changes are reviewed separately"
+  - "owner-gated authority is unchanged unless explicitly approved"
+  - "rollback target exists"
+
+forbidden:
+  - "silent production self-rewrite"
+  - "silent permission expansion"
+  - "changing root authority"
+  - "using private owner data as public training material"
+  - "treating web scraping as automatically lawful or reliable"
+  - "promoting a candidate solely because it is more verbose or confident"
+  - "removing dissent or negative benchmark evidence"
+
+evaluation_dimensions:
+  - "factual accuracy"
+  - "source quality"
+  - "reasoning validity"
+  - "task success"
+  - "calibration/uncertainty"
+  - "security and safety"
+  - "cost/latency where runtime-relevant"
+  - "user usefulness"
+  - "regression resistance"
+  - "cross-domain coordination"
+
+states: ["REGISTERED", "CANDIDATE", "EVALUATED", "PROMOTED", "REJECTED", "RUNTIME_VERIFIED"]
