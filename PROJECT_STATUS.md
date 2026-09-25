@@ -16,10 +16,11 @@ The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Exp
 - current-source/freshness/provenance policy;
 - controlled postmortem -> candidate -> benchmark -> adversarial evaluation -> promotion/rejection evolution;
 - machine-readable cognitive-method archetypes that explicitly do not claim human-mind recreation;
+- a Thinkers / Paradigm Shifters council covering Turing, Lovelace, von Neumann, Gödel, Einstein, Newton, Curie, Darwin, Aristotle, Plato, Sun Tzu and Jung as advisory cognitive-method profiles, not simulated personas;
 - `schemas/sigma-expert.schema.json`, expert template and fail-closed mesh validation integrated into `scripts/validate_control_plane.py`;
 - Headquarters, autonomous-runner and Alysha `/sigma` integration contracts updated.
 
-No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. GitHub Actions run `36170638029` completed **SUCCESS** for candidate `cf21163e7d094e5146b04c104baed7bf25159b5b`, including `python scripts/validate_control_plane.py`. Because this status update creates a new head, the final gate is the same control-plane validation on the new exact PR head plus PR review.
+No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. Earlier GitHub Actions validation succeeded on the pre-Thinkers mesh candidate. The Thinkers layer is now part of PR #23, so the final gate is Sigma control-plane validation on the new exact PR head plus PR review.
 
 ## Sigma Genesis / Headquarters — Issue #20
 
