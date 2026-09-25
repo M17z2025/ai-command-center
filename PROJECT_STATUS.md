@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Universal Expert Mesh — Issue #22
 
-**IN PROGRESS — source candidate built on `feat/22-sigma-expert-mesh`; exact-head CI pending.**
+**READY FOR REVIEW — mesh source built on `feat/22-sigma-expert-mesh`; control-plane validation passed on the pre-status-update candidate and final exact-head validation is required after this status commit.**
 
 The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Experts control plane under `headquarters/mesh/`:
 - broad human-knowledge taxonomy covering the owner's requested science, computing, cyber, engineering, medical, veterinary/agricultural/environmental, business/economics/finance, legal/governance/geopolitical, humanities/social-science and creative fields;
@@ -19,7 +19,7 @@ The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Exp
 - `schemas/sigma-expert.schema.json`, expert template and fail-closed mesh validation integrated into `scripts/validate_control_plane.py`;
 - Headquarters, autonomous-runner and Alysha `/sigma` integration contracts updated.
 
-No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. The next gate is exact-head Sigma control-plane CI and PR review.
+No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. GitHub Actions run `36170638029` completed **SUCCESS** for candidate `cf21163e7d094e5146b04c104baed7bf25159b5b`, including `python scripts/validate_control_plane.py`. Because this status update creates a new head, the final gate is the same control-plane validation on the new exact PR head plus PR review.
 
 ## Sigma Genesis / Headquarters — Issue #20
 
