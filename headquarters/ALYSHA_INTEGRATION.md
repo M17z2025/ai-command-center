@@ -29,7 +29,8 @@ Alysha's owner-only `/sigma` experience should render the governed mesh from:
 - `headquarters/mesh/leaders.yaml`;
 - `headquarters/mesh/pipeline.yaml`;
 - `headquarters/mesh/evolution.yaml`;
-- `headquarters/mesh/cognitive-methods.yaml`.
+- `headquarters/mesh/cognitive-methods.yaml`;
+- `headquarters/mesh/thinkers.yaml`.
 
 The interface should allow the owner to inspect:
 - permanent leaders and their coverage;
@@ -37,7 +38,8 @@ The interface should allow the owner to inspect:
 - the knowledge taxonomy;
 - which experts were selected for a real mission;
 - critic/verifier findings;
-- agent/config versions and evaluation status.
+- agent/config versions and evaluation status;
+- the Thinkers / Paradigm Shifters layer and which cognitive lenses were actually selected for a real mission.
 
 Static governance may be rendered directly from versioned GitHub data. "Active", "working", "learning", "mission running", "completed" and similar runtime states require real private runtime evidence and must never be fabricated by the UI.
 
