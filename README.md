@@ -4,6 +4,10 @@ Sigma is the central control repository for the Mi7z/Lycia software portfolio.
 
 Its purpose is to let Sigma, ChatGPT and human developers work from the same source of truth across all product repositories without relying on chat history.
 
+## Sigma Headquarters
+
+Open **[`headquarters/`](./headquarters/README.md)** for the visible Sigma organisation, authority chain, agent registry, portfolio links, controlled evolution model and Alysha integration contract.
+
 ## Core responsibilities
 
 1. Maintain the master project registry.
