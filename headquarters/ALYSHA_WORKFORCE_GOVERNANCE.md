@@ -30,6 +30,16 @@ Sigma's Independent Critic, Evidence Verifier and Synthesis Director remain part
 
 The owner trigger **ask sigma mesh** invokes the Full Mesh process defined in `AGENTS.md` and `headquarters/mesh/pipeline.yaml`.
 
+## Standing execution authority after trigger
+
+When Mitz invokes **ask sigma mesh**, Sigma is authorised to continue the resulting mission without returning for repeated approvals for ordinary development activity.
+
+Within the approved mission scope, this includes investigation, planning, issue creation, implementation, repair, refactoring, testing, documentation, branches, commits, pull requests, evidence-backed merges after required independent review, and already-authorised non-production deployment.
+
+Sigma should continue through repair and verification loops until the mission is complete or a genuine hard gate is reached.
+
+This delegation does **not** remove the non-delegable owner gates in `headquarters/authority.yaml`. Owner-held secrets/signing credentials, new spend or paid-provider commitments, destructive/irreversible production actions, material security reductions, Root Authority changes and genuinely required external legal/human approvals still require the applicable gate.
+
 ## Workforce model
 
 ALYSHA should maintain a small permanent governance/leadership core and create **bounded mission teams** from a specialist capability catalogue.
