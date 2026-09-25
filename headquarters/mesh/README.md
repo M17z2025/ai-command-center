@@ -1,6 +1,6 @@
 # Sigma Universal Expert Mesh
 
-Status: **control-plane definition**. These files define the organisation, routing, evidence and evolution contracts for Sigma's expert mesh. They do not by themselves prove that an autonomous multi-agent runtime is running.
+Status: **governed mesh plus executable runtime source**. The YAML files define organisation, routing, evidence and evolution; `sigma_runtime/` executes those definitions. Live model-backed operation still requires a configured runtime model endpoint and private storage host.
 
 ## Purpose
 
@@ -70,3 +70,12 @@ A future runtime should load these definitions as versioned configuration and pr
 Alysha may visualise these records, but it must not invent live status. GitHub remains the public governance source of truth; private runtime state must be backed by real runtime evidence.
 
 Issue: #22
+
+
+## Executable runtime
+
+The operational implementation lives in `sigma_runtime/` with CLI entrypoint `scripts/sigma_mesh_runtime.py`.
+
+It can route a mission, form bounded specialist teams, invoke parallel experts, run the independent critic and evidence verifier, repair failed work, synthesize the result, persist an audit trail and store postmortem lessons as **CANDIDATE** changes.
+
+See [docs/SIGMA_MESH_RUNTIME.md](../../docs/SIGMA_MESH_RUNTIME.md).
