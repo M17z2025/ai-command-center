@@ -16,6 +16,7 @@ MESH_FILES = {
     "pipeline": "headquarters/mesh/pipeline.yaml",
     "evidence": "headquarters/mesh/evidence.yaml",
     "evolution": "headquarters/mesh/evolution.yaml",
+    "cognitive_methods": "headquarters/mesh/cognitive-methods.yaml",
 }
 
 REQUIRED_DOMAIN_IDS = {
@@ -140,6 +141,7 @@ def validate_mesh(root: Path) -> list[str]:
     leaders_cfg = loaded.get("leaders")
     pipeline = loaded.get("pipeline")
     evolution = loaded.get("evolution")
+    cognitive_methods = loaded.get("cognitive_methods")
 
     domain_ids: set[str] = set()
     if taxonomy:
@@ -230,6 +232,19 @@ def validate_mesh(root: Path) -> list[str]:
                 if domain_id not in domain_ids:
                     errors.append(f"{node_id} references unknown taxonomy domain {domain_id!r}")
 
+        covered_domains = {
+            domain_id
+            for node in all_nodes
+            for domain_id in node.get("domains", [])
+            if isinstance(domain_id, str)
+        }
+        uncovered_required = sorted(REQUIRED_DOMAIN_IDS - covered_domains)
+        if uncovered_required:
+            errors.append(
+                "Required taxonomy domains without a registered leader: "
+                + ", ".join(uncovered_required)
+            )
+
         factory = leaders_cfg.get("global_team_factory", {})
         if factory.get("child_may_outrank_parent") is not False:
             errors.append("global_team_factory.child_may_outrank_parent must be false")
@@ -264,6 +279,17 @@ def validate_mesh(root: Path) -> list[str]:
         if "candidate cannot evaluate or promote itself" not in requirements:
             errors.append("Evolution promotion must require independent evaluation")
 
+    method_ids: set[str] = set()
+    if cognitive_methods:
+        for idx, method in enumerate(cognitive_methods.get("methods", [])):
+            if not isinstance(method, dict) or not method.get("id"):
+                errors.append(f"cognitive-methods method[{idx}] missing id")
+                continue
+            method_id = method["id"]
+            if method_id in method_ids:
+                errors.append(f"Duplicate cognitive method id: {method_id}")
+            method_ids.add(method_id)
+
     expert_schema_path = root / "schemas/sigma-expert.schema.json"
     expert_template_path = root / "templates/sigma-expert.yaml"
     if not expert_schema_path.exists():
@@ -275,6 +301,11 @@ def validate_mesh(root: Path) -> list[str]:
             schema = json.loads(expert_schema_path.read_text(encoding="utf-8"))
             template = yaml.safe_load(expert_template_path.read_text(encoding="utf-8"))
             jsonschema.validate(template, schema)
+            for method_id in template.get("expert", {}).get("cognitive_methods", []):
+                if method_id not in method_ids:
+                    errors.append(
+                        f"Sigma expert template references unknown cognitive method {method_id!r}"
+                    )
         except Exception as exc:
             errors.append(f"Sigma expert template/schema validation failed: {exc}")
 
