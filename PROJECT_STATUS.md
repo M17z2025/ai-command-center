@@ -1,8 +1,12 @@
 # Sigma Development Command Center Status
 
-Last updated: 2026-09-24
+Last updated: 2026-09-25
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
+
+## Sigma Genesis / Headquarters — Issue #20
+
+A visible GitHub-native Sigma Headquarters is now implemented on branch `feat/20-sigma-genesis-headquarters` as a source candidate. It defines the root authority, permanent agent organisation, cognitive-method archetypes, governed agent-evolution states, Alysha integration contract and explicit links to every repository in the master registry. This is governance/visibility evidence only: it does not claim the autonomous runner, agent creation runtime or self-improvement loop is operational. Exact-head control-plane validation is still required before merge.
 
 ## Control-plane rules
 
