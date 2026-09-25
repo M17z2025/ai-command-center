@@ -4,23 +4,36 @@ Last updated: 2026-09-25
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
-## Sigma Universal Expert Mesh — Issue #22
+## Sigma Universal Expert Mesh + Runtime — Issues #22 / #24 / #25
 
-**READY FOR REVIEW — mesh source and Thinkers layer are built on `feat/22-sigma-expert-mesh`; Sigma control-plane validation has passed on the thinker-integrated candidate. The PR exact-head check remains the authoritative merge gate.**
+**MESH + RUNTIME ENGINE: MERGED / COMPLETE IN SOURCE. LIVE MODEL SERVICE: BLOCKED ON OWNER-GATED PRIVATE INFERENCE / SECRET COMMISSIONING.**
 
-The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Experts control plane under `headquarters/mesh/`:
-- broad human-knowledge taxonomy covering the owner's requested science, computing, cyber, engineering, medical, veterinary/agricultural/environmental, business/economics/finance, legal/governance/geopolitical, humanities/social-science and creative fields;
-- Sigma domain leaders plus independent router, critic, evidence verifier and synthesis roles;
-- bounded temporary specialist-team creation with explicit parent, mission, tools, prohibitions and review/expiry requirements;
-- multi-domain parallel analysis, adversarial critique, evidence verification, repair and synthesis pipeline;
-- current-source/freshness/provenance policy;
-- controlled postmortem -> candidate -> benchmark -> adversarial evaluation -> promotion/rejection evolution;
-- machine-readable cognitive-method archetypes that explicitly do not claim human-mind recreation;
-- a Thinkers / Paradigm Shifters council covering Turing, Lovelace, von Neumann, Gödel, Einstein, Newton, Curie, Darwin, Aristotle, Plato, Sun Tzu and Jung as advisory cognitive-method profiles, not simulated personas;
-- `schemas/sigma-expert.schema.json`, expert template and fail-closed mesh validation integrated into `scripts/validate_control_plane.py`;
-- Headquarters, autonomous-runner and Alysha `/sigma` integration contracts updated.
+PR #23 is merged on `main` as `f53b8b73e90b57b36ab31f05b92f78457a5f6260`.
 
-No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. Thinker-integrated GitHub Actions run `36171651428` completed the `validate_control_plane.py` step successfully on candidate `071dcdfda7a852277a11ddb7ed201efcb78ea6cb`. PR exact-head checks remain authoritative for any later commit.
+The merged Sigma stack now contains:
+- universal human-knowledge taxonomy and domain leaders;
+- Thinkers / Paradigm Shifters cognitive-method layer;
+- bounded temporary specialist-team creation;
+- deterministic mission routing and risk gates;
+- parallel model-backed expert execution;
+- independent critic and evidence verifier;
+- bounded repair loop and synthesis;
+- SQLite persistence for private mission/audit/artifact/candidate-learning state;
+- authenticated HTTP API and CLI;
+- vendor-neutral live HTTP model adapter supporting Responses or chat-completions shapes;
+- private container deployment definition;
+- fail-closed live-provider configuration;
+- deterministic end-to-end CI smoke that proves the orchestration path without pretending to be a live intelligence provider.
+
+Merged-main verification:
+- `Sigma mesh runtime` run `36175300404`: **SUCCESS**;
+- `Sigma control-plane validation` run `36175300242`: **SUCCESS**;
+- unit tests: **SUCCESS**;
+- deterministic route -> experts -> critic -> verifier -> repair -> synthesis -> persistence smoke: **SUCCESS**.
+
+Issue #24 is complete and closed. Issue #25 owns the remaining live commissioning only.
+
+No live-model claim is made yet. A real private mission service requires an approved host/model gateway plus runtime-only secrets. Existing MI7Z architecture identifies private/self-hosted inference and the FreeLLMAPI development-pilot gateway as a preferred free-first route, with paid inference disabled unless separately authorised. Sigma must not invent credentials, expose the endpoint publicly, or silently incur spend.
 
 ## Sigma Genesis / Headquarters — Issue #20
 
@@ -34,7 +47,7 @@ Repository evidence overrides chat history. Product code stays in product reposi
 
 | Project | Sigma classification | Highest-priority executable next task |
 | --- | --- | --- |
-| Sigma Development Command Center | Supervisory control plane **READY**; runner phase 1 **CHANGES REQUIRED**; default-branch governance **BLOCKED — OWNER/ADMIN** | Synchronise PR #10 with current `main`, preserve GET-only/no-guessing discovery, rerun exact-head unit/control-plane CI and re-confirm mergeability. Separately, owner/admin issue #14 must protect `main`. |
+| Sigma Development Command Center | Expert mesh + runtime engine **MERGED / COMPLETE IN SOURCE**; live inference service **BLOCKED — OWNER-GATED COMMISSIONING**; portfolio development runner phase 1 **CHANGES REQUIRED**; default-branch governance **BLOCKED — OWNER/ADMIN** | Commission issue #25 on an approved private inference/runtime host without silent spend or secret exposure. Independently synchronise runner PR #10 and apply owner/admin issue #14 branch protection. |
 | Mi7z Web | **CHANGES REQUIRED / SECURITY REMEDIATION REQUIRED** | Fix PR #2's two TypeScript errors, upgrade vulnerable `next@15.5.3`, then obtain exact-head dependency audit + typecheck + production build + Playwright evidence. |
 | Alysha AI Platform | RC2 source **READY**; trusted release **BLOCKED**; Supabase final reconciliation **BLOCKED ON PREVIEW**; session-v2 composition-clock hardening **READY / COMPLETE IN SOURCE** | Execute Issue #1150: reconcile the session-v2 design/threat/test docs with merged PR #1149, preserve v1 as sole runtime authority, and require exact-head ALYSHA Web Quality before merge. Owner gates #388/#661/#470 remain independent. |
 | Invoiceit by Mi7z | **CHANGES REQUIRED / P0 SECURITY HARDENING ADVANCED** | Create safe Tenant A/Tenant B plus restricted non-Master fixtures and run hostile direct-call/entity authorization tests; add exact-head CI. |
