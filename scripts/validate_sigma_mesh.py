@@ -17,6 +17,7 @@ MESH_FILES = {
     "evidence": "headquarters/mesh/evidence.yaml",
     "evolution": "headquarters/mesh/evolution.yaml",
     "cognitive_methods": "headquarters/mesh/cognitive-methods.yaml",
+    "thinkers": "headquarters/mesh/thinkers.yaml",
 }
 
 REQUIRED_DOMAIN_IDS = {
@@ -106,6 +107,21 @@ REQUIRED_DOMAIN_IDS = {
     "foresight-innovation",
 }
 
+REQUIRED_THINKER_IDS = {
+    "alan-turing",
+    "ada-lovelace",
+    "john-von-neumann",
+    "kurt-godel",
+    "albert-einstein",
+    "isaac-newton",
+    "marie-curie",
+    "charles-darwin",
+    "aristotle",
+    "plato",
+    "sun-tzu",
+    "carl-jung",
+}
+
 REQUIRED_ASSURANCE_ROLES = {
     "sigma-mission-router",
     "sigma-independent-critic",
@@ -142,6 +158,7 @@ def validate_mesh(root: Path) -> list[str]:
     pipeline = loaded.get("pipeline")
     evolution = loaded.get("evolution")
     cognitive_methods = loaded.get("cognitive_methods")
+    thinkers_cfg = loaded.get("thinkers")
 
     domain_ids: set[str] = set()
     if taxonomy:
@@ -257,6 +274,7 @@ def validate_mesh(root: Path) -> list[str]:
             "authority-check",
             "mission-decomposition",
             "expert-routing",
+            "cognitive-lens-selection",
             "team-formation",
             "parallel-analysis",
             "adversarial-critique",
@@ -289,6 +307,39 @@ def validate_mesh(root: Path) -> list[str]:
             if method_id in method_ids:
                 errors.append(f"Duplicate cognitive method id: {method_id}")
             method_ids.add(method_id)
+
+    if thinkers_cfg:
+        thinker_ids: set[str] = set()
+        for idx, thinker in enumerate(thinkers_cfg.get("thinkers", [])):
+            if not isinstance(thinker, dict):
+                errors.append(f"thinkers.yaml thinker[{idx}] must be an object")
+                continue
+            thinker_id = thinker.get("id")
+            if not thinker_id:
+                errors.append(f"thinkers.yaml thinker[{idx}] missing id")
+                continue
+            if thinker_id in thinker_ids:
+                errors.append(f"Duplicate thinker id: {thinker_id}")
+            thinker_ids.add(thinker_id)
+
+            for domain_id in thinker.get("primary_domains", []):
+                if domain_id not in domain_ids:
+                    errors.append(
+                        f"Thinker {thinker_id} references unknown taxonomy domain {domain_id!r}"
+                    )
+            for method_id in thinker.get("cognitive_methods", []):
+                if method_id not in method_ids:
+                    errors.append(
+                        f"Thinker {thinker_id} references unknown cognitive method {method_id!r}"
+                    )
+
+        missing_thinkers = sorted(REQUIRED_THINKER_IDS - thinker_ids)
+        if missing_thinkers:
+            errors.append("Missing required Thinkers Council profiles: " + ", ".join(missing_thinkers))
+
+        policy = thinkers_cfg.get("policy", {})
+        if policy.get("not_personas") is not True or policy.get("not_human_recreations") is not True:
+            errors.append("Thinkers Council must explicitly prohibit persona/human recreation claims")
 
     expert_schema_path = root / "schemas/sigma-expert.schema.json"
     expert_template_path = root / "templates/sigma-expert.yaml"
