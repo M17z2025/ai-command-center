@@ -54,3 +54,7 @@ The Sigma Universal Expert Mesh is ALYSHA's standing principal advisory and assu
 ALYSHA should assemble bounded mission teams from the specialist capability catalogue rather than treat every possible specialist as an always-running permanent agent. Independent critic, evidence verification, security/legal gates and Sigma User Tester remain separate from the implementing specialist team.
 
 This advisory relationship does not widen runtime authority: owner gates, production gates, secrets, spend, destructive actions and paid inference remain governed by Sigma authority and product policy.
+
+### Triggered execution delegation
+
+After the owner invokes **ask sigma mesh**, Sigma may execute the resulting bounded mission without repeated owner confirmation for routine fixes, development, refactoring, testing, documentation, repository changes, evidence-backed merges and already-authorised non-production deployment. The hard gates defined in `headquarters/authority.yaml` remain controlling.
