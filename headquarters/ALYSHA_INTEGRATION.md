@@ -44,3 +44,13 @@ The interface should allow the owner to inspect:
 Static governance may be rendered directly from versioned GitHub data. "Active", "working", "learning", "mission running", "completed" and similar runtime states require real private runtime evidence and must never be fabricated by the UI.
 
 Issue #22 defines the mesh. Alysha issue #1160 owns the visible private interface slice.
+
+## Standing ALYSHA workforce governance
+
+The ALYSHA specialist development/creative/operations organisation is governed by [ALYSHA Elite AI Workforce Governance](./ALYSHA_WORKFORCE_GOVERNANCE.md).
+
+The Sigma Universal Expert Mesh is ALYSHA's standing principal advisory and assurance layer for material architecture, engineering, testing, security, legal/compliance, AI/data, design/creative and release decisions.
+
+ALYSHA should assemble bounded mission teams from the specialist capability catalogue rather than treat every possible specialist as an always-running permanent agent. Independent critic, evidence verification, security/legal gates and Sigma User Tester remain separate from the implementing specialist team.
+
+This advisory relationship does not widen runtime authority: owner gates, production gates, secrets, spend, destructive actions and paid inference remain governed by Sigma authority and product policy.
