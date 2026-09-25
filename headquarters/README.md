@@ -56,6 +56,7 @@ SIGMA GOVERNOR
 - [Portfolio links](./PORTFOLIO.md)
 - [Agent evolution rules](./evolution/README.md)
 - [Alysha integration contract](./ALYSHA_INTEGRATION.md)
+- [ALYSHA elite workforce governance](./ALYSHA_WORKFORCE_GOVERNANCE.md)
 
 ## Evidence rule
 
