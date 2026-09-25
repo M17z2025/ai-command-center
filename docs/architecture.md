@@ -49,6 +49,20 @@ A product's repository evidence must be inspected before development or readines
 
 These define authority ordering, work selection, implementation, review, security and completion rules.
 
+### Universal expert mesh
+
+`headquarters/mesh/` defines Sigma's application-level Mixture-of-Experts architecture:
+- hierarchical human-knowledge taxonomy;
+- permanent domain leaders;
+- bounded temporary specialist-team creation;
+- multi-domain mission routing;
+- independent critic and evidence verifier roles;
+- synthesis and action gates;
+- evidence/freshness policy;
+- controlled, versioned evolution.
+
+The mesh is governance/configuration until a runtime loads it and produces auditable mission records. Unknown domains fail over to Research Director plus nearest leaders rather than being answered by an invented specialist.
+
 ### Independent user testing
 
 `docs/SIGMA_USER_TESTER.md` defines the independent real-browser acceptance role for applicable user-facing products.
