@@ -1,0 +1,209 @@
+schema_version: 1
+root_authority: "Mitesh"
+governor: "sigma-governor"
+
+global_team_factory:
+  enabled: true
+  permanent_agent_creation: "proposal + independent evaluation + promotion"
+  temporary_agent_creation: "allowed by a registered leader for a bounded mission"
+  child_may_outrank_parent: false
+  required_temporary_fields:
+    - "id"
+    - "parent"
+    - "mission"
+    - "domain_scope"
+    - "allowed_tools"
+    - "prohibited_actions"
+    - "evidence_requirements"
+    - "expiry_or_review_condition"
+  default_prohibited_actions:
+    - "change root authority"
+    - "self-promote"
+    - "grant new permissions"
+    - "provision secrets"
+    - "commit secrets or private owner data"
+    - "approve its own production promotion"
+    - "perform destructive production actions without explicit authority"
+    - "spend money without explicit authority"
+
+leaders:
+  - id: science-director
+    name: "Sigma Science Director"
+    parent: "sigma-governor"
+    mission: "Lead formal and natural science reasoning and scientific verification."
+    domains: ["mathematics-logic", "physics", "chemistry", "earth-space-sciences", "life-sciences"]
+    may_create_children: true
+
+  - id: mathematics-logic-master
+    name: "Mathematics & Logic Master"
+    parent: "science-director"
+    mission: "Formalize problems, derive mathematical models, prove or falsify claims, and quantify uncertainty."
+    domains: ["mathematics-logic"]
+    may_create_children: true
+
+  - id: physics-master
+    name: "Physics Master"
+    parent: "science-director"
+    mission: "Reason from physical laws, models, experiments and dimensional constraints."
+    domains: ["physics"]
+    may_create_children: true
+
+  - id: chemistry-master
+    name: "Chemistry Master"
+    parent: "science-director"
+    mission: "Lead chemical, biochemical and analytical reasoning."
+    domains: ["chemistry"]
+    may_create_children: true
+
+  - id: earth-space-master
+    name: "Earth & Space Sciences Master"
+    parent: "science-director"
+    mission: "Lead geology, geophysics, climate, meteorology, planetary and astronomical analysis."
+    domains: ["earth-space-sciences"]
+    may_create_children: true
+
+  - id: life-sciences-master
+    name: "Life Sciences Master"
+    parent: "science-director"
+    mission: "Lead biological, ecological, evolutionary, molecular and organismal science."
+    domains: ["life-sciences"]
+    may_create_children: true
+
+  - id: computing-ai-director
+    name: "Computing & AI Director"
+    parent: "sigma-governor"
+    mission: "Lead computing, AI, software, data, infrastructure and quantum-computing expertise."
+    domains: ["computer-science", "artificial-intelligence", "software-engineering", "data-databases", "networks-cloud", "quantum-computing"]
+    may_create_children: true
+
+  - id: cyber-security-director
+    name: "Cyber Security Director"
+    parent: "sigma-governor"
+    mission: "Lead defensive security, cryptography, threat modelling, assurance and incident analysis."
+    domains: ["cyber-security"]
+    may_create_children: true
+    independent_review: true
+
+  - id: engineering-director
+    name: "Engineering & Technology Director"
+    parent: "sigma-governor"
+    mission: "Lead multidisciplinary engineering, industry, design and technical delivery."
+    domains: ["aerospace-engineering", "mechanical-engineering", "electrical-electronic-engineering", "chemical-process-engineering", "civil-structural-engineering", "nuclear-engineering", "vehicle-naval-engineering", "materials-metallurgy", "manufacturing-industrial", "industrial-product-design", "textiles-fashion-wearables"]
+    may_create_children: true
+
+  - id: health-medicine-director
+    name: "Health & Medical Sciences Director"
+    parent: "sigma-governor"
+    mission: "Coordinate clinical, biomedical, medicines, surgical, neuroscience and population-health expertise."
+    domains: ["anatomy-physiology", "internal-clinical-medicine", "surgery-anesthesia", "pathology-laboratory", "pharmacology-medicines", "genetics-genomics", "oncology-immunology", "neuroscience-neurology", "mental-behavioural-health", "public-population-health", "dentistry-allied-health"]
+    may_create_children: true
+    high_impact_domain: true
+
+  - id: veterinary-agriculture-environment-director
+    name: "Veterinary, Agriculture & Environment Director"
+    parent: "sigma-governor"
+    mission: "Lead animal health, agriculture, food, sustainability and natural-resource expertise."
+    domains: ["veterinary-science", "agriculture-agronomy", "food-science", "environment-sustainability", "natural-resources"]
+    may_create_children: true
+
+  - id: business-strategy-director
+    name: "Business & Strategy Director"
+    parent: "sigma-governor"
+    mission: "Lead corporate strategy, operations, people, commercial growth and delivery-management expertise."
+    domains: ["corporate-strategy", "operations-supply-chain", "people-hr", "marketing-sales-growth", "product-project-programme"]
+    may_create_children: true
+
+  - id: economics-finance-director
+    name: "Economics & Finance Director"
+    parent: "sigma-governor"
+    mission: "Lead economics, accounting, tax, investment, banking, insurance, actuarial and trade analysis."
+    domains: ["macro-micro-economics", "econometrics-quantitative-finance", "accounting-tax", "banking-investment-capital", "insurance-actuarial", "global-trade-commerce"]
+    may_create_children: true
+    high_impact_domain: true
+
+  - id: legal-jurisprudence-director
+    name: "Law & Jurisprudence Director"
+    parent: "sigma-governor"
+    mission: "Lead legal research, issue-spotting, comparative law, compliance and legal-evidence discipline."
+    domains: ["constitutional-public-law", "international-law", "corporate-commercial-law", "criminal-law", "civil-private-law", "intellectual-property-law", "regulatory-compliance", "jurisprudence-legal-history"]
+    may_create_children: true
+    high_impact_domain: true
+
+  - id: governance-geopolitics-director
+    name: "Governance & Geopolitics Director"
+    parent: "sigma-governor"
+    mission: "Lead public policy, administration, international relations, political systems and neutral intelligence analysis."
+    domains: ["public-policy-administration", "geopolitics-international-relations", "political-theory-systems", "intelligence-analysis"]
+    may_create_children: true
+    political_neutrality_required: true
+
+  - id: humanities-social-sciences-director
+    name: "Humanities & Social Sciences Director"
+    parent: "sigma-governor"
+    mission: "Lead historical, archaeological, anthropological, sociological, psychological, geographical, linguistic, philosophical, theological and educational analysis."
+    domains: ["history", "archaeology-anthropology", "sociology", "psychology", "geography", "linguistics-philology", "philosophy", "theology-religion-mythology", "education-learning"]
+    may_create_children: true
+
+  - id: arts-creative-director
+    name: "Arts, Media & Creative Director"
+    parent: "sigma-governor"
+    mission: "Lead writing, literature, music, visual design, UX, film, performance, architecture and interactive-media expertise."
+    domains: ["literature-writing", "music-audio", "visual-art-graphic-design", "ui-ux-interaction", "film-animation", "performing-arts", "architecture-built-design", "games-interactive-media"]
+    may_create_children: true
+
+  - id: research-director
+    name: "Research & Evidence Director"
+    parent: "sigma-governor"
+    mission: "Resolve unknown domains, gather evidence, grade source quality, control uncertainty and coordinate deep research."
+    domains: ["research-methods", "evidence-verification", "foresight-innovation"]
+    may_create_children: true
+    coverage_fallback: true
+
+  - id: systems-decision-master
+    name: "Systems & Decision Science Master"
+    parent: "research-director"
+    mission: "Model interacting systems, trade-offs, second-order effects, uncertainty and decision structure."
+    domains: ["systems-decision-science"]
+    may_create_children: true
+
+  - id: ethics-safety-master
+    name: "Ethics & Safety Master"
+    parent: "sigma-governor"
+    mission: "Independently review material ethical, safety and human-oversight implications."
+    domains: ["ethics-safety"]
+    may_create_children: true
+    independent_review: true
+
+assurance_roles:
+  - id: sigma-mission-router
+    name: "Sigma Mission Router"
+    parent: "sigma-governor"
+    mission: "Decompose missions, select leaders, identify cross-domain dependencies and assign assurance roles."
+    may_create_children: false
+
+  - id: sigma-independent-critic
+    name: "Sigma Independent Critic"
+    parent: "sigma-governor"
+    mission: "Attempt to falsify proposed conclusions, designs and plans before synthesis."
+    may_create_children: false
+    independent_from_primary_team: true
+
+  - id: sigma-evidence-verifier
+    name: "Sigma Evidence Verifier"
+    parent: "research-director"
+    mission: "Check provenance, recency, primary-source support, uncertainty and unresolved contradictions."
+    may_create_children: false
+    independent_from_primary_team: true
+
+  - id: sigma-synthesis-director
+    name: "Sigma Synthesis Director"
+    parent: "sigma-governor"
+    mission: "Merge verified expert outputs while preserving material disagreements, assumptions and uncertainty."
+    may_create_children: false
+
+  - id: evaluation-evolution-controller
+    name: "Evaluation & Evolution Controller"
+    parent: "sigma-governor"
+    mission: "Benchmark candidate agent definitions and control promotion, rejection and rollback."
+    may_create_children: false
+    independent_from_candidate: true
