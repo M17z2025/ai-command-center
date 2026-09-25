@@ -1,0 +1,100 @@
+schema_version: 1
+pipeline_id: sigma-mesh-execution-v1
+
+stages:
+  - id: authority-check
+    purpose: "Verify requester authority, requested action class and owner-gated boundaries."
+    required: true
+
+  - id: mission-decomposition
+    purpose: "Convert the request into explicit questions, deliverables, constraints, risks and acceptance criteria."
+    required: true
+
+  - id: expert-routing
+    purpose: "Select one or more domain leaders from taxonomy coverage."
+    required: true
+    rules:
+      - "Use multiple leaders when the mission spans multiple domains."
+      - "Route unknown subjects through research-director and nearest domains."
+      - "Do not route high-impact questions to a single generic expert."
+
+  - id: team-formation
+    purpose: "Each selected leader forms the smallest sufficient permanent/temporary specialist team."
+    required: true
+    rules:
+      - "Temporary specialists inherit no permission beyond their explicit mission."
+      - "Every temporary specialist has a parent and expiry/review condition."
+      - "Specialists may disagree with leaders on evidence."
+
+  - id: parallel-analysis
+    purpose: "Experts independently analyze their assigned subproblem before group synthesis."
+    required: true
+    anti_groupthink: true
+
+  - id: cross-expert-workshop
+    purpose: "Share models, dependencies, constraints and contradictions across experts."
+    required_when: "more_than_one_domain"
+
+  - id: adversarial-critique
+    purpose: "Independent critic attempts to break, falsify or find unsafe assumptions in the proposed result."
+    required_for_material_work: true
+    independence_required: true
+
+  - id: evidence-verification
+    purpose: "Verify sources, dates, provenance, calculations, current law/standards and uncertainty."
+    required_for_material_work: true
+    independence_required: true
+
+  - id: repair-loop
+    purpose: "Return failed claims or designs to the relevant experts for bounded correction."
+    max_default_cycles: 3
+    escalate_if:
+      - "material contradiction remains unresolved"
+      - "required authoritative evidence is unavailable"
+      - "owner-only decision is required"
+      - "legal/compliance approval is required"
+      - "safe execution boundary is unclear"
+
+  - id: synthesis
+    purpose: "Produce one coherent output preserving material uncertainty, dissent and action gates."
+    required: true
+
+  - id: execution-gate
+    purpose: "Separate advisory output from actions that change code, production, finance, data or external systems."
+    required: true
+
+  - id: postmortem
+    purpose: "Capture what worked, failed, delayed or surprised the team."
+    required_for_material_work: true
+
+  - id: learning-candidate
+    purpose: "Propose versioned improvements to memory, procedures, routing or expert definitions."
+    required_when: "postmortem identifies reusable learning"
+
+routing:
+  minimum_confidence_to_skip_research_fallback: 0.80
+  multi_domain_threshold: 2
+  unknown_domain_behavior: "research_fallback"
+  leader_selection:
+    primary: "domain coverage"
+    secondary: ["risk", "dependency", "verification need", "historical performance on comparable evaluated tasks"]
+
+risk_gates:
+  medical:
+    triggers: ["health-medical-sciences"]
+    requirements: ["current authoritative evidence", "uncertainty statement", "no unsupported diagnosis or treatment certainty", "human professional escalation where appropriate"]
+  legal:
+    triggers: ["law-governance-geopolitics"]
+    requirements: ["jurisdiction", "current primary/authoritative law where material", "effective date", "legal uncertainty/contested interpretation identified"]
+  finance:
+    triggers: ["business-finance-economics"]
+    requirements: ["time-sensitive market data verified when used", "assumptions stated", "risk and downside considered"]
+  cyber:
+    triggers: ["cyber-security"]
+    requirements: ["defensive scope", "least privilege", "authorization boundary", "security review"]
+  politics:
+    triggers: ["political-theory-systems", "geopolitics-international-relations", "public-policy-administration"]
+    requirements: ["neutral factual framing", "current sources for substantive claims", "no political endorsement or electoral recommendation"]
+  production_action:
+    triggers: ["deployment", "destructive change", "secrets", "paid service", "financial transfer"]
+    requirements: ["applicable explicit owner gate", "audit trail", "rollback or recovery plan"]
