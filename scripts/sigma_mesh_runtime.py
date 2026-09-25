@@ -9,6 +9,10 @@ import os
 from pathlib import Path
 import sys
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from sigma_runtime import MeshConfig, MissionRouter, MissionStore, SigmaOrchestrator
 from sigma_runtime.provider import provider_from_env
 from sigma_runtime.server import build_server
