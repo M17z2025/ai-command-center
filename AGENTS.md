@@ -36,7 +36,26 @@ Full Mesh mode requires:
 9. Sigma Synthesis Director output preserving material dissent and uncertainty.
 10. Controlled lesson/evolution candidates only; no self-promotion.
 
-The trigger never overrides Root Authority, security, spend, production, legal/compliance, privacy, destructive-action or other owner gates.
+### Standing execution delegation after trigger
+
+When the product owner uses **ask sigma mesh**, that invocation grants Sigma a standing execution delegation for the resulting mission. After the Full Mesh review/routing step, Sigma and its authorised implementation agents may continue **without asking the owner for repeated approval** to:
+
+- investigate and triage;
+- plan and create repository-backed work items;
+- write, repair, refactor and remove code within the approved mission scope;
+- update tests, documentation, configuration and non-secret infrastructure-as-code;
+- create branches, commits and pull requests;
+- run CI, tests, static/security checks and Sigma User Tester;
+- repair findings and regressions;
+- merge changes when required independent reviews and repository quality gates pass;
+- deploy to development/staging or other already-authorised non-production environments;
+- continue the development loop until the mission is complete, blocked by a hard gate, or materially outside the owner's requested scope.
+
+Routine implementation choices, bug fixes, quality improvements and bounded architectural changes within the mission do not require further owner confirmation.
+
+This standing delegation remains subordinate to the non-delegable owner gates in `headquarters/authority.yaml`. In particular, it does not authorise an agent to change Root Authority, provision owner-held secrets/signing credentials, create new financial spend or paid-provider commitments, perform destructive or irreversible production actions, materially reduce security controls, or bypass any external human/legal approval that is actually required.
+
+Where production release is already explicitly delegated by product policy, Sigma may follow that policy. Where product policy still reserves production release to the owner, that gate remains in force.
 
 ## Mandatory pre-work inspection
 

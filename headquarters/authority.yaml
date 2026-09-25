@@ -19,6 +19,25 @@ command_chain:
   - "specialist-agent"
   - "temporary-agent"
 
+standing_owner_delegations:
+  sigma_mesh_trigger:
+    trigger: "ask sigma mesh"
+    effect: "authorise bounded autonomous execution for the resulting mission without repeated owner approval"
+    allowed:
+      - "investigation, triage and planning"
+      - "repository-backed issue/task creation"
+      - "code fixes, development, refactoring and bounded architecture changes"
+      - "tests, documentation and non-secret configuration changes"
+      - "branches, commits, pull requests and evidence-backed merge after required independent review and quality gates"
+      - "development/staging deployment where already authorised"
+      - "bounded repair loops and continuation until complete or hard-gated"
+    remains_subject_to:
+      - "non_delegable_owner_gates"
+      - "least privilege"
+      - "independent review and evidence requirements"
+      - "product-specific production policy"
+      - "applicable external human or legal approval requirements"
+
 non_delegable_owner_gates:
   - "production release where product policy requires owner approval"
   - "destructive or irreversible production action"
