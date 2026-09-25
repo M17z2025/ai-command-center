@@ -57,6 +57,12 @@ REQUIRED = [
     "docs/SIGMA_MESH_RUNTIME.md",
     ".github/workflows/sigma-mesh-runtime.yml",
     "Dockerfile.sigma-runtime",
+    "deploy/sigma-stack/docker-compose.yml",
+    "deploy/sigma-stack/docker-compose.freellm-pilot.yml",
+    "deploy/sigma-stack/.env.example",
+    "deploy/sigma-stack/README.md",
+    "scripts/sigma_live_probe.py",
+    "tests/test_sigma_live_stack_files.py",
 ]
 
 errors = []

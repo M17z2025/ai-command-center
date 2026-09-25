@@ -1,0 +1,31 @@
+services:
+  sigma-runtime:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-runtime
+    restart: unless-stopped
+    environment:
+      SIGMA_RUNTIME_PROVIDER: ${SIGMA_RUNTIME_PROVIDER:-http}
+      SIGMA_LLM_ENDPOINT: ${SIGMA_LLM_ENDPOINT:?set SIGMA_LLM_ENDPOINT}
+      SIGMA_LLM_MODEL: ${SIGMA_LLM_MODEL:?set SIGMA_LLM_MODEL}
+      SIGMA_LLM_PROTOCOL: ${SIGMA_LLM_PROTOCOL:-chat-completions}
+      SIGMA_LLM_API_KEY: ${SIGMA_LLM_API_KEY:-}
+      SIGMA_LLM_TIMEOUT_SECONDS: ${SIGMA_LLM_TIMEOUT_SECONDS:-120}
+      SIGMA_RUNTIME_DB: /data/sigma-runtime.db
+      SIGMA_RUNTIME_TOKEN: ${SIGMA_RUNTIME_TOKEN:?set SIGMA_RUNTIME_TOKEN}
+      PORT: "8080"
+    volumes:
+      - sigma-runtime-data:/data
+    ports:
+      - "127.0.0.1:${SIGMA_RUNTIME_PORT:-8080}:8080"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  sigma-private:
+    driver: bridge
+
+volumes:
+  sigma-runtime-data:
