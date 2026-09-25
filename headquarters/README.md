@@ -27,6 +27,18 @@ SIGMA GOVERNOR
         +-- Sigma User Tester
         +-- Agent Factory Controller
         +-- Evaluation & Evolution Controller
+        |
+        +-- Universal Expert Mesh
+            +-- Science
+            +-- Computing & AI
+            +-- Engineering & Technology
+            +-- Health & Medicine
+            +-- Veterinary / Agriculture / Environment
+            +-- Business / Economics / Finance
+            +-- Law / Governance / Geopolitics
+            +-- Humanities / Social Sciences
+            +-- Arts / Media / Creative
+            +-- Research / Evidence / Decision Science
 ```
 
 ## Headquarters index
@@ -34,6 +46,13 @@ SIGMA GOVERNOR
 - [Authority constitution](./authority.yaml)
 - [Permanent agent registry](./agents/registry.yaml)
 - [Cognitive-method archetypes](./agents/cognitive-archetypes.md)
+- [Universal Expert Mesh](./mesh/README.md)
+- [Knowledge taxonomy](./mesh/taxonomy.yaml)
+- [Domain leaders and team factory](./mesh/leaders.yaml)
+- [Execution / critique / synthesis pipeline](./mesh/pipeline.yaml)
+- [Evidence discipline](./mesh/evidence.yaml)
+- [Controlled evolution](./mesh/evolution.yaml)
+- [Machine-readable cognitive methods](./mesh/cognitive-methods.yaml)
 - [Portfolio links](./PORTFOLIO.md)
 - [Agent evolution rules](./evolution/README.md)
 - [Alysha integration contract](./ALYSHA_INTEGRATION.md)
@@ -41,6 +60,8 @@ SIGMA GOVERNOR
 ## Evidence rule
 
 An agent displayed here is a registered organisational role. It must not be described as live, working, learning, evolved or autonomous unless runtime evidence exists for that claim.
+
+The Universal Expert Mesh extends the permanent organisation with domain leaders, dynamic mission specialists, multi-expert routing, independent criticism, evidence verification and versioned evolution. It is an application-level expert-routing architecture; it does not claim to recreate human minds or expose a foundation model's internal MoE routing.
 
 ## Public/private boundary
 
