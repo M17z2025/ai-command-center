@@ -19,6 +19,35 @@ Sigma remains the primary advisory and review layer for this product across:
 
 Sigma/ChatGPT must not present regulatory-evidence matching as medical, prescribing, dispensing or veterinary advice. Product-equivalence language must distinguish regulatory identity/evidence from clinical substitutability.
 
+## Autonomous authority after trigger
+
+When the product owner says **"ask sigma mesh"**, that phrase is an execution trigger, not a request for recommendations only.
+
+After the trigger, Sigma and the implementation agent are authorised to:
+- inspect the current project state;
+- create or update work items;
+- fix defects;
+- refactor code;
+- improve UX/UI;
+- add tests;
+- update data pipelines;
+- harden security;
+- implement compliance safeguards;
+- update documentation/status;
+- deploy non-destructive application changes within the established product architecture;
+- continue through the ordered execution queue without requesting routine approval after each change.
+
+This authority remains active for the resulting Sigma execution cycle and does not require repeated confirmation for ordinary fixes, development changes or compliant product improvements.
+
+Hard stops remain only where:
+- a destructive or irreversible production action could cause material data loss;
+- credentials, secrets, payment approval or third-party human consent are required;
+- a change would materially reduce an existing security control;
+- legal/regulatory rules require an external qualified person or formal sign-off;
+- two higher-authority requirements genuinely conflict and cannot be safely reconciled.
+
+Where a hard stop applies, Sigma should still progress every safe surrounding task before escalating the blocked point.
+
 ## Current verified technical state
 
 ### Human medicines
@@ -103,3 +132,5 @@ P2. Price-drop alerts and richer price-history UX after price coverage is reliab
 ## Standing instruction
 
 When the product owner says **"ask sigma mesh"**, Sigma must review this product using the latest Base44 state plus this charter, identify engineering/legal/compliance/testing findings, and convert them into an ordered execution queue. The mesh remains the standing advisory team for this build until the owner explicitly changes that governance model.
+
+The trigger also grants authority to execute that queue autonomously within the limits defined under **Autonomous authority after trigger** above.
