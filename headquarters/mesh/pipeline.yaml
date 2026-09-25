@@ -18,6 +18,14 @@ stages:
       - "Route unknown subjects through research-director and nearest domains."
       - "Do not route high-impact questions to a single generic expert."
 
+  - id: cognitive-lens-selection
+    purpose: "Select the smallest useful set of Thinkers/cognitive methods for the mission without impersonating historical people."
+    required_for_material_work: true
+    rules:
+      - "Thinker methods are advisory lenses, not authorities."
+      - "Pair generative or strategic lenses with falsification/evidence disciplines when stakes are material."
+      - "Historical prestige never substitutes for current evidence."
+
   - id: team-formation
     purpose: "Each selected leader forms the smallest sufficient permanent/temporary specialist team."
     required: true
