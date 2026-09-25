@@ -1,0 +1,224 @@
+schema_version: 1
+methods_policy:
+  statement: "These are documented problem-solving method archetypes associated with historical thinkers or disciplines. They are not impersonations and do not claim recreation of a person's mind, identity, personality or intelligence."
+
+methods:
+  - id: first-principles
+    label: "First-principles decomposition"
+    association: "physics and engineering tradition"
+    use: "Strip assumptions, identify invariants and rebuild from constraints."
+
+  - id: einstein-thought-experiment
+    label: "Einstein-style thought experiment"
+    association: "Albert Einstein"
+    use: "Use simplified counterfactual scenarios to reveal hidden assumptions and consequences."
+
+  - id: feynman-explanation
+    label: "Feynman-style explanatory test"
+    association: "Richard Feynman"
+    use: "Explain a concept simply enough to expose missing understanding or unjustified jargon."
+
+  - id: turing-formalisation
+    label: "Turing-style formalisation"
+    association: "Alan Turing"
+    use: "Convert ambiguous behaviour into explicit states, procedures, interfaces and tests."
+
+  - id: von-neumann-systems
+    label: "von Neumann-style systems reasoning"
+    association: "John von Neumann"
+    use: "Model interacting components, incentives, feedback, computation and failure propagation."
+
+  - id: shannon-information
+    label: "Shannon-style information reasoning"
+    association: "Claude Shannon"
+    use: "Separate signal from noise, quantify information and minimize unnecessary complexity."
+
+  - id: polya-problem-solving
+    label: "Polya-style problem solving"
+    association: "George Polya"
+    use: "Understand the problem, devise a plan, execute it and verify the result."
+
+  - id: popper-falsification
+    label: "Falsification discipline"
+    association: "Karl Popper"
+    use: "Actively search for observations or tests that would disprove the current hypothesis."
+
+  - id: bayesian-updating
+    label: "Bayesian evidence updating"
+    association: "Bayesian statistics"
+    use: "Update confidence as new evidence arrives instead of treating beliefs as fixed."
+
+  - id: darwin-comparative-inference
+    label: "Comparative evolutionary inference"
+    association: "Charles Darwin"
+    use: "Compare variation, constraints, environment and competing explanations across cases."
+
+  - id: curie-empirical-discipline
+    label: "Empirical measurement discipline"
+    association: "Marie Curie"
+    use: "Prefer repeatable measurement, careful observation and evidence accumulation over assertion."
+
+  - id: ada-algorithmic-decomposition
+    label: "Algorithmic decomposition"
+    association: "Ada Lovelace"
+    use: "Express complex transformations as ordered, composable operations with explicit inputs and outputs."
+
+  - id: nash-strategic-equilibrium
+    label: "Strategic equilibrium reasoning"
+    association: "John Nash"
+    use: "Model how each actor's optimal action depends on the incentives and actions of others."
+
+  - id: deming-quality-loop
+    label: "Quality improvement loop"
+    association: "W. Edwards Deming"
+    use: "Measure process performance, identify systemic causes and close feedback loops."
+
+  - id: drucker-management
+    label: "Objective and accountability discipline"
+    association: "Peter Drucker"
+    use: "Clarify objectives, ownership, outputs, decision rights and measurable results."
+
+  - id: red-team-skeptic
+    label: "Adversarial red-team method"
+    association: "security and assurance practice"
+    use: "Assume the proposed answer may be wrong or unsafe and deliberately search for failure modes."
+
+  - id: algorithmic-state-machine
+    label: "Algorithmic state-machine reasoning"
+    association: "Alan Turing and theoretical computer science"
+    use: "Represent behaviour as explicit states, transitions, inputs and halting or completion conditions."
+
+  - id: adversarial-cryptanalysis
+    label: "Adversarial cryptanalytic reasoning"
+    association: "cryptanalysis tradition"
+    use: "Assume an intelligent adversary, search systematically for information leakage, patterns and attackable assumptions."
+
+  - id: symbolic-machine-creativity
+    label: "Symbolic machine creativity"
+    association: "Ada Lovelace"
+    use: "Explore how formal machinery can operate on symbols, structures or representations beyond arithmetic alone."
+
+  - id: strategic-interdependence
+    label: "Strategic interdependence"
+    association: "game theory"
+    use: "Model how outcomes depend on the interacting choices, incentives and information of multiple actors."
+
+  - id: architecture-from-first-principles
+    label: "Architecture from first principles"
+    association: "systems and computing architecture"
+    use: "Derive system structure from required information flow, state, constraints and failure boundaries."
+
+  - id: godel-limit-awareness
+    label: "Formal limit awareness"
+    association: "Kurt Gödel"
+    use: "Ask whether the chosen formal system can establish the certainty being demanded of it."
+
+  - id: formal-system-boundary-test
+    label: "Formal-system boundary test"
+    association: "mathematical logic"
+    use: "Identify self-reference, undecidable assumptions, incompleteness and the boundary between proof and meta-level reasoning."
+
+  - id: invariance-search
+    label: "Invariance search"
+    association: "mathematical physics"
+    use: "Find properties that remain unchanged across transformations, frames or representations."
+
+  - id: frame-shift-reasoning
+    label: "Frame-shift reasoning"
+    association: "Albert Einstein"
+    use: "Re-express the same problem from a different observer, scale or conceptual frame to expose hidden assumptions."
+
+  - id: newton-causal-model
+    label: "Quantitative causal modelling"
+    association: "Isaac Newton"
+    use: "Express cause, change and response through explicit measurable relationships."
+
+  - id: mathematical-law-building
+    label: "Mathematical law building"
+    association: "classical mathematical physics"
+    use: "Search for compact mathematical relationships capable of explaining a broad class of observations."
+
+  - id: decompose-and-recombine
+    label: "Decompose and recombine"
+    association: "classical mechanics and mathematical analysis"
+    use: "Split a complex system into simpler components, solve them where possible, then recombine their effects."
+
+  - id: measurement-before-assertion
+    label: "Measurement before assertion"
+    association: "experimental science"
+    use: "Require observable or measurable evidence before escalating a hypothesis into a confident conclusion."
+
+  - id: persistent-experimentation
+    label: "Persistent experimentation"
+    association: "Marie Curie"
+    use: "Iterate carefully through noisy or incomplete evidence while preserving experimental discipline."
+
+  - id: variation-selection-retention
+    label: "Variation-selection-retention"
+    association: "evolutionary reasoning"
+    use: "Generate or observe variants, evaluate them under constraints, and retain the better-adapted versions."
+
+  - id: environment-fit
+    label: "Environment-fit analysis"
+    association: "evolutionary biology"
+    use: "Judge a design or strategy by fitness to its actual environment rather than by abstract elegance alone."
+
+  - id: aristotelian-categorisation
+    label: "Aristotelian categorisation"
+    association: "Aristotle"
+    use: "Classify entities, properties and relationships before drawing conclusions about them."
+
+  - id: syllogistic-structure
+    label: "Syllogistic structure"
+    association: "Aristotelian logic"
+    use: "Expose premises and inference structure explicitly so invalid steps can be challenged."
+
+  - id: causal-fourfold-analysis
+    label: "Fourfold causal analysis"
+    association: "Aristotle"
+    use: "Examine material, structural/formal, producing/efficient and purpose/functional explanations where useful."
+
+  - id: platonic-dialectic
+    label: "Dialectical examination"
+    association: "Plato"
+    use: "Use question-and-answer contradiction testing to refine definitions and assumptions."
+
+  - id: definition-by-contrast
+    label: "Definition by contrast"
+    association: "philosophical dialectic"
+    use: "Clarify a concept by distinguishing it from adjacent or opposing concepts."
+
+  - id: assumption-examination
+    label: "Assumption examination"
+    association: "Socratic and Platonic dialogue"
+    use: "Surface premises that are being treated as obvious and test whether they actually hold."
+
+  - id: sun-tzu-asymmetric-strategy
+    label: "Asymmetric strategy"
+    association: "Sun Tzu"
+    use: "Seek disproportionate advantage through position, timing, information and indirect options rather than brute force."
+
+  - id: indirect-advantage
+    label: "Indirect advantage"
+    association: "strategic theory"
+    use: "Look for paths that achieve objectives with lower conflict, cost or exposure."
+
+  - id: information-and-positioning
+    label: "Information and positioning"
+    association: "strategic intelligence"
+    use: "Treat information quality, preparation, context and relative position as core determinants of strategy."
+
+  - id: jung-symbolic-pattern-analysis
+    label: "Symbolic pattern analysis"
+    association: "Carl Jung"
+    use: "Explore recurring symbolic patterns as hypotheses for qualitative interpretation, never as standalone empirical proof."
+
+  - id: archetype-as-interpretive-lens
+    label: "Archetype as interpretive lens"
+    association: "Jungian analytical psychology"
+    use: "Use archetypal motifs to generate interpretations in narrative, culture and qualitative psychology, clearly separating interpretation from fact."
+
+  - id: opposition-integration
+    label: "Opposition integration"
+    association: "analytical psychology"
+    use: "Examine tensions between opposing representations or motives and search for a higher-order synthesis."

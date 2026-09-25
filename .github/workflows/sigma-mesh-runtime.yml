@@ -1,0 +1,39 @@
+name: Sigma mesh runtime
+
+on:
+  pull_request:
+    paths:
+      - "sigma_runtime/**"
+      - "scripts/sigma_mesh_runtime.py"
+      - "tests/test_sigma_mesh_runtime.py"
+      - "headquarters/mesh/**"
+      - ".github/workflows/sigma-mesh-runtime.yml"
+  push:
+    branches: [main]
+    paths:
+      - "sigma_runtime/**"
+      - "scripts/sigma_mesh_runtime.py"
+      - "tests/test_sigma_mesh_runtime.py"
+      - "headquarters/mesh/**"
+      - ".github/workflows/sigma-mesh-runtime.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-control.txt
+      - run: python -m unittest discover -s tests -p 'test_*.py'
+      - run: python scripts/validate_control_plane.py
+      - name: Run deterministic end-to-end mesh smoke
+        env:
+          SIGMA_RUNTIME_PROVIDER: test
+          SIGMA_ALLOW_TEST_PROVIDER: "1"
+        run: python scripts/sigma_mesh_runtime.py --db /tmp/sigma-runtime.db smoke

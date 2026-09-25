@@ -88,3 +88,14 @@ agents:
 
 status_meaning:
   registered: "The role and authority contract exist in GitHub. This does not claim a live autonomous runtime."
+
+
+mesh_extension:
+  issue: 22
+  taxonomy: "headquarters/mesh/taxonomy.yaml"
+  leaders: "headquarters/mesh/leaders.yaml"
+  pipeline: "headquarters/mesh/pipeline.yaml"
+  evidence: "headquarters/mesh/evidence.yaml"
+  evolution: "headquarters/mesh/evolution.yaml"
+  cognitive_methods: "headquarters/mesh/cognitive-methods.yaml"
+  rule: "The mesh extends these permanent roles; overlapping IDs denote the same authority role, not a competing agent."

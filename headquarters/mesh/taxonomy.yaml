@@ -1,0 +1,311 @@
+schema_version: 1
+taxonomy_id: sigma-universal-knowledge-v1
+purpose: "Route human-knowledge missions to the correct Sigma leaders and specialist teams."
+
+coverage_policy:
+  claim: "Broad practical coverage of the owner's requested human-knowledge fields; not a claim of literally complete or infallible knowledge."
+  unknown_subject_flow:
+    - "route to research-director"
+    - "identify nearest existing domains"
+    - "perform source-backed domain discovery"
+    - "create a provisional temporary specialist definition if needed"
+    - "require evaluation before permanent registration"
+  cross_domain_allowed: true
+  multiple_primary_domains_allowed: true
+
+pillars:
+  - id: formal-natural-sciences
+    name: "Formal & Natural Sciences"
+    domains:
+      - id: mathematics-logic
+        name: "Mathematics & Logic"
+        subjects: ["pure mathematics", "applied mathematics", "statistics", "probability", "calculus", "algebra", "geometry", "number theory", "discrete mathematics", "theoretical logic", "formal methods", "game theory", "operations research"]
+      - id: physics
+        name: "Physics"
+        subjects: ["classical mechanics", "quantum mechanics", "relativity", "thermodynamics", "statistical mechanics", "electromagnetism", "particle physics", "nuclear physics", "condensed matter", "optics", "acoustics", "astrophysics"]
+      - id: chemistry
+        name: "Chemistry"
+        subjects: ["organic chemistry", "inorganic chemistry", "physical chemistry", "analytical chemistry", "biochemistry", "materials chemistry", "electrochemistry", "chemical thermodynamics"]
+      - id: earth-space-sciences
+        name: "Earth, Climate & Space Sciences"
+        subjects: ["geology", "geophysics", "geochemistry", "mineralogy", "meteorology", "climatology", "oceanography", "hydrology", "planetary science", "astronomy", "cosmology"]
+      - id: life-sciences
+        name: "Life Sciences"
+        subjects: ["biology", "molecular biology", "cell biology", "biochemistry", "genetics", "genomics", "zoology", "botany", "microbiology", "ecology", "evolutionary science", "bioinformatics", "systems biology"]
+
+  - id: computing-information-cyber
+    name: "Computing, Information Technology & Cyber Security"
+    domains:
+      - id: computer-science
+        name: "Computer Science"
+        subjects: ["algorithms", "data structures", "theory of computation", "compilers", "operating systems", "distributed systems", "parallel computing", "computer architecture", "human-computer interaction"]
+      - id: artificial-intelligence
+        name: "Artificial Intelligence"
+        subjects: ["machine learning", "deep learning", "foundation models", "language models", "computer vision", "robotics", "reinforcement learning", "agent systems", "reasoning systems", "AI evaluation", "AI safety"]
+      - id: software-engineering
+        name: "Coding & Software Engineering"
+        subjects: ["software architecture", "programming languages", "API design", "web engineering", "mobile engineering", "testing", "DevOps", "SRE", "CI/CD", "developer tooling", "performance engineering"]
+      - id: data-databases
+        name: "Data & Database Systems"
+        subjects: ["relational databases", "NoSQL", "data modelling", "data engineering", "data warehouses", "vector databases", "search", "information retrieval", "knowledge graphs", "data governance"]
+      - id: networks-cloud
+        name: "Networks, Cloud & Infrastructure"
+        subjects: ["network architecture", "internet protocols", "cloud infrastructure", "containers", "orchestration", "edge computing", "observability", "capacity engineering"]
+      - id: cyber-security
+        name: "Cyber Security"
+        subjects: ["cryptography", "network security", "application security", "cloud security", "identity", "zero trust", "threat modelling", "ethical hacking", "incident response", "digital forensics", "security frameworks", "secure software supply chain"]
+      - id: quantum-computing
+        name: "Quantum Computing"
+        subjects: ["quantum information", "quantum algorithms", "quantum error correction", "quantum cryptography", "quantum hardware"]
+
+  - id: engineering-industry-design
+    name: "Engineering, Industry & Technology"
+    domains:
+      - id: aerospace-engineering
+        name: "Aerospace Engineering"
+        subjects: ["aerodynamics", "rocket propulsion", "flight mechanics", "orbital mechanics", "spacecraft", "satellite design", "avionics", "guidance navigation control"]
+      - id: mechanical-engineering
+        name: "Mechanical Engineering"
+        subjects: ["mechanics", "machine design", "thermal systems", "fluid mechanics", "HVAC", "mechatronics", "tribology", "reliability engineering"]
+      - id: electrical-electronic-engineering
+        name: "Electrical & Electronic Engineering"
+        subjects: ["power systems", "electronics", "semiconductors", "control systems", "signal processing", "telecommunications", "embedded systems", "instrumentation"]
+      - id: chemical-process-engineering
+        name: "Chemical & Process Engineering"
+        subjects: ["process design", "reaction engineering", "separations", "process control", "industrial chemistry", "process safety"]
+      - id: civil-structural-engineering
+        name: "Civil & Structural Engineering"
+        subjects: ["structural engineering", "geotechnical engineering", "transport", "water infrastructure", "construction engineering", "urban planning", "infrastructure asset management"]
+      - id: nuclear-engineering
+        name: "Nuclear Engineering"
+        subjects: ["reactor physics", "nuclear systems", "radiation engineering", "fuel cycle", "nuclear safety", "fusion engineering"]
+      - id: vehicle-naval-engineering
+        name: "Vehicle & Naval Engineering"
+        subjects: ["automotive engineering", "electric vehicles", "motorsport engineering", "naval architecture", "marine engineering", "vehicle dynamics", "powertrains"]
+      - id: mining-resources-engineering
+        name: "Mining & Resources Engineering"
+        subjects: ["mining engineering", "exploration geology", "economic geology", "resource estimation", "mine planning", "open-pit mining", "underground mining", "mineral processing", "extractive metallurgy", "mine safety", "mine economics", "commodities"]
+
+      - id: materials-metallurgy
+        name: "Materials Science & Metallurgy"
+        subjects: ["metallurgy", "polymers", "ceramics", "composites", "nanomaterials", "corrosion", "failure analysis", "materials characterization"]
+      - id: manufacturing-industrial
+        name: "Manufacturing & Industrial Systems"
+        subjects: ["manufacturing automation", "robotics", "CNC", "additive manufacturing", "industrial engineering", "quality engineering", "lean systems", "factory design"]
+      - id: industrial-product-design
+        name: "Industrial & Product Design"
+        subjects: ["industrial design", "ergonomics", "human factors", "product engineering", "design for manufacture", "design systems"]
+      - id: textiles-fashion-wearables
+        name: "Fashion, Clothing & Wearable Technology"
+        subjects: ["textile science", "garment construction", "fashion design", "haute couture", "footwear", "wearable technology", "smart textiles"]
+
+  - id: health-medical-sciences
+    name: "Health & Medical Sciences"
+    domains:
+      - id: anatomy-physiology
+        name: "Human Anatomy & Physiology"
+        subjects: ["anatomy", "physiology", "histology", "developmental biology", "human biomechanics"]
+      - id: internal-clinical-medicine
+        name: "Clinical & Internal Medicine"
+        subjects: ["internal medicine", "cardiology", "respiratory medicine", "gastroenterology", "endocrinology", "nephrology", "rheumatology", "infectious disease", "geriatrics", "emergency medicine"]
+      - id: surgery-anesthesia
+        name: "Surgery & Anaesthesiology"
+        subjects: ["general surgery", "trauma surgery", "neurosurgery", "cardiothoracic surgery", "orthopaedics", "vascular surgery", "plastic surgery", "urology", "obstetrics and gynaecology", "anaesthesiology", "perioperative medicine"]
+      - id: pathology-laboratory
+        name: "Pathology & Laboratory Medicine"
+        subjects: ["pathology", "histopathology", "clinical biochemistry", "haematology", "microbiology", "diagnostic laboratory science"]
+      - id: pharmacology-medicines
+        name: "Pharmacology & Medicines"
+        subjects: ["pharmacology", "clinical pharmacology", "pharmaceutics", "toxicology", "drug development", "pharmacovigilance", "regulatory medicines science"]
+      - id: genetics-genomics
+        name: "Human Genetics & Genomics"
+        subjects: ["medical genetics", "genomics", "epigenetics", "genetic counselling", "precision medicine"]
+      - id: oncology-immunology
+        name: "Oncology & Immunology"
+        subjects: ["oncology", "haematologic malignancy", "immunology", "immunotherapy", "cancer biology"]
+      - id: neuroscience-neurology
+        name: "Neuroscience & Neurology"
+        subjects: ["neurobiology", "neuroscience", "neurology", "neurophysiology", "neuroimaging", "cognitive neuroscience"]
+      - id: mental-behavioural-health
+        name: "Mental & Behavioural Health"
+        subjects: ["psychiatry", "clinical psychology", "cognitive psychology", "behavioural psychology", "psychotherapy research", "addiction science"]
+      - id: public-population-health
+        name: "Public & Population Health"
+        subjects: ["epidemiology", "biostatistics", "public health", "global health", "health policy", "health economics", "occupational health", "environmental health"]
+      - id: dentistry-allied-health
+        name: "Dentistry & Allied Health"
+        subjects: ["dentistry", "oral health", "nursing", "physiotherapy", "occupational therapy", "radiography", "dietetics", "pharmacy practice"]
+
+  - id: agriculture-environment-veterinary
+    name: "Agriculture, Veterinary & Environmental Sciences"
+    domains:
+      - id: veterinary-science
+        name: "Veterinary Medicine"
+        subjects: ["veterinary medicine", "animal surgery", "animal pharmacology", "animal pathology", "animal epidemiology", "livestock health"]
+      - id: agriculture-agronomy
+        name: "Agriculture & Agronomy"
+        subjects: ["agronomy", "soil science", "crop science", "plant pathology", "horticulture", "precision agriculture", "agricultural engineering"]
+      - id: food-science
+        name: "Food Science & Food Systems"
+        subjects: ["food science", "food chemistry", "food microbiology", "food safety", "nutrition science", "food processing", "food supply systems"]
+      - id: environment-sustainability
+        name: "Environment & Sustainability"
+        subjects: ["environmental science", "sustainability", "climate mitigation", "climate adaptation", "pollution", "circular economy", "environmental impact assessment"]
+      - id: natural-resources
+        name: "Natural Resource Management"
+        subjects: ["forestry", "fisheries", "water resources", "conservation", "biodiversity", "land management", "resource economics"]
+
+  - id: business-finance-economics
+    name: "Business, Finance & Economics"
+    domains:
+      - id: corporate-strategy
+        name: "Corporate Strategy & Management"
+        subjects: ["corporate strategy", "competitive strategy", "business models", "M&A strategy", "governance", "organizational design", "organizational behavior", "change management"]
+      - id: operations-supply-chain
+        name: "Operations & Supply Chain"
+        subjects: ["operations management", "supply chain logistics", "procurement", "inventory", "warehousing", "transport logistics", "quality management"]
+      - id: people-hr
+        name: "Human Resources & People Systems"
+        subjects: ["human resources", "talent", "compensation", "performance management", "employment practice", "workforce planning", "leadership development"]
+      - id: marketing-sales-growth
+        name: "Marketing, Sales & Growth"
+        subjects: ["marketing", "brand strategy", "consumer behaviour", "sales", "pricing", "growth", "digital marketing", "market research"]
+      - id: product-project-programme
+        name: "Product, Project & Programme Management"
+        subjects: ["product management", "project management", "programme management", "portfolio management", "requirements", "delivery governance"]
+      - id: macro-micro-economics
+        name: "Macroeconomics & Microeconomics"
+        subjects: ["macroeconomics", "microeconomics", "monetary economics", "labour economics", "development economics", "industrial organization", "behavioural economics"]
+      - id: econometrics-quantitative-finance
+        name: "Econometrics & Quantitative Analysis"
+        subjects: ["econometric modeling", "causal inference", "forecasting", "time series", "quantitative finance", "risk modelling"]
+      - id: accounting-tax
+        name: "Accounting & Tax"
+        subjects: ["financial accounting", "management accounting", "audit", "taxation", "corporate tax", "indirect tax", "transfer pricing", "financial reporting"]
+      - id: banking-investment-capital
+        name: "Banking, Investment & Capital Markets"
+        subjects: ["investment banking", "corporate finance", "capital markets", "asset management", "private equity", "venture capital", "credit", "treasury", "foreign exchange"]
+      - id: insurance-actuarial
+        name: "Insurance & Actuarial Science"
+        subjects: ["actuarial science", "insurance", "underwriting", "claims", "reinsurance", "catastrophe modelling"]
+      - id: global-trade-commerce
+        name: "Global Trade & Commerce"
+        subjects: ["global trade", "trade finance", "customs", "commodity trading", "international business", "commercial logistics"]
+
+  - id: law-governance-geopolitics
+    name: "Law, Jurisprudence, Governance & Geopolitics"
+    domains:
+      - id: constitutional-public-law
+        name: "Constitutional & Public Law"
+        subjects: ["constitutional law", "administrative law", "judicial review", "human rights law", "public law"]
+      - id: international-law
+        name: "International Law"
+        subjects: ["public international law", "private international law", "treaty law", "international arbitration", "international humanitarian law"]
+      - id: corporate-commercial-law
+        name: "Corporate & Commercial Law"
+        subjects: ["corporate law", "company law", "commercial contracts", "M&A law", "securities law", "competition law", "insolvency"]
+      - id: criminal-law
+        name: "Criminal Law & Justice"
+        subjects: ["criminal law", "criminal procedure", "evidence", "sentencing", "criminology", "criminal justice"]
+      - id: civil-private-law
+        name: "Civil & Private Law"
+        subjects: ["civil law", "tort", "contract", "property", "family law", "succession", "civil procedure"]
+      - id: intellectual-property-law
+        name: "Intellectual Property"
+        subjects: ["patents", "copyright", "trade marks", "design rights", "trade secrets", "licensing"]
+      - id: regulatory-compliance
+        name: "Regulation & Compliance"
+        subjects: ["financial regulation", "AML", "sanctions", "data protection", "consumer regulation", "sector licensing", "regulatory strategy", "compliance systems"]
+      - id: jurisprudence-legal-history
+        name: "Jurisprudence & Legal History"
+        subjects: ["jurisprudence", "legal theory", "comparative law", "legal history", "law and economics"]
+      - id: public-policy-administration
+        name: "Public Policy & Administration"
+        subjects: ["public policy", "public administration", "policy analysis", "regulatory policy", "public finance", "institutional design"]
+      - id: geopolitics-international-relations
+        name: "Geopolitics & International Relations"
+        subjects: ["international relations", "geopolitics", "diplomacy", "foreign policy", "security studies", "strategic studies", "political economy"]
+      - id: political-theory-systems
+        name: "Political Theory & Systems"
+        subjects: ["political theory", "comparative politics", "political institutions", "electoral systems", "political history"]
+      - id: intelligence-analysis
+        name: "Intelligence Analysis"
+        subjects: ["intelligence analysis", "structured analytic techniques", "indications and warning", "open-source intelligence", "counterintelligence theory", "risk assessment"]
+
+  - id: humanities-social-sciences
+    name: "Humanities & Social Sciences"
+    domains:
+      - id: history
+        name: "History"
+        subjects: ["world history", "ancient history", "medieval history", "early modern history", "modern history", "regional history", "economic history", "military history", "history of science", "historiography"]
+      - id: archaeology-anthropology
+        name: "Archaeology & Anthropology"
+        subjects: ["archaeology", "material culture", "cultural anthropology", "biological anthropology", "linguistic anthropology", "heritage preservation"]
+      - id: sociology
+        name: "Sociology"
+        subjects: ["sociology", "social theory", "demography", "institutions", "networks", "inequality", "urban sociology"]
+      - id: psychology
+        name: "Psychology"
+        subjects: ["cognitive psychology", "behavioural psychology", "social psychology", "developmental psychology", "personality", "decision psychology"]
+      - id: geography
+        name: "Geography"
+        subjects: ["human geography", "physical geography", "GIS", "cartography", "economic geography", "population geography", "geopolitical geography"]
+      - id: linguistics-philology
+        name: "Linguistics, Philology & Languages"
+        subjects: ["linguistics", "syntax", "semantics", "phonetics", "phonology", "pragmatics", "sociolinguistics", "historical linguistics", "philology", "translation", "all human languages"]
+      - id: philosophy
+        name: "Philosophy"
+        subjects: ["epistemology", "ethics", "metaphysics", "logic", "philosophy of science", "political philosophy", "aesthetics", "philosophy of mind"]
+      - id: theology-religion-mythology
+        name: "Theology, Religion & Mythology"
+        subjects: ["theology", "world religions", "religious studies", "comparative religion", "comparative mythology", "philosophy of religion"]
+      - id: education-learning
+        name: "Education & Learning Sciences"
+        subjects: ["education", "pedagogy", "curriculum", "assessment", "learning science", "instructional design", "education policy"]
+
+  - id: arts-media-creative
+    name: "Arts, Media & Creative Expression"
+    domains:
+      - id: literature-writing
+        name: "Literature & Writing"
+        subjects: ["literary criticism", "creative writing", "novels", "poetry", "scriptwriting", "screenwriting", "playwriting", "copywriting", "narrative design"]
+      - id: music-audio
+        name: "Music & Audio Arts"
+        subjects: ["music theory", "composition", "songwriting", "lyricism", "orchestration", "audio engineering", "sound design", "acoustics", "ethnomusicology"]
+      - id: visual-art-graphic-design
+        name: "Visual Arts & Graphic Design"
+        subjects: ["fine art", "art history", "graphic design", "illustration", "photography", "visual communication", "branding"]
+      - id: ui-ux-interaction
+        name: "UI, UX & Interaction Design"
+        subjects: ["UI design", "UX design", "interaction design", "information architecture", "service design", "accessibility", "design research"]
+      - id: film-animation
+        name: "Film, Cinematography & Animation"
+        subjects: ["cinematography", "film direction", "editing", "production design", "animation", "VFX", "motion design"]
+      - id: performing-arts
+        name: "Performing Arts"
+        subjects: ["theatre production", "acting", "dance", "choreography", "stagecraft", "performance studies"]
+      - id: architecture-built-design
+        name: "Architecture & Built Design"
+        subjects: ["architecture", "architectural history", "interior architecture", "landscape architecture", "urban design", "building design"]
+      - id: games-interactive-media
+        name: "Games & Interactive Media"
+        subjects: ["game design", "game development", "interactive narrative", "level design", "simulation design", "serious games"]
+
+  - id: cross-domain-meta
+    name: "Cross-Domain Research, Reasoning & Assurance"
+    domains:
+      - id: research-methods
+        name: "Research Methods"
+        subjects: ["scientific method", "experimental design", "systematic review", "meta-analysis", "qualitative research", "mixed methods", "replication", "open science"]
+      - id: evidence-verification
+        name: "Evidence & Verification"
+        subjects: ["source evaluation", "fact checking", "provenance", "uncertainty", "contradiction resolution", "data quality", "reproducibility"]
+      - id: systems-decision-science
+        name: "Systems & Decision Science"
+        subjects: ["systems thinking", "decision theory", "complexity", "scenario analysis", "forecasting", "risk analysis", "optimization", "multi-criteria decision analysis"]
+      - id: ethics-safety
+        name: "Ethics, Safety & Responsible Practice"
+        subjects: ["applied ethics", "bioethics", "technology ethics", "research ethics", "professional ethics", "safety engineering", "human oversight"]
+      - id: foresight-innovation
+        name: "Foresight & Innovation"
+        subjects: ["technology forecasting", "strategic foresight", "innovation systems", "horizon scanning", "scenario planning", "emerging technology assessment"]

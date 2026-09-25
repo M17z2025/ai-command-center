@@ -53,3 +53,39 @@ This repository must not be used to smuggle production credentials or bypass a p
 - Confirm Sigma control-plane validation passes for the merged state.
 - Confirm registry and self-manifest remain readable and schema-valid.
 - For reusable workflow changes, verify an applicable caller repository on an approved test target before claiming that user-facing browser certification works end-to-end.
+
+
+## Expert-mesh runtime deployment
+
+The operational expert mesh is container-ready through `Dockerfile.sigma-runtime`.
+
+The runtime must be deployed only to an approved **private** host/volume because its SQLite database can contain mission prompts, expert outputs, audit events and candidate lessons. The public command-center repository remains governance/source only.
+
+### Required runtime configuration
+
+Names only are documented in `.env.example`:
+
+- `SIGMA_LLM_ENDPOINT`
+- `SIGMA_LLM_MODEL`
+- `SIGMA_LLM_PROTOCOL`
+- `SIGMA_LLM_API_KEY` when the endpoint requires authentication
+- `SIGMA_RUNTIME_DB`
+- `SIGMA_RUNTIME_TOKEN` for any non-loopback HTTP binding
+
+A real runtime fails closed when a live model endpoint/model is not configured. The deterministic provider is reserved for CI/smoke testing and cannot be represented as production intelligence.
+
+### Container
+
+```bash
+docker build -f Dockerfile.sigma-runtime -t sigma-mesh-runtime .
+docker run --rm -p 8080:8080 \
+  -e SIGMA_RUNTIME_TOKEN \
+  -e SIGMA_LLM_ENDPOINT \
+  -e SIGMA_LLM_MODEL \
+  -e SIGMA_LLM_PROTOCOL \
+  -e SIGMA_LLM_API_KEY \
+  -v sigma-runtime-data:/data \
+  sigma-mesh-runtime
+```
+
+The runtime has no implicit product-repository write permission. Cross-repository development actions remain governed separately by the autonomous-runner contract and applicable owner/security gates.

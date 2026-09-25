@@ -49,6 +49,37 @@ A product's repository evidence must be inspected before development or readines
 
 These define authority ordering, work selection, implementation, review, security and completion rules.
 
+### Universal expert mesh
+
+`headquarters/mesh/` defines Sigma's application-level Mixture-of-Experts architecture:
+- hierarchical human-knowledge taxonomy;
+- permanent domain leaders;
+- bounded temporary specialist-team creation;
+- multi-domain mission routing;
+- independent critic and evidence verifier roles;
+- synthesis and action gates;
+- evidence/freshness policy;
+- controlled, versioned evolution.
+
+The mesh governance is consumed by the operational runtime in `sigma_runtime/`. Unknown domains fail over to Research Director plus nearest leaders rather than being answered by an invented permanent specialist.
+
+### Operational expert-mesh runtime
+
+The runtime provides:
+- deterministic taxonomy/leader routing;
+- Thinker/cognitive-lens selection;
+- bounded temporary specialist creation;
+- parallel model-backed expert analysis;
+- independent critic and evidence verifier stages;
+- bounded repair loops;
+- final synthesis with unresolved uncertainty preserved;
+- SQLite persistence for private mission, audit, artifact and candidate-learning state;
+- authenticated HTTP API plus CLI;
+- a vendor-neutral HTTP model adapter supporting Responses and chat-completions response shapes;
+- deterministic CI smoke execution that proves orchestration without pretending to be a live intelligence provider.
+
+The public Git repository stores code/configuration only. Mission databases and private payloads belong on a private runtime host/volume and are excluded from Git. The runtime is advisory by default and does not inherit repository-write, production, financial or secret-management authority.
+
 ### Independent user testing
 
 `docs/SIGMA_USER_TESTER.md` defines the independent real-browser acceptance role for applicable user-facing products.
@@ -73,9 +104,7 @@ It validates mandatory control-plane artefacts, registry uniqueness/basic reposi
 
 ## Autonomous runner boundary
 
-`docs/AUTONOMOUS_RUNNER.md` defines the target separate execution runner. The repository currently stores the orchestration policy and durable state; it does not itself prove that a continuous unattended implementation service is running.
-
-Issue #2 tracks that implementation gap.
+`docs/AUTONOMOUS_RUNNER.md` defines the separate portfolio development runner. The expert-mesh runtime is executable, but it does not automatically gain product-repository mutation authority. Issue #2 continues to track the development-runner path that selects and changes product work.
 
 ## Evidence model
 

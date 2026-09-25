@@ -4,6 +4,24 @@ Last updated: 2026-09-25
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Universal Expert Mesh — Issue #22
+
+**READY FOR REVIEW — mesh source and Thinkers layer are built on `feat/22-sigma-expert-mesh`; Sigma control-plane validation has passed on the thinker-integrated candidate. The PR exact-head check remains the authoritative merge gate.**
+
+The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Experts control plane under `headquarters/mesh/`:
+- broad human-knowledge taxonomy covering the owner's requested science, computing, cyber, engineering, medical, veterinary/agricultural/environmental, business/economics/finance, legal/governance/geopolitical, humanities/social-science and creative fields;
+- Sigma domain leaders plus independent router, critic, evidence verifier and synthesis roles;
+- bounded temporary specialist-team creation with explicit parent, mission, tools, prohibitions and review/expiry requirements;
+- multi-domain parallel analysis, adversarial critique, evidence verification, repair and synthesis pipeline;
+- current-source/freshness/provenance policy;
+- controlled postmortem -> candidate -> benchmark -> adversarial evaluation -> promotion/rejection evolution;
+- machine-readable cognitive-method archetypes that explicitly do not claim human-mind recreation;
+- a Thinkers / Paradigm Shifters council covering Turing, Lovelace, von Neumann, Gödel, Einstein, Newton, Curie, Darwin, Aristotle, Plato, Sun Tzu and Jung as advisory cognitive-method profiles, not simulated personas;
+- `schemas/sigma-expert.schema.json`, expert template and fail-closed mesh validation integrated into `scripts/validate_control_plane.py`;
+- Headquarters, autonomous-runner and Alysha `/sigma` integration contracts updated.
+
+No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. Thinker-integrated GitHub Actions run `36171651428` completed the `validate_control_plane.py` step successfully on candidate `071dcdfda7a852277a11ddb7ed201efcb78ea6cb`. PR exact-head checks remain authoritative for any later commit.
+
 ## Sigma Genesis / Headquarters — Issue #20
 
 A visible GitHub-native Sigma Headquarters is now implemented on branch `feat/20-sigma-genesis-headquarters` as a source candidate. It defines the root authority, permanent agent organisation, cognitive-method archetypes, governed agent-evolution states, Alysha integration contract and explicit links to every repository in the master registry. This is governance/visibility evidence only: it does not claim the autonomous runner, agent creation runtime or self-improvement loop is operational. Exact-head control-plane validation is still required before merge.

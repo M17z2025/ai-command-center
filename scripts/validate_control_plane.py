@@ -8,6 +8,8 @@ import sys
 import jsonschema
 import yaml
 
+from validate_sigma_mesh import validate_mesh
+
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED = [
@@ -32,6 +34,29 @@ REQUIRED = [
     "docs/deployment.md",
     ".github/workflows/sigma-control-plane.yml",
     ".github/workflows/sigma-full-user-test.yml",
+    "headquarters/mesh/README.md",
+    "headquarters/mesh/taxonomy.yaml",
+    "headquarters/mesh/leaders.yaml",
+    "headquarters/mesh/pipeline.yaml",
+    "headquarters/mesh/evidence.yaml",
+    "headquarters/mesh/evolution.yaml",
+    "headquarters/mesh/cognitive-methods.yaml",
+    "headquarters/mesh/thinkers.yaml",
+    "schemas/sigma-expert.schema.json",
+    "templates/sigma-expert.yaml",
+    "scripts/validate_sigma_mesh.py",
+    "sigma_runtime/__init__.py",
+    "sigma_runtime/config.py",
+    "sigma_runtime/provider.py",
+    "sigma_runtime/store.py",
+    "sigma_runtime/router.py",
+    "sigma_runtime/orchestrator.py",
+    "sigma_runtime/server.py",
+    "scripts/sigma_mesh_runtime.py",
+    "tests/test_sigma_mesh_runtime.py",
+    "docs/SIGMA_MESH_RUNTIME.md",
+    ".github/workflows/sigma-mesh-runtime.yml",
+    "Dockerfile.sigma-runtime",
 ]
 
 errors = []
@@ -93,6 +118,8 @@ if registry is not None:
         errors.append(
             f"Command-center repository {expected_repo!r} is not registered in projects"
         )
+
+errors.extend(validate_mesh(ROOT))
 
 if errors:
     print("Sigma control-plane validation FAILED")

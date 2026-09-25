@@ -1,0 +1,156 @@
+schema_version: 1
+council_id: sigma-paradigm-shifters-v1
+name: "The Thinkers — Cognitive Architecture & Paradigm Shifters"
+
+policy:
+  purpose: "Provide reusable cognitive lenses, reasoning disciplines and paradigm-shifting methods to Sigma missions."
+  authority: "advisory-method layer only"
+  not_personas: true
+  not_human_recreations: true
+  rules:
+    - "Invoke methods, not personalities."
+    - "Do not fabricate private thoughts, motives, speech or opinions of the historical person."
+    - "Do not treat fame as evidence."
+    - "Historical thinker lenses never override current empirical evidence, law, safety controls or Sigma authority."
+    - "Use multiple contrasting lenses where one framework could create blind spots."
+    - "Every material conclusion still passes evidence verification and independent critique."
+
+thinkers:
+  - id: alan-turing
+    name: "Alan Turing"
+    era: "1912-1954"
+    primary_domains: ["computer-science", "mathematics-logic", "cyber-security", "artificial-intelligence"]
+    cognitive_methods: ["turing-formalisation", "algorithmic-state-machine", "adversarial-cryptanalysis"]
+    contribution_to_sigma:
+      - "Reduce ambiguous problems to explicit procedures, states and tests."
+      - "Distinguish computable procedures from vague intuition."
+      - "Use adversarial reasoning in cryptographic and systems problems."
+
+  - id: ada-lovelace
+    name: "Ada Lovelace"
+    era: "1815-1852"
+    primary_domains: ["mathematics-logic", "computer-science", "software-engineering", "literature-writing"]
+    cognitive_methods: ["ada-algorithmic-decomposition", "symbolic-machine-creativity"]
+    contribution_to_sigma:
+      - "Translate abstract ideas into ordered operations."
+      - "Bridge mathematical machinery with symbolic and creative applications."
+      - "Think beyond a machine's immediate intended use."
+
+  - id: john-von-neumann
+    name: "John von Neumann"
+    era: "1903-1957"
+    primary_domains: ["mathematics-logic", "computer-science", "physics", "systems-decision-science", "macro-micro-economics"]
+    cognitive_methods: ["von-neumann-systems", "strategic-interdependence", "architecture-from-first-principles"]
+    contribution_to_sigma:
+      - "Model interacting systems rather than isolated components."
+      - "Reason about strategic actors, computation and feedback simultaneously."
+      - "Design architectures around information flow and state."
+
+  - id: kurt-godel
+    name: "Kurt Gödel"
+    era: "1906-1978"
+    primary_domains: ["mathematics-logic", "computer-science", "philosophy"]
+    cognitive_methods: ["godel-limit-awareness", "formal-system-boundary-test"]
+    contribution_to_sigma:
+      - "Test whether a formal system can prove the claims being demanded of it."
+      - "Expose hidden assumptions about completeness, consistency and self-reference."
+      - "Flag questions whose certainty exceeds what the chosen formalism can justify."
+
+  - id: albert-einstein
+    name: "Albert Einstein"
+    era: "1879-1955"
+    primary_domains: ["physics", "mathematics-logic", "systems-decision-science"]
+    cognitive_methods: ["einstein-thought-experiment", "invariance-search", "frame-shift-reasoning"]
+    contribution_to_sigma:
+      - "Use simplified thought experiments to reveal structural contradictions."
+      - "Look for invariants beneath changing viewpoints."
+      - "Reframe a problem when conventional assumptions block progress."
+
+  - id: isaac-newton
+    name: "Isaac Newton"
+    era: "1643-1727"
+    primary_domains: ["physics", "mathematics-logic", "earth-space-sciences", "mechanical-engineering"]
+    cognitive_methods: ["newton-causal-model", "mathematical-law-building", "decompose-and-recombine"]
+    contribution_to_sigma:
+      - "Express cause-and-effect relationships quantitatively."
+      - "Break complex motion or systems into simpler interacting components."
+      - "Seek compact mathematical laws that explain many observations."
+
+  - id: marie-curie
+    name: "Marie Curie"
+    era: "1867-1934"
+    primary_domains: ["chemistry", "physics", "pharmacology-medicines", "research-methods"]
+    cognitive_methods: ["curie-empirical-discipline", "measurement-before-assertion", "persistent-experimentation"]
+    contribution_to_sigma:
+      - "Prioritise repeatable measurement over attractive theory."
+      - "Accumulate evidence carefully under uncertainty."
+      - "Continue investigation when early observations are incomplete or noisy."
+
+  - id: charles-darwin
+    name: "Charles Darwin"
+    era: "1809-1882"
+    primary_domains: ["life-sciences", "systems-decision-science", "foresight-innovation"]
+    cognitive_methods: ["darwin-comparative-inference", "variation-selection-retention", "environment-fit"]
+    contribution_to_sigma:
+      - "Compare competing variants under real environmental constraints."
+      - "Model adaptation as iterative selection rather than one-shot design."
+      - "Look for cumulative effects across generations or versions."
+
+  - id: aristotle
+    name: "Aristotle"
+    era: "384-322 BCE"
+    primary_domains: ["philosophy", "mathematics-logic", "life-sciences", "ethics-safety"]
+    cognitive_methods: ["aristotelian-categorisation", "syllogistic-structure", "causal-fourfold-analysis"]
+    contribution_to_sigma:
+      - "Classify entities and propositions before reasoning over them."
+      - "Separate forms of causation and explanation."
+      - "Make argumentative structure explicit enough to test."
+
+  - id: plato
+    name: "Plato"
+    era: "c. 428-348 BCE"
+    primary_domains: ["philosophy", "political-theory-systems", "education-learning", "ethics-safety"]
+    cognitive_methods: ["platonic-dialectic", "definition-by-contrast", "assumption-examination"]
+    contribution_to_sigma:
+      - "Use structured dialogue to expose contradictions."
+      - "Interrogate definitions before debating conclusions."
+      - "Distinguish appearances, assumptions and underlying conceptual structure."
+
+  - id: sun-tzu
+    name: "Sun Tzu"
+    era: "traditionally dated c. 5th century BCE"
+    primary_domains: ["systems-decision-science", "corporate-strategy", "geopolitics-international-relations", "intelligence-analysis"]
+    cognitive_methods: ["sun-tzu-asymmetric-strategy", "indirect-advantage", "information-and-positioning"]
+    contribution_to_sigma:
+      - "Seek advantage through positioning, information and efficiency rather than brute force."
+      - "Model incentives, timing, terrain/context and asymmetric options."
+      - "Prefer achieving objectives with minimum unnecessary conflict or resource expenditure."
+    constraints:
+      - "For political, military or security topics, use neutral descriptive analysis and applicable safety rules."
+
+  - id: carl-jung
+    name: "Carl Jung"
+    era: "1875-1961"
+    primary_domains: ["psychology", "philosophy", "literature-writing", "visual-art-graphic-design"]
+    cognitive_methods: ["jung-symbolic-pattern-analysis", "archetype-as-interpretive-lens", "opposition-integration"]
+    contribution_to_sigma:
+      - "Use symbolic and archetypal analysis as an interpretive lens in culture, narrative and qualitative psychology."
+      - "Examine tensions between opposing motives or representations."
+      - "Treat symbolic interpretation as hypothesis, not established empirical fact."
+    constraints:
+      - "Do not present Jungian constructs as settled clinical science."
+
+selection:
+  default: "select only the smallest useful set of thinker lenses for the mission"
+  cross_check:
+    - "pair generative/reframing lenses with falsification or evidence disciplines"
+    - "pair strategy lenses with ethics/safety and evidence verification where stakes are material"
+    - "pair symbolic/qualitative lenses with empirical methods when factual conclusions are required"
+  examples:
+    software_architecture: ["alan-turing", "ada-lovelace", "john-von-neumann"]
+    fundamental_science: ["albert-einstein", "isaac-newton", "marie-curie"]
+    formal_limits: ["kurt-godel", "alan-turing"]
+    adaptive_systems: ["charles-darwin", "john-von-neumann"]
+    strategic_problem: ["sun-tzu", "john-von-neumann", "aristotle"]
+    conceptual_debate: ["plato", "aristotle", "kurt-godel"]
+    narrative_psychology: ["carl-jung", "plato", "aristotle"]

@@ -10,6 +10,9 @@ GitHub events / schedule
         v
 Sigma Orchestrator
         |
+        +--> loads headquarters/mesh taxonomy + leaders + pipeline
+        +--> routes each mission to one or more expert leaders
+        +--> requires critic + verifier + synthesis for material work
         +--> reads projects/registry.yaml
         +--> reads product .sigma/project.yaml + PROJECT_STATUS.md
         +--> selects next executable issue

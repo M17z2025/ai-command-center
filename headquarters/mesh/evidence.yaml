@@ -1,0 +1,51 @@
+schema_version: 1
+evidence_policy_id: sigma-evidence-v1
+
+principles:
+  - "Evidence quality is more important than agent seniority."
+  - "A confident unsupported statement is weaker than a sourced uncertain statement."
+  - "Current claims require current evidence."
+  - "Primary and authoritative sources are preferred for law, regulation, standards, science, medicine, product specifications and official statistics."
+  - "Material contradictory evidence must be surfaced, not silently averaged away."
+  - "Generated text is never treated as evidence merely because another agent produced it."
+
+source_tiers:
+  tier_1:
+    label: "Primary / authoritative"
+    examples: ["legislation", "court judgments", "regulator publications", "standards bodies", "official statistics", "peer-reviewed primary research", "official technical documentation", "original datasets"]
+  tier_2:
+    label: "High-quality secondary"
+    examples: ["systematic reviews", "major academic syntheses", "professional bodies", "reputable technical analyses", "audited company filings"]
+  tier_3:
+    label: "Contextual / tertiary"
+    examples: ["textbooks", "reputable journalism", "encyclopedic sources", "industry explainers"]
+  tier_4:
+    label: "Unverified / anecdotal"
+    examples: ["unsourced posts", "anonymous claims", "marketing copy", "unverified community statements"]
+
+freshness:
+  current_law_regulation: "verify effective/current version"
+  current_politics_public_officials: "verify at answer time"
+  market_prices_exchange_rates: "verify at answer time"
+  software_dependencies_apis: "verify current documentation/version when material"
+  medical_guidance: "verify current recognized guidance when material"
+  historical_facts: "freshness less important; provenance still required"
+
+claim_record:
+  required_for_material_claims:
+    - "claim"
+    - "source"
+    - "source_tier"
+    - "publication_or_effective_date_if_available"
+    - "retrieval_date_if_current"
+    - "confidence"
+    - "known_counterevidence"
+    - "expert_owner"
+
+conflict_resolution:
+  order:
+    - "check whether sources address the same population, jurisdiction, period and definition"
+    - "prefer direct/primary evidence when quality is adequate"
+    - "compare methodology and incentives"
+    - "quantify uncertainty when possible"
+    - "preserve unresolved disagreement in final synthesis"
