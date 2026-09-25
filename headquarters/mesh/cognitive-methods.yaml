@@ -1,0 +1,84 @@
+schema_version: 1
+methods_policy:
+  statement: "These are documented problem-solving method archetypes associated with historical thinkers or disciplines. They are not impersonations and do not claim recreation of a person's mind, identity, personality or intelligence."
+
+methods:
+  - id: first-principles
+    label: "First-principles decomposition"
+    association: "physics and engineering tradition"
+    use: "Strip assumptions, identify invariants and rebuild from constraints."
+
+  - id: einstein-thought-experiment
+    label: "Einstein-style thought experiment"
+    association: "Albert Einstein"
+    use: "Use simplified counterfactual scenarios to reveal hidden assumptions and consequences."
+
+  - id: feynman-explanation
+    label: "Feynman-style explanatory test"
+    association: "Richard Feynman"
+    use: "Explain a concept simply enough to expose missing understanding or unjustified jargon."
+
+  - id: turing-formalisation
+    label: "Turing-style formalisation"
+    association: "Alan Turing"
+    use: "Convert ambiguous behaviour into explicit states, procedures, interfaces and tests."
+
+  - id: von-neumann-systems
+    label: "von Neumann-style systems reasoning"
+    association: "John von Neumann"
+    use: "Model interacting components, incentives, feedback, computation and failure propagation."
+
+  - id: shannon-information
+    label: "Shannon-style information reasoning"
+    association: "Claude Shannon"
+    use: "Separate signal from noise, quantify information and minimize unnecessary complexity."
+
+  - id: polya-problem-solving
+    label: "Polya-style problem solving"
+    association: "George Polya"
+    use: "Understand the problem, devise a plan, execute it and verify the result."
+
+  - id: popper-falsification
+    label: "Falsification discipline"
+    association: "Karl Popper"
+    use: "Actively search for observations or tests that would disprove the current hypothesis."
+
+  - id: bayesian-updating
+    label: "Bayesian evidence updating"
+    association: "Bayesian statistics"
+    use: "Update confidence as new evidence arrives instead of treating beliefs as fixed."
+
+  - id: darwin-comparative-inference
+    label: "Comparative evolutionary inference"
+    association: "Charles Darwin"
+    use: "Compare variation, constraints, environment and competing explanations across cases."
+
+  - id: curie-empirical-discipline
+    label: "Empirical measurement discipline"
+    association: "Marie Curie"
+    use: "Prefer repeatable measurement, careful observation and evidence accumulation over assertion."
+
+  - id: ada-algorithmic-decomposition
+    label: "Algorithmic decomposition"
+    association: "Ada Lovelace"
+    use: "Express complex transformations as ordered, composable operations with explicit inputs and outputs."
+
+  - id: nash-strategic-equilibrium
+    label: "Strategic equilibrium reasoning"
+    association: "John Nash"
+    use: "Model how each actor's optimal action depends on the incentives and actions of others."
+
+  - id: deming-quality-loop
+    label: "Quality improvement loop"
+    association: "W. Edwards Deming"
+    use: "Measure process performance, identify systemic causes and close feedback loops."
+
+  - id: drucker-management
+    label: "Objective and accountability discipline"
+    association: "Peter Drucker"
+    use: "Clarify objectives, ownership, outputs, decision rights and measurable results."
+
+  - id: red-team-skeptic
+    label: "Adversarial red-team method"
+    association: "security and assurance practice"
+    use: "Assume the proposed answer may be wrong or unsafe and deliberately search for failure modes."
