@@ -1,0 +1,29 @@
+services:
+  freellmapi:
+    image: ghcr.io/tashfeenahmed/freellmapi:v0.12.0
+    restart: unless-stopped
+    environment:
+      ENCRYPTION_KEY: ${FREELLMAPI_ENCRYPTION_KEY:?set FREELLMAPI_ENCRYPTION_KEY}
+      PORT: "3001"
+      FREEAPI_CONFIG_JSON: ${FREEAPI_CONFIG_JSON:-}
+    volumes:
+      - freellmapi-data:/app/server/data
+    expose:
+      - "3001"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+
+  sigma-runtime:
+    environment:
+      SIGMA_RUNTIME_PROVIDER: http
+      SIGMA_LLM_ENDPOINT: http://freellmapi:3001/v1/chat/completions
+      SIGMA_LLM_MODEL: ${SIGMA_LLM_MODEL:-auto}
+      SIGMA_LLM_PROTOCOL: chat-completions
+      SIGMA_LLM_API_KEY: ${FREELLMAPI_UNIFIED_KEY:?set FREELLMAPI_UNIFIED_KEY}
+    depends_on:
+      - freellmapi
+
+volumes:
+  freellmapi-data:
