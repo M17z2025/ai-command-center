@@ -68,8 +68,29 @@ stages:
     required: true
 
   - id: execution-gate
-    purpose: "Separate advisory output from actions that change code, production, finance, data or external systems."
+    purpose: "Execute approved-scope development changes under standing owner authority while separating non-delegable production, finance, secret, spend and legal gates."
     required: true
+    standing_owner_authority:
+      trigger: "ask sigma mesh"
+      permits_without_repeat_approval:
+        - "repository inspection and diagnosis"
+        - "bug fixes"
+        - "feature development within approved project scope"
+        - "refactoring"
+        - "tests and CI changes"
+        - "security hardening"
+        - "documentation"
+        - "issues, branches, commits and pull requests"
+        - "reversible non-production configuration"
+        - "safe migrations with documented recovery path"
+      persists_until: "owner explicitly revokes or narrows authority"
+      still_owner_or_external_gated:
+        - "unavailable secrets or credentials"
+        - "unapproved paid spend"
+        - "financial transfers"
+        - "irreversible or destructive production actions"
+        - "formal legal or regulatory sign-off"
+        - "actions prohibited by platform/security policy"
 
   - id: postmortem
     purpose: "Capture what worked, failed, delayed or surprised the team."
