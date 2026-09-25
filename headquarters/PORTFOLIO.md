@@ -19,7 +19,7 @@ Source authority: [projects/registry.yaml](../projects/registry.yaml)
 | Signit by Mi7z | [M17z2025/signit-by-mi7z](https://github.com/M17z2025/signit-by-mi7z) | active | e-signature |
 | Humanit | [M17z2025/ihumanit](https://github.com/M17z2025/ihumanit) | active | ai-assistant |
 | Designit AI Platform | [M17z2025/designit-ai-platform](https://github.com/M17z2025/designit-ai-platform) | active | development-platform |
-| Synergy AI Pay | [M17z2025/synergy-ai-pay](https://github.com/M17z2025/synergy-ai-pay) | discovered | fintech |
+| Synergy AI Pay | [M17z2025/synergy-ai-pay](https://github.com/M17z2025/synergy-ai-pay) | active | fintech |
 | Synergy Alliance Holdings | [M17z2025/synergy-alliance-holdings](https://github.com/M17z2025/synergy-alliance-holdings) | discovered | corporate |
 | Lycia Limited | [M17z2025/lycia-limited](https://github.com/M17z2025/lycia-limited) | active | corporate |
 | Nexus Hosting | [M17z2025/nexushosting](https://github.com/M17z2025/nexushosting) | discovered | hosting |

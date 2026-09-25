@@ -88,7 +88,7 @@ projects:
 
   - name: "Synergy AI Pay"
     repository: "M17z2025/synergy-ai-pay"
-    lifecycle: discovered
+    lifecycle: active
     category: fintech
 
   - name: "Synergy Alliance Holdings"
