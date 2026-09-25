@@ -6,3 +6,5 @@ artifacts/sigma-runtime/
 *.db
 *.db-shm
 *.db-wal
+
+deploy/sigma-stack/.env
