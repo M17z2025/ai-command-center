@@ -16,6 +16,28 @@ When instructions conflict, use this order:
 
 Never silently override a higher-authority source.
 
+## Global Sigma Mesh trigger
+
+The product owner's canonical trigger phrase is:
+
+**ask sigma mesh**
+
+This trigger is session-independent. In any Sigma-connected chat, new chat, handoff, or implementation session, when the owner uses this phrase the agent must load the current Sigma Universal Expert Mesh from `headquarters/mesh/` and execute **Full Mesh mode** unless the owner explicitly narrows the scope.
+
+Full Mesh mode requires:
+1. Mission Router decomposition.
+2. A relevance scan across all registered domain leaders.
+3. Deep independent work only from materially relevant leaders/specialists.
+4. Appropriate Thinker/cognitive-method selection.
+5. Cross-expert challenge.
+6. Sigma Independent Critic.
+7. Sigma Evidence Verifier.
+8. Bounded repair of material weaknesses.
+9. Sigma Synthesis Director output preserving material dissent and uncertainty.
+10. Controlled lesson/evolution candidates only; no self-promotion.
+
+The trigger never overrides Root Authority, security, spend, production, legal/compliance, privacy, destructive-action or other owner gates.
+
 ## Mandatory pre-work inspection
 
 Before changing a product repository:
