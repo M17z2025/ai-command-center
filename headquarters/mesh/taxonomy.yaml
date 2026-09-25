@@ -82,6 +82,10 @@ pillars:
       - id: vehicle-naval-engineering
         name: "Vehicle & Naval Engineering"
         subjects: ["automotive engineering", "electric vehicles", "motorsport engineering", "naval architecture", "marine engineering", "vehicle dynamics", "powertrains"]
+      - id: mining-resources-engineering
+        name: "Mining & Resources Engineering"
+        subjects: ["mining engineering", "exploration geology", "economic geology", "resource estimation", "mine planning", "open-pit mining", "underground mining", "mineral processing", "extractive metallurgy", "mine safety", "mine economics", "commodities"]
+
       - id: materials-metallurgy
         name: "Materials Science & Metallurgy"
         subjects: ["metallurgy", "polymers", "ceramics", "composites", "nanomaterials", "corrosion", "failure analysis", "materials characterization"]
