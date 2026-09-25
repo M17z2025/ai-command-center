@@ -40,6 +40,7 @@ REQUIRED = [
     "headquarters/mesh/pipeline.yaml",
     "headquarters/mesh/evidence.yaml",
     "headquarters/mesh/evolution.yaml",
+    "headquarters/mesh/cognitive-methods.yaml",
     "schemas/sigma-expert.schema.json",
     "templates/sigma-expert.yaml",
     "scripts/validate_sigma_mesh.py",
