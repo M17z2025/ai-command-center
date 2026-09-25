@@ -45,6 +45,18 @@ REQUIRED = [
     "schemas/sigma-expert.schema.json",
     "templates/sigma-expert.yaml",
     "scripts/validate_sigma_mesh.py",
+    "sigma_runtime/__init__.py",
+    "sigma_runtime/config.py",
+    "sigma_runtime/provider.py",
+    "sigma_runtime/store.py",
+    "sigma_runtime/router.py",
+    "sigma_runtime/orchestrator.py",
+    "sigma_runtime/server.py",
+    "scripts/sigma_mesh_runtime.py",
+    "tests/test_sigma_mesh_runtime.py",
+    "docs/SIGMA_MESH_RUNTIME.md",
+    ".github/workflows/sigma-mesh-runtime.yml",
+    "Dockerfile.sigma-runtime",
 ]
 
 errors = []
