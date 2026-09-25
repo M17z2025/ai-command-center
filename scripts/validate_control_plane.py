@@ -8,6 +8,8 @@ import sys
 import jsonschema
 import yaml
 
+from validate_sigma_mesh import validate_mesh
+
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED = [
@@ -32,6 +34,15 @@ REQUIRED = [
     "docs/deployment.md",
     ".github/workflows/sigma-control-plane.yml",
     ".github/workflows/sigma-full-user-test.yml",
+    "headquarters/mesh/README.md",
+    "headquarters/mesh/taxonomy.yaml",
+    "headquarters/mesh/leaders.yaml",
+    "headquarters/mesh/pipeline.yaml",
+    "headquarters/mesh/evidence.yaml",
+    "headquarters/mesh/evolution.yaml",
+    "schemas/sigma-expert.schema.json",
+    "templates/sigma-expert.yaml",
+    "scripts/validate_sigma_mesh.py",
 ]
 
 errors = []
@@ -93,6 +104,8 @@ if registry is not None:
         errors.append(
             f"Command-center repository {expected_repo!r} is not registered in projects"
         )
+
+errors.extend(validate_mesh(ROOT))
 
 if errors:
     print("Sigma control-plane validation FAILED")
