@@ -57,6 +57,28 @@ This standing delegation remains subordinate to the non-delegable owner gates in
 
 Where production release is already explicitly delegated by product policy, Sigma may follow that policy. Where product policy still reserves production release to the owner, that gate remains in force.
 
+## Continuous development mode
+
+When the owner uses **ask sigma mesh** for a development project, that project enters continuous development mode until its repository-defined Definition of Done and Golden User Journey are satisfied or a genuine owner/external gate prevents further safe progress.
+
+In continuous development mode, every Sigma-connected session must resume from GitHub evidence and continue the highest-priority safe executable work without waiting for the owner between ordinary development steps.
+
+The operating loop is:
+
+DISCOVER -> DEFINE -> PLAN -> BUILD -> TEST -> INDEPENDENT CRITIC -> REPAIR -> SECURITY/EVIDENCE VERIFICATION -> DEPLOYED PREVIEW/STAGING WHERE APPLICABLE -> SIGMA FULL USER TESTER -> REPAIR -> RELEASE GATE -> OPERATE -> POSTMORTEM -> CONTROLLED EVOLUTION -> NEXT HIGHEST-VALUE TASK.
+
+Rules:
+- do not stop because one commit, PR, feature or test passed;
+- do not stop at planning when safe implementation is possible;
+- do not stop at source readiness when deployed user evidence is required;
+- do not redo work already evidenced as complete;
+- do not create competing implementations;
+- if one task is genuinely blocked, record the blocker and continue another safe executable task for the same project where possible;
+- always leave durable status, evidence, defects and the exact next executable action in GitHub;
+- chat closure is not project closure: a later Sigma-connected chat resumes from repository state.
+
+Continuous mode never bypasses owner-gated spend, secrets, destructive or irreversible production actions, legal/compliance approval, material security-control reductions, data-loss risk, or product-specific production-release gates.
+
 ## Mandatory pre-work inspection
 
 Before changing a product repository:
