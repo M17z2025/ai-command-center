@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Universal Expert Mesh — Issue #22
 
-**READY FOR REVIEW — mesh source built on `feat/22-sigma-expert-mesh`; control-plane validation passed on the pre-status-update candidate and final exact-head validation is required after this status commit.**
+**READY FOR REVIEW — mesh source and Thinkers layer are built on `feat/22-sigma-expert-mesh`; Sigma control-plane validation has passed on the thinker-integrated candidate. The PR exact-head check remains the authoritative merge gate.**
 
 The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Experts control plane under `headquarters/mesh/`:
 - broad human-knowledge taxonomy covering the owner's requested science, computing, cyber, engineering, medical, veterinary/agricultural/environmental, business/economics/finance, legal/governance/geopolitical, humanities/social-science and creative fields;
@@ -20,7 +20,7 @@ The candidate adds a governed application-level Agentic AI Mesh / Mixture-of-Exp
 - `schemas/sigma-expert.schema.json`, expert template and fail-closed mesh validation integrated into `scripts/validate_control_plane.py`;
 - Headquarters, autonomous-runner and Alysha `/sigma` integration contracts updated.
 
-No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. Earlier GitHub Actions validation succeeded on the pre-Thinkers mesh candidate. The Thinkers layer is now part of PR #23, so the final gate is Sigma control-plane validation on the new exact PR head plus PR review.
+No autonomous runtime, live learning process or active-agent status is claimed from these configuration files. Promotion/runtime states require real evidence. Thinker-integrated GitHub Actions run `36171651428` completed the `validate_control_plane.py` step successfully on candidate `071dcdfda7a852277a11ddb7ed201efcb78ea6cb`. PR exact-head checks remain authoritative for any later commit.
 
 ## Sigma Genesis / Headquarters — Issue #20
 
