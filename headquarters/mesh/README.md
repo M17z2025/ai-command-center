@@ -48,6 +48,7 @@ The term "Mixture of Experts" here describes **application-level orchestration o
 - `evidence.yaml` — source quality, freshness, contradiction and uncertainty rules.
 - `evolution.yaml` — controlled learning, benchmarking, promotion and rollback.
 - `cognitive-methods.yaml` — machine-readable reasoning archetypes based on documented methods, never human impersonation.
+- `thinkers.yaml` — the Thinkers / Paradigm Shifters council mapping historical intellectual frameworks to valid Sigma domains and cognitive methods.
 
 ## Runtime contract
 
