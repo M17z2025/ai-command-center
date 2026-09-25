@@ -47,6 +47,7 @@ The term "Mixture of Experts" here describes **application-level orchestration o
 - `pipeline.yaml` — routing, collaboration, critique, verification and synthesis.
 - `evidence.yaml` — source quality, freshness, contradiction and uncertainty rules.
 - `evolution.yaml` — controlled learning, benchmarking, promotion and rollback.
+- `cognitive-methods.yaml` — machine-readable reasoning archetypes based on documented methods, never human impersonation.
 
 ## Runtime contract
 
