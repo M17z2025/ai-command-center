@@ -71,13 +71,13 @@ leaders:
 
   - id: computing-ai-director
     name: "Computing & AI Director"
-    parent: "sigma-governor"
+    parent: "chief-ai-scientist"
     mission: "Lead computing, AI, software, data, infrastructure and quantum-computing expertise."
     domains: ["computer-science", "artificial-intelligence", "software-engineering", "data-databases", "networks-cloud", "quantum-computing"]
     may_create_children: true
 
-  - id: cyber-security-director
-    name: "Cyber Security Director"
+  - id: security-master
+    name: "Security Master"
     parent: "sigma-governor"
     mission: "Lead defensive security, cryptography, threat modelling, assurance and incident analysis."
     domains: ["cyber-security"]
@@ -89,6 +89,13 @@ leaders:
     parent: "sigma-governor"
     mission: "Lead multidisciplinary engineering, industry, design and technical delivery."
     domains: ["aerospace-engineering", "mechanical-engineering", "electrical-electronic-engineering", "chemical-process-engineering", "civil-structural-engineering", "nuclear-engineering", "vehicle-naval-engineering", "materials-metallurgy", "manufacturing-industrial", "industrial-product-design", "textiles-fashion-wearables"]
+    may_create_children: true
+
+  - id: mining-resources-master
+    name: "Mining & Resources Master"
+    parent: "sigma-governor"
+    mission: "Lead mining engineering, exploration geology, mineral resources, mine planning, mineral processing and commodity-resource analysis."
+    domains: ["mining-resources-engineering", "earth-space-sciences", "materials-metallurgy"]
     may_create_children: true
 
   - id: health-medicine-director
@@ -106,8 +113,8 @@ leaders:
     domains: ["veterinary-science", "agriculture-agronomy", "food-science", "environment-sustainability", "natural-resources"]
     may_create_children: true
 
-  - id: business-strategy-director
-    name: "Business & Strategy Director"
+  - id: business-strategy-master
+    name: "Business & Strategy Master"
     parent: "sigma-governor"
     mission: "Lead corporate strategy, operations, people, commercial growth and delivery-management expertise."
     domains: ["corporate-strategy", "operations-supply-chain", "people-hr", "marketing-sales-growth", "product-project-programme"]
@@ -121,8 +128,8 @@ leaders:
     may_create_children: true
     high_impact_domain: true
 
-  - id: legal-jurisprudence-director
-    name: "Law & Jurisprudence Director"
+  - id: legal-compliance-master
+    name: "Legal & Compliance Master"
     parent: "sigma-governor"
     mission: "Lead legal research, issue-spotting, comparative law, compliance and legal-evidence discipline."
     domains: ["constitutional-public-law", "international-law", "corporate-commercial-law", "criminal-law", "civil-private-law", "intellectual-property-law", "regulatory-compliance", "jurisprudence-legal-history"]
