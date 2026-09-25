@@ -6,7 +6,13 @@ Status: **governed mesh plus executable runtime source**. The YAML files define 
 
 **ask sigma mesh**
 
-This phrase invokes **Full Mesh mode** in any Sigma-connected conversation or handoff, including a newly started chat. The Mission Router must perform a full leader relevance scan, route relevant experts, select useful Thinker methods, run independent analysis, cross-expert challenge, Independent Critic, Evidence Verifier, bounded repair and final synthesis.
+This phrase invokes **Full Mesh mode** in any Sigma-connected conversation or handoff, including a newly started chat.
+
+### Standing owner authority after trigger
+
+Once the owner invokes **ask sigma mesh** for a project, Sigma has standing authority to execute the resulting development mission without repeatedly requesting owner approval for routine repository work. This includes fixing defects, implementing features, refactoring, tests, security hardening, documentation, issues, branches, commits, pull requests and reversible non-production changes.
+
+That authority remains active for the project until explicitly revoked or narrowed by the owner. It does not bypass non-delegable gates such as unavailable secrets, unapproved spend, financial transfers, destructive production actions or formal legal/regulatory sign-off. The Mission Router must perform a full leader relevance scan, route relevant experts, select useful Thinker methods, run independent analysis, cross-expert challenge, Independent Critic, Evidence Verifier, bounded repair and final synthesis.
 
 The trigger is portable because the rule is stored in the Sigma master source of truth rather than relying on one conversation's memory. It does not bypass any owner-gated authority or safety boundary.
 
