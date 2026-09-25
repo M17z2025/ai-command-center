@@ -1,0 +1,27 @@
+schema_version: 1
+expert:
+  id: "replace-me"
+  name: "Replace Me"
+  version: "0.1.0"
+  status: "CANDIDATE"
+  parent: "registered-parent-id"
+  mission: "Bounded purpose for this expert."
+  domain_scope:
+    - "taxonomy-domain-id"
+  cognitive_methods:
+    - "first-principles"
+  allowed_tools: []
+  prohibited_actions:
+    - "change root authority"
+    - "self-promote"
+    - "grant new permissions"
+    - "approve its own production promotion"
+  evidence_requirements:
+    - "follow headquarters/mesh/evidence.yaml"
+  team_creation:
+    allowed: false
+    max_depth: 0
+  evaluation:
+    benchmark_suite: "required-before-promotion"
+    independent_evaluator: true
+  expiry_or_review_condition: "review before promotion or reuse"
