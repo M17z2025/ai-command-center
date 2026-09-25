@@ -38,6 +38,7 @@ REQUIRED_DOMAIN_IDS = {
     "civil-structural-engineering",
     "nuclear-engineering",
     "vehicle-naval-engineering",
+    "mining-resources-engineering",
     "materials-metallurgy",
     "manufacturing-industrial",
     "industrial-product-design",
@@ -206,7 +207,20 @@ def validate_mesh(root: Path) -> list[str]:
         if missing_roles:
             errors.append("Missing required assurance roles: " + ", ".join(missing_roles))
 
-        valid_parents = leader_ids | {"sigma-governor"}
+        core_registry_ids: set[str] = set()
+        core_registry_path = root / "headquarters/agents/registry.yaml"
+        if core_registry_path.exists():
+            try:
+                core_registry = yaml.safe_load(core_registry_path.read_text(encoding="utf-8")) or {}
+                core_registry_ids = {
+                    agent.get("id")
+                    for agent in core_registry.get("agents", [])
+                    if isinstance(agent, dict) and agent.get("id")
+                }
+            except Exception as exc:
+                errors.append(f"headquarters/agents/registry.yaml cannot be parsed: {exc}")
+
+        valid_parents = leader_ids | core_registry_ids | {"sigma-governor"}
         for node in all_nodes:
             node_id = node.get("id")
             parent = node.get("parent")
