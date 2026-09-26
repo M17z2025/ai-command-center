@@ -126,8 +126,27 @@ REQUIRED_ASSURANCE_ROLES = {
     "sigma-mission-router",
     "sigma-independent-critic",
     "sigma-evidence-verifier",
+    "sigma-security-gatekeeper",
     "sigma-synthesis-director",
     "evaluation-evolution-controller",
+}
+
+REQUIRED_SECURITY_ROLES = {
+    "security-master",
+    "appsec-master",
+    "identity-access-security-master",
+    "tenant-data-isolation-master",
+    "cloud-infrastructure-security-master",
+    "network-edge-security-master",
+    "supply-chain-security-master",
+    "secrets-cryptography-master",
+    "offensive-security-master",
+    "detection-response-forensics-master",
+    "ai-systems-security-master",
+    "api-mobile-integration-security-master",
+    "privacy-data-security-master",
+    "resilience-recovery-security-master",
+    "sigma-security-gatekeeper",
 }
 
 
@@ -226,6 +245,13 @@ def validate_mesh(root: Path) -> list[str]:
         if missing_roles:
             errors.append("Missing required assurance roles: " + ", ".join(missing_roles))
 
+        missing_security_roles = sorted(REQUIRED_SECURITY_ROLES - leader_ids)
+        if missing_security_roles:
+            errors.append(
+                "Missing required Sigma Cybersecurity Division roles: "
+                + ", ".join(missing_security_roles)
+            )
+
         core_registry_ids: set[str] = set()
         core_registry_path = root / "headquarters/agents/registry.yaml"
         if core_registry_path.exists():
@@ -279,6 +305,7 @@ def validate_mesh(root: Path) -> list[str]:
             "parallel-analysis",
             "adversarial-critique",
             "evidence-verification",
+            "security-assurance",
             "synthesis",
             "execution-gate",
             "postmortem",
