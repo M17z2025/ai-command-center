@@ -19,11 +19,17 @@ Convert the requested outcome into:
 
 Record this in an issue when the work is material.
 
-## 3. Plan
+## 3. Expert advisory plan
 
-Select the smallest safe implementation path. Identify files/modules, schema changes, external services and migration impacts.
+For material development, route the relevant Sigma Expert Advisory Council specialists and create/update `templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md` (or an equivalent repository-backed issue/plan).
 
-## 4. Build
+The advisory plan must include the product objective/users, facts/assumptions/proposals, specialist recommendations, architecture/platform implications, UX/creative direction, legal/security/privacy and commercial/HR/finance implications where applicable, dependencies/gates, risks, phased delivery, ordered backlog/pull plan, acceptance criteria, evidence/test plan and exact next executable actions.
+
+## 4. Implementation plan
+
+Select the smallest safe implementation path from the advisory plan. Identify files/modules, schema changes, external services, migrations, ownership and rollback/recovery impacts.
+
+## 5. Build
 
 Create a branch and implement. Keep security and backward compatibility in scope from the beginning.
 
@@ -33,7 +39,7 @@ Recommended branch names:
 - `security/<issue>-<short-name>`
 - `chore/<issue>-<short-name>`
 
-## 5. Verify
+## 6. Verify
 
 Run, as applicable:
 - type checking;
@@ -47,7 +53,7 @@ Run, as applicable:
 
 Do not substitute a successful compile for functional verification.
 
-## 6. Self-review
+## 7. Self-review
 
 Check:
 - acceptance criteria;
@@ -60,7 +66,7 @@ Check:
 - documentation;
 - secret leakage.
 
-## 7. Independent cybersecurity assurance
+## 8. Independent cybersecurity assurance
 
 Route every material change through the Sigma Cybersecurity Division before READY/release classification.
 
@@ -75,7 +81,7 @@ Use `templates/SIGMA_CYBER_SECURITY_REPORT.md` and record:
 
 The implementing agent cannot self-certify this verdict. Required NOT VERIFIED controls block PASS. BLOCKER, CRITICAL and HIGH findings block release by default.
 
-## 8. Pull request
+## 9. Pull request
 
 PR body must include:
 - what changed;
@@ -86,15 +92,15 @@ PR body must include:
 - screenshots for UI changes where practical;
 - rollback notes for high-risk changes.
 
-## 9. Review and repair
+## 10. Review and repair
 
 Sigma or another reviewer checks the PR against acceptance criteria and system architecture. Repair substantive findings before merge.
 
-## 10. Merge and deploy
+## 11. Merge and deploy
 
 Merge only when required gates pass. Deployment follows the product manifest.
 
-## 11. Close the loop
+## 12. Close the loop
 
 Update `PROJECT_STATUS.md` with:
 - completion state;
