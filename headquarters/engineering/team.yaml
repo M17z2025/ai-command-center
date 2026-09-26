@@ -1,0 +1,107 @@
+schema_version: 1
+division:
+  id: sigma-algorithmic-engineering-lab
+  name: "Sigma Algorithmic Engineering & Solution Lab"
+  leader: algorithmic-engineering-director
+  reports_to: sigma-governor
+  mission: "Generate, implement, test, compare and repair engineering solution candidates until the best evidence-backed solution within project constraints is established or the unresolved problem is explicitly recorded."
+  evidence_over_confidence: true
+  no_universal_solution_claim: true
+
+specialists:
+  - id: algorithm-complexity-master
+    name: "Algorithm & Complexity Master"
+    parent: algorithmic-engineering-director
+    domains: ["computer-science", "mathematics-logic", "software-engineering"]
+  - id: software-architecture-master
+    name: "Software Architecture Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science"]
+  - id: polyglot-coding-master
+    name: "Polyglot Coding Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science"]
+  - id: frontend-engineering-master
+    name: "Frontend Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "ui-ux-interaction"]
+  - id: backend-api-engineering-master
+    name: "Backend & API Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "data-databases", "networks-cloud"]
+  - id: algorithmic-mobile-engineering-master
+    name: "Algorithmic Mobile Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "ui-ux-interaction"]
+  - id: database-data-engineering-master
+    name: "Database & Data Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["data-databases", "software-engineering"]
+  - id: distributed-cloud-systems-master
+    name: "Distributed & Cloud Systems Master"
+    parent: algorithmic-engineering-director
+    domains: ["networks-cloud", "software-engineering", "computer-science"]
+  - id: ai-agent-engineering-master
+    name: "AI & Agent Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["artificial-intelligence", "software-engineering"]
+  - id: integration-automation-master
+    name: "Integration & Automation Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "networks-cloud"]
+  - id: debugging-root-cause-master
+    name: "Debugging & Root-Cause Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science"]
+  - id: performance-optimisation-master
+    name: "Performance & Optimisation Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science", "data-databases"]
+  - id: formal-correctness-master
+    name: "Formal Methods & Correctness Master"
+    parent: algorithmic-engineering-director
+    domains: ["mathematics-logic", "computer-science", "software-engineering"]
+  - id: qa-test-engineering-master
+    name: "QA & Test Engineering Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering"]
+  - id: fuzz-property-mutation-master
+    name: "Property, Fuzz & Mutation Testing Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science"]
+  - id: reliability-chaos-recovery-master
+    name: "Reliability, Chaos & Recovery Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "networks-cloud"]
+  - id: developer-tooling-ci-master
+    name: "Developer Tooling & CI Master"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "networks-cloud"]
+  - id: sigma-solution-judge
+    name: "Independent Code Reviewer / Solution Judge"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science"]
+    independent_from_primary_implementer: true
+
+solution_tournament:
+  minimum_candidates_when_meaningful: 2
+  recommended_candidates_for_material_design_choice: 3
+  hard_gates:
+    - "correctness"
+    - "mandatory security"
+    - "data/authorization integrity where applicable"
+  comparison_order:
+    - "correctness and acceptance coverage"
+    - "security and data integrity"
+    - "reliability and recovery"
+    - "measured performance/scalability where relevant"
+    - "simplicity"
+    - "maintainability/testability"
+    - "compatibility/migration risk"
+    - "operational/infrastructure cost"
+    - "delivery effort"
+  unresolved_behavior: "Record UNSOLVED / NEEDS NEXT EXPERIMENT with failed candidates and exact next test; never fabricate success."
+
+artifact:
+  template: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
+  name: "algorithmic-solution-report"
