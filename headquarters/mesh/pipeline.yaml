@@ -57,6 +57,28 @@ stages:
       - "name owner/external gates"
       - "end with exact next executable actions"
 
+  - id: algorithmic-solution-search
+    purpose: "For applicable software/technical development, formalise the problem, generate competing solution candidates and define the executable test/benchmark evidence needed to select the strongest justified approach."
+    required_when: "algorithmic_engineering_required"
+    director: "algorithmic-engineering-director"
+    artifact_template: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
+    rules:
+      - "Generate at least two materially different candidates when a genuine design choice exists; prefer three for material architecture/algorithm choices."
+      - "Correctness and mandatory security are hard gates."
+      - "Do not claim code/tests/benchmarks ran unless runtime/repository evidence proves they ran."
+      - "Record unresolved problems and the next experiment rather than fabricating a solution."
+
+  - id: engineering-independent-judge
+    purpose: "Independently challenge algorithmic/software candidates and reject unsupported best-solution claims."
+    required_when: "algorithmic_engineering_required"
+    judge: "sigma-solution-judge"
+    independence_required: true
+    verdicts: ["PASS", "REPAIR"]
+    rules:
+      - "The primary implementer cannot be the sole solution judge."
+      - "Candidate comparison must state explicit criteria and evidence."
+      - "A hard-gate failure cannot be averaged away by a higher overall score."
+
   - id: adversarial-critique
     purpose: "Independent critic attempts to break, falsify or find unsafe assumptions in the proposed result."
     required_for_material_work: true
