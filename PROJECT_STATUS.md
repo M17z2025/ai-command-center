@@ -4,6 +4,30 @@ Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Algorithmic Engineering & Solution Lab — Issue #45
+
+**SPECIALIST CODERS/TESTERS + EVIDENCE-BACKED SOLUTION TOURNAMENT IMPLEMENTED ON PR #46 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**
+
+Issue #45 adds a permanent engineering problem-solving division with:
+- Algorithm & Complexity Master;
+- Software Architecture Master;
+- Polyglot Coding Master;
+- Frontend, Backend/API and Mobile Engineering;
+- Database/Data and Distributed/Cloud Systems;
+- AI/Agent Engineering and Integration/Automation;
+- Debugging & Root-Cause, Performance/Optimisation and Formal Correctness;
+- QA/Test Engineering, Property/Fuzz/Mutation Testing, Reliability/Chaos/Recovery and Developer Tooling/CI;
+- independent `sigma-solution-judge`.
+
+Applicable software missions are marked `algorithmic_engineering_required`. The runtime creates an `algorithmic-solution-report`, runs the independent Solution Judge during repair, and preserves the final engineering evidence/decision artifact.
+
+The governing rule is deliberately fail-honest: Sigma seeks the strongest evidence-backed solution available under the stated constraints, but if no candidate passes correctness/security hard gates it must record **UNSOLVED / NEEDS NEXT EXPERIMENT** rather than fabricate success.
+
+Exact-head verification for candidate `0833eb59ab3d7e6b2df42bf343559821edc2a323`:
+- Sigma control-plane validation run `36243296451`: **SUCCESS**.
+- Sigma mesh runtime run `36243296507`: **SUCCESS**.
+- Runtime tests include specialist engineering routing plus durable `algorithmic-solution-report` and independent judge artifacts.
+
 ## Sigma Universal Expert Advisory & Development Planning Council — Issue #43
 
 **NAMED EXPERT WORKFORCE + EXECUTABLE DEVELOPMENT-PLAN RUNTIME IMPLEMENTED ON PR #44 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**

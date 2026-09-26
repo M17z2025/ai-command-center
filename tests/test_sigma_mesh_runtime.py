@@ -65,6 +65,16 @@ class SigmaMeshRuntimeTests(unittest.TestCase):
         self.assertIn("marketing-brand-master", commercial.leaders)
         self.assertIn("sales-commercial-master", commercial.leaders)
 
+    def test_router_selects_algorithmic_engineering_team(self):
+        plan = self.router.route(
+            "Debug and fix the backend API, database query performance and add strong regression tests."
+        )
+        self.assertTrue(plan.algorithmic_engineering_required)
+        self.assertIn("debugging-root-cause-master", plan.leaders)
+        self.assertIn("backend-api-engineering-master", plan.leaders)
+        self.assertIn("performance-optimisation-master", plan.leaders)
+        self.assertIn("qa-test-engineering-master", plan.leaders)
+
     def test_router_selects_thinker_lenses(self):
         plan = self.router.route(
             "Formal proof limits for a computer algorithm and computation model."
@@ -101,6 +111,21 @@ class SigmaMeshRuntimeTests(unittest.TestCase):
             )
             self.assertIn(
                 "development-advisory-plan",
+                [event["stage"] for event in result["events"]],
+            )
+            self.assertTrue(result["plan"]["algorithmic_engineering_required"])
+            self.assertIn("algorithmic-solution-report", result["artifacts"])
+            self.assertIn(
+                "SIGMA ALGORITHMIC SOLUTION REPORT",
+                result["artifacts"]["algorithmic-solution-report"],
+            )
+            self.assertIn("engineering-solution-judge", result["artifacts"])
+            self.assertIn(
+                "algorithmic-solution-search",
+                [event["stage"] for event in result["events"]],
+            )
+            self.assertIn(
+                "engineering-independent-judge",
                 [event["stage"] for event in result["events"]],
             )
 

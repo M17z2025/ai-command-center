@@ -171,3 +171,18 @@ The plan follows `templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md` and is intended 
 
 This runtime behavior does not claim that a plan is legally, financially or technically verified beyond the evidence and assurance stages actually completed.
 
+## Algorithmic engineering solution tournament
+
+For applicable software/technical development prompts, the router sets `algorithmic_engineering_required=true`.
+
+The runtime can then persist:
+
+- `algorithmic-solution-report` — formal problem, candidate approaches, comparison criteria, required test/benchmark evidence, selection/rejection rationale and unresolved uncertainty.
+- `engineering-solution-judge` — independent Solution Judge review.
+
+The runtime records the mission event `algorithmic-solution-search`. During repair cycles, the algorithmic report is regenerated from repaired expert work and the judge is rerun.
+
+The model-backed runtime is not itself proof that code executed. It must not report tests, benchmarks or prototypes as run unless mission/repository evidence proves they ran. Interactive implementation agents and CI perform the actual repository code/test work; the runtime orchestrates and preserves the decision/evidence structure.
+
+Correctness and mandatory security are hard gates. If no candidate satisfies the evidence requirements, Sigma must record the problem as unresolved and identify the next experiment.
+

@@ -28,6 +28,18 @@ Acts as implementation and problem-solving agent. ChatGPT should:
 - create PRs where appropriate;
 - report concrete blockers rather than generic uncertainty.
 
+### Sigma Algorithmic Engineering & Solution Lab
+Acts as the specialist software/technical problem-solving and implementation-quality layer. The Lab:
+- formalises difficult engineering problems and explicit success criteria;
+- generates competing algorithms/architectures when a meaningful choice exists;
+- uses specialist developers, debuggers, performance engineers and test engineers;
+- requires reproducible tests/benchmarks rather than unsupported "best" claims;
+- uses an independent Solution Judge;
+- records rejected alternatives and unresolved problems;
+- hands implementation agents the strongest evidence-backed solution plus exact next actions.
+
+It does not guarantee that every problem is solvable. If no candidate meets the hard gates, the correct result is an unresolved engineering finding and next experiment.
+
 ### Sigma Expert Advisory & Development Planning Council
 Acts as the cross-disciplinary planning layer for material development. The council:
 - routes the smallest sufficient set of relevant experts;

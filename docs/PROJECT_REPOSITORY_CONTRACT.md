@@ -40,6 +40,14 @@ Secret values must never appear in this file.
 
 Product-specific instructions override the generic Sigma agent contract only where explicitly stated. It should record architectural rules, naming conventions, protected modules, data-safety requirements and prohibited shortcuts.
 
+## Algorithmic engineering inheritance
+
+Every registered product inherits the Sigma Algorithmic Engineering & Solution Lab for applicable material software/technical development.
+
+The product issue/PR/status must link a current `SIGMA_ALGORITHMIC_SOLUTION_REPORT.md` or stricter equivalent when the work involves a meaningful algorithm/architecture/debugging/performance/testing decision. The report must not claim tests or benchmarks that were not actually executed and evidenced.
+
+If no candidate satisfies correctness/security hard gates, the repository must record the work as unresolved or blocked with the exact next experiment rather than marking it complete.
+
 ## Expert advisory planning inheritance
 
 Every repository registered in `projects/registry.yaml` inherits the Sigma Universal Expert Advisory & Development Planning Council for material development work.

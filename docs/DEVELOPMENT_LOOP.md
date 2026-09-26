@@ -25,11 +25,27 @@ For material development, route the relevant Sigma Expert Advisory Council speci
 
 The advisory plan must include the product objective/users, facts/assumptions/proposals, specialist recommendations, architecture/platform implications, UX/creative direction, legal/security/privacy and commercial/HR/finance implications where applicable, dependencies/gates, risks, phased delivery, ordered backlog/pull plan, acceptance criteria, evidence/test plan and exact next executable actions.
 
-## 4. Implementation plan
+## 4. Algorithmic engineering / solution tournament
 
-Select the smallest safe implementation path from the advisory plan. Identify files/modules, schema changes, external services, migrations, ownership and rollback/recovery impacts.
+For applicable software/technical work, use the Sigma Algorithmic Engineering & Solution Lab before and during implementation.
 
-## 5. Build
+The engineering team must:
+- formalise objective/invariants/constraints;
+- generate multiple candidates where a meaningful choice exists;
+- define the evidence needed to distinguish them;
+- prototype/implement the strongest candidate(s) where authorised;
+- run appropriate unit/integration/regression/property/fuzz/concurrency/recovery/performance tests;
+- obtain independent Solution Judge review;
+- preserve rejected alternatives and reasons;
+- record unresolved work honestly with the exact next experiment.
+
+Persist the result with `templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md` or an equivalent repository-backed report.
+
+## 5. Implementation plan
+
+Select the smallest safe implementation path from the advisory and algorithmic engineering outputs. Identify files/modules, schema changes, external services, migrations, ownership and rollback/recovery impacts.
+
+## 6. Build
 
 Create a branch and implement. Keep security and backward compatibility in scope from the beginning.
 
@@ -39,7 +55,7 @@ Recommended branch names:
 - `security/<issue>-<short-name>`
 - `chore/<issue>-<short-name>`
 
-## 6. Verify
+## 7. Verify
 
 Run, as applicable:
 - type checking;
@@ -53,7 +69,7 @@ Run, as applicable:
 
 Do not substitute a successful compile for functional verification.
 
-## 7. Self-review
+## 8. Self-review
 
 Check:
 - acceptance criteria;
@@ -66,7 +82,7 @@ Check:
 - documentation;
 - secret leakage.
 
-## 8. Independent cybersecurity assurance
+## 9. Independent cybersecurity assurance
 
 Route every material change through the Sigma Cybersecurity Division before READY/release classification.
 
@@ -81,7 +97,7 @@ Use `templates/SIGMA_CYBER_SECURITY_REPORT.md` and record:
 
 The implementing agent cannot self-certify this verdict. Required NOT VERIFIED controls block PASS. BLOCKER, CRITICAL and HIGH findings block release by default.
 
-## 9. Pull request
+## 10. Pull request
 
 PR body must include:
 - what changed;
@@ -92,15 +108,15 @@ PR body must include:
 - screenshots for UI changes where practical;
 - rollback notes for high-risk changes.
 
-## 10. Review and repair
+## 11. Review and repair
 
 Sigma or another reviewer checks the PR against acceptance criteria and system architecture. Repair substantive findings before merge.
 
-## 11. Merge and deploy
+## 12. Merge and deploy
 
 Merge only when required gates pass. Deployment follows the product manifest.
 
-## 12. Close the loop
+## 13. Close the loop
 
 Update `PROJECT_STATUS.md` with:
 - completion state;

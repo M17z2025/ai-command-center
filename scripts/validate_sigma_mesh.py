@@ -127,6 +127,7 @@ REQUIRED_ASSURANCE_ROLES = {
     "sigma-independent-critic",
     "sigma-evidence-verifier",
     "sigma-development-planning-director",
+    "sigma-solution-judge",
     "sigma-security-gatekeeper",
     "sigma-synthesis-director",
     "evaluation-evolution-controller",
@@ -153,6 +154,28 @@ REQUIRED_ADVISORY_ROLES = {
     "scriptwriting-master",
     "songwriting-master",
     "sigma-development-planning-director",
+}
+
+REQUIRED_ENGINEERING_ROLES = {
+    "algorithmic-engineering-director",
+    "algorithm-complexity-master",
+    "software-architecture-master",
+    "polyglot-coding-master",
+    "frontend-engineering-master",
+    "backend-api-engineering-master",
+    "algorithmic-mobile-engineering-master",
+    "database-data-engineering-master",
+    "distributed-cloud-systems-master",
+    "ai-agent-engineering-master",
+    "integration-automation-master",
+    "debugging-root-cause-master",
+    "performance-optimisation-master",
+    "formal-correctness-master",
+    "qa-test-engineering-master",
+    "fuzz-property-mutation-master",
+    "reliability-chaos-recovery-master",
+    "developer-tooling-ci-master",
+    "sigma-solution-judge",
 }
 
 REQUIRED_SECURITY_ROLES = {
@@ -283,6 +306,13 @@ def validate_mesh(root: Path) -> list[str]:
                 + ", ".join(missing_advisory_roles)
             )
 
+        missing_engineering_roles = sorted(REQUIRED_ENGINEERING_ROLES - leader_ids)
+        if missing_engineering_roles:
+            errors.append(
+                "Missing required Sigma Algorithmic Engineering roles: "
+                + ", ".join(missing_engineering_roles)
+            )
+
         core_registry_ids: set[str] = set()
         core_registry_path = root / "headquarters/agents/registry.yaml"
         if core_registry_path.exists():
@@ -335,6 +365,8 @@ def validate_mesh(root: Path) -> list[str]:
             "team-formation",
             "parallel-analysis",
             "development-advisory-plan",
+            "algorithmic-solution-search",
+            "engineering-independent-judge",
             "adversarial-critique",
             "evidence-verification",
             "security-assurance",

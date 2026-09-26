@@ -70,6 +70,18 @@ This repository is public. It contains non-secret governance metadata and links 
 
 Issue: #20
 
+## Algorithmic Engineering & Solution Lab
+
+The **Sigma Algorithmic Engineering & Solution Lab** is the permanent coding, algorithm, debugging, optimisation and test-engineering division.
+
+- Charter: [`engineering/README.md`](./engineering/README.md)
+- Machine-readable team: [`engineering/team.yaml`](./engineering/team.yaml)
+- Evidence template: [`../templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md`](../templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md)
+
+It contains dedicated algorithm/complexity, architecture, polyglot coding, frontend, backend/API, mobile, database/data, distributed/cloud, AI/agent, integration, debugging, performance, formal-correctness, QA, fuzz/property/mutation, reliability/recovery and CI/tooling specialists plus an independent Solution Judge.
+
+The Lab seeks the strongest evidence-backed solution under explicit criteria; it never claims every problem is solvable and records the next experiment when no candidate passes the hard gates.
+
 ## Universal Expert Advisory & Development Planning Council
 
 The **Sigma Universal Expert Advisory & Development Planning Council** converts owner goals into executable cross-disciplinary development plans.

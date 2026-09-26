@@ -80,12 +80,46 @@ class SigmaOrchestrator:
                     plan, prompt, outputs, evidence
                 )
 
+            algorithmic_report = ""
+            engineering_judge = ""
+            if plan.algorithmic_engineering_required:
+                algorithmic_report = self._algorithmic_solution(
+                    plan, prompt, outputs, evidence, advisory_plan
+                )
+
             critic = ""
             verifier = ""
             for cycle in range(max_cycles + 1):
-                critic = self._critic(plan, prompt, outputs, advisory_plan)
+                if plan.algorithmic_engineering_required:
+                    engineering_judge = self._solution_judge(
+                        plan, prompt, algorithmic_report, evidence
+                    )
+                    self.store.event(
+                        mission_id,
+                        "engineering-independent-judge",
+                        {
+                            "cycle": cycle,
+                            "verdict": _verdict(engineering_judge),
+                            "text": _bounded(engineering_judge, 8000),
+                        },
+                    )
+                critic = self._critic(
+                    plan,
+                    prompt,
+                    outputs,
+                    advisory_plan,
+                    algorithmic_report,
+                    engineering_judge,
+                )
                 verifier = self._verify(
-                    plan, prompt, outputs, critic, evidence, advisory_plan
+                    plan,
+                    prompt,
+                    outputs,
+                    critic,
+                    evidence,
+                    advisory_plan,
+                    algorithmic_report,
+                    engineering_judge,
                 )
                 self.store.event(mission_id, "adversarial-critique", {
                     "cycle": cycle, "verdict": _verdict(critic), "text": _bounded(critic, 8000)
@@ -93,14 +127,41 @@ class SigmaOrchestrator:
                 self.store.event(mission_id, "evidence-verification", {
                     "cycle": cycle, "verdict": _verdict(verifier), "text": _bounded(verifier, 8000)
                 })
-                if _verdict(critic) == "PASS" and _verdict(verifier) == "PASS":
+                judge_pass = (
+                    not plan.algorithmic_engineering_required
+                    or _verdict(engineering_judge) == "PASS"
+                )
+                if (
+                    _verdict(critic) == "PASS"
+                    and _verdict(verifier) == "PASS"
+                    and judge_pass
+                ):
                     break
                 if cycle >= max_cycles:
                     break
-                outputs = self._repair(plan, prompt, outputs, critic, verifier, evidence)
+                outputs = self._repair(
+                    plan,
+                    prompt,
+                    outputs,
+                    critic,
+                    verifier,
+                    evidence,
+                    engineering_judge,
+                )
                 if plan.development_planning_required:
                     advisory_plan = self._development_plan(
                         plan, prompt, outputs, evidence, critic, verifier
+                    )
+                if plan.algorithmic_engineering_required:
+                    algorithmic_report = self._algorithmic_solution(
+                        plan,
+                        prompt,
+                        outputs,
+                        evidence,
+                        advisory_plan,
+                        critic,
+                        verifier,
+                        engineering_judge,
                     )
                 self.store.event(mission_id, "repair-loop", {"cycle": cycle + 1})
 
@@ -120,10 +181,60 @@ class SigmaOrchestrator:
                     },
                 )
 
+            if plan.algorithmic_engineering_required:
+                algorithmic_report = self._algorithmic_solution(
+                    plan,
+                    prompt,
+                    outputs,
+                    evidence,
+                    advisory_plan,
+                    critic,
+                    verifier,
+                    engineering_judge,
+                )
+                engineering_judge = self._solution_judge(
+                    plan, prompt, algorithmic_report, evidence
+                )
+                self.store.artifact(
+                    mission_id,
+                    "algorithmic-solution-report",
+                    _bounded(algorithmic_report, 30000),
+                )
+                self.store.artifact(
+                    mission_id,
+                    "engineering-solution-judge",
+                    _bounded(engineering_judge, 12000),
+                )
+                self.store.event(
+                    mission_id,
+                    "algorithmic-solution-search",
+                    {
+                        "director": "algorithmic-engineering-director",
+                        "judge": "sigma-solution-judge",
+                        "judge_verdict": _verdict(engineering_judge),
+                        "template": "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md",
+                    },
+                )
+
             final = self._synthesize(
-                plan, prompt, outputs, critic, verifier, evidence, advisory_plan
+                plan,
+                prompt,
+                outputs,
+                critic,
+                verifier,
+                evidence,
+                advisory_plan,
+                algorithmic_report,
+                engineering_judge,
             )
-            unresolved = _verdict(critic) != "PASS" or _verdict(verifier) != "PASS"
+            unresolved = (
+                _verdict(critic) != "PASS"
+                or _verdict(verifier) != "PASS"
+                or (
+                    plan.algorithmic_engineering_required
+                    and _verdict(engineering_judge) != "PASS"
+                )
+            )
             status = "COMPLETE_WITH_UNVERIFIED_ITEMS" if unresolved else "COMPLETE"
             self.store.artifact(mission_id, "final", _bounded(final, 50000))
             self.store.finish(mission_id, status, final_output=final)
@@ -230,12 +341,80 @@ class SigmaOrchestrator:
             )
         )
 
+    def _algorithmic_solution(
+        self,
+        plan: MissionPlan,
+        prompt: str,
+        outputs: dict[str, str],
+        evidence: list[dict[str, Any]],
+        advisory_plan: str = "",
+        critic: str = "",
+        verifier: str = "",
+        prior_judge: str = "",
+    ) -> str:
+        system = (
+            "You are Sigma Algorithmic Engineering Director. Formalise the engineering problem and "
+            "run a solution-design tournament. Generate at least two materially different candidates "
+            "when a real design choice exists, preferably three for a material architecture/algorithm choice. "
+            "Compare correctness, invariants, algorithmic complexity, security/data integrity, reliability, "
+            "testability, maintainability, compatibility, measured-performance requirements and cost. "
+            "Specify the exact unit/integration/property/fuzz/concurrency/recovery/benchmark evidence needed. "
+            "Never claim code ran or a benchmark passed unless that evidence is supplied to the mission. "
+            "If the problem is unresolved, say so and identify the next experiment rather than inventing success. "
+            "Follow templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md."
+        )
+        user = (
+            f"MISSION:\n{prompt}\n\nDOMAINS: {plan.domains}\nLEADERS: {plan.leaders}\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:36000]}\n\n"
+            f"DEVELOPMENT PLAN:\n{advisory_plan[:12000]}\n\n"
+            f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:16000]}\n\n"
+            f"CRITIC:\n{critic[:7000]}\n\nVERIFIER:\n{verifier[:7000]}\n\n"
+            f"PRIOR SOLUTION JUDGE:\n{prior_judge[:7000]}"
+        )
+        return self.provider.complete(
+            CompletionRequest(
+                "algorithmic-solution",
+                system,
+                user,
+                {"director": "algorithmic-engineering-director"},
+            )
+        )
+
+    def _solution_judge(
+        self,
+        plan: MissionPlan,
+        prompt: str,
+        algorithmic_report: str,
+        evidence: list[dict[str, Any]],
+    ) -> str:
+        system = (
+            "You are Sigma Independent Code Reviewer / Solution Judge, independent from the primary "
+            "engineering implementers. Reject unsupported 'best' claims. Verify that hard gates are explicit, "
+            "candidate trade-offs are real, tests/benchmarks are reproducible, and unresolved evidence is "
+            "marked unresolved. Correctness and mandatory security are hard gates. Start with exactly "
+            "VERDICT: PASS or VERDICT: REPAIR."
+        )
+        user = (
+            f"MISSION:\n{prompt}\n\nALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:30000]}\n\n"
+            f"MISSION EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:18000]}"
+        )
+        return self.provider.complete(
+            CompletionRequest(
+                "solution-judge",
+                system,
+                user,
+                {"judge": "sigma-solution-judge"},
+            )
+        )
+
     def _critic(
         self,
         plan: MissionPlan,
         prompt: str,
         outputs: dict[str, str],
         advisory_plan: str = "",
+        algorithmic_report: str = "",
+        engineering_judge: str = "",
     ) -> str:
         system = (
             "You are Sigma Independent Critic. You are independent from the primary team. "
@@ -244,8 +423,10 @@ class SigmaOrchestrator:
             "Start with exactly VERDICT: PASS or VERDICT: REPAIR."
         )
         user = (
-            f"MISSION:\n{prompt}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:42000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:16000]}"
+            f"MISSION:\n{prompt}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:34000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:12000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:14000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}"
         )
         return self.provider.complete(CompletionRequest("critic", system, user))
 
@@ -257,6 +438,8 @@ class SigmaOrchestrator:
         critic: str,
         evidence: list[dict[str, Any]],
         advisory_plan: str = "",
+        algorithmic_report: str = "",
+        engineering_judge: str = "",
     ) -> str:
         system = (
             "You are Sigma Evidence Verifier. Check whether material claims are actually supported "
@@ -267,8 +450,10 @@ class SigmaOrchestrator:
         )
         user = (
             f"MISSION:\n{prompt}\n\nEVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:25000]}\n\n"
-            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:30000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:14000]}\n\n"
+            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:10000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:12000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}\n\n"
             f"CRITIC:\n{critic[:10000]}"
         )
         return self.provider.complete(CompletionRequest("verifier", system, user))
@@ -281,6 +466,7 @@ class SigmaOrchestrator:
         critic: str,
         verifier: str,
         evidence: list[dict[str, Any]],
+        engineering_judge: str = "",
     ) -> dict[str, str]:
         repaired: dict[str, str] = {}
         for specialist in plan.specialists:
@@ -291,7 +477,8 @@ class SigmaOrchestrator:
             )
             user = (
                 f"MISSION:\n{prompt}\n\nPRIOR ANALYSIS:\n{prior[:16000]}\n\n"
-                f"CRITIC:\n{critic[:8000]}\n\nVERIFIER:\n{verifier[:8000]}\n\n"
+                f"CRITIC:\n{critic[:7000]}\n\nVERIFIER:\n{verifier[:7000]}\n\n"
+                f"ENGINEERING JUDGE:\n{engineering_judge[:6000]}\n\n"
                 f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:12000]}"
             )
             repaired[specialist.id] = self.provider.complete(
@@ -308,6 +495,8 @@ class SigmaOrchestrator:
         verifier: str,
         evidence: list[dict[str, Any]],
         advisory_plan: str = "",
+        algorithmic_report: str = "",
+        engineering_judge: str = "",
     ) -> str:
         system = (
             "You are Sigma Synthesis Director. Merge the verified expert work into one coherent answer. "
@@ -317,9 +506,11 @@ class SigmaOrchestrator:
         )
         user = (
             f"MISSION:\n{prompt}\n\nRISK GATES: {plan.risk_gates}\n"
-            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:36000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:18000]}\n\n"
-            f"CRITIC:\n{critic[:10000]}\n\nVERIFIER:\n{verifier[:10000]}\n\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:12000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:14000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}\n\n"
+            f"CRITIC:\n{critic[:9000]}\n\nVERIFIER:\n{verifier[:9000]}\n\n"
             f"EVIDENCE COUNT: {len(evidence)}"
         )
         return self.provider.complete(CompletionRequest("synthesis", system, user))

@@ -31,12 +31,14 @@ Full Mesh mode requires:
 4. Appropriate Thinker/cognitive-method selection.
 5. Cross-expert challenge.
 6. Sigma Development Planning Director creates an executable advisory plan for material development missions.
-7. Sigma Independent Critic.
-8. Sigma Evidence Verifier.
-9. Sigma Security Gatekeeper for every material development/release mission.
-10. Bounded repair of material weaknesses.
-11. Sigma Synthesis Director output preserving material dissent and uncertainty.
-12. Controlled lesson/evolution candidates only; no self-promotion.
+7. Sigma Algorithmic Engineering & Solution Lab runs an evidence-backed candidate/implementation/test tournament for applicable software/technical missions.
+8. Sigma Independent Code Reviewer / Solution Judge challenges the engineering selection.
+9. Sigma Independent Critic.
+10. Sigma Evidence Verifier.
+11. Sigma Security Gatekeeper for every material development/release mission.
+12. Bounded repair of material weaknesses.
+13. Sigma Synthesis Director output preserving material dissent and uncertainty.
+14. Controlled lesson/evolution candidates only; no self-promotion.
 
 ### Standing execution delegation after trigger
 
@@ -108,6 +110,22 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For multi-tenant systems, prove tenant isolation for every new data path.
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
+
+## Mandatory Sigma Algorithmic Engineering & Solution Lab
+
+For material software/technical development, Sigma must invoke the Algorithmic Engineering & Solution Lab defined in `headquarters/engineering/README.md`.
+
+Rules:
+- formalise the objective, invariants, constraints and measurable acceptance criteria before claiming a solution;
+- generate competing candidates when a meaningful design/algorithm choice exists;
+- correctness and mandatory security are hard gates;
+- implementation, tests and benchmarks must be evidenced; never claim execution that did not occur;
+- use direct tests, edge/property/fuzz/concurrency/recovery/benchmark evidence where applicable;
+- the primary implementer cannot be the sole judge of its own solution;
+- preserve rejected alternatives and reasons;
+- if no candidate works, record the problem as unresolved plus the exact next experiment rather than inventing success.
+
+Use `templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md` for durable evidence.
 
 ## Mandatory Sigma Expert Advisory & Development Planning Council
 

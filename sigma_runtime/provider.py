@@ -142,6 +142,18 @@ class DeterministicTestProvider(ModelProvider):
             return "VERDICT: PASS\nFINDINGS: repaired analysis is internally coherent."
         if request.kind == "verifier":
             return "VERDICT: PASS\nEVIDENCE: test provider confirms evidence-handling path only."
+        if request.kind == "algorithmic-solution":
+            return (
+                "SIGMA ALGORITHMIC SOLUTION REPORT\n"
+                "Problem formalised. Multiple candidate approaches are compared on correctness, "
+                "security, reliability, performance, maintainability and evidence. "
+                "The selected candidate requires reproducible tests and benchmarks."
+            )
+        if request.kind == "solution-judge":
+            return (
+                "VERDICT: PASS\n"
+                "ENGINEERING REVIEW: candidate selection is explicitly evidence-gated and independently reviewed."
+            )
         if request.kind == "development-plan":
             return (
                 "SIGMA DEVELOPMENT ADVISORY PLAN\n"
