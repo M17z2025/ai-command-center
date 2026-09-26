@@ -8,6 +8,12 @@ defaults:
   contract_manifest: ".sigma/project.yaml"
   status_file: "PROJECT_STATUS.md"
   agent_file: "AGENTS.md"
+  security_assurance:
+    required_for_material_work: true
+    division: "headquarters/security/README.md"
+    report_template: "templates/SIGMA_CYBER_SECURITY_REPORT.md"
+    independent_gatekeeper: "sigma-security-gatekeeper"
+    fail_closed_on_missing_required_evidence: true
 
 projects:
   - name: "Sigma Development Command Center"
