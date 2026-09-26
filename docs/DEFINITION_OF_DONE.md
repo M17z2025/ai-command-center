@@ -7,6 +7,16 @@ A task is Done only when all applicable conditions are satisfied.
 - The plan records relevant expert recommendations, facts/assumptions/proposals, dependencies/gates, risks, phased delivery, ordered backlog/pull plan, acceptance criteria and exact next actions.
 - Material unresolved expert disagreement or evidence gaps are not silently omitted.
 
+## Algorithmic engineering
+- Applicable material software/technical work has a current Sigma Algorithmic Solution Report or equivalent evidence.
+- The problem, constraints, invariants and measurable acceptance criteria are explicit.
+- Competing candidates were considered where a meaningful design choice existed.
+- The selected solution satisfies correctness and mandatory security hard gates.
+- Tests/benchmarks claimed in the decision are reproducible and tied to the exact candidate.
+- Relevant edge/property/fuzz/concurrency/recovery/performance evidence exists where applicable.
+- An independent Solution Judge reviewed the engineering selection.
+- Rejected alternatives and unresolved uncertainty are recorded rather than hidden.
+
 ## Functional
 - Acceptance criteria are met.
 - Primary and failure paths behave correctly.
