@@ -14,6 +14,12 @@ defaults:
     report_template: "templates/SIGMA_CYBER_SECURITY_REPORT.md"
     independent_gatekeeper: "sigma-security-gatekeeper"
     fail_closed_on_missing_required_evidence: true
+  advisory_planning:
+    required_for_material_development: true
+    council: "headquarters/advisory/README.md"
+    plan_template: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
+    planning_director: "sigma-development-planning-director"
+    research_fallback: "research-director"
 
 projects:
   - name: "Sigma Development Command Center"
