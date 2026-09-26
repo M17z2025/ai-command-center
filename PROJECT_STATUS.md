@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Scouter + Persistent Chat Build Ownership — Issues #54 / #55
 
-**IMPLEMENTED ON `feat/sigma-scouter`; PR/CI VERIFICATION PENDING.**
+**IMPLEMENTED ON PR #56; REPAIRED AFTER CI-CAUGHT ALIAS COLLISION; EXACT-HEAD CI GREEN AT `6a9b25f4826975fd9804354731c95322e228cdc4`.**
 
 This candidate adds two portfolio-wide controls:
 
@@ -21,6 +21,12 @@ This candidate adds two portfolio-wide controls:
 - canonical individual Drive blueprints updated for the currently identifiable projects, including Humanit, BodyFit, Tattooit, Marketit, Signit, Invoiceit, Alysha, Lycia Zambia, Legalit, Synergy AI Pay, Lycia Limited, Total Mining Intelligence, AutoHedge, Tax Intelligence OS, UK Payroll AI, PL Lookup/Veterinary Medicines, Imotion, Aurelius, Mitz PA and Mi7z Core Intelligence.
 
 Truth boundary: Sigma can resolve and own chats whose title/content/project context is available to the runtime. It must not claim omniscient access to an unseen private conversation. Chat ownership persists by project, not by chat session.
+
+Exact-head verification after repair:
+- Sigma mesh runtime run `36261924931`: **SUCCESS**.
+- Sigma control-plane validation run `36261924902`: **SUCCESS**.
+- CI initially caught a case-insensitive Alysha alias collision in `headquarters/project-teams.yaml`; duplicate-case aliases were removed before the passing run.
+- Drive readback verified the ownership section on the master portfolio register and representative Humanit/Invoiceit project blueprints.
 
 ## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
 
