@@ -1,0 +1,112 @@
+schema_version: 1
+council:
+  id: sigma-universal-advisory-council
+  name: "Sigma Universal Expert Advisory & Development Planning Council"
+  chair: sigma-development-planning-director
+  reports_to: sigma-governor
+  mission: "Provide cross-disciplinary advice and produce executable development plans for material Sigma development missions."
+  broad_coverage_not_omniscience: true
+  research_fallback: research-director
+
+permanent_experts:
+  - id: universal-knowledge-research-master
+    name: "Universal Knowledge & Research Master"
+    parent: research-director
+    domains: ["research-methods", "evidence-verification", "foresight-innovation"]
+  - id: legal-law-advisory-master
+    name: "Legal & Law Advisory Master"
+    parent: legal-compliance-master
+    domains: ["constitutional-public-law", "international-law", "corporate-commercial-law", "criminal-law", "civil-private-law", "intellectual-property-law", "regulatory-compliance", "jurisprudence-legal-history"]
+  - id: marketing-brand-master
+    name: "Marketing & Brand Master"
+    parent: business-strategy-master
+    domains: ["marketing-sales-growth"]
+  - id: hr-people-master
+    name: "HR & People Master"
+    parent: business-strategy-master
+    domains: ["people-hr"]
+  - id: sales-commercial-master
+    name: "Sales & Commercial Master"
+    parent: business-strategy-master
+    domains: ["marketing-sales-growth", "corporate-strategy"]
+  - id: mobile-app-engineering-master
+    name: "Mobile App Engineering Master"
+    parent: computing-ai-director
+    domains: ["software-engineering", "ui-ux-interaction"]
+  - id: business-operations-master
+    name: "Business, Operations & Management Master"
+    parent: business-strategy-master
+    domains: ["corporate-strategy", "operations-supply-chain", "product-project-programme"]
+  - id: finance-all-aspects-master
+    name: "Finance, Accounting, Tax & Capital Master"
+    parent: economics-finance-director
+    domains: ["macro-micro-economics", "econometrics-quantitative-finance", "accounting-tax", "banking-investment-capital", "insurance-actuarial", "global-trade-commerce"]
+  - id: engineering-advisory-master
+    name: "Engineering Advisory Master"
+    parent: engineering-director
+    domains: ["mechanical-engineering", "electrical-electronic-engineering", "chemical-process-engineering", "civil-structural-engineering", "nuclear-engineering", "vehicle-naval-engineering", "materials-metallurgy", "manufacturing-industrial", "industrial-product-design"]
+  - id: aerospace-engineering-master
+    name: "Aerospace Engineering Master"
+    parent: engineering-director
+    domains: ["aerospace-engineering"]
+  - id: coding-software-master
+    name: "Coding & Software Engineering Master"
+    parent: computing-ai-director
+    domains: ["computer-science", "software-engineering", "data-databases", "networks-cloud"]
+  - id: graphic-design-master
+    name: "Graphic Design & Visual Communication Master"
+    parent: arts-creative-director
+    domains: ["visual-art-graphic-design", "ui-ux-interaction"]
+  - id: fashion-design-master
+    name: "Fashion, Textiles & Wearables Master"
+    parent: engineering-director
+    domains: ["textiles-fashion-wearables", "industrial-product-design"]
+  - id: photography-master
+    name: "Photography Master"
+    parent: arts-creative-director
+    domains: ["visual-art-graphic-design", "film-animation"]
+  - id: film-director-master
+    name: "Film Direction Master"
+    parent: arts-creative-director
+    domains: ["film-animation", "literature-writing"]
+  - id: film-production-master
+    name: "Film Production Master"
+    parent: arts-creative-director
+    domains: ["film-animation", "product-project-programme"]
+  - id: film-editing-master
+    name: "Film Editing & Post-Production Master"
+    parent: arts-creative-director
+    domains: ["film-animation", "music-audio"]
+  - id: scriptwriting-master
+    name: "Scriptwriting & Screenwriting Master"
+    parent: arts-creative-director
+    domains: ["literature-writing", "film-animation"]
+  - id: songwriting-master
+    name: "Songwriting & Composition Master"
+    parent: arts-creative-director
+    domains: ["music-audio", "literature-writing"]
+
+planning:
+  director: sigma-development-planning-director
+  artifact_template: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
+  required_for_material_development: true
+  must_include:
+    - "objective and users"
+    - "facts assumptions proposals"
+    - "expert recommendations"
+    - "architecture and platform implications"
+    - "UX UI and creative direction"
+    - "legal compliance security and privacy"
+    - "business marketing sales HR and finance implications where applicable"
+    - "dependencies and gates"
+    - "risks and mitigations"
+    - "delivery phases"
+    - "ordered backlog / pull plan"
+    - "acceptance criteria"
+    - "test evidence and release plan"
+    - "assigned specialists"
+    - "exact next executable actions"
+
+unknown_subject_policy:
+  route_to: research-director
+  action: "Discover the domain, form a bounded temporary specialist team, and independently evaluate before any permanent promotion."
