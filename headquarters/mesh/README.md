@@ -34,6 +34,10 @@ Sigma Governor
         |      +--> permanent specialists
         |      +--> temporary specialists created for the mission
         |
+        +--> Development Planning Director
+        |      +--> cross-disciplinary development advisory plan
+        |      +--> ordered backlog / pull plan + acceptance criteria
+        |
         +--> Independent Critic / Red Team
         +--> Evidence Verifier
         +--> Synthesis Director
@@ -63,6 +67,8 @@ The term "Mixture of Experts" here describes **application-level orchestration o
 - `evolution.yaml` — controlled learning, benchmarking, promotion and rollback.
 - `cognitive-methods.yaml` — machine-readable reasoning archetypes based on documented methods, never human impersonation.
 - `thinkers.yaml` — the Thinkers / Paradigm Shifters council mapping historical intellectual frameworks to valid Sigma domains and cognitive methods.
+- `../advisory/` — permanent advisory council, named expert coverage and development-planning rules.
+- `../../templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md` — durable executable development-plan template.
 
 ## Runtime contract
 
