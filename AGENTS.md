@@ -30,12 +30,13 @@ Full Mesh mode requires:
 3. Deep independent work only from materially relevant leaders/specialists.
 4. Appropriate Thinker/cognitive-method selection.
 5. Cross-expert challenge.
-6. Sigma Independent Critic.
-7. Sigma Evidence Verifier.
-8. Sigma Security Gatekeeper for every material development/release mission.
-9. Bounded repair of material weaknesses.
-10. Sigma Synthesis Director output preserving material dissent and uncertainty.
-11. Controlled lesson/evolution candidates only; no self-promotion.
+6. Sigma Development Planning Director creates an executable advisory plan for material development missions.
+7. Sigma Independent Critic.
+8. Sigma Evidence Verifier.
+9. Sigma Security Gatekeeper for every material development/release mission.
+10. Bounded repair of material weaknesses.
+11. Sigma Synthesis Director output preserving material dissent and uncertainty.
+12. Controlled lesson/evolution candidates only; no self-promotion.
 
 ### Standing execution delegation after trigger
 
@@ -107,6 +108,22 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For multi-tenant systems, prove tenant isolation for every new data path.
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
+
+## Mandatory Sigma Expert Advisory & Development Planning Council
+
+For material development missions, Sigma must route the relevant permanent/temporary experts and create a durable plan using `templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md`.
+
+The plan must:
+- separate verified facts, assumptions and proposals;
+- include recommendations from every materially relevant domain rather than a generic single-agent opinion;
+- cover architecture/platform, UX/creative, legal/compliance, security/privacy, business, marketing, sales, HR and finance implications where applicable;
+- preserve material disagreement and unknowns;
+- define dependencies, owner/external gates, risks and mitigations;
+- produce delivery phases plus an ordered backlog / pull plan;
+- define acceptance criteria, test/evidence requirements and specialist ownership;
+- end with exact next executable actions.
+
+"Universal knowledge" means broad practical taxonomy coverage with research fallback and bounded specialist creation, never a claim of omniscience or infallibility.
 
 ## Mandatory Sigma Cybersecurity Division
 
