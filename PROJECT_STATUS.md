@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
 
-**IMPLEMENTATION CANDIDATE IN PROGRESS — REAL BUILD/FIX PROOF + PERSISTENT RESCUE OWNERSHIP.**
+**REAL BUILD/FIX PROOF + PERSISTENT RESCUE OWNERSHIP IMPLEMENTED ON PR #48 — REPAIRED AFTER CI-CATCHED DEFECTS; EXACT-HEAD CI GREEN.**
 
 Issue #47 changes the engineering acceptance test from orchestration/source confidence to real delivery evidence.
 
@@ -20,7 +20,16 @@ The candidate adds:
 - external/owner gates keep incidents open while other safe repair work continues;
 - regression/root-cause/competing-hypothesis evidence requirements and prohibition on closing difficult defects merely because current attempts failed.
 
-Exact-head CI evidence is required before merge/completion.
+Initial PR-head verification correctly failed and exposed two implementation defects:
+- Rescue Mode could route a broken-login prompt away from software/support domains.
+- The new rescue report was passed to synthesis without the synthesis signature accepting it.
+
+Those defects were repaired at `14acca729d140360c4d726e5e99af5d6f7e8aea8` by forcing software-engineering into Rescue Mode routing, widening engineering specialist fan-out, and correcting the synthesis contract.
+
+Repaired exact-head verification:
+- Sigma mesh runtime run `36244349816`: **SUCCESS**.
+- Sigma control-plane validation run `36244349855`: **SUCCESS**.
+- Tests prove broken requests route to Support Desk/root-cause specialists, remain `ACTIVE_WORKING` without closure evidence, and become `FIXED_VERIFIED` only with explicit verification evidence.
 
 ## Sigma Algorithmic Engineering & Solution Lab — Issue #45
 
