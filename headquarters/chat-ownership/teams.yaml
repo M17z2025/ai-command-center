@@ -213,6 +213,24 @@ intake_projects:
     aliases: ["ai video", "ai image", "film capability", "ai media"]
     domain_team: ["arts-creative-director", "film-director-master", "film-production-master", "film-editing-master", "graphic-design-master"]
 
+  - project: "Dormant Medicines Research"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["dormant medicines", "dormant medicines research", "relicensing medicines", "medicine relicensing"]
+    domain_team: ["health-medicine-director", "legal-law-advisory-master", "research-director", "finance-all-aspects-master"]
+
+  - project: "White Rino"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["white rino"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "graphic-design-master", "legal-law-advisory-master"]
+
+  - project: "AI Gaming"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai gaming", "ai gaming platform"]
+    domain_team: ["polyglot-coding-master", "arts-creative-director", "graphic-design-master", "qa-test-engineering-master"]
+
 intake_team:
   accountable_build_steward: "sigma-chat-build-steward"
   core_team:
