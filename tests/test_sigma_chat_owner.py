@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib.util
 import unittest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("sigma_chat_owner", ROOT / "scripts" / "sigma_chat_owner.py")
@@ -31,6 +32,79 @@ class ChatOwnershipTests(unittest.TestCase):
     def test_repository_reference_beats_chat_alias(self):
         result = MOD.resolve("General development", repository="M17z2025/umarketit")
         self.assertEqual(result["project"], "Marketit")
+
+    def test_every_registered_repository_has_chat_ownership(self):
+        registry = yaml.safe_load((ROOT / "projects" / "registry.yaml").read_text(encoding="utf-8"))
+        ownership = MOD.load_config()
+        expected = {
+            (item["name"], item["repository"])
+            for item in registry.get("projects", [])
+        }
+        actual = {
+            (item["project"], item["repository"])
+            for item in ownership.get("projects", [])
+        }
+        self.assertEqual(expected, actual)
+
+    def test_every_team_member_is_registered(self):
+        ownership = MOD.load_config()
+        leaders = yaml.safe_load(
+            (ROOT / "headquarters" / "mesh" / "leaders.yaml").read_text(encoding="utf-8")
+        )
+        registry = yaml.safe_load(
+            (ROOT / "headquarters" / "agents" / "registry.yaml").read_text(encoding="utf-8")
+        )
+        known = {
+            item["id"] for item in registry.get("agents", [])
+            if isinstance(item, dict) and item.get("id")
+        }
+        for section in ("leaders", "assurance_roles"):
+            known.update(
+                item["id"] for item in leaders.get(section, [])
+                if isinstance(item, dict) and item.get("id")
+            )
+
+        self.assertIn(ownership["defaults"]["accountable_build_steward"], known)
+        for agent_id in ownership["defaults"].get("core_team", []):
+            self.assertIn(agent_id, known)
+        for section in ("projects", "intake_projects"):
+            for item in ownership.get(section, []):
+                for agent_id in item.get("domain_team", []):
+                    self.assertIn(agent_id, known, f"{item['project']}: {agent_id}")
+
+    def test_normalized_aliases_cannot_point_to_different_projects(self):
+        ownership = MOD.load_config()
+        seen = {}
+        for section in ("projects", "intake_projects"):
+            for item in ownership.get(section, []):
+                for alias in [item.get("project", ""), *item.get("aliases", [])]:
+                    key = " ".join(str(alias).casefold().split())
+                    if not key:
+                        continue
+                    if key in seen and seen[key] != item["project"]:
+                        self.fail(
+                            f"alias {alias!r} maps to both {seen[key]!r} and {item['project']!r}"
+                        )
+                    seen[key] = item["project"]
+
+    def test_known_chat_only_projects_are_explicitly_owned(self):
+        ownership = MOD.load_config()
+        projects = {item["project"] for item in ownership.get("intake_projects", [])}
+        for required in {
+            "AutoHedge – FXHedge",
+            "UK AI Tax Adviser / Tax Intelligence OS",
+            "UK Payroll AI",
+            "PL Lookup / Veterinary Medicines",
+            "Dormant Medicines Research",
+            "Secure DX Zambia",
+            "Alpha-Zulu Directory",
+            "Mitz PA",
+            "White Rino",
+            "AI Gaming",
+            "UK AI HR & Employment Compliance",
+            "AI PI Agent",
+        }:
+            self.assertIn(required, projects)
 
 
 if __name__ == "__main__":
