@@ -56,8 +56,6 @@ SIGMA GOVERNOR
 - [Sigma chat/project-team ownership](./chat-ownership/README.md)
 - [Sigma Scouter](./scouter/README.md)
 - [Portfolio links](./PORTFOLIO.md)
-- [Chat build ownership](./chat-ownership/README.md)
-- [Sigma Scouter](./scouter/README.md)
 - [Agent evolution rules](./evolution/README.md)
 - [Alysha integration contract](./ALYSHA_INTEGRATION.md)
 - [ALYSHA elite workforce governance](./ALYSHA_WORKFORCE_GOVERNANCE.md)
