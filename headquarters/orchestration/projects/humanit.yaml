@@ -1,0 +1,44 @@
+schema_version: 1
+project: Humanit
+repository: M17z2025/ihumanit
+cycle:
+  last_evidenced_at: "2026-09-26T20:20:50Z"
+  state: CHANGED
+  trigger: "portfolio evidence bootstrap"
+source:
+  commit: "aedf6f6ea7bd702050f273722ddd1c635f136a47"
+production:
+  version: null
+  commit: null
+  verified_at: null
+tests:
+  passed: null
+  failed: null
+  evidence: []
+journeys:
+  mobile: NOT_VERIFIED
+  desktop: NOT_VERIFIED
+  evidence: []
+capabilities:
+  ai_assist:
+    status: NOT_VERIFIED
+    evidence: []
+  pdf_chat:
+    status: NOT_VERIFIED
+    evidence: []
+research:
+  findings: []
+improvements:
+  implemented: []
+benchmarks:
+  before: null
+  after: null
+  evidence: []
+next_cycle:
+  action: "Collect exact-head CI, deployed Base44 identity, independent mobile/desktop user-test evidence, and explicit AI Assist/PDF Chat runtime checks; then promote only the stages supported by evidence."
+blockers:
+  - "Production/deployed candidate identity is not centrally evidenced."
+  - "AI Assist and PDF Chat runtime health are not centrally evidenced."
+evidence:
+  - type: github_commit
+    value: "M17z2025/ihumanit@aedf6f6ea7bd702050f273722ddd1c635f136a47"
