@@ -7,7 +7,7 @@ Every build/project handled under Sigma has one accountable project team.
 A ChatGPT conversation is a **work surface**, not a separate development organisation. When a chat maps to an existing project, the agent must load:
 
 1. `projects/registry.yaml`;
-2. `headquarters/project-teams.yaml`;
+2. `headquarters/chat-ownership/teams.yaml`;
 3. the project repository contract/status where available;
 4. the project's Drive blueprint/build pack when relevant.
 
@@ -25,7 +25,7 @@ Every project team inherits these independent functions in addition to its domai
 - Sigma User Tester — real-browser user acceptance;
 - Sigma Evidence Verifier — source/evidence discipline.
 
-The team profile in `headquarters/project-teams.yaml` supplies the accountable lead and domain specialists.
+The canonical Build Steward assignment in `headquarters/chat-ownership/teams.yaml` supplies the persistent continuity owner, core engineering team and project-specific domain specialists.
 
 ## Build ownership
 
@@ -56,4 +56,4 @@ The central manifest is authoritative if a Drive document becomes stale.
 
 ## Unknown chat/project
 
-If a new project/chat is not mapped, Sigma Chief of Staff temporarily owns routing. The mission is classified, a project identity is created or linked, then `headquarters/project-teams.yaml` is updated. Unknown chats must not silently become disconnected development silos.
+If a new project/chat is not mapped, Sigma Chief of Staff temporarily owns routing. The mission is classified, a project identity is created or linked, then the canonical `headquarters/chat-ownership/teams.yaml` registry is updated. Unknown chats must not silently become disconnected development silos.
