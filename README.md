@@ -57,3 +57,9 @@ Read these files in order:
 ## Golden rule
 
 No agent should guess project state. Read the repository, manifest, current status, issues, recent commits and tests before changing code.
+
+
+## Portfolio build ownership and open-source scouting
+
+- [Sigma Chat Build Ownership](./headquarters/chat-ownership/README.md) keeps all development chats for the same product on one accountable team and repository-backed backlog.
+- [Sigma Scouter](./headquarters/scouter/README.md) discovers reusable open-source code and unlimited-free/self-hosted APIs under a strict licence/quota evidence gate.
