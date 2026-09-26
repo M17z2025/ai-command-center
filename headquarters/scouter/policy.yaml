@@ -1,0 +1,141 @@
+schema_version: 1
+policy_id: sigma-scouter-free-unlimited-v1
+owner: "Mitesh"
+agent_id: "sigma-scouter"
+
+mission:
+  - "Continuously discover reusable open-source applications, codebases, self-hosted APIs and genuinely unlimited free public APIs relevant to the Sigma portfolio."
+  - "Prefer code Sigma can legally fork, modify, test, secure, self-host and integrate."
+  - "Reject marketing definitions of free that depend on trials, credits, quotas, non-commercial restrictions or required paid features."
+
+truth_boundary:
+  free_means:
+    - "No licence fee or provider usage fee for the accepted software/code itself."
+    - "Commercial use is permitted by the governing licence/terms."
+    - "Modification and derivative works are permitted for code candidates."
+    - "For self-hosted services, no vendor request/month or seat quota applies; capacity is limited only by infrastructure we control."
+  free_does_not_mean:
+    - "Hardware, electricity, domains, telecom carrier charges, payment-rail fees or third-party data rights magically cost nothing."
+    - "A public third-party service can be guaranteed to stay free forever."
+    - "Model weights inherit the licence of an inference runtime; every model/dataset licence must be checked separately."
+
+states:
+  ACCEPT:
+    description: "Evidence currently proves the candidate satisfies the relevant admission rules."
+  FORK_CANDIDATE:
+    description: "Open code is useful and modifiable, but upstream feature-gating, copyleft or architectural constraints mean Sigma should fork/extend carefully rather than call it a complete unrestricted replacement."
+  REVIEW:
+    description: "Potentially useful, but current licence, commercial-use, quota, security, maintenance or provenance evidence is incomplete."
+  REJECT:
+    description: "Fails a hard rule: trial/credits, usage cap, non-commercial restriction, prohibited field-of-use, required paid dependency, or incompatible/unclear rights."
+
+hard_reject:
+  - "trial or time-limited access"
+  - "credit-based free access"
+  - "requests-per-day/month or seat/project quota for the API/service being presented as unlimited"
+  - "non-commercial-only licence or terms"
+  - "field-of-use restriction"
+  - "source-available licence that is not OSI-compatible when presented as open source"
+  - "required paid provider to make the advertised core function work"
+  - "licence or terms cannot be verified"
+  - "repository archived or abandoned without a justified maintained fork"
+  - "known critical security/supply-chain issue with no viable remediation path"
+
+software_admission:
+  required:
+    - "source code available"
+    - "commercial use allowed"
+    - "modification/derivative works allowed"
+    - "licence verified from upstream evidence"
+    - "self-hostable for server applications"
+    - "no vendor usage quota when self-hosted"
+    - "current maintenance/security posture assessed"
+  preferred:
+    - "permissive licence"
+    - "active releases/commits"
+    - "documented API"
+    - "container or reproducible deployment"
+    - "tests and CI"
+    - "portable data formats"
+    - "no proprietary control-plane dependency"
+
+public_api_admission:
+  required:
+    - "publisher explicitly states no usage/rate limit"
+    - "no API key purchase or paid subscription required"
+    - "commercial use permitted"
+    - "data/content rights compatible with intended use"
+    - "source/provenance and update cadence documented"
+  preferred:
+    - "open-source implementation"
+    - "downloadable/mirrorable data"
+    - "self-host fallback"
+    - "multiple independent delivery endpoints"
+  rule: "If unlimited status is not explicit and current, mark REVIEW or REJECT; never infer unlimited from 'free'."
+
+licence_classes:
+  permissive:
+    - "MIT"
+    - "Apache-2.0"
+    - "BSD-2-Clause"
+    - "BSD-3-Clause"
+    - "ISC"
+    - "Zlib"
+    - "Unlicense"
+    - "0BSD"
+  weak_copyleft:
+    - "MPL-2.0"
+    - "EPL-2.0"
+    - "LGPL-2.1-only"
+    - "LGPL-2.1-or-later"
+    - "LGPL-3.0-only"
+    - "LGPL-3.0-or-later"
+  strong_copyleft:
+    - "GPL-2.0-only"
+    - "GPL-2.0-or-later"
+    - "GPL-3.0-only"
+    - "GPL-3.0-or-later"
+    - "AGPL-3.0-only"
+    - "AGPL-3.0-or-later"
+  review_only:
+    - "NOASSERTION"
+    - "OTHER"
+    - "BUSL-1.1"
+    - "BSL-1.1"
+    - "SSPL-1.0"
+    - "Elastic-2.0"
+
+copyleft_rule:
+  - "GPL/AGPL/LGPL/MPL/EPL are not 'bad'; they are usable when Sigma complies with their obligations."
+  - "AGPL network-source obligations are material for modified network services."
+  - "Before embedding or modifying copyleft code in a proprietary Sigma product, route the exact architecture/licence question to Legal & Compliance."
+
+required_candidate_fields:
+  - "id"
+  - "name"
+  - "category"
+  - "kind"
+  - "upstream"
+  - "licence"
+  - "licence_class"
+  - "state"
+  - "self_hosted"
+  - "unlimited_basis"
+  - "what_it_does"
+  - "portfolio_fit"
+  - "integration_strategy"
+  - "verified_on"
+  - "evidence"
+
+cadence:
+  discovery: "continuous when Sigma has a live runtime/search connector; otherwise on every Scouter invocation"
+  reverify_accepted: "at least monthly"
+  security_recheck: "before adoption and on material upstream release"
+  licence_recheck: "before first adoption and before major-version upgrade"
+  stale_after_days: 35
+
+security:
+  - "Never execute unknown discovered code in production during scouting."
+  - "Use isolated disposable analysis environments for builds/tests."
+  - "Inspect dependencies, install scripts, containers, CI actions and release provenance before adoption."
+  - "Run Sigma Cybersecurity Division and supply-chain review before any portfolio integration."
