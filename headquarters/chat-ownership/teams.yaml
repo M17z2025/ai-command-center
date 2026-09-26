@@ -1,0 +1,245 @@
+schema_version: 1
+policy_id: sigma-chat-build-ownership-v1
+owner: "Mitesh"
+updated: "2026-09-26"
+
+defaults:
+  accountable_build_steward: "sigma-chat-build-steward"
+  core_team:
+    - "sigma-development-planning-director"
+    - "algorithmic-engineering-director"
+    - "software-architecture-master"
+    - "polyglot-coding-master"
+    - "frontend-engineering-master"
+    - "backend-api-engineering-master"
+    - "database-data-engineering-master"
+    - "integration-automation-master"
+    - "developer-tooling-ci-master"
+    - "qa-test-engineering-master"
+    - "security-master"
+    - "sigma-security-gatekeeper"
+    - "sigma-user-tester"
+    - "sigma-scouter"
+    - "research-director"
+  completion_rule: "Team remains accountable across chats until repository Definition of Done / Golden User Journey is satisfied or the owner explicitly reassigns/archives the project."
+  truth_rule: "Chat is a work surface. Repository evidence and Sigma status are the build truth."
+
+projects:
+  - project: "Sigma Development Command Center"
+    repository: "M17z2025/ai-command-center"
+    aliases: ["sigma", "sigma mesh", "command center", "sigma development command center", "sigma agent index", "cybersecurity team creation", "sigma scouter"]
+    domain_team: ["chief-ai-scientist", "computing-ai-director", "systems-decision-master", "legal-law-advisory-master"]
+  - project: "Mi7z Web"
+    repository: "M17z2025/mi7z-web"
+    aliases: ["mi7z web", "mi7z-web", "mi7z web builder", "website builder"]
+    domain_team: ["graphic-design-master", "marketing-brand-master", "business-operations-master"]
+  - project: "Alysha AI Platform"
+    repository: "M17z2025/alisha-ai-platform"
+    aliases: ["alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app"]
+    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "algorithmic-mobile-engineering-master", "api-mobile-integration-security-master", "legal-law-advisory-master"]
+  - project: "Alysha OS"
+    repository: "M17z2025/alisha-os"
+    aliases: ["alysha os", "alisha os"]
+    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "distributed-cloud-systems-master"]
+  - project: "Alysha Repository Automation"
+    repository: "M17z2025/alisha-repository-automation"
+    aliases: ["alysha repository automation", "alisha repository automation"]
+    domain_team: ["integration-automation-master", "developer-tooling-ci-master"]
+  - project: "Invoiceit by Mi7z"
+    repository: "M17z2025/invoiceit-by-mi7z"
+    aliases: ["invoiceit", "invoiceit by mi7z", "invoiceit development loop"]
+    domain_team: ["finance-all-aspects-master", "business-operations-master", "legal-law-advisory-master", "tenant-data-isolation-master"]
+  - project: "Lycia Zambia"
+    repository: "M17z2025/lycia-zambia"
+    aliases: ["lycia zambia", "lycia.co.zm", "mines minerals marketplace", "zambia mining"]
+    domain_team: ["mining-resources-master", "earth-space-master", "legal-law-advisory-master", "finance-all-aspects-master", "business-operations-master", "marketing-brand-master"]
+  - project: "Marketit"
+    repository: "M17z2025/umarketit"
+    aliases: ["marketit", "umarketit", "marketit development loop"]
+    domain_team: ["marketing-brand-master", "sales-commercial-master", "business-operations-master", "tenant-data-isolation-master"]
+  - project: "Total Mining Intelligence"
+    repository: "M17z2025/total-mining-intelligence"
+    aliases: ["total mining intelligence", "mining intelligence"]
+    domain_team: ["mining-resources-master", "earth-space-master", "research-director", "finance-all-aspects-master"]
+  - project: "BodyFit"
+    repository: "M17z2025/mybodyfit"
+    aliases: ["bodyfit", "mybodyfit", "mybodyfit.ai", "bodyfit labs"]
+    domain_team: ["health-medicine-director", "legal-law-advisory-master", "privacy-data-security-master", "graphic-design-master"]
+  - project: "Tattooit"
+    repository: "M17z2025/tattooit"
+    aliases: ["tattooit", "itattooit", "tattoo ai"]
+    domain_team: ["graphic-design-master", "marketing-brand-master", "business-operations-master", "tenant-data-isolation-master"]
+  - project: "Legalit"
+    repository: "M17z2025/legalit"
+    aliases: ["legalit", "legalit by mi7z", "legal crm"]
+    domain_team: ["legal-law-advisory-master", "business-operations-master", "tenant-data-isolation-master", "privacy-data-security-master"]
+  - project: "Signit by Mi7z"
+    repository: "M17z2025/signit-by-mi7z"
+    aliases: ["signit", "signitly", "signit by mi7z", "e-signature", "esignature"]
+    domain_team: ["legal-law-advisory-master", "secrets-cryptography-master", "privacy-data-security-master", "business-operations-master"]
+  - project: "Humanit"
+    repository: "M17z2025/ihumanit"
+    aliases: ["humanit", "ihumanit", "study", "revision", "school signup", "gcse", "a-level", "exam tutor"]
+    domain_team: ["humanities-social-sciences-director", "chief-ai-scientist", "graphic-design-master", "legal-law-advisory-master", "privacy-data-security-master"]
+  - project: "Designit AI Platform"
+    repository: "M17z2025/designit-ai-platform"
+    aliases: ["designit", "designit ai", "designit ai platform"]
+    domain_team: ["graphic-design-master", "chief-ai-scientist", "frontend-engineering-master", "arts-creative-director"]
+  - project: "Synergy AI Pay"
+    repository: "M17z2025/synergy-ai-pay"
+    aliases: ["synergy ai pay", "synergy pay"]
+    domain_team: ["finance-all-aspects-master", "legal-law-advisory-master", "secrets-cryptography-master", "api-mobile-integration-security-master"]
+  - project: "Synergy Alliance Holdings"
+    repository: "M17z2025/synergy-alliance-holdings"
+    aliases: ["synergy alliance holdings", "synergy holdings"]
+    domain_team: ["business-operations-master", "finance-all-aspects-master", "legal-law-advisory-master"]
+  - project: "Lycia Limited"
+    repository: "M17z2025/lycia-limited"
+    aliases: ["lycia limited", "lycia.co.uk", "lycia website"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "legal-law-advisory-master", "finance-all-aspects-master"]
+  - project: "Nexus Hosting"
+    repository: "M17z2025/nexushosting"
+    aliases: ["nexus hosting", "reseller hosting", "20i hosting"]
+    domain_team: ["distributed-cloud-systems-master", "cloud-infrastructure-security-master", "business-operations-master", "marketing-brand-master"]
+  - project: "Mi7z"
+    repository: "M17z2025/mi7z"
+    aliases: ["mi7z corporate", "mi7z"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "graphic-design-master"]
+  - project: "Imotion"
+    repository: "M17z2025/imoition"
+    aliases: ["imotion", "imoition", "imoitic"]
+    domain_team: ["business-operations-master", "graphic-design-master", "marketing-brand-master"]
+  - project: "Vinci Gateway"
+    repository: "M17z2025/vinci-gateway"
+    aliases: ["vinci gateway"]
+    domain_team: ["distributed-cloud-systems-master", "integration-automation-master", "cloud-infrastructure-security-master"]
+  - project: "CSK Mega Structures"
+    repository: "M17z2025/csk-mega-structures"
+    aliases: ["csk mega structures", "mega structures"]
+    domain_team: ["engineering-advisory-master", "business-operations-master", "graphic-design-master"]
+  - project: "Aurelius"
+    repository: "M17z2025/Aurelius"
+    aliases: ["aurelius", "aruelius"]
+    domain_team: ["business-operations-master", "finance-all-aspects-master", "research-director"]
+  - project: "Mi7z Play Foundation"
+    repository: "M17z2025/Mi7z_play_foundation"
+    aliases: ["mi7z play foundation", "play foundation"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "humanities-social-sciences-director"]
+  - project: "Mi7z Core Intelligence"
+    repository: "M17z2025/mi7z_core_Intelliegence"
+    aliases: ["mi7z core intelligence", "ai brain mi7z core intelligence"]
+    domain_team: ["chief-ai-scientist", "research-director", "systems-decision-master", "ai-agent-engineering-master"]
+
+intake_projects:
+  - project: "AutoHedge – FXHedge"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["autohedge", "fxhedge"]
+    domain_team: ["finance-all-aspects-master", "chief-ai-scientist", "algorithm-complexity-master", "security-master"]
+  - project: "UK AI Tax Adviser / Tax Intelligence OS"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["uk ai tax adviser", "tax intelligence os", "tax adviser"]
+    domain_team: ["finance-all-aspects-master", "legal-law-advisory-master", "chief-ai-scientist", "research-director"]
+  - project: "UK Payroll AI"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["payroll ai", "uk payroll ai service"]
+    domain_team: ["finance-all-aspects-master", "legal-law-advisory-master", "chief-ai-scientist", "security-master"]
+  - project: "PL Lookup / Veterinary Medicines"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["pl lookup", "veterinary medicines", "vet medication", "product lookup"]
+    domain_team: ["health-medicine-director", "veterinary-agriculture-environment-director", "legal-law-advisory-master", "research-director"]
+  - project: "Secure DX Zambia"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["secure dx", "secure dx zambia", "legal document logistics"]
+    domain_team: ["legal-law-advisory-master", "business-operations-master", "mobile-app-engineering-master", "security-master"]
+  - project: "Alpha-Zulu Directory"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["alpha-zulu", "alpha zulu directory"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "legal-law-advisory-master", "privacy-data-security-master"]
+
+  - project: "Mitz PA"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["mitz pa", "jarvis", "personal assistant"]
+    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "integration-automation-master", "privacy-data-security-master"]
+  - project: "UK AI HR & Employment Compliance"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["hr ai", "uk ai hr", "employment compliance"]
+    domain_team: ["hr-people-master", "legal-law-advisory-master", "chief-ai-scientist", "privacy-data-security-master"]
+  - project: "Messageit"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["messageit", "messaging platform"]
+    domain_team: ["business-operations-master", "integration-automation-master", "api-mobile-integration-security-master"]
+  - project: "Indian Wedding Platform"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["indian wedding platform", "wedding platform"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "graphic-design-master", "legal-law-advisory-master"]
+  - project: "Password Manager"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["password manager", "credential manager"]
+    domain_team: ["secrets-cryptography-master", "identity-access-security-master", "security-master"]
+  - project: "Gold Trading / Contract Engine"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["gold trading business model", "gold contract engine", "gold purchase contract", "gold trading"]
+    domain_team: ["finance-all-aspects-master", "legal-law-advisory-master", "mining-resources-master", "research-director"]
+  - project: "Yengo / Mining Digital Workflows"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["yengo", "yengo mine", "mining transaction document system", "mining supporting digital workflows"]
+    domain_team: ["mining-resources-master", "legal-law-advisory-master", "business-operations-master", "security-master"]
+  - project: "AI PI Agent"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai pi agent", "investigation intelligence os"]
+    domain_team: ["research-director", "legal-law-advisory-master", "chief-ai-scientist", "privacy-data-security-master"]
+  - project: "Game Development Capability"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["game development", "godot", "game-development capability"]
+    domain_team: ["polyglot-coding-master", "arts-creative-director", "graphic-design-master", "qa-test-engineering-master"]
+  - project: "AI Media / Film Capability"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai video", "ai image", "film capability", "ai media"]
+    domain_team: ["arts-creative-director", "film-director-master", "film-production-master", "film-editing-master", "graphic-design-master"]
+
+  - project: "Dormant Medicines Research"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["dormant medicines", "dormant medicines research", "relicensing medicines", "medicine relicensing"]
+    domain_team: ["health-medicine-director", "legal-law-advisory-master", "research-director", "finance-all-aspects-master"]
+
+  - project: "White Rino"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["white rino"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "graphic-design-master", "legal-law-advisory-master"]
+
+  - project: "AI Gaming"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai gaming", "ai gaming platform"]
+    domain_team: ["polyglot-coding-master", "arts-creative-director", "graphic-design-master", "qa-test-engineering-master"]
+
+intake_team:
+  accountable_build_steward: "sigma-chat-build-steward"
+  core_team:
+    - "sigma-development-planning-director"
+    - "algorithmic-engineering-director"
+    - "software-architecture-master"
+    - "polyglot-coding-master"
+    - "security-master"
+    - "sigma-user-tester"
+    - "sigma-scouter"
+    - "research-director"
+  rule: "Create/identify the real product repository and Sigma contract before source implementation is called continuous or complete."

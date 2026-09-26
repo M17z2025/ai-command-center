@@ -53,6 +53,8 @@ SIGMA GOVERNOR
 - [Evidence discipline](./mesh/evidence.yaml)
 - [Controlled evolution](./mesh/evolution.yaml)
 - [Machine-readable cognitive methods](./mesh/cognitive-methods.yaml)
+- [Sigma chat/project-team ownership](./chat-ownership/README.md)
+- [Sigma Scouter](./scouter/README.md)
 - [Portfolio links](./PORTFOLIO.md)
 - [Agent evolution rules](./evolution/README.md)
 - [Alysha integration contract](./ALYSHA_INTEGRATION.md)
@@ -111,3 +113,12 @@ The **Sigma Cybersecurity Division** is the permanent independent security assur
 
 The division contains specialist AppSec, identity/access, tenant/data isolation, cloud/infrastructure, network/edge, supply-chain, secrets/cryptography, red-team, incident-response/forensics, AI security, API/mobile/integration, privacy/data-security and resilience/recovery cells. Its independent Security Gatekeeper can block Sigma READY/release classification when required evidence is missing or release-blocking findings remain.
 
+
+
+## Chat Build Ownership
+
+The **Sigma Chat Build Steward** maintains persistent build ownership across development chats. All chats for the same product resolve to the same repository-backed project team and backlog. The machine-readable assignments are in [chat-ownership/teams.yaml](./chat-ownership/teams.yaml). Unknown/unregistered projects are assigned an intake team but remain `PROJECT_REPOSITORY_REQUIRED` until a real repository is registered.
+
+## Sigma Scouter
+
+The **Sigma Scouter** continuously researches reusable open-source applications, modifiable code and genuinely unlimited free/self-hosted APIs. Its strict admission policy rejects trials, credits, usage quotas, non-commercial restrictions and unverified licence claims. See [scouter/README.md](./scouter/README.md), [scouter/policy.yaml](./scouter/policy.yaml) and [scouter/catalog.yaml](./scouter/catalog.yaml).

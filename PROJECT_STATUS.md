@@ -4,6 +4,30 @@ Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Scouter + Persistent Chat Build Ownership — Issues #54 / #55
+
+**IMPLEMENTED ON PR #56; REPAIRED AFTER CI-CAUGHT ALIAS COLLISION; EXACT-HEAD CI GREEN AT `6a9b25f4826975fd9804354731c95322e228cdc4`.**
+
+This candidate adds two portfolio-wide controls:
+
+- `sigma-scouter`: one permanent research agent for discovering reusable open-source applications, modifiable code, self-hosted APIs and only those public APIs whose current evidence proves genuinely unlimited free use for the stated purpose;
+- strict admission rules that reject trials, credits, request/month caps, non-commercial restrictions, unverified licences and paid core dependencies;
+- a seeded, evidence-tagged catalogue plus CLI/runtime policy validation and optional self-hosted SearXNG discovery;
+- `sigma-chat-build-steward`: one accountable continuity owner for every development chat/project;
+- machine-readable project team assignments in `headquarters/chat-ownership/teams.yaml`;
+- deterministic chat title/message/repository resolution so multiple chats about one product return to the same repository-backed team and backlog;
+- explicit `PROJECT_REPOSITORY_REQUIRED` handling for known projects whose real repository has not yet been registered instead of inventing repository state;
+- Google Drive master portfolio blueprint registers updated with the ownership model;
+- canonical individual Drive blueprints updated for the currently identifiable projects, including Humanit, BodyFit, Tattooit, Marketit, Signit, Invoiceit, Alysha, Lycia Zambia, Legalit, Synergy AI Pay, Lycia Limited, Total Mining Intelligence, AutoHedge, Tax Intelligence OS, UK Payroll AI, PL Lookup/Veterinary Medicines, Imotion, Aurelius, Mitz PA and Mi7z Core Intelligence.
+
+Truth boundary: Sigma can resolve and own chats whose title/content/project context is available to the runtime. It must not claim omniscient access to an unseen private conversation. Chat ownership persists by project, not by chat session.
+
+Exact-head verification after repair:
+- Sigma mesh runtime run `36261924931`: **SUCCESS**.
+- Sigma control-plane validation run `36261924902`: **SUCCESS**.
+- CI initially caught a case-insensitive Alysha alias collision in `headquarters/project-teams.yaml`; duplicate-case aliases were removed before the passing run.
+- Drive readback verified the ownership section on the master portfolio register and representative Humanit/Invoiceit project blueprints.
+
 ## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
 
 **REAL BUILD/FIX PROOF + PERSISTENT RESCUE OWNERSHIP IMPLEMENTED ON PR #48 — REPAIRED AFTER CI-CATCHED DEFECTS; EXACT-HEAD CI GREEN.**

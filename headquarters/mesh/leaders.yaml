@@ -433,6 +433,17 @@ leaders:
     may_create_children: true
     coverage_fallback: true
 
+  - id: sigma-scouter
+    name: "Sigma Scouter"
+    parent: "research-director"
+    mission: "Search GitHub and the public internet for maintained open-source applications, reusable code, self-hostable APIs and genuinely unlimited free public APIs that can accelerate Sigma products."
+    domains: ["research-methods", "evidence-verification", "foresight-innovation", "software-engineering", "computer-science"]
+    may_create_children: false
+    portfolio_wide: true
+    routing_priority: 130
+    routing_keywords: ["open source", "github", "free api", "free code", "self hosted", "reuse", "fork", "scout", "scouter", "library", "framework"]
+    evidence_policy: "headquarters/scouter/policy.yaml"
+
   - id: systems-decision-master
     name: "Systems & Decision Science Master"
     parent: "research-director"

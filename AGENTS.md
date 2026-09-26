@@ -83,6 +83,19 @@ Rules:
 
 Continuous mode never bypasses owner-gated spend, secrets, destructive or irreversible production actions, legal/compliance approval, material security-control reductions, data-loss risk, or product-specific production-release gates.
 
+## Mandatory Sigma project team ownership
+
+Every Sigma-managed project/chat must resolve through `headquarters/chat-ownership/teams.yaml`.
+
+- A chat is a work surface for the mapped project team, not an isolated build.
+- The accountable team remains responsible across old chats, new chats, GitHub sessions and Drive blueprints.
+- Before rebuilding commodity functionality, route applicable discovery through **Sigma Scouter** and `headquarters/scouter/policy.yaml`.
+- Scouter may recommend open-source code, self-hosted APIs and verified unlimited-free public APIs, but it cannot bypass licence, security, engineering or user-test gates.
+- Trials, credits, quotas, non-commercial restrictions and source-available field-of-use restrictions must never be represented as unlimited free/open source.
+- When team membership materially changes, update the project blueprint/build pack as well as the central manifest.
+
+See `headquarters/chat-ownership/README.md` and `docs/SIGMA_PROJECT_TEAM_OWNERSHIP.md`.
+
 ## Mandatory pre-work inspection
 
 Before changing a product repository:
