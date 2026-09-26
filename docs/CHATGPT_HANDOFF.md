@@ -42,6 +42,12 @@ known_blockers: []
 security_notes: []
 ```
 
+## Development advisory plan
+
+For material development, the handoff should link the current Sigma Development Advisory Plan (or equivalent repository-backed issue/plan). The implementation agent should not reconstruct product strategy from chat when a current plan exists.
+
+The plan should provide the ordered backlog/pull plan, acceptance criteria, relevant specialist advice, evidence requirements, security/user-test gates and exact next executable action.
+
 ## Handoff back to Sigma
 
 ChatGPT should return durable state through GitHub:
