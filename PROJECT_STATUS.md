@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Scouter + Persistent Chat Build Ownership — Issues #54 / #55
 
-**IMPLEMENTED ON PR #56; REPAIRED AFTER CI-CAUGHT ALIAS COLLISION; EXACT-HEAD CI GREEN AT `6a9b25f4826975fd9804354731c95322e228cdc4`.**
+**MERGED / ACTIVE ON `main` VIA PR #56 AT `dd0f329a47d05721f5471db12ec5d46072c63e1c`; MERGED-MAIN CI GREEN.**
 
 This candidate adds two portfolio-wide controls:
 
@@ -22,11 +22,14 @@ This candidate adds two portfolio-wide controls:
 
 Truth boundary: Sigma can resolve and own chats whose title/content/project context is available to the runtime. It must not claim omniscient access to an unseen private conversation. Chat ownership persists by project, not by chat session.
 
-Exact-head verification after repair:
-- Sigma mesh runtime run `36261924931`: **SUCCESS**.
-- Sigma control-plane validation run `36261924902`: **SUCCESS**.
-- CI initially caught a case-insensitive Alysha alias collision in `headquarters/project-teams.yaml`; duplicate-case aliases were removed before the passing run.
-- Drive readback verified the ownership section on the master portfolio register and representative Humanit/Invoiceit project blueprints.
+Verification and repair:
+- PR head verification passed before merge, including canonical ownership tests.
+- Merged-main Sigma mesh runtime run `36262175350`: **SUCCESS**.
+- Merged-main Sigma control-plane validation run `36262175531`: **SUCCESS**.
+- CI initially caught a duplicate/case-normalised Alysha alias problem and a duplicate ownership-manifest design. The duplicate manifest/test were removed so `headquarters/chat-ownership/teams.yaml` is the single canonical registry.
+- Issues #54 and #55 are closed as completed.
+- Drive readback verified the ownership section on the master portfolio register and representative Humanit/Invoiceit blueprints.
+- Additional identified individual blueprints updated after the initial set include UK AI HR & Employment Compliance, AI PI Agent / UK Investigation Intelligence OS and White Rino; projects without a distinct editable individual blueprint remain covered by the master portfolio blueprint registers and future-blueprint template rule.
 
 ## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
 
