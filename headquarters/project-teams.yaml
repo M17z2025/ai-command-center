@@ -106,7 +106,7 @@ project_assignments:
   - project: "Alysha AI Platform"
     repository: "M17z2025/alisha-ai-platform"
     team_profile: "ai_assistant"
-    chat_aliases: ["Alysha","Alisha","ALYSHA","Alysha mobile"]
+    chat_aliases: ["Alysha","Alisha","Alysha mobile"]
   - project: "Alysha OS"
     repository: "M17z2025/alisha-os"
     team_profile: "ai_assistant"
@@ -158,7 +158,7 @@ project_assignments:
   - project: "Synergy AI Pay"
     repository: "M17z2025/synergy-ai-pay"
     team_profile: "fintech"
-    chat_aliases: ["Synergy AI Pay","Synergy Ai Pay"]
+    chat_aliases: ["Synergy AI Pay"]
   - project: "Synergy Alliance Holdings"
     repository: "M17z2025/synergy-alliance-holdings"
     team_profile: "corporate"
@@ -174,7 +174,7 @@ project_assignments:
   - project: "Mi7z"
     repository: "M17z2025/mi7z"
     team_profile: "corporate"
-    chat_aliases: ["Mi7z","MI7Z"]
+    chat_aliases: ["Mi7z"]
   - project: "Imotion"
     repository: "M17z2025/imoition"
     team_profile: "general_product"
