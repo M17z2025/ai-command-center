@@ -1,0 +1,26 @@
+schema_version: 1
+system: sigma-knowledge-workforce-runtime
+deployment: owner-private-ovh-vps
+paid_provider_default: forbidden_without_owner_approval
+governance_source: github
+private_runtime_source: postgres
+services:
+  source_registry: {purpose: "approved source inventory, tiers, licensing and freshness"}
+  acquisition_worker: {purpose: "fetch, hash and detect source changes"}
+  knowledge_indexer: {purpose: "normalize, chunk, classify, embed and index with provenance"}
+  retrieval_gateway: {purpose: "hybrid lexical/vector/metadata retrieval for missions"}
+  freshness_scheduler: {purpose: "TTL and change-driven revalidation"}
+  capability_gap_detector: {purpose: "derive missing expertise from taxonomy and mission evidence"}
+  recruitment_factory: {purpose: "create bounded deduplicated specialist candidates"}
+  evaluation_service: {purpose: "benchmark, adversarial test, certify/reject and recertify"}
+  workforce_compiler: {purpose: "deduplicate IDs and publish exact workforce metrics"}
+  dashboard_api: {purpose: "serve workforce, coverage, growth, freshness and mission telemetry"}
+loops:
+  knowledge: [discover, policy_check, fetch, change_detect, normalize, provenance, index, verify, publish, refresh]
+  recruitment: [observe, gap_detect, propose, deduplicate, curriculum, benchmark, evaluate, adversarial_test, certify_or_reject, register, monitor, recertify]
+quality_gates:
+  promotion_requires_independent_evaluation: true
+  runtime_claim_requires_runtime_evidence: true
+  black_belt_requires_current_certification: true
+  duplicate_capability_does_not_increase_headcount: true
+  source_without_provenance_not_publishable: true
