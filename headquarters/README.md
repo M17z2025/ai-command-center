@@ -69,3 +69,14 @@ The Universal Expert Mesh extends the permanent organisation with domain leaders
 This repository is public. It contains non-secret governance metadata and links only. Private operational state belongs in an approved private product/runtime repository or approved data store. Alysha is the first private authenticated interface to Sigma Headquarters.
 
 Issue: #20
+
+## Cybersecurity Division
+
+The **Sigma Cybersecurity Division** is the permanent independent security assurance function for every Sigma-managed product and release candidate.
+
+- Charter: [`security/README.md`](./security/README.md)
+- Machine-readable team: [`security/team.yaml`](./security/team.yaml)
+- Evidence template: [`../templates/SIGMA_CYBER_SECURITY_REPORT.md`](../templates/SIGMA_CYBER_SECURITY_REPORT.md)
+
+The division contains specialist AppSec, identity/access, tenant/data isolation, cloud/infrastructure, network/edge, supply-chain, secrets/cryptography, red-team, incident-response/forensics, AI security, API/mobile/integration, privacy/data-security and resilience/recovery cells. Its independent Security Gatekeeper can block Sigma READY/release classification when required evidence is missing or release-blocking findings remain.
+
