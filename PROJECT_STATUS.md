@@ -1,8 +1,24 @@
 # Sigma Development Command Center Status
 
-Last updated: 2026-09-25
+Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
+
+## Sigma Universal Expert Advisory & Development Planning Council — Issue #43
+
+**IMPLEMENTATION CANDIDATE IN PROGRESS — NAMED EXPERT WORKFORCE + EXECUTABLE DEVELOPMENT-PLAN RUNTIME.**
+
+Issue #43 establishes a permanent cross-disciplinary advisory council for Sigma-managed development. The candidate includes:
+- permanent named advisers for universal research/knowledge routing, law, marketing, HR, sales, mobile app engineering, business/operations, finance, multidisciplinary engineering, aerospace, coding/software, graphic design, fashion, photography, film direction, film production, film editing/post, scriptwriting/screenwriting and songwriting/composition;
+- the wider existing Sigma taxonomy for science, medicine, mining, AI, infrastructure, governance, humanities, creative work and other domains;
+- evidence-backed Research Director fallback for unknown subjects rather than claims of omniscience;
+- prompt-specific expert routing that can select multiple relevant advisers within one domain;
+- a permanent `sigma-development-planning-director`;
+- mandatory `development-advisory-plan` pipeline stage for material development missions;
+- runtime persistence of a `development-advisory-plan` artifact;
+- a durable planning template with phased delivery, ordered backlog/pull plan, acceptance criteria, evidence requirements, specialist ownership and exact next executable actions.
+
+Exact-head CI evidence is still required before this candidate can be merged/called complete.
 
 ## Sigma Cybersecurity Division — Issue #40 / PR #41
 
