@@ -68,12 +68,19 @@
 | Cycle | Failure found | Repair | Retest evidence | Outcome |
 | ---: | --- | --- | --- | --- |
 
-## Final state
-- [ ] FIXED / VERIFIED
-- [ ] FIXED IN SOURCE / DEPLOYED VERIFICATION PENDING
-- [ ] PARTIALLY REPAIRED
-- [ ] UNSOLVED / NEEDS NEXT EXPERIMENT
-- [ ] BLOCKED
+## Incident state
+- [ ] FIXED / VERIFIED — terminal
+- [ ] FIXED IN SOURCE / DEPLOYED VERIFICATION PENDING — open
+- [ ] PARTIALLY REPAIRED — WORKING — open
+- [ ] ACTIVE — WORKING / NEXT EXPERIMENT — open
+- [ ] BLOCKED — EXTERNAL GATE — open
+
+## Support Desk ownership
+- Incident owner:
+- Current specialist team:
+- Failed repair attempts retained:
+- External gate (if any):
+- Work that can continue despite gate:
 
 ## Remaining work / exact next experiment
 1.
