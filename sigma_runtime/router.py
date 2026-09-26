@@ -40,6 +40,7 @@ class MissionPlan:
     risk_gates: list[str]
     development_planning_required: bool
     algorithmic_engineering_required: bool
+    rescue_mode_required: bool
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -87,6 +88,7 @@ class MissionRouter:
         algorithmic_engineering_required = self.config.is_algorithmic_engineering_mission(
             prompt, selected
         )
+        rescue_mode_required = self.config.is_rescue_mission(prompt)
 
         leader_ids: list[str] = []
         specialists: list[Specialist] = []
@@ -154,4 +156,5 @@ class MissionRouter:
             risk_gates=self.config.risk_gates_for(selected, prompt),
             development_planning_required=development_planning_required,
             algorithmic_engineering_required=algorithmic_engineering_required,
+            rescue_mode_required=rescue_mode_required,
         )
