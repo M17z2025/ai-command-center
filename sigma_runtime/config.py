@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 from typing import Any
 
 import yaml
@@ -107,13 +108,15 @@ class MeshConfig:
     @staticmethod
     def is_development_mission(prompt: str) -> bool:
         lowered = prompt.lower()
-        development_terms = (
+        words = set(re.findall(r"[a-z0-9]+", lowered))
+        word_terms = {
             "build", "develop", "development", "code", "coding", "software",
             "app", "application", "website", "platform", "feature", "fix",
-            "refactor", "deploy", "release", "product", "implementation",
-            "architecture", "user journey", "roadmap", "backlog", "pull plan",
-        )
-        return any(term in lowered for term in development_terms)
+            "refactor", "deploy", "deployment", "release", "product",
+            "implementation", "architecture", "roadmap", "backlog",
+        }
+        phrase_terms = ("user journey", "pull plan", "development plan")
+        return bool(words & word_terms) or any(term in lowered for term in phrase_terms)
 
     def risk_gates_for(self, domain_ids: list[str], prompt: str) -> list[str]:
         domain_set = set(domain_ids)
