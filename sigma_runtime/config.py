@@ -70,14 +70,50 @@ class MeshConfig:
             for domain_id, domain in self.domains.items()
         ]
 
-    def leader_for(self, domain_id: str) -> dict[str, Any]:
+    def leaders_for(
+        self,
+        domain_id: str,
+        prompt: str = "",
+        *,
+        max_leaders: int = 3,
+    ) -> list[dict[str, Any]]:
         candidates = self.leaders_for_domain.get(domain_id, [])
         if candidates:
-            return candidates[0]
+            lowered = prompt.lower()
+            scored: list[tuple[int, int, int, dict[str, Any]]] = []
+            for index, candidate in enumerate(candidates):
+                keywords = [
+                    str(item).lower()
+                    for item in candidate.get("routing_keywords", [])
+                    if str(item).strip()
+                ]
+                hits = sum(1 for keyword in keywords if keyword in lowered)
+                if hits:
+                    priority = int(candidate.get("routing_priority", 0) or 0)
+                    scored.append((hits, priority, -index, candidate))
+            if scored:
+                scored.sort(key=lambda item: (-item[0], -item[1], -item[2]))
+                return [item[3] for item in scored[:max(1, max_leaders)]]
+            return [candidates[0]]
+
         fallback = self.leaders.get("research-director")
         if not fallback:
             raise MeshConfigError(f"No leader for domain {domain_id}")
-        return fallback
+        return [fallback]
+
+    def leader_for(self, domain_id: str, prompt: str = "") -> dict[str, Any]:
+        return self.leaders_for(domain_id, prompt, max_leaders=1)[0]
+
+    @staticmethod
+    def is_development_mission(prompt: str) -> bool:
+        lowered = prompt.lower()
+        development_terms = (
+            "build", "develop", "development", "code", "coding", "software",
+            "app", "application", "website", "platform", "feature", "fix",
+            "refactor", "deploy", "release", "product", "implementation",
+            "architecture", "user journey", "roadmap", "backlog", "pull plan",
+        )
+        return any(term in lowered for term in development_terms)
 
     def risk_gates_for(self, domain_ids: list[str], prompt: str) -> list[str]:
         domain_set = set(domain_ids)
