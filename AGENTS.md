@@ -85,7 +85,7 @@ Continuous mode never bypasses owner-gated spend, secrets, destructive or irreve
 
 ## Mandatory Sigma project team ownership
 
-Every Sigma-managed project/chat must resolve through `headquarters/project-teams.yaml`.
+Every Sigma-managed project/chat must resolve through `headquarters/chat-ownership/teams.yaml`.
 
 - A chat is a work surface for the mapped project team, not an isolated build.
 - The accountable team remains responsible across old chats, new chats, GitHub sessions and Drive blueprints.
@@ -94,7 +94,7 @@ Every Sigma-managed project/chat must resolve through `headquarters/project-team
 - Trials, credits, quotas, non-commercial restrictions and source-available field-of-use restrictions must never be represented as unlimited free/open source.
 - When team membership materially changes, update the project blueprint/build pack as well as the central manifest.
 
-See `docs/SIGMA_PROJECT_TEAM_OWNERSHIP.md`.
+See `headquarters/chat-ownership/README.md` and `docs/SIGMA_PROJECT_TEAM_OWNERSHIP.md`.
 
 ## Mandatory pre-work inspection
 
