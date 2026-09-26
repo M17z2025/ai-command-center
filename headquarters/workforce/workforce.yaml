@@ -1,0 +1,95 @@
+schema_version: 1
+workforce_id: sigma-workforce-v1
+root_authority: Mitesh
+executive_owner: sigma-governor
+
+counting:
+  unique_key: agent_id
+  no_duplicate_counting_across_councils: true
+  classes:
+    registered: "Unique versioned specialist/leadership definitions accepted into the registry."
+    operational: "Registered agents with runtime execution evidence."
+    certified: "Operational agents that pass the current proficiency/evidence benchmark."
+    active_mission: "Operational agents assigned to a current mission."
+    temporary: "Bounded mission specialists; counted separately until promoted."
+  forbidden:
+    - "count aliases or council memberships as additional agents"
+    - "count generated names without a versioned definition"
+    - "describe registered-only agents as live or autonomous"
+    - "inflate headcount by cloning equivalent capability"
+
+growth:
+  principle: "Capability density before headcount."
+  daily_cycle:
+    - "measure taxonomy coverage and unresolved mission demand"
+    - "identify missing or materially under-specialised fields"
+    - "propose new specialist definitions"
+    - "deduplicate against existing capabilities"
+    - "attach parent, scope, tools, prohibitions and evidence curriculum"
+    - "evaluate candidate"
+    - "register only if it adds measurable capability"
+    - "publish workforce and field deltas"
+  milestones:
+    - target: 1000
+      gate: "broad domain and high-value subdomain coverage"
+    - target: 10000
+      gate: "deep industry, jurisdiction, platform and technique specialisation"
+    - target: 100000
+      gate: "fine-grained cross-domain and product/runtime specialisation with automated evaluation"
+    - target: 1000000
+      gate: "only after registry, routing, evaluation, storage and observability prove scale without material quality degradation"
+  target_is_not_deadline: true
+
+proficiency:
+  levels: [TRAINEE, QUALIFIED, ADVANCED, BLACK_BELT]
+  black_belt_requires:
+    - "domain benchmark pass"
+    - "evidence/source-quality pass"
+    - "freshness pass"
+    - "adversarial/critic pass"
+    - "calibration and uncertainty pass"
+    - "task-success threshold"
+    - "recertification current"
+  no_self_certification: true
+
+metrics:
+  workforce:
+    - registered_unique
+    - operational_unique
+    - certified_unique
+    - black_belt_unique
+    - active_mission_unique
+    - temporary_unique
+    - created_24h
+    - promoted_24h
+    - retired_24h
+  capability:
+    - taxonomy_domains_covered
+    - subjects_covered
+    - coverage_gaps
+    - benchmark_pass_rate
+    - first_time_resolution_rate
+    - task_success_rate
+    - critic_rejection_rate
+    - security_failure_rate
+    - user_test_failure_rate
+    - knowledge_freshness_sla
+  performance:
+    - p50_response_latency
+    - p95_response_latency
+    - evidence_accuracy
+    - stale_source_rate
+    - hallucination_or_unsupported_claim_rate
+
+dashboard_contract:
+  hierarchy: "root -> governor -> director -> master -> specialist -> temporary"
+  required_views:
+    - executive workforce counters
+    - animated organisation/mesh graph
+    - domain and subject coverage heatmap
+    - growth history and milestone progress
+    - certification distribution
+    - current missions and routed teams
+    - agent drill-down with parent, children, scope, sources, benchmarks, freshness and history
+    - gaps/recruitment queue
+  source_of_truth: "GitHub definitions plus runtime evidence store"
