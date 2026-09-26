@@ -6,27 +6,34 @@ Default branch: `main`
 
 ## Sigma Scouter + Persistent Chat Build Ownership — Issues #54 / #55
 
-**IMPLEMENTED ON PR #56; REPAIRED AFTER CI-CAUGHT ALIAS COLLISION; EXACT-HEAD CI GREEN AT `6a9b25f4826975fd9804354731c95322e228cdc4`.**
+**IMPLEMENTED ON PR #56; DUPLICATE OWNERSHIP MANIFEST REMOVED; FUNCTIONAL CANDIDATE `86332a31e1779889848817034129c2e68f0a8b09` PASSED BOTH REQUIRED CI CHECKS.**
 
 This candidate adds two portfolio-wide controls:
 
 - `sigma-scouter`: one permanent research agent for discovering reusable open-source applications, modifiable code, self-hosted APIs and only those public APIs whose current evidence proves genuinely unlimited free use for the stated purpose;
-- strict admission rules that reject trials, credits, request/month caps, non-commercial restrictions, unverified licences and paid core dependencies;
-- a seeded, evidence-tagged catalogue plus CLI/runtime policy validation and optional self-hosted SearXNG discovery;
+- strict admission rules that reject trials, credits, request/month caps, non-commercial/field-of-use restrictions, unverified licences and required paid core dependencies;
+- a seeded, evidence-tagged catalogue plus CLI/runtime policy validation and optional self-hosted SearXNG discovery; discovery hits always enter REVIEW and cannot auto-approve themselves;
 - `sigma-chat-build-steward`: one accountable continuity owner for every development chat/project;
-- machine-readable project team assignments in `headquarters/chat-ownership/teams.yaml`;
-- deterministic chat title/message/repository resolution so multiple chats about one product return to the same repository-backed team and backlog;
-- explicit `PROJECT_REPOSITORY_REQUIRED` handling for known projects whose real repository has not yet been registered instead of inventing repository state;
-- Google Drive master portfolio blueprint registers updated with the ownership model;
-- canonical individual Drive blueprints updated for the currently identifiable projects, including Humanit, BodyFit, Tattooit, Marketit, Signit, Invoiceit, Alysha, Lycia Zambia, Legalit, Synergy AI Pay, Lycia Limited, Total Mining Intelligence, AutoHedge, Tax Intelligence OS, UK Payroll AI, PL Lookup/Veterinary Medicines, Imotion, Aurelius, Mitz PA and Mi7z Core Intelligence.
+- **one canonical ownership registry** at `headquarters/chat-ownership/teams.yaml` plus deterministic resolver `scripts/sigma_chat_owner.py`;
+- every repository in `projects/registry.yaml` mapped to a persistent Build Steward Team, with known chat-only projects explicitly assigned to the intake registry and honestly marked `PROJECT_REPOSITORY_REQUIRED` until a real repository exists;
+- all chats for the same product resolve to the same project/team/backlog instead of creating competing implementations;
+- Google Drive project blueprints updated with Sigma Build Team & Ownership sections and the two portfolio blueprint registers updated with the portfolio-wide ownership standard.
 
-Truth boundary: Sigma can resolve and own chats whose title/content/project context is available to the runtime. It must not claim omniscient access to an unseen private conversation. Chat ownership persists by project, not by chat session.
+A review found that overlapping work had temporarily produced a second `headquarters/project-teams.yaml` registry. That duplicate was removed so ownership cannot drift between two machine-readable authorities. `headquarters/chat-ownership/teams.yaml` is now the sole canonical team registry; Drive blueprints are human-readable mirrors.
 
-Exact-head verification after repair:
-- Sigma mesh runtime run `36261924931`: **SUCCESS**.
-- Sigma control-plane validation run `36261924902`: **SUCCESS**.
-- CI initially caught a case-insensitive Alysha alias collision in `headquarters/project-teams.yaml`; duplicate-case aliases were removed before the passing run.
-- Drive readback verified the ownership section on the master portfolio register and representative Humanit/Invoiceit project blueprints.
+Drive blueprint updates completed and verified in this mission include Invoiceit, Legalit, Signit, Marketit, Tattooit, Humanit, Alysha, Lycia Zambia, Lycia Limited, Mitz PA, White Rino, Total Mining Intelligence, Mi7z Core Intelligence, AI Gaming, BodyFit, AutoHedge, Synergy AI Pay, UK Payroll AI, Tax Intelligence OS, PL Lookup, UK AI HR & Employment Compliance, Aurelius and Imotion/Imoiton, plus the Mitz consolidated blueprint and both portfolio blueprint registers. Projects without a separately located native master blueprint remain covered by the canonical registry and portfolio registers rather than being falsely reported as individually updated.
+
+Truth boundary:
+- self-hosting removes vendor request/seat/project quotas; it does not make compute, electricity, storage, bandwidth, telecom, payment rails, domains or third-party data rights cost-free;
+- a model runtime licence does not grant rights to model weights or datasets;
+- no third-party public API is assumed permanently unlimited merely because it is marketed as free;
+- Sigma can resolve chats whose project/title/message/repository context is available to the runtime; it does not claim omniscient access to unseen private conversations.
+
+Verification for functional candidate `86332a31e1779889848817034129c2e68f0a8b09`:
+- Sigma mesh runtime run `36262115051`: **SUCCESS**.
+- Sigma control-plane validation run `36262115010`: **SUCCESS**.
+- Unit tests validate chat routing, registered-repository ownership, registered team members, known chat-only projects, Scouter catalogue admission rules and runtime orchestration.
+- Drive readback verified the ownership section on representative individual blueprints and the portfolio registers.
 
 ## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
 
