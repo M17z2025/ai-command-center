@@ -36,10 +36,27 @@ agents:
     status: "registered"
 
   - id: "security-master"
-    name: "Security Master"
-    role: "Threat modelling, security review and hostile-path assurance"
+    name: "Sigma Chief Cybersecurity Officer / Security Master"
+    role: "Independent portfolio cybersecurity authority, threat modelling, hostile-path assurance and release security gate"
     parent: "sigma-governor"
     status: "registered"
+    independent_from_implementer: true
+    release_gate_authority: true
+    children:
+      - "appsec-master"
+      - "identity-access-security-master"
+      - "tenant-data-isolation-master"
+      - "cloud-infrastructure-security-master"
+      - "network-edge-security-master"
+      - "supply-chain-security-master"
+      - "secrets-cryptography-master"
+      - "offensive-security-master"
+      - "detection-response-forensics-master"
+      - "ai-systems-security-master"
+      - "api-mobile-integration-security-master"
+      - "privacy-data-security-master"
+      - "resilience-recovery-security-master"
+      - "sigma-security-gatekeeper"
 
   - id: "sigma-user-tester"
     name: "Sigma User Tester"
