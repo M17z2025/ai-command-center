@@ -20,6 +20,13 @@ defaults:
     plan_template: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
     planning_director: "sigma-development-planning-director"
     research_fallback: "research-director"
+  algorithmic_engineering:
+    required_for_material_software_development: true
+    division: "headquarters/engineering/README.md"
+    report_template: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
+    director: "algorithmic-engineering-director"
+    independent_judge: "sigma-solution-judge"
+    unresolved_behavior: "record unresolved problem and exact next experiment; never fabricate success"
 
 projects:
   - name: "Sigma Development Command Center"
