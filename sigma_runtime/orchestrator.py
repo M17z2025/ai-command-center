@@ -521,7 +521,6 @@ class SigmaOrchestrator:
         advisory_plan: str = "",
         algorithmic_report: str = "",
         engineering_judge: str = "",
-        rescue_report: str = "",
     ) -> str:
         system = (
             "You are Sigma Independent Critic. You are independent from the primary team. "
@@ -604,6 +603,7 @@ class SigmaOrchestrator:
         advisory_plan: str = "",
         algorithmic_report: str = "",
         engineering_judge: str = "",
+        rescue_report: str = "",
     ) -> str:
         system = (
             "You are Sigma Synthesis Director. Merge the verified expert work into one coherent answer. "
