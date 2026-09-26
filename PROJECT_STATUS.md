@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Universal Expert Advisory & Development Planning Council — Issue #43
 
-**IMPLEMENTATION CANDIDATE IN PROGRESS — NAMED EXPERT WORKFORCE + EXECUTABLE DEVELOPMENT-PLAN RUNTIME.**
+**NAMED EXPERT WORKFORCE + EXECUTABLE DEVELOPMENT-PLAN RUNTIME IMPLEMENTED ON PR #44 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**
 
 Issue #43 establishes a permanent cross-disciplinary advisory council for Sigma-managed development. The candidate includes:
 - permanent named advisers for universal research/knowledge routing, law, marketing, HR, sales, mobile app engineering, business/operations, finance, multidisciplinary engineering, aerospace, coding/software, graphic design, fashion, photography, film direction, film production, film editing/post, scriptwriting/screenwriting and songwriting/composition;
@@ -18,7 +18,11 @@ Issue #43 establishes a permanent cross-disciplinary advisory council for Sigma-
 - runtime persistence of a `development-advisory-plan` artifact;
 - a durable planning template with phased delivery, ordered backlog/pull plan, acceptance criteria, evidence requirements, specialist ownership and exact next executable actions.
 
-Exact-head CI evidence is still required before this candidate can be merged/called complete.
+Exact-head verification for candidate `e0a2c5b0f5d0fff86da6f91930933ddb7607d980`:
+- Sigma mesh runtime run `36227968010`: **SUCCESS**.
+- Sigma control-plane validation run `36227968026`: **SUCCESS**.
+- Runtime tests include named expert routing and durable `development-advisory-plan` persistence.
+
 
 ## Sigma Cybersecurity Division — Issue #40 / PR #41
 
