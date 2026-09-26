@@ -1026,7 +1026,7 @@
       "id": "qgis",
       "name": "QGIS",
       "category": "geospatial-mining",
-      "kind": "application",
+      "kind": "desktop_application",
       "upstream": "https://github.com/qgis/QGIS",
       "licence": "GPL-2.0",
       "licence_class": "strong_copyleft",
