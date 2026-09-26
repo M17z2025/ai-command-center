@@ -53,6 +53,8 @@ SIGMA GOVERNOR
 - [Evidence discipline](./mesh/evidence.yaml)
 - [Controlled evolution](./mesh/evolution.yaml)
 - [Machine-readable cognitive methods](./mesh/cognitive-methods.yaml)
+- [Sigma project-team ownership](./project-teams.yaml)
+- [Sigma Scouter](./scouter/README.md)
 - [Portfolio links](./PORTFOLIO.md)
 - [Agent evolution rules](./evolution/README.md)
 - [Alysha integration contract](./ALYSHA_INTEGRATION.md)
