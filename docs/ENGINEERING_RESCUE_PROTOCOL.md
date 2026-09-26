@@ -75,19 +75,37 @@ Rescue Mode is activated for requests such as:
    - Sigma Full User Tester repeats the actual failing journey and relevant regressions.
 
 9. **Close or continue**
-   - Close only with reproducible PASS evidence.
-   - Otherwise continue the loop or mark **UNSOLVED / BLOCKED** with the exact next experiment or genuine owner/external gate.
+   - Close only with reproducible **FIXED / VERIFIED** evidence.
+   - If the defect is not fixed, the incident remains **ACTIVE — WORKING** and Sigma must continue with the next highest-value hypothesis/experiment.
+   - A difficult or repeatedly failing repair is not a reason to close the incident.
+   - **BLOCKED — EXTERNAL GATE** is allowed only when the next required action genuinely depends on something Sigma cannot safely supply or authorise (for example an unavailable credential, third-party outage, owner-only production action, physical-device access or external legal approval).
+   - Even when one path is externally blocked, continue every other safe executable investigation, test, refactor or alternative repair path.
 
 ## Completion language
 
 Sigma must not use **fixed**, **working**, **complete**, **ready**, **passed**, **release-ready** or equivalent as a factual status unless the relevant exact evidence exists.
 
 Allowed states:
-- **FIXED / VERIFIED** — defect reproduced, repaired and verified through applicable exact-head and real-user evidence.
-- **FIXED IN SOURCE / DEPLOYED VERIFICATION PENDING** — source evidence passes but deployed user verification is still missing.
-- **PARTIALLY REPAIRED** — some acceptance criteria remain open.
-- **UNSOLVED / NEEDS NEXT EXPERIMENT** — no current repair has met the hard gates.
-- **BLOCKED** — a genuine owner/external gate prevents the next required verification/action.
+- **FIXED / VERIFIED** — defect reproduced, repaired and verified through applicable exact-head and real-user evidence. This is the only normal terminal state for an owned defect.
+- **FIXED IN SOURCE / DEPLOYED VERIFICATION PENDING** — source evidence passes but deployed user verification is still missing; incident remains open.
+- **PARTIALLY REPAIRED — WORKING** — some acceptance criteria remain open; incident remains open.
+- **ACTIVE — WORKING / NEXT EXPERIMENT** — current repair attempts have not yet met the hard gates; Sigma must continue.
+- **BLOCKED — EXTERNAL GATE** — the next required step genuinely depends on unavailable external/owner authority. The incident remains open and other safe work continues.
+
+## Support Desk ownership rule
+
+Any confirmed broken Sigma-managed product enters a persistent **Sigma Engineering Support Desk** incident.
+
+The Support Desk owns the defect until **FIXED / VERIFIED**. It must:
+- preserve the reproduction evidence and incident history;
+- continuously hand the problem to the most relevant debugging, architecture, database, integration, mobile, infrastructure, security and test specialists;
+- generate new hypotheses when previous fixes fail;
+- prefer root-cause repair over symptom suppression;
+- escalate internally across the expert mesh without waiting for repeated owner permission for routine safe development;
+- keep a precise next experiment/action at all times;
+- never close an incident because it is difficult, time-consuming or has survived several repair attempts.
+
+The phrase "fail is not an option" is implemented operationally as **no false closure and continuous bounded repair until verified or genuinely externally gated**. It is not permission to fabricate success, bypass security, spend money without approval, invent credentials, or perform unsafe/destructive production actions.
 
 ## Golden Challenge scorecard
 
