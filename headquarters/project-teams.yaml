@@ -26,7 +26,7 @@ team_profiles:
     specialists: ["algorithmic-engineering-director","software-architecture-master","ai-agent-engineering-master","developer-tooling-ci-master","research-director","security-master","qa-test-engineering-master"]
   web_platform:
     lead: "software-architecture-master"
-    specialists: ["frontend-engineering-master","backend-api-engineering-master","database-data-engineering-master","ui-ux-interaction","graphic-design-master","developer-tooling-ci-master","security-master","qa-test-engineering-master"]
+    specialists: ["frontend-engineering-master","backend-api-engineering-master","database-data-engineering-master","arts-creative-director","graphic-design-master","developer-tooling-ci-master","security-master","qa-test-engineering-master"]
   ai_assistant:
     lead: "ai-agent-engineering-master"
     specialists: ["backend-api-engineering-master","algorithmic-mobile-engineering-master","distributed-cloud-systems-master","integration-automation-master","research-director","privacy-data-security-master","security-master","qa-test-engineering-master"]
@@ -89,7 +89,7 @@ team_profiles:
     specialists: ["business-operations-master","algorithmic-mobile-engineering-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","integration-automation-master","security-master","qa-test-engineering-master"]
   consumer_assistant:
     lead: "ai-agent-engineering-master"
-    specialists: ["algorithmic-mobile-engineering-master","backend-api-engineering-master","integration-automation-master","ui-ux-interaction","privacy-data-security-master","security-master","qa-test-engineering-master"]
+    specialists: ["algorithmic-mobile-engineering-master","backend-api-engineering-master","integration-automation-master","arts-creative-director","privacy-data-security-master","security-master","qa-test-engineering-master"]
   general_product:
     lead: "sigma-development-planning-director"
     specialists: ["software-architecture-master","frontend-engineering-master","backend-api-engineering-master","business-strategy-master","marketing-brand-master","security-master","qa-test-engineering-master"]
