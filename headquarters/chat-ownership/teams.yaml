@@ -162,6 +162,57 @@ intake_projects:
     aliases: ["alpha-zulu", "alpha zulu directory"]
     domain_team: ["business-operations-master", "marketing-brand-master", "legal-law-advisory-master", "privacy-data-security-master"]
 
+  - project: "Mitz PA"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["mitz pa", "jarvis", "personal assistant"]
+    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "integration-automation-master", "privacy-data-security-master"]
+  - project: "UK AI HR & Employment Compliance"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["hr ai", "uk ai hr", "employment compliance"]
+    domain_team: ["hr-people-master", "legal-law-advisory-master", "chief-ai-scientist", "privacy-data-security-master"]
+  - project: "Messageit"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["messageit", "messaging platform"]
+    domain_team: ["business-operations-master", "integration-automation-master", "api-mobile-integration-security-master"]
+  - project: "Indian Wedding Platform"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["indian wedding platform", "wedding platform"]
+    domain_team: ["business-operations-master", "marketing-brand-master", "graphic-design-master", "legal-law-advisory-master"]
+  - project: "Password Manager"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["password manager", "credential manager"]
+    domain_team: ["secrets-cryptography-master", "identity-access-security-master", "security-master"]
+  - project: "Gold Trading / Contract Engine"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["gold trading business model", "gold contract engine", "gold purchase contract", "gold trading"]
+    domain_team: ["finance-all-aspects-master", "legal-law-advisory-master", "mining-resources-master", "research-director"]
+  - project: "Yengo / Mining Digital Workflows"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["yengo", "yengo mine", "mining transaction document system", "mining supporting digital workflows"]
+    domain_team: ["mining-resources-master", "legal-law-advisory-master", "business-operations-master", "security-master"]
+  - project: "AI PI Agent"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai pi agent", "investigation intelligence os"]
+    domain_team: ["research-director", "legal-law-advisory-master", "chief-ai-scientist", "privacy-data-security-master"]
+  - project: "Game Development Capability"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["game development", "godot", "game-development capability"]
+    domain_team: ["polyglot-coding-master", "arts-creative-director", "graphic-design-master", "qa-test-engineering-master"]
+  - project: "AI Media / Film Capability"
+    repository: null
+    state: "PROJECT_REPOSITORY_REQUIRED"
+    aliases: ["ai video", "ai image", "film capability", "ai media"]
+    domain_team: ["arts-creative-director", "film-director-master", "film-production-master", "film-editing-master", "graphic-design-master"]
+
 intake_team:
   accountable_build_steward: "sigma-chat-build-steward"
   core_team:
