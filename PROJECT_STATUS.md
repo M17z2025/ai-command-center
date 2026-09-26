@@ -4,6 +4,27 @@ Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Algorithmic Engineering & Solution Lab — Issue #45
+
+**IMPLEMENTATION CANDIDATE IN PROGRESS — SPECIALIST CODERS/TESTERS + EVIDENCE-BACKED SOLUTION TOURNAMENT.**
+
+Issue #45 adds a permanent engineering problem-solving division with:
+- Algorithm & Complexity Master;
+- Software Architecture Master;
+- Polyglot Coding Master;
+- Frontend, Backend/API and Mobile Engineering;
+- Database/Data and Distributed/Cloud Systems;
+- AI/Agent Engineering and Integration/Automation;
+- Debugging & Root-Cause, Performance/Optimisation and Formal Correctness;
+- QA/Test Engineering, Property/Fuzz/Mutation Testing, Reliability/Chaos/Recovery and Developer Tooling/CI;
+- independent `sigma-solution-judge`.
+
+Applicable software missions are marked `algorithmic_engineering_required`. The runtime creates an `algorithmic-solution-report`, runs the independent Solution Judge during repair, and preserves the final engineering evidence/decision artifact.
+
+The governing rule is deliberately fail-honest: Sigma seeks the strongest evidence-backed solution available under the stated constraints, but if no candidate passes correctness/security hard gates it must record **UNSOLVED / NEEDS NEXT EXPERIMENT** rather than fabricate success.
+
+Exact-head CI evidence is required before merge/completion.
+
 ## Sigma Universal Expert Advisory & Development Planning Council — Issue #43
 
 **NAMED EXPERT WORKFORCE + EXECUTABLE DEVELOPMENT-PLAN RUNTIME IMPLEMENTED ON PR #44 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**
