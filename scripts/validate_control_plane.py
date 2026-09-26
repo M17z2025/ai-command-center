@@ -101,6 +101,14 @@ if registry_path.exists():
     if advisory_planning.get("research_fallback") != "research-director":
         errors.append("projects/registry.yaml advisory planning must retain research-director fallback")
 
+    algorithmic_engineering = defaults.get("algorithmic_engineering", {})
+    if algorithmic_engineering.get("required_for_material_software_development") is not True:
+        errors.append("projects/registry.yaml must require algorithmic engineering for material software development")
+    if algorithmic_engineering.get("director") != "algorithmic-engineering-director":
+        errors.append("projects/registry.yaml must use algorithmic-engineering-director")
+    if algorithmic_engineering.get("independent_judge") != "sigma-solution-judge":
+        errors.append("projects/registry.yaml must use sigma-solution-judge")
+
     projects = registry.get("projects", [])
     seen = set()
     for idx, project in enumerate(projects):
