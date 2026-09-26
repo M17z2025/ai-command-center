@@ -4,6 +4,28 @@ Last updated: 2026-09-25
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Cybersecurity Division — Issue #40 / PR #41
+
+**PORTFOLIO-WIDE SECURITY GATE IMPLEMENTED ON PR #41 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN PRESENT ON DEFAULT BRANCH.**
+
+PR #41 creates a permanent independent Sigma Cybersecurity Division and wires it into the Universal Expert Mesh. The candidate includes:
+- Security Master / Chief Cybersecurity Officer with 13 permanent specialist cells;
+- independent `sigma-security-gatekeeper`;
+- mandatory `security-assurance` mesh stage;
+- fail-closed behavior when required controls are NOT VERIFIED;
+- default release blocking for BLOCKER / CRITICAL / HIGH findings;
+- hostile authorization/tenant/data-path evidence requirements;
+- application, IAM, data isolation, cloud/infra, network/edge, supply-chain, secrets/crypto, authorised red-team, detection/IR/forensics, AI security, API/mobile/integration, privacy/data-security and resilience/recovery coverage;
+- portfolio registry defaults that make the security gate apply to every registered Sigma project;
+- durable review template at `templates/SIGMA_CYBER_SECURITY_REPORT.md`.
+
+Exact-head verification for candidate `bf7e91d8498531b59ad8e25c4ab9a2a2d916f413`:
+- Sigma mesh runtime run `36227347799`: **SUCCESS**.
+- Sigma control-plane validation run `36227347819`: **SUCCESS**.
+
+This change establishes the organisation and mandatory interactive/release gate. It does **not** falsely claim unattended scheduled security scans across every repository while the autonomous portfolio runner/private Sigma runtime remains uncommissioned. Once that runner is commissioned, scheduled portfolio scanning becomes a required operating cadence.
+
+
 ## Sigma Universal Expert Mesh + Runtime — Issues #22 / #24 / #25
 
 **MESH + RUNTIME ENGINE: MERGED / COMPLETE IN SOURCE. LIVE MODEL SERVICE: BLOCKED ON OWNER-GATED PRIVATE INFERENCE / SECRET COMMISSIONING.**

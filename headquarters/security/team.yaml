@@ -1,0 +1,105 @@
+schema_version: 1
+division:
+  id: sigma-cybersecurity-division
+  name: "Sigma Cybersecurity Division"
+  leader: security-master
+  reports_to: sigma-governor
+  scope: "All Sigma-managed repositories, products, runtimes, integrations, infrastructure and release candidates."
+  independent_release_assurance: true
+  fail_closed_on_missing_required_evidence: true
+
+specialists:
+  - id: appsec-master
+    name: "Application Security Master"
+    parent: security-master
+    focus: ["secure design", "secure code review", "web vulnerabilities", "business logic abuse", "server-side authorization"]
+  - id: identity-access-security-master
+    name: "Identity & Access Security Master"
+    parent: security-master
+    focus: ["authentication", "sessions", "MFA", "RBAC/ABAC", "privilege boundaries", "account recovery"]
+  - id: tenant-data-isolation-master
+    name: "Tenant & Data Isolation Master"
+    parent: security-master
+    focus: ["RLS", "tenant ownership", "cross-tenant hostile tests", "storage isolation", "data relationships"]
+  - id: cloud-infrastructure-security-master
+    name: "Cloud & Infrastructure Security Master"
+    parent: security-master
+    focus: ["hosts", "containers", "IaC", "patching", "service permissions", "hardening"]
+  - id: network-edge-security-master
+    name: "Network & Edge Security Master"
+    parent: security-master
+    focus: ["TLS", "DNS", "reverse proxies", "firewalls", "WAF/rate limits", "ingress/egress"]
+  - id: supply-chain-security-master
+    name: "Software Supply-Chain Security Master"
+    parent: security-master
+    focus: ["dependencies", "lockfiles", "provenance", "CI actions", "SBOM", "vulnerability remediation"]
+  - id: secrets-cryptography-master
+    name: "Secrets & Cryptography Master"
+    parent: security-master
+    focus: ["secret leakage", "key lifecycle", "rotation", "signing", "encryption", "secret-safe logs"]
+  - id: offensive-security-master
+    name: "Offensive Security / Red Team Master"
+    parent: security-master
+    focus: ["authorised adversarial testing", "hostile paths", "abuse cases", "exploit validation"]
+    authorised_targets_only: true
+  - id: detection-response-forensics-master
+    name: "Detection, Incident Response & Forensics Master"
+    parent: security-master
+    focus: ["security logging", "detection", "alerting", "containment", "forensics", "post-incident learning"]
+  - id: ai-systems-security-master
+    name: "AI & Agent Security Master"
+    parent: security-master
+    focus: ["prompt injection", "tool injection", "data exfiltration", "agent authority", "RAG/memory poisoning", "model/provider boundaries"]
+  - id: api-mobile-integration-security-master
+    name: "API, Mobile & Integration Security Master"
+    parent: security-master
+    focus: ["API authorization", "replay resistance", "webhooks", "OAuth/OIDC", "mobile secure storage", "deep links"]
+  - id: privacy-data-security-master
+    name: "Privacy & Sensitive-Data Security Master"
+    parent: security-master
+    focus: ["data minimisation", "retention", "exports/deletion", "sensitive logging", "regulated data protection"]
+  - id: resilience-recovery-security-master
+    name: "Resilience, Backup & Recovery Security Master"
+    parent: security-master
+    focus: ["backup integrity", "restore tests", "ransomware resilience", "rollback", "disaster recovery"]
+
+assurance:
+  gatekeeper: sigma-security-gatekeeper
+  implementer_may_self_certify: false
+  verdicts: ["PASS", "PASS WITH RECORDED NON-BLOCKING FINDINGS", "FAIL", "BLOCKED / NOT VERIFIED"]
+  release_blocking_severities: ["BLOCKER", "CRITICAL", "HIGH"]
+  unknown_required_control_behavior: "BLOCKED / NOT VERIFIED"
+
+mandatory_triggers:
+  - "material pull request"
+  - "authentication/authorization/role change"
+  - "tenancy/RLS/storage/data-boundary change"
+  - "external integration/webhook/OAuth/payment change"
+  - "secrets/cryptography/signing/session change"
+  - "dependency/runtime/framework security-impacting change"
+  - "infrastructure/DNS/ingress/container/CI-CD permission change"
+  - "AI agent/tool/action authority change"
+  - "release candidate"
+  - "closure of blocker/critical security finding"
+
+evidence:
+  template: "templates/SIGMA_CYBER_SECURITY_REPORT.md"
+  minimum:
+    - "exact commit and environment"
+    - "threat/trust-boundary review"
+    - "security-sensitive diff review"
+    - "secret scanning"
+    - "dependency/security audit"
+    - "authorization/tenant negative tests where applicable"
+    - "database/RLS/storage tests where applicable"
+    - "API/webhook negative/replay/signature tests where applicable"
+    - "authorised non-production adversarial test where applicable"
+    - "infrastructure/container/IaC review where applicable"
+    - "logging/audit review"
+    - "backup/restore evidence for persistent critical data"
+    - "AI security tests where applicable"
+    - "findings and remediation status"
+
+cadence:
+  interactive: "Apply to every material Sigma-connected development/release mission."
+  unattended: "Scheduled portfolio scans become mandatory when the autonomous portfolio runner is commissioned."

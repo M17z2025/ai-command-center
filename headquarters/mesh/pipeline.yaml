@@ -53,6 +53,21 @@ stages:
     required_for_material_work: true
     independence_required: true
 
+  - id: security-assurance
+    purpose: "Independently verify the applicable Sigma Cybersecurity Division controls and evidence before a material development or release candidate can be called READY."
+    required_for_material_work: true
+    independence_required: true
+    fail_closed_on_missing_required_evidence: true
+    gatekeeper: "sigma-security-gatekeeper"
+    report_template: "templates/SIGMA_CYBER_SECURITY_REPORT.md"
+    verdicts: ["PASS", "PASS WITH RECORDED NON-BLOCKING FINDINGS", "FAIL", "BLOCKED / NOT VERIFIED"]
+    rules:
+      - "The implementing agent cannot self-certify the final security verdict."
+      - "BLOCKER, CRITICAL and HIGH findings block release by default."
+      - "A required NOT VERIFIED control prevents a PASS."
+      - "Security review includes all applicable trust boundaries, not only the changed source file."
+      - "Adversarial testing is restricted to owned/authorised code and environments."
+
   - id: repair-loop
     purpose: "Return failed claims or designs to the relevant experts for bounded correction."
     max_default_cycles: 3

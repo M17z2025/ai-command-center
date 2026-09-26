@@ -77,12 +77,105 @@ leaders:
     may_create_children: true
 
   - id: security-master
-    name: "Security Master"
+    name: "Sigma Chief Cybersecurity Officer / Security Master"
     parent: "sigma-governor"
-    mission: "Lead defensive security, cryptography, threat modelling, assurance and incident analysis."
+    mission: "Lead the permanent Sigma Cybersecurity Division, independently assure every material development/release mission, coordinate specialist security cells, and fail closed when required evidence is missing."
     domains: ["cyber-security"]
     may_create_children: true
     independent_review: true
+    portfolio_wide: true
+
+  - id: appsec-master
+    name: "Application Security Master"
+    parent: "security-master"
+    mission: "Review secure design and code, business-logic abuse, input/output handling, web vulnerability classes and server-side authorization."
+    domains: ["cyber-security"]
+    may_create_children: true
+
+  - id: identity-access-security-master
+    name: "Identity & Access Security Master"
+    parent: "security-master"
+    mission: "Assure authentication, sessions, MFA, recovery, roles, least privilege, token handling and privilege-change boundaries."
+    domains: ["cyber-security"]
+    may_create_children: true
+
+  - id: tenant-data-isolation-master
+    name: "Tenant & Data Isolation Master"
+    parent: "security-master"
+    mission: "Prove tenant/organisation ownership, RLS/storage isolation and hostile cross-tenant read/write/update/delete resistance."
+    domains: ["cyber-security", "data-databases"]
+    may_create_children: true
+
+  - id: cloud-infrastructure-security-master
+    name: "Cloud & Infrastructure Security Master"
+    parent: "security-master"
+    mission: "Assure hosts, containers, infrastructure-as-code, patch posture, service permissions and secure deployment configuration."
+    domains: ["cyber-security", "networks-cloud"]
+    may_create_children: true
+
+  - id: network-edge-security-master
+    name: "Network & Edge Security Master"
+    parent: "security-master"
+    mission: "Assure TLS, DNS, ingress/egress, proxies, WAF/rate limiting, firewalls and exposed network services."
+    domains: ["cyber-security", "networks-cloud"]
+    may_create_children: true
+
+  - id: supply-chain-security-master
+    name: "Software Supply-Chain Security Master"
+    parent: "security-master"
+    mission: "Assure dependencies, lockfiles, CI actions, package/build provenance, SBOM readiness and vulnerable component remediation."
+    domains: ["cyber-security", "software-engineering"]
+    may_create_children: true
+
+  - id: secrets-cryptography-master
+    name: "Secrets & Cryptography Master"
+    parent: "security-master"
+    mission: "Assure secret/key/token lifecycle, rotation, signing, encryption choices and secret-safe source/logging practices."
+    domains: ["cyber-security"]
+    may_create_children: true
+
+  - id: offensive-security-master
+    name: "Offensive Security / Red Team Master"
+    parent: "security-master"
+    mission: "Perform authorised adversarial testing of owned code and approved non-production targets to validate real exploit paths and abuse cases."
+    domains: ["cyber-security"]
+    may_create_children: true
+    authorised_targets_only: true
+
+  - id: detection-response-forensics-master
+    name: "Detection, Incident Response & Forensics Master"
+    parent: "security-master"
+    mission: "Assure security logging, detections, alerting, containment, forensics and incident learning."
+    domains: ["cyber-security"]
+    may_create_children: true
+
+  - id: ai-systems-security-master
+    name: "AI & Agent Security Master"
+    parent: "security-master"
+    mission: "Assure prompt/tool injection resistance, data-exfiltration boundaries, agent/tool authority, RAG/memory poisoning controls and model/provider trust boundaries."
+    domains: ["cyber-security", "artificial-intelligence"]
+    may_create_children: true
+
+  - id: api-mobile-integration-security-master
+    name: "API, Mobile & Integration Security Master"
+    parent: "security-master"
+    mission: "Assure API authorization, replay resistance, webhooks, OAuth/OIDC, mobile token/storage handling, deep links and external integration boundaries."
+    domains: ["cyber-security", "software-engineering"]
+    may_create_children: true
+
+  - id: privacy-data-security-master
+    name: "Privacy & Sensitive-Data Security Master"
+    parent: "security-master"
+    mission: "Assure data minimisation, retention, access/export/delete paths, sensitive logging and protection of regulated or confidential information."
+    domains: ["cyber-security", "regulatory-compliance"]
+    may_create_children: true
+
+  - id: resilience-recovery-security-master
+    name: "Resilience, Backup & Recovery Security Master"
+    parent: "security-master"
+    mission: "Assure backup integrity, restore evidence, ransomware/blast-radius controls, rollback and disaster-recovery security."
+    domains: ["cyber-security", "networks-cloud"]
+    may_create_children: true
 
   - id: engineering-director
     name: "Engineering & Technology Director"
@@ -201,6 +294,14 @@ assurance_roles:
     mission: "Check provenance, recency, primary-source support, uncertainty and unresolved contradictions."
     may_create_children: false
     independent_from_primary_team: true
+
+  - id: sigma-security-gatekeeper
+    name: "Sigma Security Gatekeeper"
+    parent: "security-master"
+    mission: "Independently issue PASS, PASS WITH RECORDED NON-BLOCKING FINDINGS, FAIL, or BLOCKED / NOT VERIFIED for material development and release candidates based on the Cybersecurity Division evidence pack."
+    may_create_children: false
+    independent_from_primary_team: true
+    may_block_release: true
 
   - id: sigma-synthesis-director
     name: "Sigma Synthesis Director"

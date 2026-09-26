@@ -32,9 +32,10 @@ Full Mesh mode requires:
 5. Cross-expert challenge.
 6. Sigma Independent Critic.
 7. Sigma Evidence Verifier.
-8. Bounded repair of material weaknesses.
-9. Sigma Synthesis Director output preserving material dissent and uncertainty.
-10. Controlled lesson/evolution candidates only; no self-promotion.
+8. Sigma Security Gatekeeper for every material development/release mission.
+9. Bounded repair of material weaknesses.
+10. Sigma Synthesis Director output preserving material dissent and uncertainty.
+11. Controlled lesson/evolution candidates only; no self-promotion.
 
 ### Standing execution delegation after trigger
 
@@ -106,6 +107,22 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For multi-tenant systems, prove tenant isolation for every new data path.
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
+
+## Mandatory Sigma Cybersecurity Division
+
+Every material development and release candidate must pass the independent Sigma Cybersecurity Division gate defined in `headquarters/security/README.md` and use `templates/SIGMA_CYBER_SECURITY_REPORT.md` for durable evidence.
+
+Rules:
+- the implementation agent cannot self-certify the final security verdict;
+- review all applicable trust boundaries, not only the changed source file;
+- hostile authorization and tenant/organisation isolation tests are mandatory where applicable;
+- secrets, dependency/supply-chain, infrastructure, API/integration, logging/recovery and AI-agent controls must be checked where applicable;
+- authorised adversarial testing is restricted to owned/approved code and environments;
+- BLOCKER, CRITICAL and HIGH findings block release by default;
+- a required control marked NOT VERIFIED prevents PASS and produces BLOCKED / NOT VERIFIED;
+- a successful build, lint, happy-path test or Sigma User Tester run does not substitute for security assurance.
+
+The Security Gatekeeper may block a Sigma READY/release-ready classification but may not accept material risk on behalf of the owner or bypass owner-gated production/secret/destructive-action controls.
 
 ## Mandatory Sigma Full User Tester
 

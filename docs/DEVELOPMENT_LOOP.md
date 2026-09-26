@@ -60,7 +60,22 @@ Check:
 - documentation;
 - secret leakage.
 
-## 7. Pull request
+## 7. Independent cybersecurity assurance
+
+Route every material change through the Sigma Cybersecurity Division before READY/release classification.
+
+Use `templates/SIGMA_CYBER_SECURITY_REPORT.md` and record:
+- exact commit/environment reviewed;
+- applicable trust boundaries;
+- hostile authorization/tenant/data-path evidence;
+- secret/dependency/supply-chain checks;
+- infrastructure/API/integration/AI/recovery checks where applicable;
+- findings, severity and retest evidence;
+- independent Security Gatekeeper verdict.
+
+The implementing agent cannot self-certify this verdict. Required NOT VERIFIED controls block PASS. BLOCKER, CRITICAL and HIGH findings block release by default.
+
+## 8. Pull request
 
 PR body must include:
 - what changed;
@@ -71,15 +86,15 @@ PR body must include:
 - screenshots for UI changes where practical;
 - rollback notes for high-risk changes.
 
-## 8. Review and repair
+## 9. Review and repair
 
 Sigma or another reviewer checks the PR against acceptance criteria and system architecture. Repair substantive findings before merge.
 
-## 9. Merge and deploy
+## 10. Merge and deploy
 
 Merge only when required gates pass. Deployment follows the product manifest.
 
-## 10. Close the loop
+## 11. Close the loop
 
 Update `PROJECT_STATUS.md` with:
 - completion state;

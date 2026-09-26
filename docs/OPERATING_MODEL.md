@@ -28,6 +28,15 @@ Acts as implementation and problem-solving agent. ChatGPT should:
 - create PRs where appropriate;
 - report concrete blockers rather than generic uncertainty.
 
+### Sigma Cybersecurity Division
+Acts as the independent portfolio security assurance function. It is led by the Security Master and specialist cells defined under `headquarters/security/`. It must:
+- review every material development/release mission across all applicable trust boundaries;
+- require hostile authorization/tenant-isolation evidence where applicable;
+- verify secrets, dependencies/supply chain, infrastructure, integrations, logging/recovery and AI-agent controls where applicable;
+- issue an independent PASS / PASS WITH RECORDED NON-BLOCKING FINDINGS / FAIL / BLOCKED-NOT-VERIFIED verdict;
+- block READY/release classification for required missing evidence or release-blocking findings;
+- remain independent from the implementation agent.
+
 ### CI/CD
 Acts as the objective gatekeeper. Builds, tests, linting, security checks and deployment validation should be automated where practical.
 
