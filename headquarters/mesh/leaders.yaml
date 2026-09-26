@@ -76,6 +76,169 @@ leaders:
     domains: ["computer-science", "artificial-intelligence", "software-engineering", "data-databases", "networks-cloud", "quantum-computing"]
     may_create_children: true
 
+  - id: algorithmic-engineering-director
+    name: "Sigma Algorithmic Engineering Director"
+    parent: "sigma-governor"
+    mission: "Lead evidence-backed algorithm design, software implementation, debugging, optimisation and testing through competing candidate solutions and independent engineering review."
+    domains: ["computer-science", "software-engineering", "data-databases", "networks-cloud", "artificial-intelligence", "mathematics-logic"]
+    may_create_children: true
+    portfolio_wide: true
+    routing_priority: 60
+    routing_keywords: ["algorithm", "solve", "solution", "code", "coding", "software", "develop", "build", "debug", "test", "optimise", "optimize", "performance"]
+
+  - id: algorithm-complexity-master
+    name: "Algorithm & Complexity Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Design and compare algorithms, data structures and optimisation strategies with explicit complexity and correctness reasoning."
+    domains: ["computer-science", "mathematics-logic", "software-engineering"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["algorithm", "complexity", "data structure", "optimisation", "optimization", "graph", "search", "scheduling"]
+
+  - id: software-architecture-master
+    name: "Software Architecture Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Design robust software boundaries, contracts, patterns, migrations and distributed architectures."
+    domains: ["software-engineering", "computer-science"]
+    may_create_children: true
+    routing_priority: 85
+    routing_keywords: ["architecture", "architect", "system design", "module", "service", "migration", "refactor"]
+
+  - id: polyglot-coding-master
+    name: "Polyglot Coding Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Implement production-grade code across appropriate languages and frameworks while preserving repository conventions and tests."
+    domains: ["software-engineering", "computer-science"]
+    may_create_children: true
+    routing_priority: 80
+    routing_keywords: ["code", "coding", "programming", "typescript", "javascript", "python", "java", "kotlin", "swift", "go", "rust", "c++", "c#"]
+
+  - id: frontend-engineering-master
+    name: "Frontend Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Lead browser UI engineering, state, accessibility, responsiveness, performance and frontend integration."
+    domains: ["software-engineering", "ui-ux-interaction"]
+    may_create_children: true
+    routing_priority: 85
+    routing_keywords: ["frontend", "react", "next.js", "browser", "ui", "web app", "responsive"]
+
+  - id: backend-api-engineering-master
+    name: "Backend & API Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Lead backend services, APIs, jobs, queues, authentication boundaries and distributed workflows."
+    domains: ["software-engineering", "data-databases", "networks-cloud"]
+    may_create_children: true
+    routing_priority: 85
+    routing_keywords: ["backend", "api", "server", "endpoint", "webhook", "queue", "worker", "service"]
+
+  - id: algorithmic-mobile-engineering-master
+    name: "Algorithmic Mobile Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Implement and test iOS, Android and cross-platform mobile applications, native integrations, offline/sync, deep links and device behavior."
+    domains: ["software-engineering", "ui-ux-interaction"]
+    may_create_children: true
+    routing_priority: 95
+    routing_keywords: ["mobile", "android", "ios", "iphone", "ipad", "react native", "flutter", "kotlin", "swift", "phone app"]
+
+  - id: database-data-engineering-master
+    name: "Database & Data Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Design and optimise schemas, queries, indexes, migrations, transactions and data pipelines."
+    domains: ["data-databases", "software-engineering"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["database", "sql", "postgres", "supabase", "schema", "migration", "query", "index", "data pipeline"]
+
+  - id: distributed-cloud-systems-master
+    name: "Distributed & Cloud Systems Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Engineer distributed, concurrent, containerised and cloud systems with observable and scalable runtime behavior."
+    domains: ["networks-cloud", "software-engineering", "computer-science"]
+    may_create_children: true
+    routing_priority: 85
+    routing_keywords: ["cloud", "distributed", "container", "docker", "kubernetes", "network", "concurrency", "scale", "observability"]
+
+  - id: ai-agent-engineering-master
+    name: "AI & Agent Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Engineer AI/LLM/agent systems, tools, RAG, model integration, evaluations and deterministic authority boundaries."
+    domains: ["artificial-intelligence", "software-engineering"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["ai", "agent", "llm", "model", "rag", "embedding", "tool calling", "inference"]
+
+  - id: integration-automation-master
+    name: "Integration & Automation Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Engineer reliable external API integrations, connectors, webhooks and workflow automation."
+    domains: ["software-engineering", "networks-cloud"]
+    may_create_children: true
+    routing_priority: 85
+    routing_keywords: ["integration", "connector", "automation", "webhook", "oauth", "third-party", "api integration"]
+
+  - id: debugging-root-cause-master
+    name: "Debugging & Root-Cause Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Reproduce failures, isolate root causes from evidence, repair defects and prove regressions are closed."
+    domains: ["software-engineering", "computer-science"]
+    may_create_children: true
+    routing_priority: 100
+    routing_keywords: ["bug", "debug", "error", "broken", "failing", "failure", "root cause", "fix"]
+
+  - id: performance-optimisation-master
+    name: "Performance & Optimisation Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Profile and optimise latency, throughput, memory, queries and resource/cost efficiency using reproducible measurements."
+    domains: ["software-engineering", "computer-science", "data-databases"]
+    may_create_children: true
+    routing_priority: 95
+    routing_keywords: ["performance", "slow", "latency", "throughput", "memory", "profile", "optimise", "optimize"]
+
+  - id: formal-correctness-master
+    name: "Formal Methods & Correctness Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Define invariants, state machines, contracts and proof-oriented correctness checks for high-risk software behavior."
+    domains: ["mathematics-logic", "computer-science", "software-engineering"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["correctness", "invariant", "state machine", "formal", "proof", "contract", "race condition"]
+
+  - id: qa-test-engineering-master
+    name: "QA & Test Engineering Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Design and implement unit, integration, end-to-end and regression test strategies with reliable fixtures and release evidence."
+    domains: ["software-engineering"]
+    may_create_children: true
+    routing_priority: 100
+    routing_keywords: ["test", "testing", "qa", "quality", "regression", "unit test", "integration test", "e2e"]
+
+  - id: fuzz-property-mutation-master
+    name: "Property, Fuzz & Mutation Testing Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Use generative, property-based, fuzz and mutation techniques to expose edge cases and weak test suites."
+    domains: ["software-engineering", "computer-science"]
+    may_create_children: true
+    routing_priority: 95
+    routing_keywords: ["fuzz", "property test", "mutation test", "edge case", "boundary", "randomized test"]
+
+  - id: reliability-chaos-recovery-master
+    name: "Reliability, Chaos & Recovery Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Test retries, idempotency, failure injection, degraded dependencies, recovery, rollback and resilience."
+    domains: ["software-engineering", "networks-cloud"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["reliability", "recovery", "rollback", "chaos", "retry", "idempotency", "resilience", "failover"]
+
+  - id: developer-tooling-ci-master
+    name: "Developer Tooling & CI Master"
+    parent: "algorithmic-engineering-director"
+    mission: "Engineer reproducible builds, CI/CD, static analysis, developer tooling and automated quality gates."
+    domains: ["software-engineering", "networks-cloud"]
+    may_create_children: true
+    routing_priority: 90
+    routing_keywords: ["ci", "cd", "github actions", "build", "lint", "typecheck", "tooling", "pipeline"]
+
   - id: security-master
     name: "Sigma Chief Cybersecurity Officer / Security Master"
     parent: "sigma-governor"
@@ -480,6 +643,15 @@ assurance_roles:
     may_create_children: false
     independent_from_primary_team: true
     may_block_release: true
+
+  - id: sigma-solution-judge
+    name: "Sigma Independent Code Reviewer / Solution Judge"
+    parent: "algorithmic-engineering-director"
+    mission: "Independently compare engineering candidates, challenge correctness and test evidence, reject unverified solutions and record why the selected candidate is strongest under explicit criteria."
+    domains: ["software-engineering", "computer-science"]
+    may_create_children: false
+    independent_from_primary_team: true
+    may_reject_solution: true
 
   - id: sigma-synthesis-director
     name: "Sigma Synthesis Director"
