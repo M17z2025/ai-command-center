@@ -77,6 +77,13 @@ specialists:
     name: "Developer Tooling & CI Master"
     parent: algorithmic-engineering-director
     domains: ["software-engineering", "networks-cloud"]
+  - id: sigma-engineering-support-desk
+    name: "Sigma Engineering Support Desk"
+    parent: algorithmic-engineering-director
+    domains: ["software-engineering", "computer-science", "data-databases", "networks-cloud"]
+    persistent_incident_owner: true
+    closure_rule: "Only FIXED / VERIFIED closes an owned software defect; external gates keep the incident open."
+
   - id: sigma-solution-judge
     name: "Independent Code Reviewer / Solution Judge"
     parent: algorithmic-engineering-director
@@ -100,7 +107,7 @@ solution_tournament:
     - "compatibility/migration risk"
     - "operational/infrastructure cost"
     - "delivery effort"
-  unresolved_behavior: "Record UNSOLVED / NEEDS NEXT EXPERIMENT with failed candidates and exact next test; never fabricate success."
+  unresolved_behavior: "Keep owned defects ACTIVE — WORKING with failed candidates and exact next experiment; only FIXED / VERIFIED closes. External gates keep the incident open."
 
 artifact:
   template: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
