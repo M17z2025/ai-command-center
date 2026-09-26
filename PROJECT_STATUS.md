@@ -6,7 +6,7 @@ Default branch: `main`
 
 ## Sigma Algorithmic Engineering & Solution Lab — Issue #45
 
-**IMPLEMENTATION CANDIDATE IN PROGRESS — SPECIALIST CODERS/TESTERS + EVIDENCE-BACKED SOLUTION TOURNAMENT.**
+**SPECIALIST CODERS/TESTERS + EVIDENCE-BACKED SOLUTION TOURNAMENT IMPLEMENTED ON PR #46 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**
 
 Issue #45 adds a permanent engineering problem-solving division with:
 - Algorithm & Complexity Master;
@@ -23,7 +23,10 @@ Applicable software missions are marked `algorithmic_engineering_required`. The 
 
 The governing rule is deliberately fail-honest: Sigma seeks the strongest evidence-backed solution available under the stated constraints, but if no candidate passes correctness/security hard gates it must record **UNSOLVED / NEEDS NEXT EXPERIMENT** rather than fabricate success.
 
-Exact-head CI evidence is required before merge/completion.
+Exact-head verification for candidate `0833eb59ab3d7e6b2df42bf343559821edc2a323`:
+- Sigma control-plane validation run `36243296451`: **SUCCESS**.
+- Sigma mesh runtime run `36243296507`: **SUCCESS**.
+- Runtime tests include specialist engineering routing plus durable `algorithmic-solution-report` and independent judge artifacts.
 
 ## Sigma Universal Expert Advisory & Development Planning Council — Issue #43
 
