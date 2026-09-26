@@ -7,6 +7,16 @@ A task is Done only when all applicable conditions are satisfied.
 - The plan records relevant expert recommendations, facts/assumptions/proposals, dependencies/gates, risks, phased delivery, ordered backlog/pull plan, acceptance criteria and exact next actions.
 - Material unresolved expert disagreement or evidence gaps are not silently omitted.
 
+## Broken-product rescue
+- A confirmed defect/regression is not Done while the Support Desk incident is ACTIVE, PARTIALLY REPAIRED, verification-pending or externally blocked.
+- The defect was reproduced or the inability to reproduce is explicitly evidenced.
+- Root cause and failed repair hypotheses are retained.
+- Regression coverage is added where practical.
+- Applicable exact-head build/test/security evidence passes.
+- Applicable deployed preview/staging user journey has been retested by Sigma Full User Tester.
+- The incident has the final state **FIXED / VERIFIED**.
+- If an external gate remains, the item stays open and records the exact gated action plus safe work that can continue.
+
 ## Algorithmic engineering
 - Applicable material software/technical work has a current Sigma Algorithmic Solution Report or equivalent evidence.
 - The problem, constraints, invariants and measurable acceptance criteria are explicit.

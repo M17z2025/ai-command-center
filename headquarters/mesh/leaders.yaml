@@ -239,6 +239,17 @@ leaders:
     routing_priority: 90
     routing_keywords: ["ci", "cd", "github actions", "build", "lint", "typecheck", "tooling", "pipeline"]
 
+  - id: sigma-engineering-support-desk
+    name: "Sigma Engineering Support Desk"
+    parent: "algorithmic-engineering-director"
+    mission: "Own confirmed broken-product incidents until FIXED / VERIFIED, continuously route debugging and repair specialists, retain failed attempts, and maintain the exact next experiment or genuine external gate."
+    domains: ["software-engineering", "computer-science", "data-databases", "networks-cloud"]
+    may_create_children: true
+    portfolio_wide: true
+    persistent_incident_owner: true
+    routing_priority: 120
+    routing_keywords: ["broken", "not working", "error", "failing", "failed", "bug", "debug", "fix", "repair", "regression", "crash", "stopped working"]
+
   - id: security-master
     name: "Sigma Chief Cybersecurity Officer / Security Master"
     parent: "sigma-governor"

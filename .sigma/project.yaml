@@ -21,6 +21,7 @@ product:
     - "Run independent Sigma Cybersecurity Division assurance for material development and release candidates"
     - "Create cross-disciplinary Sigma Development Advisory Plans for material development missions"
     - "Run algorithmic engineering solution tournaments with independent code/test review for applicable software missions"
+    - "Keep broken-product Engineering Support Desk incidents open until FIXED / VERIFIED"
     - "Require independent Sigma User Tester evidence for applicable user-facing releases"
     - "Run routed Sigma expert missions through critic, evidence-verification, repair and synthesis stages"
     - "Persist private mission/audit/learning state outside the public Git repository"
@@ -68,6 +69,8 @@ documentation:
   development_advisory_plan: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
   algorithmic_engineering_lab: "headquarters/engineering/README.md"
   algorithmic_solution_report: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
+  engineering_rescue_protocol: "docs/ENGINEERING_RESCUE_PROTOCOL.md"
+  engineering_rescue_report: "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md"
   mesh_runtime: "docs/SIGMA_MESH_RUNTIME.md"
 
 integrations:

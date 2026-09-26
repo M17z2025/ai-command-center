@@ -176,6 +176,7 @@ REQUIRED_ENGINEERING_ROLES = {
     "reliability-chaos-recovery-master",
     "developer-tooling-ci-master",
     "sigma-solution-judge",
+    "sigma-engineering-support-desk",
 }
 
 REQUIRED_SECURITY_ROLES = {
@@ -365,6 +366,7 @@ def validate_mesh(root: Path) -> list[str]:
             "team-formation",
             "parallel-analysis",
             "development-advisory-plan",
+            "engineering-rescue-mode",
             "algorithmic-solution-search",
             "engineering-independent-judge",
             "adversarial-critique",

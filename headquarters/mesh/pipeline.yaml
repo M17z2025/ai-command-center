@@ -57,6 +57,23 @@ stages:
       - "name owner/external gates"
       - "end with exact next executable actions"
 
+  - id: engineering-rescue-mode
+    purpose: "For confirmed broken/fix/regression missions, create a persistent Support Desk incident that remains open until FIXED / VERIFIED and continuously carries reproduction, root cause, failed repairs and the next experiment."
+    required_when: "rescue_mode_required"
+    owner: "sigma-engineering-support-desk"
+    artifact_template: "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md"
+    closure_state: "FIXED / VERIFIED"
+    open_states:
+      - "FIXED IN SOURCE / DEPLOYED VERIFICATION PENDING"
+      - "PARTIALLY REPAIRED — WORKING"
+      - "ACTIVE — WORKING / NEXT EXPERIMENT"
+      - "BLOCKED — EXTERNAL GATE"
+    rules:
+      - "Difficulty, repeated failed attempts or lack of a current solution never closes an owned defect."
+      - "Preserve reproduction evidence and failed repair history."
+      - "Continue other safe work when one repair path is externally blocked."
+      - "Do not claim FIXED / VERIFIED without exact repository and applicable deployed/user evidence."
+
   - id: algorithmic-solution-search
     purpose: "For applicable software/technical development, formalise the problem, generate competing solution candidates and define the executable test/benchmark evidence needed to select the strongest justified approach."
     required_when: "algorithmic_engineering_required"

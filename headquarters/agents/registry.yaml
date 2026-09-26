@@ -60,6 +60,7 @@ agents:
       - "reliability-chaos-recovery-master"
       - "developer-tooling-ci-master"
       - "sigma-solution-judge"
+      - "sigma-engineering-support-desk"
 
   - id: "engineering-director"
     name: "Engineering Director"

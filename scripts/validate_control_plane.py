@@ -39,6 +39,8 @@ REQUIRED = [
     "headquarters/engineering/README.md",
     "headquarters/engineering/team.yaml",
     "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md",
+    "docs/ENGINEERING_RESCUE_PROTOCOL.md",
+    "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md",
     "docs/architecture.md",
     "docs/deployment.md",
     ".github/workflows/sigma-control-plane.yml",
@@ -108,6 +110,16 @@ if registry_path.exists():
         errors.append("projects/registry.yaml must use algorithmic-engineering-director")
     if algorithmic_engineering.get("independent_judge") != "sigma-solution-judge":
         errors.append("projects/registry.yaml must use sigma-solution-judge")
+
+    engineering_rescue = defaults.get("engineering_rescue", {})
+    if engineering_rescue.get("required_for_broken_or_regressed_products") is not True:
+        errors.append("projects/registry.yaml must require engineering rescue for broken/regressed products")
+    if engineering_rescue.get("incident_owner") != "sigma-engineering-support-desk":
+        errors.append("projects/registry.yaml must use sigma-engineering-support-desk")
+    if engineering_rescue.get("normal_terminal_state") != "FIXED / VERIFIED":
+        errors.append("engineering rescue normal terminal state must be FIXED / VERIFIED")
+    if engineering_rescue.get("external_gate_keeps_incident_open") is not True:
+        errors.append("external gates must keep engineering rescue incidents open")
 
     projects = registry.get("projects", [])
     seen = set()

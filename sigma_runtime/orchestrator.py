@@ -216,6 +216,34 @@ class SigmaOrchestrator:
                     },
                 )
 
+            rescue_report = ""
+            if plan.rescue_mode_required:
+                rescue_report = self._engineering_rescue_report(
+                    plan,
+                    prompt,
+                    outputs,
+                    evidence,
+                    advisory_plan,
+                    algorithmic_report,
+                    engineering_judge,
+                    critic,
+                    verifier,
+                )
+                self.store.artifact(
+                    mission_id,
+                    "engineering-rescue-report",
+                    _bounded(rescue_report, 30000),
+                )
+                self.store.event(
+                    mission_id,
+                    "engineering-rescue-mode",
+                    {
+                        "owner": "sigma-engineering-support-desk",
+                        "verified": self._rescue_verified(evidence),
+                        "template": "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md",
+                    },
+                )
+
             final = self._synthesize(
                 plan,
                 prompt,
@@ -226,6 +254,7 @@ class SigmaOrchestrator:
                 advisory_plan,
                 algorithmic_report,
                 engineering_judge,
+                rescue_report,
             )
             unresolved = (
                 _verdict(critic) != "PASS"
@@ -235,7 +264,14 @@ class SigmaOrchestrator:
                     and _verdict(engineering_judge) != "PASS"
                 )
             )
-            status = "COMPLETE_WITH_UNVERIFIED_ITEMS" if unresolved else "COMPLETE"
+            if plan.rescue_mode_required:
+                status = (
+                    "FIXED_VERIFIED"
+                    if self._rescue_verified(evidence) and not unresolved
+                    else "ACTIVE_WORKING"
+                )
+            else:
+                status = "COMPLETE_WITH_UNVERIFIED_ITEMS" if unresolved else "COMPLETE"
             self.store.artifact(mission_id, "final", _bounded(final, 50000))
             self.store.finish(mission_id, status, final_output=final)
             self.store.event(mission_id, "synthesis", {"status": status})
@@ -253,8 +289,25 @@ class SigmaOrchestrator:
 
             return self.store.get_mission(mission_id) or {"id": mission_id, "status": status}
         except Exception as exc:
-            self.store.finish(mission_id, "FAILED", error=str(exc))
-            self.store.event(mission_id, "failed", {"error": str(exc)})
+            failure_status = (
+                "ACTIVE_WORKING_RUNTIME_ERROR"
+                if plan.rescue_mode_required
+                else "FAILED"
+            )
+            self.store.finish(mission_id, failure_status, error=str(exc))
+            self.store.event(
+                mission_id,
+                "runtime-error",
+                {
+                    "error": str(exc),
+                    "rescue_mode": plan.rescue_mode_required,
+                    "incident_owner": (
+                        "sigma-engineering-support-desk"
+                        if plan.rescue_mode_required
+                        else None
+                    ),
+                },
+            )
             raise
 
     def _parallel_analysis(
@@ -407,6 +460,59 @@ class SigmaOrchestrator:
             )
         )
 
+    def _engineering_rescue_report(
+        self,
+        plan: MissionPlan,
+        prompt: str,
+        outputs: dict[str, str],
+        evidence: list[dict[str, Any]],
+        advisory_plan: str = "",
+        algorithmic_report: str = "",
+        engineering_judge: str = "",
+        critic: str = "",
+        verifier: str = "",
+    ) -> str:
+        verified = self._rescue_verified(evidence)
+        system = (
+            "You are the Sigma Engineering Support Desk. Own this broken-product incident until "
+            "FIXED / VERIFIED. Summarize reproduction evidence, root-cause hypotheses, failed attempts, "
+            "repair work, regression/security/user-verification requirements and the exact next experiment. "
+            "If verification evidence is absent, the incident remains ACTIVE — WORKING. Difficulty or "
+            "failed attempts never justify closure. Do not claim a repair was executed or verified unless "
+            "the supplied evidence proves it. Follow templates/SIGMA_ENGINEERING_RESCUE_REPORT.md."
+        )
+        user = (
+            f"MISSION:\n{prompt}\n\nVERIFIED CLOSURE EVIDENCE PRESENT: {verified}\n\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
+            f"DEVELOPMENT PLAN:\n{advisory_plan[:10000]}\n\n"
+            f"ALGORITHMIC REPORT:\n{algorithmic_report[:12000]}\n\n"
+            f"SOLUTION JUDGE:\n{engineering_judge[:7000]}\n\n"
+            f"CRITIC:\n{critic[:7000]}\n\nVERIFIER:\n{verifier[:7000]}\n\n"
+            f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:18000]}"
+        )
+        return self.provider.complete(
+            CompletionRequest(
+                "engineering-rescue",
+                system,
+                user,
+                {"owner": "sigma-engineering-support-desk", "verified": verified},
+            )
+        )
+
+    @staticmethod
+    def _rescue_verified(evidence: list[dict[str, Any]]) -> bool:
+        for item in evidence:
+            if not isinstance(item, dict):
+                continue
+            kind = str(item.get("type") or item.get("kind") or "").strip().lower()
+            status = str(item.get("status") or "").strip().upper().replace(" ", "_")
+            if (
+                kind == "engineering-rescue-verification"
+                and status in {"FIXED_VERIFIED", "FIXED_/VERIFIED"}
+            ):
+                return True
+        return False
+
     def _critic(
         self,
         plan: MissionPlan,
@@ -497,6 +603,7 @@ class SigmaOrchestrator:
         advisory_plan: str = "",
         algorithmic_report: str = "",
         engineering_judge: str = "",
+        rescue_report: str = "",
     ) -> str:
         system = (
             "You are Sigma Synthesis Director. Merge the verified expert work into one coherent answer. "
@@ -508,9 +615,10 @@ class SigmaOrchestrator:
             f"MISSION:\n{prompt}\n\nRISK GATES: {plan.risk_gates}\n"
             f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
             f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:12000]}\n\n"
-            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:14000]}\n\n"
-            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}\n\n"
-            f"CRITIC:\n{critic[:9000]}\n\nVERIFIER:\n{verifier[:9000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:12000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:6000]}\n\n"
+            f"ENGINEERING RESCUE REPORT:\n{rescue_report[:10000]}\n\n"
+            f"CRITIC:\n{critic[:8000]}\n\nVERIFIER:\n{verifier[:8000]}\n\n"
             f"EVIDENCE COUNT: {len(evidence)}"
         )
         return self.provider.complete(CompletionRequest("synthesis", system, user))

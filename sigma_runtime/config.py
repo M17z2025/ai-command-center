@@ -154,6 +154,31 @@ class MeshConfig:
         )
         return bool(words & engineering_terms) or any(item in lowered for item in phrases)
 
+    @staticmethod
+    def is_rescue_mission(prompt: str) -> bool:
+        lowered = prompt.lower()
+        words = set(re.findall(r"[a-z0-9]+", lowered))
+        rescue_terms = {
+            "broken", "error", "errors", "failing", "failure", "failed",
+            "crash", "crashes", "bug", "bugs", "debug", "fix", "repair",
+            "regression", "stuck", "issue", "issues", "problem", "problems",
+        }
+        rescue_phrases = (
+            "not working",
+            "does not work",
+            "doesn't work",
+            "cannot login",
+            "can't login",
+            "cannot save",
+            "can't save",
+            "not connecting",
+            "stopped working",
+            "user journey fails",
+        )
+        return bool(words & rescue_terms) or any(
+            phrase in lowered for phrase in rescue_phrases
+        )
+
     def risk_gates_for(self, domain_ids: list[str], prompt: str) -> list[str]:
         domain_set = set(domain_ids)
         pillar_set = {

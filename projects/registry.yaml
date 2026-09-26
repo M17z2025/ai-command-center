@@ -26,7 +26,14 @@ defaults:
     report_template: "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md"
     director: "algorithmic-engineering-director"
     independent_judge: "sigma-solution-judge"
-    unresolved_behavior: "record unresolved problem and exact next experiment; never fabricate success"
+    unresolved_behavior: "keep owned defects open as ACTIVE — WORKING with an exact next experiment; never fabricate success"
+  engineering_rescue:
+    required_for_broken_or_regressed_products: true
+    protocol: "docs/ENGINEERING_RESCUE_PROTOCOL.md"
+    report_template: "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md"
+    incident_owner: "sigma-engineering-support-desk"
+    normal_terminal_state: "FIXED / VERIFIED"
+    external_gate_keeps_incident_open: true
 
 projects:
   - name: "Sigma Development Command Center"

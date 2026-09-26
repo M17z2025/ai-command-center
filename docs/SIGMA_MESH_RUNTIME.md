@@ -186,3 +186,15 @@ The model-backed runtime is not itself proof that code executed. It must not rep
 
 Correctness and mandatory security are hard gates. If no candidate satisfies the evidence requirements, Sigma must record the problem as unresolved and identify the next experiment.
 
+## Engineering Rescue Mode
+
+Prompts indicating broken/failing/regressed behavior set `rescue_mode_required=true`.
+
+The runtime persists `engineering-rescue-report` and an `engineering-rescue-mode` event owned by `sigma-engineering-support-desk`.
+
+The orchestration runtime deliberately does **not** convert a convincing proposed repair into a fixed status. Without supplied evidence of type `engineering-rescue-verification` and status `FIXED_VERIFIED`, a Rescue Mode mission remains `ACTIVE_WORKING`.
+
+This protects the product truth boundary: repository implementation, CI, deployed preview/staging and applicable Sigma Full User Tester evidence are what prove a real defect is fixed. The orchestration layer structures the investigation and retains ownership/evidence; it does not fabricate execution.
+
+A runtime error during Rescue Mode is persisted as `ACTIVE_WORKING_RUNTIME_ERROR`, not as a closed failed incident.
+

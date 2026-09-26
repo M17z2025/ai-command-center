@@ -75,6 +75,53 @@ class SigmaMeshRuntimeTests(unittest.TestCase):
         self.assertIn("performance-optimisation-master", plan.leaders)
         self.assertIn("qa-test-engineering-master", plan.leaders)
 
+    def test_router_activates_rescue_mode_for_broken_product(self):
+        plan = self.router.route(
+            "The backend is broken and login is not working. Fix the regression."
+        )
+        self.assertTrue(plan.rescue_mode_required)
+        self.assertIn("sigma-engineering-support-desk", plan.leaders)
+        self.assertIn("debugging-root-cause-master", plan.leaders)
+
+    def test_rescue_mode_stays_open_without_fixed_verified_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = MissionStore(Path(tmp) / "sigma.db")
+            provider = DeterministicTestProvider()
+            runtime = SigmaOrchestrator(self.config, self.router, provider, store)
+            result = runtime.run(
+                "The software is broken. Debug and fix the failing API.",
+                evidence=[{"id": "e1", "type": "reproduction", "status": "REPRODUCED"}],
+                requested_by="test",
+                max_cycles=2,
+            )
+            self.assertEqual(result["status"], "ACTIVE_WORKING")
+            self.assertTrue(result["plan"]["rescue_mode_required"])
+            self.assertIn("engineering-rescue-report", result["artifacts"])
+            self.assertIn(
+                "engineering-rescue-mode",
+                [event["stage"] for event in result["events"]],
+            )
+
+    def test_rescue_mode_can_close_only_with_fixed_verified_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = MissionStore(Path(tmp) / "sigma.db")
+            provider = DeterministicTestProvider()
+            runtime = SigmaOrchestrator(self.config, self.router, provider, store)
+            result = runtime.run(
+                "Fix the broken API regression.",
+                evidence=[
+                    {"id": "e1", "type": "reproduction", "status": "REPRODUCED"},
+                    {
+                        "id": "e2",
+                        "type": "engineering-rescue-verification",
+                        "status": "FIXED_VERIFIED",
+                    },
+                ],
+                requested_by="test",
+                max_cycles=2,
+            )
+            self.assertEqual(result["status"], "FIXED_VERIFIED")
+
     def test_router_selects_thinker_lenses(self):
         plan = self.router.route(
             "Formal proof limits for a computer algorithm and computation model."
