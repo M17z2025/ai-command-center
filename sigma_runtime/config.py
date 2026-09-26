@@ -118,6 +118,42 @@ class MeshConfig:
         phrase_terms = ("user journey", "pull plan", "development plan")
         return bool(words & word_terms) or any(term in lowered for term in phrase_terms)
 
+    @staticmethod
+    def is_algorithmic_engineering_mission(
+        prompt: str,
+        domain_ids: list[str],
+    ) -> bool:
+        engineering_domains = {
+            "computer-science",
+            "software-engineering",
+            "data-databases",
+            "networks-cloud",
+            "artificial-intelligence",
+            "ui-ux-interaction",
+        }
+        if not engineering_domains.intersection(domain_ids):
+            return False
+
+        lowered = prompt.lower()
+        words = set(re.findall(r"[a-z0-9]+", lowered))
+        engineering_terms = {
+            "build", "develop", "development", "code", "coding", "software",
+            "app", "application", "website", "platform", "feature", "fix",
+            "debug", "repair", "refactor", "implement", "implementation",
+            "algorithm", "architecture", "api", "backend", "frontend",
+            "database", "mobile", "android", "ios", "test", "testing",
+            "performance", "optimise", "optimize",
+        }
+        phrases = (
+            "root cause",
+            "system design",
+            "pull plan",
+            "development plan",
+            "solve this",
+            "find a solution",
+        )
+        return bool(words & engineering_terms) or any(item in lowered for item in phrases)
+
     def risk_gates_for(self, domain_ids: list[str], prompt: str) -> list[str]:
         domain_set = set(domain_ids)
         pillar_set = {
