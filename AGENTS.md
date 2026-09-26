@@ -111,6 +111,22 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
 
+## Mandatory Sigma Engineering Support Desk / Rescue Mode
+
+Any confirmed broken, regressed or user-journey-failing Sigma-managed product enters Engineering Rescue Mode under `sigma-engineering-support-desk`.
+
+For an owned software defect:
+- **FIXED / VERIFIED is the only normal terminal state**;
+- lack of a current fix, repeated failed repairs or technical difficulty keeps the incident **ACTIVE — WORKING**;
+- every repair attempt must preserve reproduction/root-cause evidence and the exact next experiment;
+- for non-trivial defects, brainstorm competing causes/repairs and eliminate them with evidence;
+- add regression coverage and retest the actual affected user journey;
+- do not label a defect fixed/working/complete/ready from source inspection, compile success or a plan alone;
+- an external/owner gate may block one required step, but the incident remains open and every other safe executable line of investigation continues;
+- never bypass security, invent credentials, incur unapproved spend or perform unsafe/destructive production actions in the name of persistence.
+
+Use `docs/ENGINEERING_RESCUE_PROTOCOL.md` and `templates/SIGMA_ENGINEERING_RESCUE_REPORT.md`.
+
 ## Mandatory Sigma Algorithmic Engineering & Solution Lab
 
 For material software/technical development, Sigma must invoke the Algorithmic Engineering & Solution Lab defined in `headquarters/engineering/README.md`.
