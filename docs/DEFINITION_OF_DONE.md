@@ -19,10 +19,19 @@ A task is Done only when all applicable conditions are satisfied.
 - Manual smoke test is documented for UI/device behaviour not covered automatically.
 
 ## Security
-- Authorization is enforced.
-- Tenant isolation is verified where applicable.
-- No secret or sensitive data leakage.
-- New dependencies/integrations have been security-considered.
+- The applicable Sigma Cybersecurity Division control matrix is completed against the exact commit/environment.
+- Authorization is enforced and hostile negative paths are tested where material.
+- Tenant/organisation isolation is verified with direct cross-boundary tests where applicable.
+- Database/RLS/storage isolation is verified where applicable.
+- No secret or sensitive-data leakage is known; secret scanning is evidenced where supported.
+- Dependencies/supply-chain and external integrations have security evidence.
+- Infrastructure/container/network/edge controls are reviewed where applicable.
+- API/webhook/mobile/session/replay controls are tested where applicable.
+- AI/agent prompt-tool injection, authority and data-exfiltration boundaries are tested where applicable.
+- Backup/restore/recovery controls are evidenced for persistent critical data.
+- No BLOCKER, CRITICAL or HIGH security finding remains open unless an explicit owner/risk-owner exception is recorded where policy permits.
+- No required security control is left NOT VERIFIED.
+- The independent Sigma Security Gatekeeper has issued PASS or PASS WITH RECORDED NON-BLOCKING FINDINGS.
 
 ## Data
 - Schema changes are migrated safely.
