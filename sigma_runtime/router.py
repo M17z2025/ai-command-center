@@ -85,10 +85,14 @@ class MissionRouter:
             ][:max_domains]
 
         development_planning_required = self.config.is_development_mission(prompt)
+        rescue_mode_required = self.config.is_rescue_mission(prompt)
+        if rescue_mode_required and "software-engineering" not in selected:
+            selected = ["software-engineering", *selected]
+            selected = list(dict.fromkeys(selected))[:max_domains]
+
         algorithmic_engineering_required = self.config.is_algorithmic_engineering_mission(
             prompt, selected
         )
-        rescue_mode_required = self.config.is_rescue_mission(prompt)
 
         leader_ids: list[str] = []
         specialists: list[Specialist] = []
@@ -99,7 +103,7 @@ class MissionRouter:
             domain_leaders = self.config.leaders_for(
                 domain_id,
                 prompt,
-                max_leaders=5 if algorithmic_engineering_required else 3,
+                max_leaders=8 if algorithmic_engineering_required else 3,
             )
             for leader in domain_leaders:
                 leader_id = leader["id"]
