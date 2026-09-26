@@ -90,6 +90,14 @@ if registry_path.exists():
     if security_assurance.get("fail_closed_on_missing_required_evidence") is not True:
         errors.append("projects/registry.yaml security assurance must fail closed on missing required evidence")
 
+    advisory_planning = defaults.get("advisory_planning", {})
+    if advisory_planning.get("required_for_material_development") is not True:
+        errors.append("projects/registry.yaml must require advisory planning for material development")
+    if advisory_planning.get("planning_director") != "sigma-development-planning-director":
+        errors.append("projects/registry.yaml must use sigma-development-planning-director")
+    if advisory_planning.get("research_fallback") != "research-director":
+        errors.append("projects/registry.yaml advisory planning must retain research-director fallback")
+
     projects = registry.get("projects", [])
     seen = set()
     for idx, project in enumerate(projects):
