@@ -52,7 +52,7 @@ projects:
   - project: "Lycia Zambia"
     repository: "M17z2025/lycia-zambia"
     aliases: ["lycia zambia", "lycia.co.zm", "mines minerals marketplace", "zambia mining"]
-    domain_team: ["mining-resources-master", "legal-law-advisory-master", "finance-all-aspects-master", "business-operations-master", "marketing-brand-master", "geospatial-specialist"]
+    domain_team: ["mining-resources-master", "earth-space-master", "legal-law-advisory-master", "finance-all-aspects-master", "business-operations-master", "marketing-brand-master"]
   - project: "Marketit"
     repository: "M17z2025/umarketit"
     aliases: ["marketit", "umarketit", "marketit development loop"]
