@@ -126,9 +126,33 @@ REQUIRED_ASSURANCE_ROLES = {
     "sigma-mission-router",
     "sigma-independent-critic",
     "sigma-evidence-verifier",
+    "sigma-development-planning-director",
     "sigma-security-gatekeeper",
     "sigma-synthesis-director",
     "evaluation-evolution-controller",
+}
+
+REQUIRED_ADVISORY_ROLES = {
+    "universal-knowledge-research-master",
+    "legal-law-advisory-master",
+    "marketing-brand-master",
+    "hr-people-master",
+    "sales-commercial-master",
+    "mobile-app-engineering-master",
+    "business-operations-master",
+    "finance-all-aspects-master",
+    "engineering-advisory-master",
+    "aerospace-engineering-master",
+    "coding-software-master",
+    "graphic-design-master",
+    "fashion-design-master",
+    "photography-master",
+    "film-director-master",
+    "film-production-master",
+    "film-editing-master",
+    "scriptwriting-master",
+    "songwriting-master",
+    "sigma-development-planning-director",
 }
 
 REQUIRED_SECURITY_ROLES = {
@@ -252,6 +276,13 @@ def validate_mesh(root: Path) -> list[str]:
                 + ", ".join(missing_security_roles)
             )
 
+        missing_advisory_roles = sorted(REQUIRED_ADVISORY_ROLES - leader_ids)
+        if missing_advisory_roles:
+            errors.append(
+                "Missing required Sigma Advisory Council roles: "
+                + ", ".join(missing_advisory_roles)
+            )
+
         core_registry_ids: set[str] = set()
         core_registry_path = root / "headquarters/agents/registry.yaml"
         if core_registry_path.exists():
@@ -303,6 +334,7 @@ def validate_mesh(root: Path) -> list[str]:
             "cognitive-lens-selection",
             "team-formation",
             "parallel-analysis",
+            "development-advisory-plan",
             "adversarial-critique",
             "evidence-verification",
             "security-assurance",

@@ -19,6 +19,7 @@ product:
     - "Create repository-backed implementation handoffs and work orders"
     - "Enforce security, verification and definition-of-done gates"
     - "Run independent Sigma Cybersecurity Division assurance for material development and release candidates"
+    - "Create cross-disciplinary Sigma Development Advisory Plans for material development missions"
     - "Require independent Sigma User Tester evidence for applicable user-facing releases"
     - "Run routed Sigma expert missions through critic, evidence-verification, repair and synthesis stages"
     - "Persist private mission/audit/learning state outside the public Git repository"
@@ -62,6 +63,8 @@ documentation:
   status: "PROJECT_STATUS.md"
   user_tester: "docs/SIGMA_USER_TESTER.md"
   cybersecurity_division: "headquarters/security/README.md"
+  advisory_council: "headquarters/advisory/README.md"
+  development_advisory_plan: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
   mesh_runtime: "docs/SIGMA_MESH_RUNTIME.md"
 
 integrations:

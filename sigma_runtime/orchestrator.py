@@ -74,11 +74,19 @@ class SigmaOrchestrator:
             for specialist_id, output in outputs.items():
                 self.store.artifact(mission_id, f"expert/{specialist_id}", _bounded(output))
 
+            advisory_plan = ""
+            if plan.development_planning_required:
+                advisory_plan = self._development_plan(
+                    plan, prompt, outputs, evidence
+                )
+
             critic = ""
             verifier = ""
             for cycle in range(max_cycles + 1):
-                critic = self._critic(plan, prompt, outputs)
-                verifier = self._verify(plan, prompt, outputs, critic, evidence)
+                critic = self._critic(plan, prompt, outputs, advisory_plan)
+                verifier = self._verify(
+                    plan, prompt, outputs, critic, evidence, advisory_plan
+                )
                 self.store.event(mission_id, "adversarial-critique", {
                     "cycle": cycle, "verdict": _verdict(critic), "text": _bounded(critic, 8000)
                 })
@@ -90,9 +98,31 @@ class SigmaOrchestrator:
                 if cycle >= max_cycles:
                     break
                 outputs = self._repair(plan, prompt, outputs, critic, verifier, evidence)
+                if plan.development_planning_required:
+                    advisory_plan = self._development_plan(
+                        plan, prompt, outputs, evidence, critic, verifier
+                    )
                 self.store.event(mission_id, "repair-loop", {"cycle": cycle + 1})
 
-            final = self._synthesize(plan, prompt, outputs, critic, verifier, evidence)
+            if plan.development_planning_required:
+                advisory_plan = self._development_plan(
+                    plan, prompt, outputs, evidence, critic, verifier
+                )
+                self.store.artifact(
+                    mission_id, "development-advisory-plan", _bounded(advisory_plan, 30000)
+                )
+                self.store.event(
+                    mission_id,
+                    "development-advisory-plan",
+                    {
+                        "director": "sigma-development-planning-director",
+                        "template": "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md",
+                    },
+                )
+
+            final = self._synthesize(
+                plan, prompt, outputs, critic, verifier, evidence, advisory_plan
+            )
             unresolved = _verdict(critic) != "PASS" or _verdict(verifier) != "PASS"
             status = "COMPLETE_WITH_UNVERIFIED_ITEMS" if unresolved else "COMPLETE"
             self.store.artifact(mission_id, "final", _bounded(final, 50000))
@@ -163,13 +193,60 @@ class SigmaOrchestrator:
             CompletionRequest("analysis", system, user, {"domain": domain_id, "specialist": specialist.id})
         )
 
-    def _critic(self, plan: MissionPlan, prompt: str, outputs: dict[str, str]) -> str:
+    def _development_plan(
+        self,
+        plan: MissionPlan,
+        prompt: str,
+        outputs: dict[str, str],
+        evidence: list[dict[str, Any]],
+        critic: str = "",
+        verifier: str = "",
+    ) -> str:
+        system = (
+            "You are Sigma Development Planning Director. Turn the routed expert work into a "
+            "practical development advisory plan that an implementation team can execute. "
+            "Separate verified facts, assumptions and proposals. Preserve material expert disagreement. "
+            "Cover product scope, architecture/platform, mobile where relevant, UX/UI/creative direction, "
+            "legal/compliance, security/privacy, business/marketing/sales/HR/finance implications where applicable, "
+            "dependencies, owner gates, risks, delivery phases, an ordered backlog/pull plan, acceptance criteria, "
+            "test/evidence requirements, specialist ownership and exact next executable actions. "
+            "Do not invent evidence or authority."
+        )
+        user = (
+            f"MISSION:\n{prompt}\n\n"
+            f"DOMAINS: {plan.domains}\nLEADERS: {plan.leaders}\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:42000]}\n\n"
+            f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:16000]}\n\n"
+            f"CRITIC FEEDBACK:\n{critic[:8000]}\n\n"
+            f"VERIFIER FEEDBACK:\n{verifier[:8000]}\n\n"
+            "Follow the structure of templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md and finish with exact next actions."
+        )
+        return self.provider.complete(
+            CompletionRequest(
+                "development-plan",
+                system,
+                user,
+                {"director": "sigma-development-planning-director"},
+            )
+        )
+
+    def _critic(
+        self,
+        plan: MissionPlan,
+        prompt: str,
+        outputs: dict[str, str],
+        advisory_plan: str = "",
+    ) -> str:
         system = (
             "You are Sigma Independent Critic. You are independent from the primary team. "
-            "Attempt to falsify the analyses, find contradictions, hidden assumptions, unsafe leaps "
-            "and missing failure cases. Start with exactly VERDICT: PASS or VERDICT: REPAIR."
+            "Attempt to falsify the analyses and any development advisory plan, find contradictions, "
+            "hidden assumptions, unsafe leaps, missing dependencies and failure cases. "
+            "Start with exactly VERDICT: PASS or VERDICT: REPAIR."
         )
-        user = f"MISSION:\n{prompt}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:50000]}"
+        user = (
+            f"MISSION:\n{prompt}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:42000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:16000]}"
+        )
         return self.provider.complete(CompletionRequest("critic", system, user))
 
     def _verify(
@@ -179,6 +256,7 @@ class SigmaOrchestrator:
         outputs: dict[str, str],
         critic: str,
         evidence: list[dict[str, Any]],
+        advisory_plan: str = "",
     ) -> str:
         system = (
             "You are Sigma Evidence Verifier. Check whether material claims are actually supported "
@@ -189,7 +267,9 @@ class SigmaOrchestrator:
         )
         user = (
             f"MISSION:\n{prompt}\n\nEVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:25000]}\n\n"
-            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:35000]}\n\nCRITIC:\n{critic[:10000]}"
+            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:30000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:14000]}\n\n"
+            f"CRITIC:\n{critic[:10000]}"
         )
         return self.provider.complete(CompletionRequest("verifier", system, user))
 
@@ -227,6 +307,7 @@ class SigmaOrchestrator:
         critic: str,
         verifier: str,
         evidence: list[dict[str, Any]],
+        advisory_plan: str = "",
     ) -> str:
         system = (
             "You are Sigma Synthesis Director. Merge the verified expert work into one coherent answer. "
@@ -236,7 +317,8 @@ class SigmaOrchestrator:
         )
         user = (
             f"MISSION:\n{prompt}\n\nRISK GATES: {plan.risk_gates}\n"
-            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:45000]}\n\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:36000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:18000]}\n\n"
             f"CRITIC:\n{critic[:10000]}\n\nVERIFIER:\n{verifier[:10000]}\n\n"
             f"EVIDENCE COUNT: {len(evidence)}"
         )

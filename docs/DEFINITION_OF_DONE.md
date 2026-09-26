@@ -2,6 +2,11 @@
 
 A task is Done only when all applicable conditions are satisfied.
 
+## Advisory plan
+- Material development has a current repository-backed Sigma Development Advisory Plan or equivalent approved work plan.
+- The plan records relevant expert recommendations, facts/assumptions/proposals, dependencies/gates, risks, phased delivery, ordered backlog/pull plan, acceptance criteria and exact next actions.
+- Material unresolved expert disagreement or evidence gaps are not silently omitted.
+
 ## Functional
 - Acceptance criteria are met.
 - Primary and failure paths behave correctly.

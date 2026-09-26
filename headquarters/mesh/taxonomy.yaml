@@ -44,7 +44,7 @@ pillars:
         subjects: ["machine learning", "deep learning", "foundation models", "language models", "computer vision", "robotics", "reinforcement learning", "agent systems", "reasoning systems", "AI evaluation", "AI safety"]
       - id: software-engineering
         name: "Coding & Software Engineering"
-        subjects: ["software architecture", "programming languages", "API design", "web engineering", "mobile engineering", "testing", "DevOps", "SRE", "CI/CD", "developer tooling", "performance engineering"]
+        subjects: ["software architecture", "programming languages", "API design", "web engineering", "mobile engineering", "iOS development", "Android development", "React Native", "Flutter", "mobile app architecture", "offline sync", "push notifications", "deep links", "app store engineering", "testing", "DevOps", "SRE", "CI/CD", "developer tooling", "performance engineering"]
       - id: data-databases
         name: "Data & Database Systems"
         subjects: ["relational databases", "NoSQL", "data modelling", "data engineering", "data warehouses", "vector databases", "search", "information retrieval", "knowledge graphs", "data governance"]
@@ -97,7 +97,7 @@ pillars:
         subjects: ["industrial design", "ergonomics", "human factors", "product engineering", "design for manufacture", "design systems"]
       - id: textiles-fashion-wearables
         name: "Fashion, Clothing & Wearable Technology"
-        subjects: ["textile science", "garment construction", "fashion design", "haute couture", "footwear", "wearable technology", "smart textiles"]
+        subjects: ["textile science", "garment construction", "fashion design", "fashion collections", "haute couture", "ready-to-wear", "footwear", "fashion manufacturing", "wearable technology", "smart textiles"]
 
   - id: health-medical-sciences
     name: "Health & Medical Sciences"
@@ -166,10 +166,10 @@ pillars:
         subjects: ["operations management", "supply chain logistics", "procurement", "inventory", "warehousing", "transport logistics", "quality management"]
       - id: people-hr
         name: "Human Resources & People Systems"
-        subjects: ["human resources", "talent", "compensation", "performance management", "employment practice", "workforce planning", "leadership development"]
+        subjects: ["human resources", "people operations", "recruitment", "talent", "onboarding", "compensation", "benefits", "performance management", "employment practice", "workforce planning", "organisation design", "culture", "employee relations", "leadership development"]
       - id: marketing-sales-growth
         name: "Marketing, Sales & Growth"
-        subjects: ["marketing", "brand strategy", "consumer behaviour", "sales", "pricing", "growth", "digital marketing", "market research"]
+        subjects: ["marketing", "brand strategy", "positioning", "consumer behaviour", "sales", "sales operations", "CRM", "pipeline management", "customer success", "account management", "pricing", "growth", "digital marketing", "SEO", "social media", "campaigns", "market research"]
       - id: product-project-programme
         name: "Product, Project & Programme Management"
         subjects: ["product management", "project management", "programme management", "portfolio management", "requirements", "delivery governance"]
@@ -268,19 +268,19 @@ pillars:
     domains:
       - id: literature-writing
         name: "Literature & Writing"
-        subjects: ["literary criticism", "creative writing", "novels", "poetry", "scriptwriting", "screenwriting", "playwriting", "copywriting", "narrative design"]
+        subjects: ["literary criticism", "creative writing", "novels", "poetry", "scriptwriting", "screenwriting", "screenplays", "treatments", "dialogue", "character arcs", "playwriting", "copywriting", "narrative design"]
       - id: music-audio
         name: "Music & Audio Arts"
-        subjects: ["music theory", "composition", "songwriting", "lyricism", "orchestration", "audio engineering", "sound design", "acoustics", "ethnomusicology"]
+        subjects: ["music theory", "composition", "songwriting", "songwriting across genres", "lyricism", "melody", "harmony", "arrangement", "orchestration", "record production", "audio engineering", "sound design", "acoustics", "ethnomusicology"]
       - id: visual-art-graphic-design
         name: "Visual Arts & Graphic Design"
-        subjects: ["fine art", "art history", "graphic design", "illustration", "photography", "visual communication", "branding"]
+        subjects: ["fine art", "art history", "graphic design", "illustration", "photography", "portrait photography", "product photography", "commercial photography", "editorial photography", "lighting", "visual communication", "branding", "typography", "layout"]
       - id: ui-ux-interaction
         name: "UI, UX & Interaction Design"
         subjects: ["UI design", "UX design", "interaction design", "information architecture", "service design", "accessibility", "design research"]
       - id: film-animation
         name: "Film, Cinematography & Animation"
-        subjects: ["cinematography", "film direction", "editing", "production design", "animation", "VFX", "motion design"]
+        subjects: ["cinematography", "film direction", "performance direction", "shot design", "film production", "producing", "production planning", "editing", "post-production", "colour grading", "sound post", "production design", "animation", "VFX", "motion design", "documentary", "commercial video"]
       - id: performing-arts
         name: "Performing Arts"
         subjects: ["theatre production", "acting", "dance", "choreography", "stagecraft", "performance studies"]

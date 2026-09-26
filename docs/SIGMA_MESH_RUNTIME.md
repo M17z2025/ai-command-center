@@ -150,3 +150,24 @@ python scripts/sigma_mesh_runtime.py --db /tmp/sigma-runtime.db smoke
 ```
 
 A successful smoke proves routing, expert fan-out, critique, verification, repair, synthesis and persistence. It does not prove the quality of a live model provider.
+
+## Development advisory planning
+
+For prompts classified as material development missions, the runtime sets `development_planning_required=true` in the mission plan.
+
+The router may select multiple prompt-specific permanent advisers for the same taxonomy domain (for example marketing + sales, or film direction + production + editing) when their routing keywords are materially present.
+
+After parallel expert analysis, the runtime invokes the **Sigma Development Planning Director** to create a structured development advisory plan. The Independent Critic and Evidence Verifier receive that plan alongside the expert analyses. When repair occurs, the plan is regenerated from the repaired expert work.
+
+The final plan is persisted as the mission artifact:
+
+`development-advisory-plan`
+
+and the mission event:
+
+`development-advisory-plan`.
+
+The plan follows `templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md` and is intended to contain an ordered backlog/pull plan, acceptance criteria, evidence requirements, specialist ownership and exact next executable actions.
+
+This runtime behavior does not claim that a plan is legally, financially or technically verified beyond the evidence and assurance stages actually completed.
+

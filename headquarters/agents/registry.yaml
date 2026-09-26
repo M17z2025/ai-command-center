@@ -29,6 +29,13 @@ agents:
       - "ai-security-master"
       - "ai-infrastructure-master"
 
+  - id: "sigma-development-planning-director"
+    name: "Sigma Development Planning Director"
+    role: "Cross-disciplinary development advice, executable planning and ordered pull-plan handoff"
+    parent: "sigma-chief-of-staff"
+    status: "registered"
+    independent_from_single_domain: true
+
   - id: "engineering-director"
     name: "Engineering Director"
     role: "Software, systems, architecture and delivery engineering"

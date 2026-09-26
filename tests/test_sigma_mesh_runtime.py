@@ -38,6 +38,33 @@ class SigmaMeshRuntimeTests(unittest.TestCase):
                 "expires when the mission closes",
             )
 
+    def test_router_selects_named_advisory_specialists(self):
+        mobile = self.router.route(
+            "Build a mobile Android and iOS app with a clear development plan."
+        )
+        self.assertTrue(mobile.development_planning_required)
+        self.assertIn("mobile-app-engineering-master", mobile.leaders)
+
+        film = self.router.route(
+            "Create a film production, directing, editing and script development plan."
+        )
+        self.assertTrue(film.development_planning_required)
+        self.assertTrue(
+            {
+                "film-director-master",
+                "film-production-master",
+                "film-editing-master",
+                "scriptwriting-master",
+            }
+            & set(film.leaders)
+        )
+
+        commercial = self.router.route(
+            "Develop a marketing and sales plan for a new business product."
+        )
+        self.assertIn("marketing-brand-master", commercial.leaders)
+        self.assertIn("sales-commercial-master", commercial.leaders)
+
     def test_router_selects_thinker_lenses(self):
         plan = self.router.route(
             "Formal proof limits for a computer algorithm and computation model."
@@ -66,6 +93,16 @@ class SigmaMeshRuntimeTests(unittest.TestCase):
             self.assertIn("learning-candidate", stages)
             self.assertTrue(store.list_lessons())
             self.assertGreaterEqual(provider.critic_calls, 2)
+            self.assertTrue(result["plan"]["development_planning_required"])
+            self.assertIn("development-advisory-plan", result["artifacts"])
+            self.assertIn(
+                "SIGMA DEVELOPMENT ADVISORY PLAN",
+                result["artifacts"]["development-advisory-plan"],
+            )
+            self.assertIn(
+                "development-advisory-plan",
+                [event["stage"] for event in result["events"]],
+            )
 
     def test_store_does_not_promote_lessons_automatically(self):
         with tempfile.TemporaryDirectory() as tmp:

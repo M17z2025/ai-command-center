@@ -28,6 +28,17 @@ Acts as implementation and problem-solving agent. ChatGPT should:
 - create PRs where appropriate;
 - report concrete blockers rather than generic uncertainty.
 
+### Sigma Expert Advisory & Development Planning Council
+Acts as the cross-disciplinary planning layer for material development. The council:
+- routes the smallest sufficient set of relevant experts;
+- uses the Research Director as fallback for unknown subjects;
+- creates a durable development advisory plan before major implementation;
+- combines product, architecture, mobile, UX/creative, law/compliance, security, commercial, marketing, sales, HR, finance and other relevant advice;
+- preserves disagreement, assumptions and evidence gaps;
+- produces phased delivery, an ordered backlog/pull plan, acceptance criteria and exact next actions.
+
+The planning director does not replace implementation, security assurance, legal sign-off or owner authority.
+
 ### Sigma Cybersecurity Division
 Acts as the independent portfolio security assurance function. It is led by the Security Master and specialist cells defined under `headquarters/security/`. It must:
 - review every material development/release mission across all applicable trust boundaries;

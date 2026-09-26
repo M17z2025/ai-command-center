@@ -43,6 +43,20 @@ stages:
     purpose: "Share models, dependencies, constraints and contradictions across experts."
     required_when: "more_than_one_domain"
 
+  - id: development-advisory-plan
+    purpose: "For material development missions, synthesize relevant domain advice into an executable repository-backed development plan before execution."
+    required_when: "material_development_mission"
+    director: "sigma-development-planning-director"
+    artifact_template: "templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md"
+    requirements:
+      - "state objective, users, facts, assumptions and proposals"
+      - "preserve material expert disagreement"
+      - "cover architecture, UX/creative, legal, security, business/commercial and operational implications where applicable"
+      - "produce delivery phases and an ordered backlog / pull plan"
+      - "define acceptance criteria and evidence/test requirements"
+      - "name owner/external gates"
+      - "end with exact next executable actions"
+
   - id: adversarial-critique
     purpose: "Independent critic attempts to break, falsify or find unsafe assumptions in the proposed result."
     required_for_material_work: true

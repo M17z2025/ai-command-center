@@ -70,6 +70,16 @@ This repository is public. It contains non-secret governance metadata and links 
 
 Issue: #20
 
+## Universal Expert Advisory & Development Planning Council
+
+The **Sigma Universal Expert Advisory & Development Planning Council** converts owner goals into executable cross-disciplinary development plans.
+
+- Charter: [`advisory/README.md`](./advisory/README.md)
+- Machine-readable expert team: [`advisory/team.yaml`](./advisory/team.yaml)
+- Plan template: [`../templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md`](../templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md)
+
+Permanent expert coverage includes research/full-knowledge routing, law, marketing, HR, sales, mobile apps, business, finance, engineering, aerospace, coding, graphic design, fashion, photography, film direction/production/editing, scriptwriting, songwriting and the wider Sigma taxonomy. Unknown subjects fall back to evidence-backed research and bounded specialist creation.
+
 ## Cybersecurity Division
 
 The **Sigma Cybersecurity Division** is the permanent independent security assurance function for every Sigma-managed product and release candidate.

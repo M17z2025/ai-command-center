@@ -38,6 +38,7 @@ class MissionPlan:
     cognitive_methods: list[str]
     specialists: list[Specialist]
     risk_gates: list[str]
+    development_planning_required: bool
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -87,22 +88,26 @@ class MissionRouter:
         prohibitions = list(factory.get("default_prohibited_actions", []))
 
         for domain_id in selected:
-            leader = self.config.leader_for(domain_id)
-            leader_id = leader["id"]
-            if leader_id not in leader_ids:
-                leader_ids.append(leader_id)
-            specialists.append(
-                Specialist(
-                    id=f"temp-{mission_id[:8]}-{domain_id}"[:96],
-                    parent=leader_id,
-                    mission=f"Analyze the mission only within the {domain_id} scope.",
-                    domain_scope=[domain_id],
-                    allowed_tools=["model-inference", "mission-evidence"],
-                    prohibited_actions=prohibitions,
-                    evidence_requirements=["follow headquarters/mesh/evidence.yaml"],
-                    expiry_or_review_condition="expires when the mission closes",
+            domain_leaders = self.config.leaders_for(domain_id, prompt)
+            for leader in domain_leaders:
+                leader_id = leader["id"]
+                if leader_id not in leader_ids:
+                    leader_ids.append(leader_id)
+                specialists.append(
+                    Specialist(
+                        id=f"temp-{mission_id[:8]}-{domain_id}-{leader_id}"[:96],
+                        parent=leader_id,
+                        mission=(
+                            f"Analyze the mission within the {domain_id} scope, "
+                            f"using the specialist remit of {leader.get('name', leader_id)}."
+                        ),
+                        domain_scope=[domain_id],
+                        allowed_tools=["model-inference", "mission-evidence"],
+                        prohibited_actions=prohibitions,
+                        evidence_requirements=["follow headquarters/mesh/evidence.yaml"],
+                        expiry_or_review_condition="expires when the mission closes",
+                    )
                 )
-            )
 
         thinker_scores: list[tuple[int, str]] = []
         selected_set = set(selected)
@@ -137,4 +142,5 @@ class MissionRouter:
             cognitive_methods=method_ids,
             specialists=specialists,
             risk_gates=self.config.risk_gates_for(selected, prompt),
+            development_planning_required=self.config.is_development_mission(prompt),
         )
