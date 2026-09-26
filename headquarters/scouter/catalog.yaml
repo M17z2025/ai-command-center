@@ -1,0 +1,1664 @@
+{
+  "schema_version": 1,
+  "catalog_id": "sigma-scouter-catalog-v1",
+  "generated_on": "2026-09-26",
+  "rule": "Only ACCEPT and FORK_CANDIDATE entries have verified open-code rights for the stated use; every adoption still requires project-specific engineering, legal/licence and security review.",
+  "discovery_queries": [
+    "site:github.com open source self hosted invoicing accounting TypeScript",
+    "site:github.com open source CRM ERP self hosted MIT Apache GPL",
+    "site:github.com open source e-signature document signing self hosted",
+    "site:github.com open source legal case management document workflow",
+    "site:github.com open source LMS exam quiz assessment engine self hosted",
+    "site:github.com open source code execution sandbox API self hosted",
+    "site:github.com open source voice agent WebRTC SIP self hosted",
+    "site:github.com open source speech to text text to speech self hosted",
+    "site:github.com open source local LLM inference OpenAI compatible API",
+    "site:github.com open source agent orchestration RAG memory self hosted",
+    "site:github.com open source vector database search engine Apache MIT",
+    "site:github.com open source OCR document parsing PDF extraction",
+    "site:github.com open source marketing automation newsletter CRM self hosted",
+    "site:github.com open source web analytics self hosted MIT",
+    "site:github.com open source GIS geology mining exploration software",
+    "site:github.com open source geospatial API OGC routing maps self hosted",
+    "site:github.com open source fleet courier tracking logistics self hosted",
+    "site:github.com open source form builder workflow automation self hosted",
+    "site:github.com open source design editor whiteboard website builder",
+    "site:github.com open source image generation editing pipeline self hosted",
+    "site:github.com open source security scanner SAST DAST SBOM secrets",
+    "site:github.com open source observability monitoring logging self hosted",
+    "site:github.com open source PaaS deployment VPS alternative Vercel self hosted",
+    "site:github.com open source backup restore object storage S3 self hosted",
+    "\"no API key\" \"no rate limits\" open source API commercial use"
+  ],
+  "candidates": [
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "category": "backend-data",
+      "kind": "application",
+      "upstream": "https://github.com/supabase/supabase",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Postgres development platform with database, auth, storage, realtime and APIs.",
+      "portfolio_fit": [
+        "Invoiceit",
+        "Legalit",
+        "Signit",
+        "Humanit",
+        "BodyFit",
+        "Marketit",
+        "most Sigma web apps"
+      ],
+      "integration_strategy": "Use as self-hosted backend platform or mine individual components; preserve RLS and tenant-isolation controls.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/supabase/supabase",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "pocketbase",
+      "name": "PocketBase",
+      "category": "backend-data",
+      "kind": "application",
+      "upstream": "https://github.com/pocketbase/pocketbase",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Single-binary realtime backend with database, auth, files and admin UI.",
+      "portfolio_fit": [
+        "small Sigma services",
+        "prototypes",
+        "internal tools"
+      ],
+      "integration_strategy": "Use for compact services where SQLite-scale architecture is appropriate; not a default replacement for multi-tenant Postgres systems.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/pocketbase/pocketbase",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "appwrite",
+      "name": "Appwrite",
+      "category": "backend-data",
+      "kind": "application",
+      "upstream": "https://github.com/appwrite/appwrite",
+      "licence": "BSD-3-Clause",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Self-hosted backend platform for auth, databases, storage, functions, messaging and realtime.",
+      "portfolio_fit": [
+        "mobile apps",
+        "Alysha",
+        "Humanit",
+        "new Sigma products"
+      ],
+      "integration_strategy": "Evaluate against Supabase by workload; self-host on Sigma infrastructure.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/appwrite/appwrite",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "keycloak",
+      "name": "Keycloak",
+      "category": "identity-auth",
+      "kind": "application",
+      "upstream": "https://github.com/keycloak/keycloak",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Identity and access management with OIDC/OAuth2/SAML, realms, roles and federation.",
+      "portfolio_fit": [
+        "portfolio SSO",
+        "admin portals",
+        "school accounts",
+        "enterprise auth"
+      ],
+      "integration_strategy": "Prefer as central self-hosted IAM when portfolio-wide SSO/federation is needed.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/keycloak/keycloak",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "appsmith",
+      "name": "Appsmith",
+      "category": "internal-tools",
+      "kind": "application",
+      "upstream": "https://github.com/appsmithorg/appsmith",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "FORK_CANDIDATE",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Low-code framework for admin panels, dashboards and internal tools.",
+      "portfolio_fit": [
+        "Sigma command centre",
+        "operations dashboards",
+        "admin tooling"
+      ],
+      "integration_strategy": "Mine/fork Apache-licensed code where useful; independently implement any capabilities not present in the open code rather than depending on paid editions.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/appsmithorg/appsmith",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "kestra",
+      "name": "Kestra",
+      "category": "workflow",
+      "kind": "application",
+      "upstream": "https://github.com/kestra-io/kestra",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Event-driven orchestration and scheduling platform.",
+      "portfolio_fit": [
+        "Sigma automation",
+        "data pipelines",
+        "scheduled portfolio jobs"
+      ],
+      "integration_strategy": "Use as self-hosted orchestrator for durable scheduled/event workflows where lighter cron is insufficient.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/kestra-io/kestra",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "temporal",
+      "name": "Temporal",
+      "category": "workflow",
+      "kind": "application",
+      "upstream": "https://github.com/temporalio/temporal",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Durable execution/workflow engine for long-running reliable business processes.",
+      "portfolio_fit": [
+        "Alysha",
+        "Invoiceit",
+        "Secure DX workflows",
+        "agent jobs"
+      ],
+      "integration_strategy": "Use for critical durable workflows requiring retries, state recovery and exactly-once-style workflow semantics.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/temporalio/temporal",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "category": "ai-inference",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/ollama/ollama",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Local model runtime and API for running supported AI models.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Alysha",
+        "Humanit",
+        "local AI features"
+      ],
+      "integration_strategy": "Use as simple local inference runtime; verify each model weight licence separately.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/ollama/ollama",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "llama-cpp",
+      "name": "llama.cpp",
+      "category": "ai-inference",
+      "kind": "engine",
+      "upstream": "https://github.com/ggml-org/llama.cpp",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Portable C/C++ LLM inference engine optimized for local hardware.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "edge/mobile AI",
+        "offline inference"
+      ],
+      "integration_strategy": "Use as an inference engine/library where low-level performance and portability matter; model licences remain separate.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/ggml-org/llama.cpp",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "category": "ai-inference",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/vllm-project/vllm",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "High-throughput LLM inference and serving engine.",
+      "portfolio_fit": [
+        "Sigma private inference",
+        "Alysha backend",
+        "multi-agent workloads"
+      ],
+      "integration_strategy": "Preferred candidate for GPU-backed OpenAI-compatible serving at higher concurrency.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/vllm-project/vllm",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "localai",
+      "name": "LocalAI",
+      "category": "ai-inference",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/mudler/LocalAI",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Local multi-modal AI engine exposing OpenAI-compatible APIs.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Alysha",
+        "voice/vision local services"
+      ],
+      "integration_strategy": "Use as vendor-neutral local API layer when one service must expose multiple local model types.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/mudler/LocalAI",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "langflow",
+      "name": "Langflow",
+      "category": "ai-agents",
+      "kind": "application",
+      "upstream": "https://github.com/langflow-ai/langflow",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Visual builder/runtime for AI agents and workflows.",
+      "portfolio_fit": [
+        "Sigma prototyping",
+        "Alysha agent flows",
+        "Humanit"
+      ],
+      "integration_strategy": "Use as a self-hosted prototyping/workflow component; production authority still stays in Sigma governance.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/langflow-ai/langflow",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "haystack",
+      "name": "Haystack",
+      "category": "ai-agents",
+      "kind": "library",
+      "upstream": "https://github.com/deepset-ai/haystack",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Framework for RAG, retrieval, agents and production AI pipelines.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Humanit",
+        "knowledge search"
+      ],
+      "integration_strategy": "Use as a Python library/reference for retrieval and agent pipelines where it reduces bespoke code.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/deepset-ai/haystack",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "livekit",
+      "name": "LiveKit",
+      "category": "realtime-voice-video",
+      "kind": "application",
+      "upstream": "https://github.com/livekit/livekit",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Realtime WebRTC infrastructure for audio, video and AI agents.",
+      "portfolio_fit": [
+        "Alysha",
+        "Humanit voice",
+        "realtime support"
+      ],
+      "integration_strategy": "Continue as self-hosted realtime media layer; carrier/SIP services remain separate cost domains.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/livekit/livekit",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "jitsi",
+      "name": "Jitsi Meet",
+      "category": "realtime-voice-video",
+      "kind": "application",
+      "upstream": "https://github.com/jitsi/jitsi-meet",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Embeddable self-hosted video conferencing application.",
+      "portfolio_fit": [
+        "school collaboration",
+        "support/video",
+        "internal calls"
+      ],
+      "integration_strategy": "Use/fork where full meeting UI is needed rather than building conferencing from scratch.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/jitsi/jitsi-meet",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "erpnext",
+      "name": "ERPNext",
+      "category": "erp-crm",
+      "kind": "application",
+      "upstream": "https://github.com/frappe/erpnext",
+      "licence": "GPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "ERP covering accounting, CRM, stock, sales, purchases, HR and operations.",
+      "portfolio_fit": [
+        "Invoiceit reference",
+        "Lycia operations",
+        "SME back office"
+      ],
+      "integration_strategy": "Use as a self-hosted application/reference; comply with GPL for distributed modifications.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/frappe/erpnext",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "dolibarr",
+      "name": "Dolibarr",
+      "category": "erp-crm",
+      "kind": "application",
+      "upstream": "https://github.com/Dolibarr/dolibarr",
+      "licence": "GPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "ERP/CRM for contacts, invoices, orders, stock, agenda and accounting.",
+      "portfolio_fit": [
+        "Invoiceit reference",
+        "CRM",
+        "business apps"
+      ],
+      "integration_strategy": "Use as a self-hosted application or feature/reference benchmark; comply with GPL obligations.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/Dolibarr/dolibarr",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "listmonk",
+      "name": "listmonk",
+      "category": "marketing-email",
+      "kind": "application",
+      "upstream": "https://github.com/knadh/listmonk",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "High-performance newsletter and mailing-list manager.",
+      "portfolio_fit": [
+        "Marketit",
+        "monthly school reports",
+        "portfolio notifications"
+      ],
+      "integration_strategy": "Self-host for bulk/list email orchestration; use external SMTP only where needed and comply with AGPL.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/knadh/listmonk",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "documenso",
+      "name": "Documenso Community Edition",
+      "category": "esign",
+      "kind": "application",
+      "upstream": "https://github.com/documenso/documenso",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "FORK_CANDIDATE",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Open-source document signing core with REST API and self-hosting.",
+      "portfolio_fit": [
+        "Signit",
+        "Legalit",
+        "contracts"
+      ],
+      "integration_strategy": "Use as a code/reference accelerator only with AGPL compliance; independently build any required capabilities that upstream reserves for commercial editions.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://docs.documenso.com/docs/policies/licenses",
+          "verified_on": "2026-09-26",
+          "note": "Official docs confirm AGPL Community Edition and separate paid Enterprise features."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "paperless-ngx",
+      "name": "Paperless-ngx",
+      "category": "documents",
+      "kind": "application",
+      "upstream": "https://github.com/paperless-ngx/paperless-ngx",
+      "licence": "GPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Document management system for scanning, indexing, searching and archiving documents.",
+      "portfolio_fit": [
+        "Legalit",
+        "Secure DX",
+        "Lycia due diligence"
+      ],
+      "integration_strategy": "Use as self-hosted DMS/reference for ingestion and archive workflows; comply with GPL.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/paperless-ngx/paperless-ngx",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "tesseract",
+      "name": "Tesseract OCR",
+      "category": "ocr",
+      "kind": "engine",
+      "upstream": "https://github.com/tesseract-ocr/tesseract",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "OCR engine for extracting text from images.",
+      "portfolio_fit": [
+        "PL Lookup",
+        "Legalit",
+        "Secure DX",
+        "document ingestion"
+      ],
+      "integration_strategy": "Embed as OCR engine where document layouts are simple; benchmark against PaddleOCR for quality.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/tesseract-ocr/tesseract",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "paddleocr",
+      "name": "PaddleOCR",
+      "category": "ocr",
+      "kind": "engine",
+      "upstream": "https://github.com/PaddlePaddle/PaddleOCR",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "OCR/document parsing toolkit supporting many languages and structured extraction.",
+      "portfolio_fit": [
+        "Legalit",
+        "mining reports",
+        "receipts/invoices",
+        "education"
+      ],
+      "integration_strategy": "Use for higher-accuracy/multilingual OCR and document layout extraction.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/PaddlePaddle/PaddleOCR",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "docling",
+      "name": "Docling",
+      "category": "documents-ai",
+      "kind": "library",
+      "upstream": "https://github.com/docling-project/docling",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Converts PDFs and documents into structured formats suitable for AI pipelines.",
+      "portfolio_fit": [
+        "Sigma knowledge ingestion",
+        "Legalit",
+        "Humanit",
+        "mining reports"
+      ],
+      "integration_strategy": "Use in document-to-RAG pipelines; retain provenance and page references.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/docling-project/docling",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "qdrant",
+      "name": "Qdrant",
+      "category": "vector-search",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/qdrant/qdrant",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Vector database and similarity-search API.",
+      "portfolio_fit": [
+        "Sigma memory/RAG",
+        "Humanit",
+        "search features"
+      ],
+      "integration_strategy": "Use where dedicated vector search outgrows pgvector or requires advanced filtering/scaling.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/qdrant/qdrant",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "milvus",
+      "name": "Milvus",
+      "category": "vector-search",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/milvus-io/milvus",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Distributed vector database for large-scale ANN search.",
+      "portfolio_fit": [
+        "large Sigma knowledge stores",
+        "image similarity",
+        "AI search"
+      ],
+      "integration_strategy": "Reserve for larger-scale vector workloads; Qdrant/pgvector may be simpler at smaller scale.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/milvus-io/milvus",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "opensearch",
+      "name": "OpenSearch",
+      "category": "search-analytics",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/opensearch-project/OpenSearch",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Distributed REST search and analytics engine.",
+      "portfolio_fit": [
+        "portfolio search",
+        "logs",
+        "mining intelligence",
+        "catalogues"
+      ],
+      "integration_strategy": "Use for large full-text/search analytics where Postgres FTS is insufficient.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/opensearch-project/OpenSearch",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "umami",
+      "name": "Umami",
+      "category": "analytics",
+      "kind": "application",
+      "upstream": "https://github.com/umami-software/umami",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Privacy-focused self-hosted web analytics.",
+      "portfolio_fit": [
+        "all public Sigma sites",
+        "conversion tracking"
+      ],
+      "integration_strategy": "Use instead of quota-based hosted analytics where first-party self-hosted analytics is sufficient.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/umami-software/umami",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "category": "observability",
+      "kind": "application",
+      "upstream": "https://github.com/grafana/grafana",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Dashboards and visualization across metrics, logs and traces.",
+      "portfolio_fit": [
+        "Sigma command centre",
+        "all production apps"
+      ],
+      "integration_strategy": "Self-host for operational dashboards; comply with AGPL for modifications.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/grafana/grafana",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "category": "observability",
+      "kind": "application",
+      "upstream": "https://github.com/prometheus/prometheus",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Metrics collection and time-series monitoring.",
+      "portfolio_fit": [
+        "all production apps",
+        "VPS",
+        "Sigma runtime"
+      ],
+      "integration_strategy": "Use as default open metrics backend where appropriate.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/prometheus/prometheus",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "uptime-kuma",
+      "name": "Uptime Kuma",
+      "category": "observability",
+      "kind": "application",
+      "upstream": "https://github.com/louislam/uptime-kuma",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Self-hosted uptime and endpoint monitoring.",
+      "portfolio_fit": [
+        "all public apps",
+        "API health"
+      ],
+      "integration_strategy": "Deploy for simple independent availability checks and status visibility.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/louislam/uptime-kuma",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "trivy",
+      "name": "Trivy",
+      "category": "security",
+      "kind": "engine",
+      "upstream": "https://github.com/aquasecurity/trivy",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Scans vulnerabilities, misconfigurations, secrets and SBOMs.",
+      "portfolio_fit": [
+        "Sigma Cybersecurity Division",
+        "all repositories"
+      ],
+      "integration_strategy": "Integrate into CI and pre-deploy supply-chain checks.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/aquasecurity/trivy",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "zaproxy",
+      "name": "OWASP ZAP",
+      "category": "security-testing",
+      "kind": "application",
+      "upstream": "https://github.com/zaproxy/zaproxy",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Web application security scanner/proxy for authorised testing.",
+      "portfolio_fit": [
+        "Sigma Cybersecurity Division",
+        "all web apps"
+      ],
+      "integration_strategy": "Use against owned staging environments as part of authorised DAST; never scan third parties without permission.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/zaproxy/zaproxy",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "playwright",
+      "name": "Playwright",
+      "category": "testing",
+      "kind": "library",
+      "upstream": "https://github.com/microsoft/playwright",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Cross-browser end-to-end testing and automation.",
+      "portfolio_fit": [
+        "Sigma User Tester",
+        "all web products"
+      ],
+      "integration_strategy": "Keep as mandatory browser-test foundation across Chromium/Firefox/WebKit.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/microsoft/playwright",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "k6",
+      "name": "k6",
+      "category": "testing",
+      "kind": "engine",
+      "upstream": "https://github.com/grafana/k6",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Load and performance testing tool.",
+      "portfolio_fit": [
+        "API platforms",
+        "Alysha",
+        "Invoiceit",
+        "high-traffic services"
+      ],
+      "integration_strategy": "Use in controlled load tests and CI performance gates; comply with AGPL for modifications.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/grafana/k6",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "osrm",
+      "name": "OSRM",
+      "category": "geospatial-routing",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/Project-OSRM/osrm-backend",
+      "licence": "BSD-2-Clause",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Routing engine and HTTP API over OpenStreetMap data.",
+      "portfolio_fit": [
+        "Secure DX",
+        "logistics",
+        "travel/location features"
+      ],
+      "integration_strategy": "Self-host routing to avoid third-party map-routing quotas; OSM data licence remains separate.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/Project-OSRM/osrm-backend",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "qgis",
+      "name": "QGIS",
+      "category": "geospatial-mining",
+      "kind": "application",
+      "upstream": "https://github.com/qgis/QGIS",
+      "licence": "GPL-2.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Desktop GIS for mapping, geospatial analysis and cartography.",
+      "portfolio_fit": [
+        "Lycia Zambia",
+        "Total Mining Intelligence",
+        "Yengo geology"
+      ],
+      "integration_strategy": "Use as core analyst GIS and source of reproducible project files; build plugins where appropriate under GPL-compatible terms.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/qgis/QGIS",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "moodle",
+      "name": "Moodle",
+      "category": "education",
+      "kind": "application",
+      "upstream": "https://github.com/moodle/moodle",
+      "licence": "GPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Learning management platform with courses, assessments, users and reporting.",
+      "portfolio_fit": [
+        "Humanit school mode",
+        "revision",
+        "teacher dashboards"
+      ],
+      "integration_strategy": "Mine architecture/features and optionally integrate/fork modules; avoid rebuilding mature LMS primitives unnecessarily.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/moodle/moodle",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "jupyter-notebook",
+      "name": "Jupyter Notebook",
+      "category": "education-code",
+      "kind": "application",
+      "upstream": "https://github.com/jupyter/notebook",
+      "licence": "BSD-3-Clause",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Interactive computational notebooks.",
+      "portfolio_fit": [
+        "Humanit computer science",
+        "data science learning",
+        "Sigma research"
+      ],
+      "integration_strategy": "Embed or integrate for coding/data lessons where notebook workflows are appropriate.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/jupyter/notebook",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "piston",
+      "name": "Piston",
+      "category": "code-execution",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/engineer-man/piston",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Sandbox-oriented multi-language code execution engine/API.",
+      "portfolio_fit": [
+        "Humanit coding tests",
+        "developer tools"
+      ],
+      "integration_strategy": "Run only in hardened isolated infrastructure with strict CPU/memory/network/file limits; never trust submitted code.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/engineer-man/piston",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "theia",
+      "name": "Eclipse Theia",
+      "category": "developer-tools",
+      "kind": "application",
+      "upstream": "https://github.com/eclipse-theia/theia",
+      "licence": "EPL-2.0",
+      "licence_class": "weak_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Framework for browser and desktop IDEs.",
+      "portfolio_fit": [
+        "MI7Z web builder",
+        "Humanit coding",
+        "Sigma development tools"
+      ],
+      "integration_strategy": "Use as an IDE framework rather than writing a browser editor platform from zero.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/eclipse-theia/theia",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "penpot",
+      "name": "Penpot",
+      "category": "design",
+      "kind": "application",
+      "upstream": "https://github.com/penpot/penpot",
+      "licence": "MPL-2.0",
+      "licence_class": "weak_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Open-source collaborative product design platform.",
+      "portfolio_fit": [
+        "Designit",
+        "MI7Z web builder",
+        "UX teams"
+      ],
+      "integration_strategy": "Self-host for design collaboration or reuse concepts/components where licence-compatible.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/penpot/penpot",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "excalidraw",
+      "name": "Excalidraw",
+      "category": "design-diagrams",
+      "kind": "library",
+      "upstream": "https://github.com/excalidraw/excalidraw",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "Whiteboard/diagram editor with embeddable drawing components.",
+      "portfolio_fit": [
+        "Sigma planning",
+        "education",
+        "diagram features"
+      ],
+      "integration_strategy": "Embed/fork for visual planning and simple diagramming.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/excalidraw/excalidraw",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "valkey",
+      "name": "Valkey",
+      "category": "cache-data",
+      "kind": "application",
+      "upstream": "https://github.com/valkey-io/valkey",
+      "licence": "BSD-3-Clause",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Redis-compatible in-memory data store for caching/realtime workloads.",
+      "portfolio_fit": [
+        "Alysha",
+        "queues",
+        "sessions",
+        "caching"
+      ],
+      "integration_strategy": "Prefer as permissive self-hosted cache/coordination store when Redis compatibility is needed.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/valkey-io/valkey",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "nats",
+      "name": "NATS Server",
+      "category": "messaging",
+      "kind": "application",
+      "upstream": "https://github.com/nats-io/nats-server",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "High-performance messaging/streaming server.",
+      "portfolio_fit": [
+        "Alysha events",
+        "Sigma Mesh",
+        "microservices"
+      ],
+      "integration_strategy": "Use for lightweight pub/sub and service messaging when durable workflow semantics are not required.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/nats-io/nats-server",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "kafka",
+      "name": "Apache Kafka",
+      "category": "messaging",
+      "kind": "application",
+      "upstream": "https://github.com/apache/kafka",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Distributed event streaming platform.",
+      "portfolio_fit": [
+        "large event pipelines",
+        "analytics",
+        "audit/event ingestion"
+      ],
+      "integration_strategy": "Use only where scale/durability justify operational complexity.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/apache/kafka",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "seaweedfs",
+      "name": "SeaweedFS",
+      "category": "storage",
+      "kind": "application",
+      "upstream": "https://github.com/seaweedfs/seaweedfs",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Distributed object/file storage with S3 compatibility.",
+      "portfolio_fit": [
+        "portfolio files",
+        "media",
+        "document storage"
+      ],
+      "integration_strategy": "Evaluate as self-hosted object-storage option on Sigma infrastructure; benchmark durability/backup model before adoption.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/seaweedfs/seaweedfs",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "caddy",
+      "name": "Caddy",
+      "category": "deployment-edge",
+      "kind": "application",
+      "upstream": "https://github.com/caddyserver/caddy",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "HTTP server/reverse proxy with automatic HTTPS.",
+      "portfolio_fit": [
+        "OVH/VPS apps",
+        "Alysha",
+        "Sigma runtime"
+      ],
+      "integration_strategy": "Use as simple secure edge proxy where appropriate.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/caddyserver/caddy",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "traefik",
+      "name": "Traefik",
+      "category": "deployment-edge",
+      "kind": "application",
+      "upstream": "https://github.com/traefik/traefik",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Cloud-native reverse proxy and ingress router.",
+      "portfolio_fit": [
+        "containerized Sigma apps",
+        "multi-service VPS"
+      ],
+      "integration_strategy": "Use where dynamic container/service discovery is more useful than a static proxy.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/traefik/traefik",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "dokku",
+      "name": "Dokku",
+      "category": "deployment-paas",
+      "kind": "application",
+      "upstream": "https://github.com/dokku/dokku",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Docker-powered self-hosted PaaS for application lifecycle management.",
+      "portfolio_fit": [
+        "replace simple hosted PaaS usage",
+        "OVH/VPS deployments"
+      ],
+      "integration_strategy": "Candidate for lightweight Git-push-style deployments on Sigma-owned servers.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/dokku/dokku",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "coolify",
+      "name": "Coolify",
+      "category": "deployment-paas",
+      "kind": "application",
+      "upstream": "https://github.com/coollabsio/coolify",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Self-hostable PaaS alternative for apps, databases and services.",
+      "portfolio_fit": [
+        "portfolio deployment",
+        "Vercel replacement path",
+        "OVH/VPS"
+      ],
+      "integration_strategy": "High-priority candidate for visual self-hosted deployment control across Sigma projects.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/coollabsio/coolify",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "category": "deployment-orchestration",
+      "kind": "application",
+      "upstream": "https://github.com/kubernetes/kubernetes",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Container orchestration for resilient multi-node workloads.",
+      "portfolio_fit": [
+        "future large-scale Sigma infrastructure"
+      ],
+      "integration_strategy": "Use only when portfolio scale warrants complexity; do not introduce prematurely.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/kubernetes/kubernetes",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "moby",
+      "name": "Moby",
+      "category": "containers",
+      "kind": "engine",
+      "upstream": "https://github.com/moby/moby",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Open container runtime/building blocks underlying Docker-style systems.",
+      "portfolio_fit": [
+        "all self-hosted apps",
+        "CI",
+        "deployment"
+      ],
+      "integration_strategy": "Foundation for containerized deployments; keep images pinned/scanned.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/moby/moby",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "cesiumjs",
+      "name": "CesiumJS",
+      "category": "geospatial-3d",
+      "kind": "library",
+      "upstream": "https://github.com/CesiumGS/cesium",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "open code has no provider usage quota",
+      "what_it_does": "JavaScript library for 3D globes and geospatial visualization.",
+      "portfolio_fit": [
+        "Total Mining Intelligence",
+        "Lycia maps",
+        "3D terrain"
+      ],
+      "integration_strategy": "Use for 3D mine/terrain/asset visualization; data/terrain providers must be independently licensed.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/CesiumGS/cesium",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "pygeoapi",
+      "name": "pygeoapi",
+      "category": "geospatial-api",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/geopython/pygeoapi",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Server implementation of OGC API standards with REST/OpenAPI/GeoJSON.",
+      "portfolio_fit": [
+        "Lycia",
+        "mining intelligence",
+        "geospatial services"
+      ],
+      "integration_strategy": "Expose Sigma-owned geospatial datasets through standards-based self-hosted APIs.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/geopython/pygeoapi",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "postgis",
+      "name": "PostGIS",
+      "category": "geospatial-data",
+      "kind": "engine",
+      "upstream": "https://github.com/postgis/postgis",
+      "licence": "GPL-2.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Spatial extension for PostgreSQL.",
+      "portfolio_fit": [
+        "Lycia",
+        "mining",
+        "Secure DX",
+        "location features"
+      ],
+      "integration_strategy": "Use for geospatial storage/querying alongside PostgreSQL/Supabase stacks.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://github.com/postgis/postgis",
+          "verified_on": "2026-09-26",
+          "note": "GitHub repository metadata verified by Sigma Scouter"
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "searxng",
+      "name": "SearXNG",
+      "category": "web-search",
+      "kind": "self_hosted_api",
+      "upstream": "https://github.com/searxng/searxng",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted code removes vendor usage quotas; capacity is governed by infrastructure we control",
+      "what_it_does": "Self-hosted metasearch engine with JSON search API.",
+      "portfolio_fit": [
+        "Sigma Scouter",
+        "research agents",
+        "portfolio research"
+      ],
+      "integration_strategy": "Run a private instance as Scouter's search aggregator; upstream search engines may still throttle, so cache/index results and never promise third-party engine availability.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://docs.searxng.org/",
+          "verified_on": "2026-09-26",
+          "note": "Official docs describe free self-hosted metasearch; official repo documents AGPL-3.0."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "currency-api-unlicense",
+      "name": "Currency API dataset mirror",
+      "category": "currency-data",
+      "kind": "public_api",
+      "upstream": "https://github.com/NemesisX1/currency-api",
+      "licence": "Unlicense",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "no API key; no rate limit; commercial use allowed under the Unlicense; data is mirrorable and can be cached locally",
+      "what_it_does": "Daily currency-rate JSON files served via GitHub Pages/jsDelivr/raw GitHub.",
+      "portfolio_fit": [
+        "dual-currency UI",
+        "low-risk reference conversions"
+      ],
+      "integration_strategy": "Use only for non-authoritative convenience conversion with local caching/fallback; do not use as LBMA/trading/compliance truth.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://www.npmjs.com/package/@lixalistudio/currency-api",
+          "verified_on": "2026-09-26",
+          "note": "Publisher states no API key, no rate limits and Unlicense/public-domain terms."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "github-rest-api",
+      "name": "GitHub REST API",
+      "category": "developer-api",
+      "kind": "public_api",
+      "upstream": "https://docs.github.com/en/rest",
+      "licence": "OTHER",
+      "licence_class": "review_only",
+      "state": "REJECT",
+      "self_hosted": false,
+      "unlimited_basis": "official API is rate limited; therefore it fails Sigma's unlimited public API rule",
+      "what_it_does": "GitHub repository and platform API.",
+      "portfolio_fit": [
+        "Sigma Scouter operational discovery only"
+      ],
+      "integration_strategy": "May be used operationally with rate-limit handling, but it must never be catalogued as an unlimited free API.",
+      "verified_on": "2026-09-26",
+      "evidence": [
+        {
+          "source": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+          "verified_on": "2026-09-26",
+          "note": "Official GitHub docs specify primary and secondary rate limits."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    }
+  ]
+}
