@@ -39,6 +39,8 @@ REQUIRED = [
     "headquarters/engineering/README.md",
     "headquarters/engineering/team.yaml",
     "templates/SIGMA_ALGORITHMIC_SOLUTION_REPORT.md",
+    "docs/ENGINEERING_RESCUE_PROTOCOL.md",
+    "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md",
     "docs/architecture.md",
     "docs/deployment.md",
     ".github/workflows/sigma-control-plane.yml",
