@@ -6,7 +6,7 @@ The Sigma Algorithmic Engineering & Solution Lab is the permanent engineering pr
 
 Its purpose is to take difficult engineering problems, formalise them, generate competing solution candidates, implement or prototype the strongest candidates where authorised, test them aggressively, compare them on evidence and iterate until the best justified solution within the project's constraints is selected.
 
-The Lab must never pretend that every problem has a known or feasible solution. If no candidate satisfies the acceptance criteria, it records the unresolved problem, evidence, failed approaches and the highest-value next experiment.
+The Lab must never pretend that every problem has a known or feasible solution. For an owned software defect, however, lack of a current solution is not a closure state: the incident remains ACTIVE — WORKING, preserving failed approaches and continuously selecting the highest-value next experiment until FIXED / VERIFIED or genuinely blocked by an external/owner gate.
 
 ## Core operating rule
 
@@ -23,7 +23,7 @@ The Lab uses a solution-tournament model:
 7. **Benchmark** — compare only on measured/reproducible evidence.
 8. **Repair** — fix or replace weak candidates and rerun the relevant evidence.
 9. **Select** — choose the best evidenced candidate; preserve rejected alternatives and reasons.
-10. **Handoff** — produce exact implementation/release actions, tests and rollback/recovery notes.
+10. **Handoff / continue** — produce exact implementation/release actions, tests and rollback/recovery notes. If hard gates are not satisfied, return to candidate generation/root-cause investigation rather than closing the defect.
 
 ## Permanent engineering cells
 
@@ -89,6 +89,7 @@ It does not:
 - bypass the Cybersecurity Division;
 - self-approve destructive production actions;
 - replace legal/compliance or owner gates;
+- close an owned defect merely because current attempts have not solved it;
 - claim unsolved work is solved;
 - use benchmarks that cannot be reproduced;
 - call a solution "best" without stating the criteria and evidence used.
