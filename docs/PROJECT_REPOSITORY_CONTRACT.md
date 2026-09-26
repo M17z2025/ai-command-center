@@ -40,6 +40,12 @@ Secret values must never appear in this file.
 
 Product-specific instructions override the generic Sigma agent contract only where explicitly stated. It should record architectural rules, naming conventions, protected modules, data-safety requirements and prohibited shortcuts.
 
+## Cybersecurity assurance inheritance
+
+Every repository registered in `projects/registry.yaml` inherits the Sigma Cybersecurity Division gate for material work. A product may define stricter controls in its manifest/AGENTS.md but may not silently weaken the central gate.
+
+For material development/release work, the product status/issue/PR must link durable security evidence using `templates/SIGMA_CYBER_SECURITY_REPORT.md` or an equivalent stricter report. Required controls marked NOT VERIFIED prevent a security PASS. The implementation agent cannot self-certify the final verdict.
+
 ## PROJECT_STATUS.md
 
 This is the current operational truth. It should be concise and updated after material work. It must separate:
