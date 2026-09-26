@@ -1,0 +1,20 @@
+schema_version: 1
+policy_id: sigma-portfolio-evidence-v1
+golden_rule: "NO EVIDENCE = NO PROGRESS"
+states:
+  - PLANNED
+  - RUNNING
+  - CHANGED
+  - TESTED
+  - VERIFIED_IN_PRODUCTION
+  - BLOCKED
+freshness:
+  stale_after_hours: 24
+  label: STALE
+rules:
+  - "Instructions, plans and agent assignments are not implementation progress."
+  - "CHANGED requires a repository commit, PR, deployment artifact or equivalent durable change evidence."
+  - "TESTED requires test evidence tied to the exact candidate."
+  - "VERIFIED_IN_PRODUCTION requires production identity plus production smoke/user evidence."
+  - "Missing required evidence fails closed and cannot be promoted."
+  - "Every cycle records the exact next executable action or external blocker."
