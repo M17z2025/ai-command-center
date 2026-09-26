@@ -53,7 +53,7 @@ SIGMA GOVERNOR
 - [Evidence discipline](./mesh/evidence.yaml)
 - [Controlled evolution](./mesh/evolution.yaml)
 - [Machine-readable cognitive methods](./mesh/cognitive-methods.yaml)
-- [Sigma project-team ownership](./project-teams.yaml)
+- [Sigma chat/project-team ownership](./chat-ownership/README.md)
 - [Sigma Scouter](./scouter/README.md)
 - [Portfolio links](./PORTFOLIO.md)
 - [Chat build ownership](./chat-ownership/README.md)
