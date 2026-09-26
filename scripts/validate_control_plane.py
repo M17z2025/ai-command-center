@@ -78,6 +78,15 @@ registry = None
 registry_path = ROOT / "projects/registry.yaml"
 if registry_path.exists():
     registry = yaml.safe_load(registry_path.read_text(encoding="utf-8"))
+    defaults = registry.get("defaults", {})
+    security_assurance = defaults.get("security_assurance", {})
+    if security_assurance.get("required_for_material_work") is not True:
+        errors.append("projects/registry.yaml must require security assurance for material work")
+    if security_assurance.get("independent_gatekeeper") != "sigma-security-gatekeeper":
+        errors.append("projects/registry.yaml must use sigma-security-gatekeeper")
+    if security_assurance.get("fail_closed_on_missing_required_evidence") is not True:
+        errors.append("projects/registry.yaml security assurance must fail closed on missing required evidence")
+
     projects = registry.get("projects", [])
     seen = set()
     for idx, project in enumerate(projects):
