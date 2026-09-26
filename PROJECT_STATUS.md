@@ -4,6 +4,24 @@ Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Golden Engineering Challenge & Engineering Support Desk — Issue #47
+
+**IMPLEMENTATION CANDIDATE IN PROGRESS — REAL BUILD/FIX PROOF + PERSISTENT RESCUE OWNERSHIP.**
+
+Issue #47 changes the engineering acceptance test from orchestration/source confidence to real delivery evidence.
+
+The candidate adds:
+- Golden Engineering Challenge for material new development: repository implementation, exact-head checks, security assurance, authorised deployed preview/staging where applicable, Sigma Full User Tester and repair/retest before a working/ready claim;
+- persistent `sigma-engineering-support-desk` ownership of confirmed broken/regressed products;
+- automatic `rescue_mode_required` detection for broken/fix/regression requests;
+- runtime `engineering-rescue-report` artifact and `engineering-rescue-mode` event;
+- runtime state remains `ACTIVE_WORKING` without explicit `engineering-rescue-verification: FIXED_VERIFIED` evidence;
+- **FIXED / VERIFIED** as the only normal terminal state for an owned software defect;
+- external/owner gates keep incidents open while other safe repair work continues;
+- regression/root-cause/competing-hypothesis evidence requirements and prohibition on closing difficult defects merely because current attempts failed.
+
+Exact-head CI evidence is required before merge/completion.
+
 ## Sigma Algorithmic Engineering & Solution Lab — Issue #45
 
 **SPECIALIST CODERS/TESTERS + EVIDENCE-BACKED SOLUTION TOURNAMENT IMPLEMENTED ON PR #46 — EXACT-HEAD CI GREEN; EFFECTIVE WHEN MERGED TO DEFAULT BRANCH.**
