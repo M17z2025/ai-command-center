@@ -40,6 +40,12 @@ Secret values must never appear in this file.
 
 Product-specific instructions override the generic Sigma agent contract only where explicitly stated. It should record architectural rules, naming conventions, protected modules, data-safety requirements and prohibited shortcuts.
 
+## Expert advisory planning inheritance
+
+Every repository registered in `projects/registry.yaml` inherits the Sigma Universal Expert Advisory & Development Planning Council for material development work.
+
+Before major implementation, Sigma must route materially relevant experts and create/update a durable plan using `templates/SIGMA_DEVELOPMENT_ADVISORY_PLAN.md` or an equivalent repository-backed issue/plan. Product repositories may add stricter planning requirements but must preserve the central requirements for evidence, specialist advice, risks, ordered backlog/pull plan, acceptance criteria and exact next actions.
+
 ## Cybersecurity assurance inheritance
 
 Every repository registered in `projects/registry.yaml` inherits the Sigma Cybersecurity Division gate for material work. A product may define stricter controls in its manifest/AGENTS.md but may not silently weaken the central gate.
