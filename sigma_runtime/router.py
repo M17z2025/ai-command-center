@@ -39,6 +39,7 @@ class MissionPlan:
     specialists: list[Specialist]
     risk_gates: list[str]
     development_planning_required: bool
+    algorithmic_engineering_required: bool
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -82,13 +83,22 @@ class MissionRouter:
                 if score >= max(1, int(best * 0.45))
             ][:max_domains]
 
+        development_planning_required = self.config.is_development_mission(prompt)
+        algorithmic_engineering_required = self.config.is_algorithmic_engineering_mission(
+            prompt, selected
+        )
+
         leader_ids: list[str] = []
         specialists: list[Specialist] = []
         factory = self.config.raw["leaders"].get("global_team_factory", {})
         prohibitions = list(factory.get("default_prohibited_actions", []))
 
         for domain_id in selected:
-            domain_leaders = self.config.leaders_for(domain_id, prompt)
+            domain_leaders = self.config.leaders_for(
+                domain_id,
+                prompt,
+                max_leaders=5 if algorithmic_engineering_required else 3,
+            )
             for leader in domain_leaders:
                 leader_id = leader["id"]
                 if leader_id not in leader_ids:
@@ -142,5 +152,6 @@ class MissionRouter:
             cognitive_methods=method_ids,
             specialists=specialists,
             risk_gates=self.config.risk_gates_for(selected, prompt),
-            development_planning_required=self.config.is_development_mission(prompt),
+            development_planning_required=development_planning_required,
+            algorithmic_engineering_required=algorithmic_engineering_required,
         )
