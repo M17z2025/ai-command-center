@@ -274,12 +274,190 @@ leaders:
     may_create_children: true
     independent_review: true
 
+  - id: universal-knowledge-research-master
+    name: "Universal Knowledge & Research Master"
+    parent: "research-director"
+    mission: "Coordinate broad cross-domain knowledge discovery, identify missing expertise and route unknown subjects through evidence-backed research rather than pretending omniscience."
+    domains: ["research-methods", "evidence-verification", "foresight-innovation"]
+    may_create_children: true
+    routing_priority: 20
+    routing_keywords: ["research", "full knowledge", "all knowledge", "unknown subject", "evidence", "discover"]
+
+  - id: legal-law-advisory-master
+    name: "Legal & Law Advisory Master"
+    parent: "legal-compliance-master"
+    mission: "Provide issue-spotting and development guidance across law, contracts, corporate/commercial, IP, regulation and compliance with jurisdiction/effective-date discipline."
+    domains: ["constitutional-public-law", "international-law", "corporate-commercial-law", "criminal-law", "civil-private-law", "intellectual-property-law", "regulatory-compliance", "jurisprudence-legal-history"]
+    may_create_children: true
+    routing_priority: 20
+    routing_keywords: ["legal", "law", "contract", "terms", "privacy", "compliance", "regulation", "licence", "license", "ip", "trademark", "patent"]
+
+  - id: marketing-brand-master
+    name: "Marketing & Brand Master"
+    parent: "business-strategy-master"
+    mission: "Advise positioning, brand, customer insight, go-to-market, acquisition, retention, digital marketing, campaigns, content and measurement."
+    domains: ["marketing-sales-growth"]
+    may_create_children: true
+    routing_priority: 30
+    routing_keywords: ["marketing", "brand", "campaign", "advertising", "seo", "social media", "growth", "positioning", "content marketing"]
+
+  - id: hr-people-master
+    name: "HR & People Master"
+    parent: "business-strategy-master"
+    mission: "Advise workforce design, recruitment, onboarding, performance, compensation, policies, culture, leadership and people operations."
+    domains: ["people-hr"]
+    may_create_children: true
+    routing_priority: 30
+    routing_keywords: ["hr", "human resources", "people", "recruitment", "hiring", "employee", "staff", "performance", "compensation"]
+
+  - id: sales-commercial-master
+    name: "Sales & Commercial Master"
+    parent: "business-strategy-master"
+    mission: "Advise sales strategy, pipeline, CRM, pricing, proposals, negotiation, partnerships, customer success and commercial execution."
+    domains: ["marketing-sales-growth", "corporate-strategy"]
+    may_create_children: true
+    routing_priority: 30
+    routing_keywords: ["sales", "selling", "pipeline", "crm", "proposal", "commercial", "customer success", "account management", "negotiation"]
+
+  - id: mobile-app-engineering-master
+    name: "Mobile App Engineering Master"
+    parent: "computing-ai-director"
+    mission: "Lead iOS, Android and cross-platform mobile architecture, native integrations, offline/sync, notifications, deep links, app-store release engineering and device testing."
+    domains: ["software-engineering", "ui-ux-interaction"]
+    may_create_children: true
+    routing_priority: 40
+    routing_keywords: ["mobile", "android", "ios", "iphone", "ipad", "react native", "flutter", "app store", "play store", "phone app"]
+
+  - id: business-operations-master
+    name: "Business, Operations & Management Master"
+    parent: "business-strategy-master"
+    mission: "Advise business models, strategy, operations, procurement, supply chain, governance, product/programme delivery and organisational execution."
+    domains: ["corporate-strategy", "operations-supply-chain", "product-project-programme"]
+    may_create_children: true
+    routing_priority: 20
+    routing_keywords: ["business", "operations", "management", "strategy", "procurement", "supply chain", "process", "programme", "portfolio"]
+
+  - id: finance-all-aspects-master
+    name: "Finance, Accounting, Tax & Capital Master"
+    parent: "economics-finance-director"
+    mission: "Coordinate finance, accounting, tax, treasury, banking, investment, capital markets, insurance, risk, valuation and commercial-finance analysis."
+    domains: ["macro-micro-economics", "econometrics-quantitative-finance", "accounting-tax", "banking-investment-capital", "insurance-actuarial", "global-trade-commerce"]
+    may_create_children: true
+    routing_priority: 20
+    routing_keywords: ["finance", "financial", "accounting", "tax", "treasury", "investment", "capital", "valuation", "banking", "insurance", "fx"]
+
+  - id: engineering-advisory-master
+    name: "Engineering Advisory Master"
+    parent: "engineering-director"
+    mission: "Coordinate multidisciplinary engineering advice across mechanical, electrical, process, civil, structural, nuclear, vehicle, materials, industrial and product engineering."
+    domains: ["mechanical-engineering", "electrical-electronic-engineering", "chemical-process-engineering", "civil-structural-engineering", "nuclear-engineering", "vehicle-naval-engineering", "materials-metallurgy", "manufacturing-industrial", "industrial-product-design"]
+    may_create_children: true
+    routing_priority: 20
+    routing_keywords: ["engineering", "engineer", "mechanical", "electrical", "structural", "civil", "manufacturing", "materials", "industrial"]
+
+  - id: aerospace-engineering-master
+    name: "Aerospace Engineering Master"
+    parent: "engineering-director"
+    mission: "Lead aerospace, aerodynamics, propulsion, flight mechanics, spacecraft, satellite, avionics and guidance/navigation/control analysis."
+    domains: ["aerospace-engineering"]
+    may_create_children: true
+    routing_priority: 40
+    routing_keywords: ["aerospace", "aircraft", "aviation", "rocket", "spacecraft", "satellite", "aerodynamics", "propulsion", "avionics"]
+
+  - id: coding-software-master
+    name: "Coding & Software Engineering Master"
+    parent: "computing-ai-director"
+    mission: "Lead software architecture and implementation across programming languages, APIs, web/backend systems, databases, testing, DevOps and reliability."
+    domains: ["computer-science", "software-engineering", "data-databases", "networks-cloud"]
+    may_create_children: true
+    routing_priority: 30
+    routing_keywords: ["code", "coding", "programming", "software", "api", "backend", "frontend", "database", "typescript", "python", "next.js", "react"]
+
+  - id: graphic-design-master
+    name: "Graphic Design & Visual Communication Master"
+    parent: "arts-creative-director"
+    mission: "Lead graphic design, visual identity, branding, layout, illustration, typography and digital visual communication."
+    domains: ["visual-art-graphic-design", "ui-ux-interaction"]
+    may_create_children: true
+    routing_priority: 40
+    routing_keywords: ["graphic design", "logo", "branding", "visual identity", "typography", "illustration", "layout"]
+
+  - id: fashion-design-master
+    name: "Fashion, Textiles & Wearables Master"
+    parent: "engineering-director"
+    mission: "Lead fashion design, textiles, garment construction, footwear, collections, manufacturing and wearable-product development."
+    domains: ["textiles-fashion-wearables", "industrial-product-design"]
+    may_create_children: true
+    routing_priority: 40
+    routing_keywords: ["fashion", "clothing", "garment", "textile", "footwear", "couture", "wearable"]
+
+  - id: photography-master
+    name: "Photography Master"
+    parent: "arts-creative-director"
+    mission: "Advise photographic direction, lighting, lenses, composition, studio/location production, editorial, product and commercial photography."
+    domains: ["visual-art-graphic-design", "film-animation"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["photography", "photographer", "photo shoot", "photoshoot", "camera", "lighting", "portrait", "product photography"]
+
+  - id: film-director-master
+    name: "Film Direction Master"
+    parent: "arts-creative-director"
+    mission: "Lead film direction, visual storytelling, performance direction, shot design, pacing and creative interpretation."
+    domains: ["film-animation", "literature-writing"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["film director", "direct film", "directing", "director", "shot list", "visual storytelling"]
+
+  - id: film-production-master
+    name: "Film Production Master"
+    parent: "arts-creative-director"
+    mission: "Lead film/video production planning, budgeting, scheduling, crew, locations, equipment, production workflow and delivery."
+    domains: ["film-animation", "product-project-programme"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["film production", "producer", "production plan", "shoot schedule", "crew", "location", "video production"]
+
+  - id: film-editing-master
+    name: "Film Editing & Post-Production Master"
+    parent: "arts-creative-director"
+    mission: "Lead editing, post-production, pacing, continuity, colour, sound integration, motion/VFX handoff and delivery masters."
+    domains: ["film-animation", "music-audio"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["film editor", "video editor", "editing", "post-production", "post production", "colour grade", "color grade", "cut"]
+
+  - id: scriptwriting-master
+    name: "Scriptwriting & Screenwriting Master"
+    parent: "arts-creative-director"
+    mission: "Lead scripts, screenplays, treatments, narrative structure, dialogue, character arcs, scene design and production-ready writing."
+    domains: ["literature-writing", "film-animation"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["script", "screenplay", "screenwriting", "scriptwriting", "treatment", "dialogue", "scene"]
+
+  - id: songwriting-master
+    name: "Songwriting & Composition Master"
+    parent: "arts-creative-director"
+    mission: "Lead songwriting, lyric craft, melody, harmony, arrangement and composition across genres while respecting evidence and copyright constraints."
+    domains: ["music-audio", "literature-writing"]
+    may_create_children: true
+    routing_priority: 50
+    routing_keywords: ["song", "songwriting", "songwriter", "lyrics", "melody", "composition", "compose", "chorus", "verse"]
+
 assurance_roles:
   - id: sigma-mission-router
     name: "Sigma Mission Router"
     parent: "sigma-governor"
     mission: "Decompose missions, select leaders, identify cross-domain dependencies and assign assurance roles."
     may_create_children: false
+
+  - id: sigma-development-planning-director
+    name: "Sigma Development Planning Director"
+    parent: "sigma-chief-of-staff"
+    mission: "Turn relevant expert advice into one executable development advisory plan with scope, phases, ordered pull plan, acceptance criteria, evidence requirements, specialist ownership and exact next actions."
+    may_create_children: false
+    portfolio_wide: true
 
   - id: sigma-independent-critic
     name: "Sigma Independent Critic"
