@@ -1,0 +1,271 @@
+schema_version: 1
+policy_id: sigma-project-team-ownership-v1
+root_authority: "Mitesh"
+
+ownership_rule:
+  - "Every Sigma-managed build/project has one accountable Sigma build team."
+  - "Every Sigma-connected chat for that project resolves to the same team; the chat is a work surface, not an isolated authority island."
+  - "The team lead owns continuity of the build until the repository/project Definition of Done is satisfied or a genuine owner/external gate blocks further safe work."
+  - "Sigma Scouter continuously searches for reusable open-source code/APIs that can reduce rebuild effort for every team."
+  - "Every material release still requires independent security assurance and Sigma User Tester evidence."
+  - "Teams may recruit bounded mission specialists under headquarters/authority.yaml, but project accountability does not move silently."
+  - "Unknown/unmapped chats are held by Sigma Chief of Staff until a project identity is established; no duplicate project implementation is created by default."
+
+mandatory_roles:
+  portfolio_governor: "sigma-governor"
+  planning: "sigma-development-planning-director"
+  open_source_recon: "sigma-scouter"
+  independent_solution_judge: "sigma-solution-judge"
+  security_gate: "sigma-security-gatekeeper"
+  user_acceptance: "sigma-user-tester"
+  evidence: "sigma-evidence-verifier"
+
+team_profiles:
+  control_plane:
+    lead: "sigma-chief-of-staff"
+    specialists: ["algorithmic-engineering-director","software-architecture-master","ai-agent-engineering-master","developer-tooling-ci-master","research-director","security-master","qa-test-engineering-master"]
+  web_platform:
+    lead: "software-architecture-master"
+    specialists: ["frontend-engineering-master","backend-api-engineering-master","database-data-engineering-master","ui-ux-interaction","graphic-design-master","developer-tooling-ci-master","security-master","qa-test-engineering-master"]
+  ai_assistant:
+    lead: "ai-agent-engineering-master"
+    specialists: ["backend-api-engineering-master","algorithmic-mobile-engineering-master","distributed-cloud-systems-master","integration-automation-master","research-director","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  business_app:
+    lead: "software-architecture-master"
+    specialists: ["backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","business-operations-master","finance-all-aspects-master","legal-law-advisory-master","security-master","qa-test-engineering-master"]
+  mining_platform:
+    lead: "mining-resources-master"
+    specialists: ["earth-space-master","software-architecture-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","legal-law-advisory-master","business-strategy-master","security-master","qa-test-engineering-master"]
+  mining_intelligence:
+    lead: "mining-resources-master"
+    specialists: ["earth-space-master","research-director","ai-agent-engineering-master","database-data-engineering-master","software-architecture-master","legal-law-advisory-master","security-master","qa-test-engineering-master"]
+  marketing_growth:
+    lead: "marketing-brand-master"
+    specialists: ["sales-commercial-master","business-strategy-master","frontend-engineering-master","backend-api-engineering-master","ai-agent-engineering-master","graphic-design-master","security-master","qa-test-engineering-master"]
+  health_fitness:
+    lead: "health-medicine-director"
+    specialists: ["software-architecture-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","privacy-data-security-master","legal-law-advisory-master","security-master","qa-test-engineering-master"]
+  creative_marketplace:
+    lead: "arts-creative-director"
+    specialists: ["graphic-design-master","frontend-engineering-master","backend-api-engineering-master","ai-agent-engineering-master","business-strategy-master","legal-law-advisory-master","security-master","qa-test-engineering-master"]
+  legal_tech:
+    lead: "legal-law-advisory-master"
+    specialists: ["software-architecture-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  esign:
+    lead: "legal-law-advisory-master"
+    specialists: ["software-architecture-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","secrets-cryptography-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  education:
+    lead: "humanities-social-sciences-director"
+    specialists: ["ai-agent-engineering-master","frontend-engineering-master","backend-api-engineering-master","algorithmic-mobile-engineering-master","research-director","legal-law-advisory-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  dev_platform:
+    lead: "algorithmic-engineering-director"
+    specialists: ["software-architecture-master","polyglot-coding-master","frontend-engineering-master","backend-api-engineering-master","developer-tooling-ci-master","ai-agent-engineering-master","security-master","qa-test-engineering-master"]
+  fintech:
+    lead: "finance-all-aspects-master"
+    specialists: ["software-architecture-master","backend-api-engineering-master","database-data-engineering-master","integration-automation-master","legal-law-advisory-master","secrets-cryptography-master","security-master","qa-test-engineering-master"]
+  corporate:
+    lead: "business-strategy-master"
+    specialists: ["legal-law-advisory-master","finance-all-aspects-master","marketing-brand-master","frontend-engineering-master","backend-api-engineering-master","security-master","qa-test-engineering-master"]
+  hosting_infrastructure:
+    lead: "distributed-cloud-systems-master"
+    specialists: ["cloud-infrastructure-security-master","network-edge-security-master","developer-tooling-ci-master","software-architecture-master","reliability-chaos-recovery-master","security-master","qa-test-engineering-master"]
+  ai_platform:
+    lead: "chief-ai-scientist"
+    specialists: ["ai-agent-engineering-master","software-architecture-master","database-data-engineering-master","distributed-cloud-systems-master","research-director","ai-systems-security-master","qa-test-engineering-master"]
+  trading:
+    lead: "finance-all-aspects-master"
+    specialists: ["algorithm-complexity-master","ai-agent-engineering-master","backend-api-engineering-master","database-data-engineering-master","integration-automation-master","legal-law-advisory-master","security-master","qa-test-engineering-master"]
+  tax:
+    lead: "finance-all-aspects-master"
+    specialists: ["legal-law-advisory-master","research-director","ai-agent-engineering-master","backend-api-engineering-master","database-data-engineering-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  payroll_hr:
+    lead: "hr-people-master"
+    specialists: ["finance-all-aspects-master","legal-law-advisory-master","research-director","software-architecture-master","backend-api-engineering-master","database-data-engineering-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  medicines:
+    lead: "health-medicine-director"
+    specialists: ["legal-law-advisory-master","research-director","database-data-engineering-master","backend-api-engineering-master","frontend-engineering-master","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  legal_logistics:
+    lead: "legal-law-advisory-master"
+    specialists: ["business-operations-master","algorithmic-mobile-engineering-master","backend-api-engineering-master","database-data-engineering-master","frontend-engineering-master","integration-automation-master","security-master","qa-test-engineering-master"]
+  consumer_assistant:
+    lead: "ai-agent-engineering-master"
+    specialists: ["algorithmic-mobile-engineering-master","backend-api-engineering-master","integration-automation-master","ui-ux-interaction","privacy-data-security-master","security-master","qa-test-engineering-master"]
+  general_product:
+    lead: "sigma-development-planning-director"
+    specialists: ["software-architecture-master","frontend-engineering-master","backend-api-engineering-master","business-strategy-master","marketing-brand-master","security-master","qa-test-engineering-master"]
+
+project_assignments:
+  - project: "Sigma Development Command Center"
+    repository: "M17z2025/ai-command-center"
+    team_profile: "control_plane"
+    chat_aliases: ["Sigma","Sigma Mesh","Sigma Development Controller","Sigma Continuous Development","Sigma Agent Index"]
+  - project: "Mi7z Web"
+    repository: "M17z2025/mi7z-web"
+    team_profile: "web_platform"
+    chat_aliases: ["MI7Z web builder","mi7z-web"]
+  - project: "Alysha AI Platform"
+    repository: "M17z2025/alisha-ai-platform"
+    team_profile: "ai_assistant"
+    chat_aliases: ["Alysha","Alisha","ALYSHA","Alysha mobile"]
+  - project: "Alysha OS"
+    repository: "M17z2025/alisha-os"
+    team_profile: "ai_assistant"
+    chat_aliases: ["Alysha OS","Alisha OS"]
+  - project: "Alysha Repository Automation"
+    repository: "M17z2025/alisha-repository-automation"
+    team_profile: "dev_platform"
+    chat_aliases: ["Alysha Repository Automation"]
+  - project: "Invoiceit by Mi7z"
+    repository: "M17z2025/invoiceit-by-mi7z"
+    team_profile: "business_app"
+    chat_aliases: ["Invoiceit","invoiceit by Mi7z"]
+  - project: "Lycia Zambia"
+    repository: "M17z2025/lycia-zambia"
+    team_profile: "mining_platform"
+    chat_aliases: ["Lycia Zambia","Yengo platform"]
+  - project: "Marketit"
+    repository: "M17z2025/umarketit"
+    team_profile: "marketing_growth"
+    chat_aliases: ["Marketit","uMarketit"]
+  - project: "Total Mining Intelligence"
+    repository: "M17z2025/total-mining-intelligence"
+    team_profile: "mining_intelligence"
+    chat_aliases: ["TMI","Mining Intelligence","Lycia Intelligence Terminal"]
+  - project: "BodyFit"
+    repository: "M17z2025/mybodyfit"
+    team_profile: "health_fitness"
+    chat_aliases: ["BodyFit","mybodyfit.ai"]
+  - project: "Tattooit"
+    repository: "M17z2025/tattooit"
+    team_profile: "creative_marketplace"
+    chat_aliases: ["Tattooit","itattooit.com"]
+  - project: "Legalit"
+    repository: "M17z2025/legalit"
+    team_profile: "legal_tech"
+    chat_aliases: ["Legalit"]
+  - project: "Signit by Mi7z"
+    repository: "M17z2025/signit-by-mi7z"
+    team_profile: "esign"
+    chat_aliases: ["Signit","Signitly","Signit by Mi7z"]
+  - project: "Humanit"
+    repository: "M17z2025/ihumanit"
+    team_profile: "education"
+    chat_aliases: ["Humanit","Study","Revision","school signup"]
+  - project: "Designit AI Platform"
+    repository: "M17z2025/designit-ai-platform"
+    team_profile: "dev_platform"
+    chat_aliases: ["Designit","Designit AI Platform"]
+  - project: "Synergy AI Pay"
+    repository: "M17z2025/synergy-ai-pay"
+    team_profile: "fintech"
+    chat_aliases: ["Synergy AI Pay","Synergy Ai Pay"]
+  - project: "Synergy Alliance Holdings"
+    repository: "M17z2025/synergy-alliance-holdings"
+    team_profile: "corporate"
+    chat_aliases: ["Synergy Alliance Holdings"]
+  - project: "Lycia Limited"
+    repository: "M17z2025/lycia-limited"
+    team_profile: "corporate"
+    chat_aliases: ["Lycia Limited","Lycia corporate"]
+  - project: "Nexus Hosting"
+    repository: "M17z2025/nexushosting"
+    team_profile: "hosting_infrastructure"
+    chat_aliases: ["Nexus Hosting"]
+  - project: "Mi7z"
+    repository: "M17z2025/mi7z"
+    team_profile: "corporate"
+    chat_aliases: ["Mi7z","MI7Z"]
+  - project: "Imotion"
+    repository: "M17z2025/imoition"
+    team_profile: "general_product"
+    chat_aliases: ["Imotion","Imoiton","Imoitic"]
+  - project: "Vinci Gateway"
+    repository: "M17z2025/vinci-gateway"
+    team_profile: "hosting_infrastructure"
+    chat_aliases: ["Vinci Gateway"]
+  - project: "CSK Mega Structures"
+    repository: "M17z2025/csk-mega-structures"
+    team_profile: "general_product"
+    chat_aliases: ["CSK Mega Structures"]
+  - project: "Aurelius"
+    repository: "M17z2025/Aurelius"
+    team_profile: "general_product"
+    chat_aliases: ["Aurelius","Aruelius"]
+  - project: "Mi7z Play Foundation"
+    repository: "M17z2025/Mi7z_play_foundation"
+    team_profile: "general_product"
+    chat_aliases: ["Mi7z Play Foundation"]
+  - project: "Mi7z Core Intelligence"
+    repository: "M17z2025/mi7z_core_Intelliegence"
+    team_profile: "ai_platform"
+    chat_aliases: ["Mi7z Core Intelligence","AI Brain","AI Brain Mi7z Core Intelligence"]
+
+chat_project_assignments:
+  - project: "AutoHedge – FXHedge"
+    repository: null
+    team_profile: "trading"
+    chat_aliases: ["AutoHedge","FXHedge"]
+  - project: "UK AI Tax Adviser / Tax Intelligence OS"
+    repository: null
+    team_profile: "tax"
+    chat_aliases: ["UK AI Tax Adviser","Tax Intelligence OS"]
+  - project: "UK Payroll AI"
+    repository: null
+    team_profile: "payroll_hr"
+    chat_aliases: ["Payroll AI","UK Payroll AI"]
+  - project: "PL Lookup"
+    repository: null
+    team_profile: "medicines"
+    chat_aliases: ["PL Lookup","Veterinary medicines lookup"]
+  - project: "Dormant Medicines Research"
+    repository: null
+    team_profile: "medicines"
+    chat_aliases: ["Dormant medicines","relicensing medicines"]
+  - project: "Secure DX Zambia"
+    repository: null
+    team_profile: "legal_logistics"
+    chat_aliases: ["Secure DX","Secure DX Zambia"]
+  - project: "Mitz PA"
+    repository: null
+    team_profile: "consumer_assistant"
+    chat_aliases: ["Mitz PA"]
+  - project: "Alpha-Zulu"
+    repository: null
+    team_profile: "general_product"
+    chat_aliases: ["Alpha-Zulu","Alpha Zulu directory"]
+  - project: "White Rino"
+    repository: null
+    team_profile: "general_product"
+    chat_aliases: ["White Rino"]
+  - project: "AI Gaming"
+    repository: null
+    team_profile: "general_product"
+    chat_aliases: ["AI Gaming"]
+  - project: "UK AI HR & Employment Compliance"
+    repository: null
+    team_profile: "payroll_hr"
+    chat_aliases: ["UK AI HR","HR AI"]
+  - project: "AI PI Agent"
+    repository: null
+    team_profile: "legal_tech"
+    chat_aliases: ["AI PI Agent","UK Investigation Intelligence OS"]
+
+chat_resolution:
+  precedence:
+    - "explicit project named by owner"
+    - "repository identity from projects/registry.yaml"
+    - "chat/project folder name or chat_aliases"
+    - "Drive blueprint identity"
+    - "Sigma Chief of Staff holds and resolves ambiguity"
+  rule: "A chat never silently creates a second competing team for an already-mapped project."
+
+blueprint_sync:
+  required_section_title: "Sigma Build Team & Ownership"
+  required_fields:
+    - "Accountable Sigma lead"
+    - "Core specialists"
+    - "Mandatory independent gates"
+    - "Sigma Scouter"
+    - "Source of truth"
+    - "Chat continuity rule"
+  update_rule: "When project team membership materially changes, update this manifest and the project's master blueprint/build pack."
