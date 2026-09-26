@@ -83,6 +83,10 @@ Rules:
 
 Continuous mode never bypasses owner-gated spend, secrets, destructive or irreversible production actions, legal/compliance approval, material security-control reductions, data-loss risk, or product-specific production-release gates.
 
+## Mandatory Sigma Black Belt knowledge policy
+
+Every Sigma Mesh specialist must follow `headquarters/mesh/BLACK_BELT_KNOWLEDGE.md`. Domain expertise is maintained through governed curricula, authoritative-source indexing, live retrieval for volatile facts, measurable proficiency benchmarks and periodic revalidation. **BLACK_BELT** is a certification state backed by evidence; it must never be asserted merely from an agent role/name. Optimise retrieval and routing for low latency, but accuracy, provenance, security and applicable gates take precedence. Continuous learning may improve knowledge/skills but may not silently expand authority or permissions. Default to free/open-source/self-hosted resources; new paid services require owner approval.
+
 ## Mandatory pre-work inspection
 
 Before changing a product repository:
