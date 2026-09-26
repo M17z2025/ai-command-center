@@ -67,7 +67,7 @@ class SigmaProjectTeamTests(unittest.TestCase):
             for assignment in self.teams.get(section, []):
                 for alias in assignment.get("chat_aliases", []):
                     key = alias.strip().casefold()
-                    if key in aliases:
+                    if key in aliases and aliases[key] != assignment["project"]:
                         self.fail(
                             f"chat alias {alias!r} maps to both "
                             f"{aliases[key]!r} and {assignment['project']!r}"
