@@ -70,6 +70,15 @@ This repository is public. It contains non-secret governance metadata and links 
 
 Issue: #20
 
+## Engineering Support Desk
+
+The **Sigma Engineering Support Desk** owns confirmed broken/regressed product incidents until **FIXED / VERIFIED**.
+
+- Protocol: [`../docs/ENGINEERING_RESCUE_PROTOCOL.md`](../docs/ENGINEERING_RESCUE_PROTOCOL.md)
+- Evidence report: [`../templates/SIGMA_ENGINEERING_RESCUE_REPORT.md`](../templates/SIGMA_ENGINEERING_RESCUE_REPORT.md)
+
+Difficult defects remain **ACTIVE — WORKING**. The Support Desk continually routes root-cause, architecture, coding, database, integration, infrastructure, security and testing specialists; retains failed attempts; and always leaves an exact next experiment. External gates keep the incident open rather than converting it into a false completion.
+
 ## Algorithmic Engineering & Solution Lab
 
 The **Sigma Algorithmic Engineering & Solution Lab** is the permanent coding, algorithm, debugging, optimisation and test-engineering division.
