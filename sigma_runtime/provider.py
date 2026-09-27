@@ -58,25 +58,54 @@ class HTTPModelProvider(ModelProvider):
         self.context_tokens = max(1024, int(context_tokens))
         self.disable_thinking = bool(disable_thinking)
 
+
+    def _fit_messages_to_context(self, system: str, user: str, max_tokens: int) -> tuple[str, str]:
+        """Conservatively bound prompt size to the configured context window.
+
+        We use a deliberately conservative 3 characters/token estimate and
+        reserve both generation space and a fixed protocol/safety margin.
+        """
+        reserve = max_tokens + 512
+        input_token_budget = max(256, self.context_tokens - reserve)
+        char_budget = input_token_budget * 3
+
+        system = system or ""
+        user = user or ""
+        if len(system) + len(user) <= char_budget:
+            return system, user
+
+        # Keep system instructions intact where possible and trim user context first.
+        if len(system) >= char_budget:
+            return system[:char_budget], ""
+
+        remaining = max(0, char_budget - len(system))
+        return system, user[:remaining]
+
     def complete(self, request: CompletionRequest) -> str:
         request_max_tokens = max(
             64,
             int(request.metadata.get("max_tokens", self.max_tokens)),
         )
+        system_text, user_text = self._fit_messages_to_context(
+            request.system,
+            request.user,
+            request_max_tokens,
+        )
+
         if self.protocol == "responses":
             payload = {
                 "model": self.model,
                 "input": [
-                    {"role": "system", "content": request.system},
-                    {"role": "user", "content": request.user},
+                    {"role": "system", "content": system_text},
+                    {"role": "user", "content": user_text},
                 ],
             }
         elif self.protocol == "chat-completions":
             payload = {
                 "model": self.model,
                 "messages": [
-                    {"role": "system", "content": request.system},
-                    {"role": "user", "content": request.user},
+                    {"role": "system", "content": system_text},
+                    {"role": "user", "content": user_text},
                 ],
                 "temperature": 0.2,
                 "max_tokens": request_max_tokens,
@@ -85,8 +114,8 @@ class HTTPModelProvider(ModelProvider):
             payload = {
                 "model": self.model,
                 "messages": [
-                    {"role": "system", "content": request.system},
-                    {"role": "user", "content": request.user},
+                    {"role": "system", "content": system_text},
+                    {"role": "user", "content": user_text},
                 ],
                 "stream": False,
                 "think": not self.disable_thinking,
