@@ -1,45 +1,129 @@
-# THE LINE — Vehicle Bible v1
-
-## Creative rule
-The vehicle world must feel premium, current to 2026, and predominantly electric. Cars are character signals, not random props. Performance and chase choreography must reflect real EV dynamics.
-
-## Locked hero vehicles
-
-### Mitz Patel — Porsche Cayenne Turbo Electric
-Primary hero/performance SUV.
-- Role: Mitz's later hero car / aspirational progression vehicle, introduced as his status rises rather than at the very start.
-- Character signal: extreme capability without looking like an exotic supercar.
-- Real-world reference: 2026 Cayenne Turbo Electric, 850 kW / 1,156 PS with Launch Control, 0–62 mph in 2.5 s, up to 387 miles quoted combined range.
-- Film treatment: dark, understated specification; recognisable but not gaudy.
-- Action use: explosive launch, motorway pursuit, wet-road control, estate/industrial-road sequences.
+# THE LINE — Vehicle Bible v2
+## Canonical fleet — locked
 
 ### Marcus Vale — Bentley Torcal
-Primary luxury-power vehicle.
-- Role: Marcus's flagship car at the beginning of the series.
-- Character signal: old power moving into the electric era; immense wealth, discretion and modernity.
-- Real-world reference: all-electric Bentley Torcal, up to 821 PS and 1,155 Nm with launch control.
-- Film treatment: deep, restrained exterior; bespoke interior; chauffeur-capable but Marcus sometimes drives.
-- Narrative use: visually contrasts Marcus's opening power with his later decline.
+**Asset ID:** VEH-MARCUS-TORCAL  
+**Role:** Marcus's principal vehicle from Episode 1.  
+**Canonical source:** https://www.bentleymotors.com/uk/en/models/torcal.html  
+**Canonical visual reference:** user-supplied image IMG_0007.webp in the production conversation.  
+**Specification:** standard Bentley Torcal — NOT Torcal S.
 
-## Supporting EV fleet
-- Sofia: anonymous high-performance electric executive saloon.
-- Blackthorn: premium electric SUVs and electric commercial vans.
-- Kai: modified electric hot hatch / crossover with visible tuner personality.
-- Ellie/Hawthorne Estate: capable electric 4x4 / utility vehicle.
-- Noah: low-profile EV or electric SUV chosen for anonymity, durability and range.
+Visual lock:
+- silver/grey exterior matching the supplied reference;
+- standard Torcal bright/satin exterior treatment;
+- Floating Diamond Grille;
+- sophisticated, minimalist appearance;
+- premium multi-spoke wheels;
+- no black Torcal S body kit or S-specific styling.
 
-## Continuity and stunt rules
-- No fake petrol revs or exhaust audio on EVs.
-- Sound design: tyre scrub, suspension load, wind, inverter/drivetrain whine, road resonance, impacts, cabin vibration and cinematic low-frequency design.
-- Respect EV mass, low centre of gravity, regenerative braking, instant torque and realistic thermal/range behaviour.
-- No impossible gear-change choreography unless the specific vehicle supports simulated gears.
-- All hero cars receive immutable asset IDs, exact trim/wheel/interior records and damage-continuity states.
+Bentley official reference figures for the standard Torcal:
+- 821 PS / 604 kW;
+- 1,155 Nm;
+- 0–60 mph 3.3 s;
+- 0–100 km/h 3.4 s;
+- range up to approximately 373–375 miles;
+- 10–80% DC charge quoted at 16 minutes.
 
-## Narrative progression
-Mitz must NOT begin the story already owning the Cayenne Turbo Electric. His vehicle progression is part of the underdog-rise arc:
-1. struggling workshop / older or customer performance EV;
-2. first serious modified EV;
-3. business growth;
-4. Porsche Cayenne Turbo Electric as a visible milestone of success.
+Narrative purpose: Marcus begins the series with established wealth, control and effortless status. His car should never look loud or boy-racer aggressive.
 
-Marcus begins with the Bentley Torcal while Mitz has little. Across the series that visual hierarchy reverses as Marcus loses assets and Mitz builds legitimate power.
+---
+
+### TJ Patel — Hyundai IONIQ 5 N (Pilot / early rise)
+**Asset ID:** VEH-TJ-IONIQ5N  
+TJ must not begin wealthy. His early hero car is a rebuilt/modified IONIQ 5 N associated with Patel Performance rather than a brand-new luxury purchase.
+
+Canonical model:
+- Hyundai IONIQ 5 N;
+- 84 kWh;
+- 650 PS 4WD reference specification;
+- performance braking/regeneration;
+- N e-Shift may be used where story/audio choreography benefits.
+
+Treatment:
+- dark, restrained workshop-built specification;
+- small signs of use;
+- credible modifications;
+- no excessive body kit.
+
+Narrative purpose: proves TJ's engineering talent before he has serious money.
+
+---
+
+### TJ Patel — Porsche Cayenne Turbo Electric (Later success)
+**Asset ID:** VEH-TJ-CAYENNE-TURBO-E  
+Introduced only once TJ's legitimate business success justifies it.
+
+Canonical official reference:
+https://www.porsche.com/uk/models/cayenne/cayenne-electric-models/cayenne-turbo-electric/
+
+Reference performance:
+- 1,156 PS with Launch Control;
+- 0–62 mph 2.5 s;
+- quoted combined range up to 387 miles.
+
+Treatment:
+- dark understated premium specification;
+- visual milestone in TJ's rise;
+- never present in the pilot merely to make him look rich.
+
+---
+
+### Sofia Al-Hassan — BMW i5 M60 xDrive
+**Asset ID:** VEH-SOFIA-I5M60  
+Anonymous enough for surveillance work but extremely capable.
+Treatment: dark grey/black, standard wheels, no flashy trim.
+
+---
+
+### Noah Cole — Polestar 4 Dual Motor
+**Asset ID:** VEH-NOAH-POLESTAR4  
+Clean, low-profile, powerful and modern without looking like an action-hero cliché.
+Treatment: neutral dark colour, factory appearance.
+
+---
+
+### Ellie Hawthorne — Volvo EX90
+**Asset ID:** VEH-ELLIE-EX90  
+Premium but practical electric SUV for rural estate use.
+Treatment: muted green/grey, muddy tyres when appropriate, estate equipment in rear.
+
+---
+
+### Tommy Quinn — Volkswagen ID. Buzz GTX
+**Asset ID:** VEH-TOMMY-IDBUZZ  
+A warm, practical counterpoint to the aggressive performance vehicles.
+Use for football equipment, players, cones and community work.
+
+---
+
+### Kai Patel — compact modified performance EV
+**Asset ID:** VEH-KAI-EV1  
+Exact model to be visually approved after test generation. Must feel youthful, achievable and modified rather than expensive-supercar status.
+
+---
+
+### Blackthorn pursuit fleet — Porsche Macan Turbo Electric
+**Asset ID:** VEH-BLACKTHORN-MACAN  
+Dark unmarked Macan Turbo Electric SUVs used by security teams.
+Treatment: near-factory, no theatrical tactical armour, privacy glass only where credible.
+
+### Blackthorn logistics — Mercedes-Benz eSprinter
+**Asset ID:** VEH-BLACKTHORN-ESPRINTER  
+Used for legitimate-looking freight, covert equipment movement and warehouse operations.
+
+---
+
+## EV action rules
+- no fake exhaust smoke;
+- no conventional V8 rev soundtrack unless a non-EV appears in a later story;
+- use drivetrain/inverter tone, wind, tyres, suspension, road texture and cabin resonance;
+- respect EV mass and low centre of gravity;
+- use regenerative braking realistically;
+- avoid endless drifting;
+- charging/range enters dialogue only when naturally relevant.
+
+## Continuity
+Each recurring vehicle gets:
+MODEL / TRIM / COLOUR / WHEELS / INTERIOR / REGISTRATION-PROP / CLEAN-DIRTY STATE / DAMAGE STATE / BATTERY STATE where plot-relevant.
+
+No generated vehicle shot is approved if the model changes shape, grille, lights, wheels, door count or interior between cuts.
