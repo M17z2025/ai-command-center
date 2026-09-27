@@ -5,9 +5,9 @@ The vehicle world must feel premium, current to 2026, and predominantly electric
 
 ## Locked hero vehicles
 
-### Jay Malik — Porsche Cayenne Turbo Electric
+### Mitz Patel — Porsche Cayenne Turbo Electric
 Primary hero/performance SUV.
-- Role: Jay's later hero car / aspirational progression vehicle, introduced as his status rises rather than at the very start.
+- Role: Mitz's later hero car / aspirational progression vehicle, introduced as his status rises rather than at the very start.
 - Character signal: extreme capability without looking like an exotic supercar.
 - Real-world reference: 2026 Cayenne Turbo Electric, 850 kW / 1,156 PS with Launch Control, 0–62 mph in 2.5 s, up to 387 miles quoted combined range.
 - Film treatment: dark, understated specification; recognisable but not gaudy.
@@ -36,10 +36,10 @@ Primary luxury-power vehicle.
 - All hero cars receive immutable asset IDs, exact trim/wheel/interior records and damage-continuity states.
 
 ## Narrative progression
-Jay must NOT begin the story already owning the Cayenne Turbo Electric. His vehicle progression is part of the underdog-rise arc:
+Mitz must NOT begin the story already owning the Cayenne Turbo Electric. His vehicle progression is part of the underdog-rise arc:
 1. struggling workshop / older or customer performance EV;
 2. first serious modified EV;
 3. business growth;
 4. Porsche Cayenne Turbo Electric as a visible milestone of success.
 
-Marcus begins with the Bentley Torcal S while Jay has little. Across the series that visual hierarchy reverses as Marcus loses assets and Jay builds legitimate power.
+Marcus begins with the Bentley Torcal S while Mitz has little. Across the series that visual hierarchy reverses as Marcus loses assets and Mitz builds legitimate power.
