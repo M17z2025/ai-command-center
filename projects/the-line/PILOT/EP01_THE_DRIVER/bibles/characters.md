@@ -21,7 +21,7 @@ Male Doberman. Natural ears and tail. Black-and-rust. Gentle with family, alert 
 
 ## MARCUS VALE — 52
 Black British. Wealthy, controlled, elegant. Criminal strategist who thinks in systems, not street theatrics.
-**Visual:** quiet luxury, modern tailoring, Bentley Torcal S.
+**Visual:** quiet luxury, modern tailoring, Bentley Torcal.
 **Arc:** begins untouchable; power erodes while TJ rises.
 
 ## LENA VALE — 26
