@@ -13,11 +13,11 @@ Primary hero/performance SUV.
 - Film treatment: dark, understated specification; recognisable but not gaudy.
 - Action use: explosive launch, motorway pursuit, wet-road control, estate/industrial-road sequences.
 
-### Marcus Vale — Bentley Torcal S
+### Marcus Vale — Bentley Torcal
 Primary luxury-power vehicle.
 - Role: Marcus's flagship car at the beginning of the series.
 - Character signal: old power moving into the electric era; immense wealth, discretion and modernity.
-- Real-world reference: all-electric Bentley Torcal S, up to 888 PS and 1,350 Nm with launch control.
+- Real-world reference: all-electric Bentley Torcal, up to 821 PS and 1,155 Nm with launch control.
 - Film treatment: deep, restrained exterior; bespoke interior; chauffeur-capable but Marcus sometimes drives.
 - Narrative use: visually contrasts Marcus's opening power with his later decline.
 
@@ -42,4 +42,4 @@ Mitz must NOT begin the story already owning the Cayenne Turbo Electric. His veh
 3. business growth;
 4. Porsche Cayenne Turbo Electric as a visible milestone of success.
 
-Marcus begins with the Bentley Torcal S while Mitz has little. Across the series that visual hierarchy reverses as Marcus loses assets and Mitz builds legitimate power.
+Marcus begins with the Bentley Torcal while Mitz has little. Across the series that visual hierarchy reverses as Marcus loses assets and Mitz builds legitimate power.
