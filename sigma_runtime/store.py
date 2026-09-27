@@ -161,6 +161,42 @@ class MissionStore:
             ).fetchall()
             return [dict(row) for row in rows]
 
+    def get_lesson(self, lesson_id: str) -> dict[str, Any] | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                """SELECT id, mission_id, created_at, status, lesson, metadata_json
+                FROM lessons WHERE id=?""",
+                (lesson_id,),
+            ).fetchone()
+        if not row:
+            return None
+        item = dict(row)
+        item["metadata"] = json.loads(item.pop("metadata_json") or "{}")
+        return item
+
+    def set_lesson_status(
+        self,
+        lesson_id: str,
+        status: str,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        allowed = {"CANDIDATE", "EVALUATED", "PROMOTED", "REJECTED", "RUNTIME_VERIFIED"}
+        if status not in allowed:
+            raise ValueError(f"Invalid lesson status: {status}")
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT metadata_json FROM lessons WHERE id=?",
+                (lesson_id,),
+            ).fetchone()
+            if not row:
+                raise KeyError(lesson_id)
+            current = json.loads(row["metadata_json"] or "{}")
+            current.update(metadata or {})
+            conn.execute(
+                "UPDATE lessons SET status=?, metadata_json=? WHERE id=?",
+                (status, json.dumps(current), lesson_id),
+            )
+
     def list_lessons(self, limit: int = 100) -> list[dict[str, Any]]:
         limit = max(1, min(int(limit), 500))
         with self._connect() as conn:

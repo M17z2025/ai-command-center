@@ -17,11 +17,13 @@ services:
     environment:
       OLLAMA_HOST: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
+      OLLAMA_EMBEDDING_MODEL: ${OLLAMA_EMBEDDING_MODEL:?set OLLAMA_EMBEDDING_MODEL}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - >
         until ollama list >/dev/null 2>&1; do sleep 2; done;
-        ollama pull "$${OLLAMA_MODEL}"
+        ollama pull "${OLLAMA_MODEL}";
+        ollama pull "${OLLAMA_EMBEDDING_MODEL}"
     depends_on:
       - ollama
     networks:

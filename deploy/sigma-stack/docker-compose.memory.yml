@@ -1,0 +1,66 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:v4.20.7
+    restart: unless-stopped
+    volumes:
+      - sigma-memory-data:/var/lib/falkordb/data
+    expose:
+      - "6379"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+
+  sigma-memory:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-memory
+    restart: unless-stopped
+    environment:
+      FALKORDB_HOST: falkordb
+      FALKORDB_PORT: "6379"
+      SIGMA_MEMORY_HOST: 0.0.0.0
+      SIGMA_MEMORY_PORT: "8090"
+      SIGMA_MEMORY_TOKEN: ${SIGMA_MEMORY_TOKEN:?set SIGMA_MEMORY_TOKEN}
+      SIGMA_MEMORY_LLM_BASE_URL: http://ollama:11434/v1
+      SIGMA_MEMORY_LLM_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
+      SIGMA_MEMORY_LLM_API_KEY: ollama
+      SIGMA_MEMORY_EMBEDDING_BASE_URL: http://ollama:11434/v1
+      SIGMA_MEMORY_EMBEDDING_MODEL: ${OLLAMA_EMBEDDING_MODEL:?set OLLAMA_EMBEDDING_MODEL}
+      SIGMA_MEMORY_EMBEDDING_API_KEY: ollama
+      SIGMA_MEMORY_EMBEDDING_DIM: ${SIGMA_MEMORY_EMBEDDING_DIM:-1024}
+      SIGMA_MEMORY_STRUCTURED_OUTPUT_MODE: ${SIGMA_MEMORY_STRUCTURED_OUTPUT_MODE:-json_object}
+    expose:
+      - "8090"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      falkordb:
+        condition: service_started
+      ollama-model-init:
+        condition: service_completed_successfully
+
+  sigma-runtime:
+    environment:
+      SIGMA_MEMORY_PROVIDER: graphiti
+      SIGMA_MEMORY_ENDPOINT: http://sigma-memory:8090
+      SIGMA_MEMORY_TOKEN: ${SIGMA_MEMORY_TOKEN:?set SIGMA_MEMORY_TOKEN}
+      SIGMA_MEMORY_TIMEOUT_SECONDS: ${SIGMA_MEMORY_TIMEOUT_SECONDS:-120}
+    depends_on:
+      sigma-memory:
+        condition: service_started
+
+  sigma-runner:
+    environment:
+      SIGMA_MEMORY_PROVIDER: graphiti
+      SIGMA_MEMORY_ENDPOINT: http://sigma-memory:8090
+      SIGMA_MEMORY_TOKEN: ${SIGMA_MEMORY_TOKEN:?set SIGMA_MEMORY_TOKEN}
+      SIGMA_MEMORY_TIMEOUT_SECONDS: ${SIGMA_MEMORY_TIMEOUT_SECONDS:-120}
+    depends_on:
+      sigma-memory:
+        condition: service_started
+
+volumes:
+  sigma-memory-data:

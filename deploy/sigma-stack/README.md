@@ -151,3 +151,28 @@ POST /runner/cycle   {"trigger":"operator","execute":false}
 ```
 
 A source-valid stack is not the same as a commissioned host. Live commissioning is proven only after a real model mission, service restart/persistence check, and at least one real runner cycle are evidenced on the private host.
+## Option D — governed expanding memory (Graphiti + FalkorDB)
+
+Use this overlay together with the Ollama overlay:
+
+```bash
+docker compose --env-file .env \
+  -f docker-compose.yml \
+  -f docker-compose.ollama.yml \
+  -f docker-compose.memory.yml \
+  up -d --build
+```
+
+Required private runtime values:
+- `SIGMA_MEMORY_TOKEN`
+- `OLLAMA_MODEL`
+- `OLLAMA_EMBEDDING_MODEL`
+- `SIGMA_MEMORY_EMBEDDING_DIM` matching the chosen embedding model.
+
+The memory service and FalkorDB are exposed only on the private Docker network. The Graphiti service accepts only `VERIFIED` or `PROMOTED` episodes into trusted memory. Candidate lessons remain in Sigma's private SQLite lesson store until an independent evaluation passes benchmark, security and regression gates.
+
+Sigma retrieves promoted memory before expert execution and appends it to the mission evidence bundle with provenance metadata.
+
+The Ollama/local model used for Graphiti extraction must pass structured-output ingestion tests before bulk knowledge import. A chat-capable local model is not automatically a reliable graph-extraction model.
+
+Graphiti is pinned through `graphiti-core[falkordb]==0.30.2`. FalkorDB is pinned to `v4.20.7`. Reverify licences/security before upgrades.
