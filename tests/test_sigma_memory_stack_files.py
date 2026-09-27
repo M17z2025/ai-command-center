@@ -9,6 +9,7 @@ class SigmaMemoryStackFilesTests(unittest.TestCase):
     def test_memory_requirements_pin_graphiti(self):
         text = (ROOT / "requirements-memory.txt").read_text(encoding="utf-8")
         self.assertIn("graphiti-core[falkordb]==0.30.2", text)
+        self.assertIn("httpx==0.28.1", text)
 
     def test_memory_compose_is_private_and_pinned(self):
         text = (
