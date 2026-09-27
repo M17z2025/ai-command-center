@@ -229,6 +229,7 @@ class RunnerStore:
         with self._connect() as conn:
             conn.executescript(
                 """
+                PRAGMA journal_mode=WAL;
                 CREATE TABLE IF NOT EXISTS runner_cycles (
                   id TEXT PRIMARY KEY,
                   created_at TEXT NOT NULL,
