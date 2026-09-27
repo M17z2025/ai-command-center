@@ -129,6 +129,10 @@ projects:
     repository: "M17z2025/mi7z_core_Intelliegence"
     aliases: ["mi7z core intelligence", "ai brain mi7z core intelligence"]
     domain_team: ["chief-ai-scientist", "research-director", "systems-decision-master", "ai-agent-engineering-master"]
+  - project: "THE LINE"
+    repository: "M17z2025/ai-command-center"
+    aliases: ["the line", "the driver", "ai pilot", "30-minute ai pilot"]
+    domain_team: ["film-director-master", "film-production-master", "film-editing-master", "scriptwriting-master", "arts-creative-director"]
 
 intake_projects:
   - project: "AutoHedge – FXHedge"
