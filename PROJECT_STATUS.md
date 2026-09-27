@@ -1,5 +1,47 @@
 # Sigma Development Command Center Status
 
+
+## Autonomous Runner + Self-Hosted Inference Runtime — Issue #62 / PR #63
+
+**SOURCE IMPLEMENTATION COMPLETE ON PR #63; EXACT-HEAD CI GREEN. LIVE PRIVATE-HOST COMMISSIONING + INDEPENDENT SECURITY GATE REMAIN.**
+
+Current candidate adds:
+- current-main portfolio discovery across `projects/registry.yaml`;
+- contract/status/issues/PR/latest-commit evidence collection with no-guessing behavior;
+- deterministic highest-priority executable-work selection with explicit blocked-work skipping;
+- mesh-runtime planning and durable runner-cycle state;
+- generic governed private worker dispatch;
+- fail-closed write/execute switches;
+- branch + pull-request evidence requirement before accepting a worker repository-change claim;
+- always-on runner daemon;
+- authenticated runner API integrated into the Sigma runtime;
+- fully self-hosted Ollama inference overlay pinned to `0.34.3`;
+- private Docker-network inference endpoint with no paid fallback;
+- model-init and inference probe tooling;
+- runtime documentation and environment-variable contracts.
+
+Exact-head PR #63 verification:
+- Sigma mesh runtime: **SUCCESS**.
+- Sigma control-plane validation: **SUCCESS**.
+- Unit tests: **SUCCESS**.
+- Deterministic end-to-end mesh smoke: **SUCCESS**.
+
+Stale runner PR #10 has been closed and issue #9 retired as superseded.
+
+Truth boundary:
+- No claim is made that the OVH/VPS stack is already deployed.
+- No live model-backed Sigma mission or scheduled runner cycle has yet been evidenced on the private host.
+- Repository mutation remains disabled unless runtime-only GitHub/worker credentials are provisioned and the explicit write/execute switches are enabled.
+- Material worker changes still require independent CI/security and applicable Sigma Full User Tester evidence.
+- The implementing path cannot self-certify the mandatory independent Cybersecurity Division gate.
+
+Highest-priority next external/runtime action:
+1. deploy PR #63 after independent security review;
+2. choose an approved open-weight model suitable for the OVH/VPS and populate private runtime configuration;
+3. start the Ollama + Sigma + runner stack;
+4. run `sigma_inference_probe.py`, one real model-backed mission, restart/persistence verification, and one planning-only runner cycle;
+5. only then provision the least-privilege GitHub/worker runtime credentials required for real unattended implementation.
+
 Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`

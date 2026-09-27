@@ -1,0 +1,74 @@
+services:
+  ollama:
+    image: ollama/ollama:0.34.3
+    restart: unless-stopped
+    volumes:
+      - ollama-data:/root/.ollama
+    expose:
+      - "11434"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+
+  ollama-model-init:
+    image: ollama/ollama:0.34.3
+    restart: "no"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >
+        until ollama list >/dev/null 2>&1; do sleep 2; done;
+        ollama pull "$${OLLAMA_MODEL}"
+    depends_on:
+      - ollama
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+
+  sigma-runtime:
+    environment:
+      SIGMA_RUNTIME_PROVIDER: http
+      SIGMA_LLM_ENDPOINT: http://ollama:11434/v1/chat/completions
+      SIGMA_LLM_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
+      SIGMA_LLM_PROTOCOL: chat-completions
+      SIGMA_LLM_API_KEY: ""
+    depends_on:
+      ollama-model-init:
+        condition: service_completed_successfully
+
+  sigma-runner:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-runtime
+    restart: unless-stopped
+    command: ["python", "scripts/sigma_runner_daemon.py"]
+    environment:
+      SIGMA_RUNTIME_PROVIDER: http
+      SIGMA_LLM_ENDPOINT: http://ollama:11434/v1/chat/completions
+      SIGMA_LLM_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
+      SIGMA_LLM_PROTOCOL: chat-completions
+      SIGMA_LLM_API_KEY: ""
+      SIGMA_RUNTIME_DB: /data/sigma-runtime.db
+      SIGMA_RUNNER_INTERVAL_SECONDS: ${SIGMA_RUNNER_INTERVAL_SECONDS:-900}
+      SIGMA_RUNNER_EXECUTE: ${SIGMA_RUNNER_EXECUTE:-0}
+      SIGMA_RUNNER_ALLOW_WRITE: ${SIGMA_RUNNER_ALLOW_WRITE:-0}
+      SIGMA_GITHUB_TOKEN: ${SIGMA_GITHUB_TOKEN:-}
+      SIGMA_WORKER_ENDPOINT: ${SIGMA_WORKER_ENDPOINT:-}
+      SIGMA_WORKER_TOKEN: ${SIGMA_WORKER_TOKEN:-}
+      SIGMA_WORKER_TIMEOUT_SECONDS: ${SIGMA_WORKER_TIMEOUT_SECONDS:-900}
+    volumes:
+      - sigma-runtime-data:/data
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      ollama-model-init:
+        condition: service_completed_successfully
+
+volumes:
+  ollama-data:

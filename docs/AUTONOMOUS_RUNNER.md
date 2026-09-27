@@ -102,3 +102,40 @@ Each run should record:
 ## Production boundary
 
 Automatic code preparation and review can be continuous. Production deployment should follow each project's deployment policy and explicit approval requirements for high-risk systems.
+## Current implementation — issue #62
+
+The current-main runner lives in `sigma_runtime/portfolio_runner.py` with:
+- GitHub evidence discovery over the canonical registry;
+- contract/status/issue/PR/latest-commit inspection;
+- deterministic priority selection that skips explicit owner/external blockers;
+- mesh-runtime planning for the selected issue;
+- private SQLite runner-cycle persistence;
+- generic governed worker dispatch over `SIGMA_WORKER_ENDPOINT`;
+- write authority disabled by default;
+- branch + pull-request evidence required before a worker result is accepted as a repository change;
+- no worker may promote its own output to VERIFIED or RELEASED.
+
+The runtime HTTP service exposes:
+- `GET /runner/cycles`
+- `GET /runner/cycles/{id}`
+- `POST /runner/cycle`
+
+The always-on loop is `scripts/sigma_runner_daemon.py`. Its minimum interval is five minutes and the default is fifteen minutes.
+
+### Authority switches
+
+`SIGMA_RUNNER_ALLOW_WRITE=0` is the default. GitHub non-GET calls are refused before network access unless write mode is explicitly enabled and a runtime token exists.
+
+`SIGMA_RUNNER_EXECUTE=0` is the default. The runner may discover and plan work without dispatching implementation. Execution requires a configured governed worker endpoint.
+
+These switches do not grant production release, destructive action, paid spend, direct-main push or secret-management authority.
+
+### Truth states
+
+The runner separates:
+- `PLANNED` — issue selected and mesh plan persisted;
+- `BLOCKED` — required worker/access/gate is absent;
+- `WORKER_CHANGED` — worker returned branch + PR evidence, but independent verification remains;
+- READY/VERIFIED/RELEASED — never issued solely by the runner worker path.
+
+A material user-facing candidate still requires the independent Sigma Full User Tester on the exact deployed candidate.

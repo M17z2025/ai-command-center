@@ -79,3 +79,75 @@ A successful read after restart proves the durable runtime volume retained missi
 ## Production boundary
 
 For business production, use a model route whose commercial/data terms have been verified. The FreeLLMAPI overlay is replaceable; Sigma itself remains vendor-neutral.
+## Option C — fully self-hosted Ollama + always-on Sigma runner
+
+The Ollama overlay keeps inference on the private Docker network and publishes no Ollama port to the host. The overlay is pinned to Ollama `0.34.3`; re-verify upstream security and model licences before upgrades.
+
+Choose an open-weight model whose licence and resource requirements are acceptable for the OVH/VPS, then set only its model identifier in the private host `.env`:
+
+```bash
+OLLAMA_MODEL=<approved-model>
+SIGMA_RUNTIME_TOKEN=<private-random-token>
+```
+
+Start the private inference service, Sigma API, and runner:
+
+```bash
+docker compose --env-file .env \
+  -f docker-compose.yml \
+  -f docker-compose.ollama.yml \
+  up -d --build
+```
+
+The model-init service pulls the selected model once and Sigma uses Ollama's OpenAI-compatible endpoint internally:
+
+`http://ollama:11434/v1/chat/completions`
+
+No paid fallback exists in this overlay.
+
+### Runner commissioning
+
+The runner starts in planning-only/read-only mode:
+
+```text
+SIGMA_RUNNER_ALLOW_WRITE=0
+SIGMA_RUNNER_EXECUTE=0
+```
+
+This is sufficient to scan the portfolio, select executable work and persist mesh-backed plans.
+
+To allow real implementation dispatch later, provision a least-privilege GitHub runtime credential and a governed private worker service, then deliberately enable:
+
+```text
+SIGMA_GITHUB_TOKEN=<runtime secret>
+SIGMA_WORKER_ENDPOINT=http://<private-worker>/missions
+SIGMA_WORKER_TOKEN=<runtime secret if required>
+SIGMA_RUNNER_ALLOW_WRITE=1
+SIGMA_RUNNER_EXECUTE=1
+```
+
+A worker result is not accepted as a repository change unless it returns both branch and pull-request evidence. Independent CI/security/user-test gates remain mandatory.
+
+### Verification
+
+Inside the Sigma network, probe inference with:
+
+```bash
+python scripts/sigma_inference_probe.py
+```
+
+Probe the public-facing local Sigma API with:
+
+```bash
+python scripts/sigma_live_probe.py --url http://127.0.0.1:8080 \
+  --prompt "Run a Sigma runtime commissioning verification mission."
+```
+
+Read runner state through the authenticated API:
+
+```text
+GET  /runner/cycles
+POST /runner/cycle   {"trigger":"operator","execute":false}
+```
+
+A source-valid stack is not the same as a commissioned host. Live commissioning is proven only after a real model mission, service restart/persistence check, and at least one real runner cycle are evidenced on the private host.
