@@ -59,6 +59,10 @@ class HTTPModelProvider(ModelProvider):
         self.disable_thinking = bool(disable_thinking)
 
     def complete(self, request: CompletionRequest) -> str:
+        request_max_tokens = max(
+            64,
+            int(request.metadata.get("max_tokens", self.max_tokens)),
+        )
         if self.protocol == "responses":
             payload = {
                 "model": self.model,
@@ -75,7 +79,7 @@ class HTTPModelProvider(ModelProvider):
                     {"role": "user", "content": request.user},
                 ],
                 "temperature": 0.2,
-                "max_tokens": self.max_tokens,
+                "max_tokens": request_max_tokens,
             }
         else:
             payload = {
@@ -88,7 +92,7 @@ class HTTPModelProvider(ModelProvider):
                 "think": not self.disable_thinking,
                 "options": {
                     "temperature": 0.2,
-                    "num_predict": self.max_tokens,
+                    "num_predict": request_max_tokens,
                     "num_ctx": self.context_tokens,
                 },
             }
