@@ -11,7 +11,9 @@ from .base import (
     WorkerResult,
     WorkerStatus,
 )
+from .benchmark import WorkerBenchmark, benchmark_from_result
 from .deterministic import DeterministicWorkerAdapter
+from .openhands import OpenHandsWorkerAdapter, OpenHandsWorkerConfig
 
 __all__ = [
     "CapabilityPolicy",
@@ -19,5 +21,9 @@ __all__ = [
     "WorkerMission",
     "WorkerResult",
     "WorkerStatus",
+    "WorkerBenchmark",
+    "benchmark_from_result",
     "DeterministicWorkerAdapter",
+    "OpenHandsWorkerAdapter",
+    "OpenHandsWorkerConfig",
 ]
