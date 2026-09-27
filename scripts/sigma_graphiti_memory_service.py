@@ -21,9 +21,29 @@ from graphiti_core.embedder.openai import OpenAIEmbedder, OpenAIEmbedderConfig
 from graphiti_core.llm_client.config import LLMConfig
 from graphiti_core.llm_client.openai_generic_client import OpenAIGenericClient
 from graphiti_core.nodes import EpisodeType
+from graphiti_core.cross_encoder.client import CrossEncoderClient
 
 
 MAX_BODY = 250_000
+
+
+class LocalPassThroughReranker(CrossEncoderClient):
+    """Zero-network reranker used for Sigma's self-hosted baseline.
+
+    Graphiti requires a cross-encoder object but defaults to OpenAI. For the
+    initial Sigma deployment we preserve upstream retrieval order and avoid any
+    hidden external provider dependency. A local learned reranker can be
+    introduced later only if benchmark evidence shows material improvement.
+    """
+
+    async def rank(self, query: str, passages: list[str]) -> list[tuple[str, float]]:
+        if not passages:
+            return []
+        total = len(passages)
+        return [
+            (passage, float(total - index))
+            for index, passage in enumerate(passages)
+        ]
 
 
 class MemoryApp:
@@ -69,6 +89,7 @@ class MemoryApp:
             graph_driver=self.driver,
             llm_client=llm,
             embedder=embedder,
+            cross_encoder=LocalPassThroughReranker(),
         )
         self.runner = asyncio.Runner()
         self.runner.run(self.graphiti.build_indices_and_constraints())
