@@ -60,6 +60,15 @@ def main(argv=None) -> int:
     mission_p.add_argument("mission_id")
     sub.add_parser("lessons")
 
+    add_p = sub.add_parser("lesson-add")
+    add_p.add_argument("mission_id")
+    add_p.add_argument("--lesson", required=True)
+    add_p.add_argument("--source", default="operator")
+    add_p.add_argument(
+        "--promotion",
+        default="requires independent evaluation",
+    )
+
     eval_p = sub.add_parser("lesson-evaluate")
     eval_p.add_argument("lesson_id")
     eval_p.add_argument("--evaluator", required=True)
@@ -104,6 +113,20 @@ def main(argv=None) -> int:
         return 0
     if args.command == "lessons":
         print(json.dumps(store.list_lessons(), indent=2))
+        return 0
+    if args.command == "lesson-add":
+        if not store.get_mission(args.mission_id):
+            print("mission not found", file=sys.stderr)
+            return 2
+        lesson_id = store.add_lesson(
+            args.mission_id,
+            args.lesson,
+            {
+                "source": args.source,
+                "promotion": args.promotion,
+            },
+        )
+        print(lesson_id)
         return 0
 
     if args.command in {"lesson-evaluate", "lesson-promote", "lesson-reject"}:
