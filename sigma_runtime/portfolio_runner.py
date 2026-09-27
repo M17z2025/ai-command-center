@@ -534,11 +534,19 @@ class PortfolioRunner:
             }
         )
         worker_status = str(worker_result.get("status", "BLOCKED")).upper()
+        repository_evidence = bool(
+            worker_result.get("branch") and worker_result.get("pull_request_url")
+        )
         final_status = (
             "WORKER_CHANGED"
-            if worker_status in {"CHANGED", "TESTED"}
+            if worker_status in {"CHANGED", "TESTED"} and repository_evidence
             else "BLOCKED"
         )
+        if worker_status in {"CHANGED", "TESTED"} and not repository_evidence:
+            worker_result = dict(worker_result)
+            worker_result["runner_rejection"] = (
+                "Worker claimed repository change without branch and pull_request_url evidence."
+            )
         payload = {
             "cycle_id": cycle_id,
             "state": final_status,
