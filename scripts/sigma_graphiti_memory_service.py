@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import os
 from typing import Any
@@ -70,7 +70,8 @@ class MemoryApp:
             llm_client=llm,
             embedder=embedder,
         )
-        asyncio.run(self.graphiti.build_indices_and_constraints())
+        self.runner = asyncio.Runner()
+        self.runner.run(self.graphiti.build_indices_and_constraints())
 
     def add_episode(self, payload: dict[str, Any]) -> dict[str, Any]:
         reference_time = datetime.fromisoformat(
@@ -92,7 +93,7 @@ class MemoryApp:
             },
             ensure_ascii=False,
         )
-        asyncio.run(
+        self.runner.run(
             self.graphiti.add_episode(
                 name=str(payload["title"]),
                 episode_body=body,
@@ -107,7 +108,7 @@ class MemoryApp:
     def search(self, payload: dict[str, Any]) -> dict[str, Any]:
         project = payload.get("project")
         limit = max(1, min(int(payload.get("limit", 8)), 50))
-        results = asyncio.run(
+        results = self.runner.run(
             self.graphiti.search(
                 str(payload["text"]),
                 group_ids=[project] if project else None,
@@ -144,10 +145,13 @@ class MemoryApp:
         return {"results": mapped}
 
     def close(self) -> None:
-        asyncio.run(self.graphiti.close())
+        try:
+            self.runner.run(self.graphiti.close())
+        finally:
+            self.runner.close()
 
 
-def build_server(app: MemoryApp) -> ThreadingHTTPServer:
+def build_server(app: MemoryApp) -> HTTPServer:
     token = os.getenv("SIGMA_MEMORY_TOKEN") or None
     host = os.getenv("SIGMA_MEMORY_HOST", "0.0.0.0")
     port = int(os.getenv("SIGMA_MEMORY_PORT", "8090"))
@@ -205,7 +209,7 @@ def build_server(app: MemoryApp) -> ThreadingHTTPServer:
             if os.getenv("SIGMA_MEMORY_HTTP_LOG") == "1":
                 super().log_message(format, *args)
 
-    return ThreadingHTTPServer((host, port), Handler)
+    return HTTPServer((host, port), Handler)
 
 
 def main() -> int:
