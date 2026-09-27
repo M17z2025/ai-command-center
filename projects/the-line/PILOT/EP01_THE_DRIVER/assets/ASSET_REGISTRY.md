@@ -11,3 +11,8 @@
 
 ## Approval policy
 Only QC_PASS references may be used as canonical generation anchors. A new approved reference supersedes but never deletes the prior version.
+
+| CHAR-SOFIA-REF01 | Sofia Al-Hassan | GENERATING | Runway task 303f012c-dd85-45db-9e6d-4a58618e783d |
+| CHAR-ELLIE-REF01 | Ellie Hawthorne | GENERATING | Runway task f41a06cd-d156-4bb5-8841-289f23e92474 |
+| LOC-DOCKLANDS-ACTION-REF01 | Docklands chase | GENERATING | Runway task 1a7c576f-596d-4c20-b962-098df034e919 |
+| PROP-LINE-CASE-REF01 | THE LINE case reveal | GENERATING | Runway task c9bd74a7-68a7-44b0-8554-a540caf5cf2c |
