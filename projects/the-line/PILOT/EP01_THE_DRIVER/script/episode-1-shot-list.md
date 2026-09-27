@@ -27,7 +27,7 @@ S01E01-SC##-SH##
 - SH09 Atlas watches TJ
 
 ### SC03 Marcus arrives
-- SH01 Bentley Torcal S silent arrival
+- SH01 Bentley Torcal silent arrival
 - SH02 Atlas rises before TJ reacts
 - SH03 Marcus exits
 - SH04 Atlas barrier position
