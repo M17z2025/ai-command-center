@@ -48,6 +48,11 @@ def main(argv=None):
         type=int,
         default=int(os.getenv("SIGMA_LIVE_PROBE_TIMEOUT_SECONDS", "600")),
     )
+    parser.add_argument(
+        "--max-cycles",
+        type=int,
+        default=int(os.getenv("SIGMA_COMMISSIONING_MAX_CYCLES", "1")),
+    )
     args = parser.parse_args(argv)
 
     token = os.getenv("SIGMA_RUNTIME_TOKEN")
@@ -74,7 +79,7 @@ def main(argv=None):
         {
             "prompt": args.prompt,
             "requested_by": "commissioning-probe",
-            "max_cycles": 2,
+            "max_cycles": max(0, min(args.max_cycles, 1)),
             "evidence": [
                 {
                     "id": "commissioning-probe",
