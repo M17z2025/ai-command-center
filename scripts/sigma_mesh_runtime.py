@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 from sigma_runtime import MeshConfig, MissionRouter, MissionStore, SigmaOrchestrator
 from sigma_runtime.provider import provider_from_env
 from sigma_runtime.server import build_server
+from sigma_runtime.portfolio_runner import runner_from_env
 
 
 def build_components(args, *, allow_test=False):
@@ -113,7 +114,16 @@ def main(argv=None) -> int:
 
     if args.command == "serve":
         token = os.getenv("SIGMA_RUNTIME_TOKEN") or None
-        server = build_server(args.host, args.port, orchestrator, config, store, token)
+        portfolio_runner = runner_from_env(orchestrator, args.db, registry_path=Path(args.root) / "projects/registry.yaml")
+        server = build_server(
+            args.host,
+            args.port,
+            orchestrator,
+            config,
+            store,
+            token,
+            portfolio_runner=portfolio_runner,
+        )
         print(f"Sigma mesh runtime listening on http://{args.host}:{server.server_port}")
         try:
             server.serve_forever()
