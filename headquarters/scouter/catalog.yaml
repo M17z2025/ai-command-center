@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_id": "sigma-scouter-catalog-v1",
-  "generated_on": "2026-09-26",
+  "generated_on": "2026-09-27",
   "rule": "Only ACCEPT and FORK_CANDIDATE entries have verified open-code rights for the stated use; every adoption still requires project-specific engineering, legal/licence and security review.",
   "discovery_queries": [
     "site:github.com open source self hosted invoicing accounting TypeScript",
@@ -1659,6 +1659,238 @@
         }
       ],
       "requires_paid_core_dependency": false
+    },
+    {
+      "id": "agent-zero",
+      "name": "Agent Zero",
+      "category": "ai-agents",
+      "kind": "application",
+      "upstream": "https://github.com/agent0ai/agent-zero",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted MIT-licensed code has no vendor usage quota; compute/model capacity is governed by infrastructure and separately licensed model weights",
+      "what_it_does": "General-purpose autonomous agent framework with subagents, plugins, browser/code execution, projects, scheduling and tool-policy components.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Sigma research workers",
+        "general-purpose autonomous tasks"
+      ],
+      "integration_strategy": "Use only as an isolated optional worker/reference behind Sigma WorkerAdapter; preserve Sigma authority and sandbox all side-effecting execution.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/agent0ai/agent-zero/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Repository LICENSE verified as MIT; GitHub metadata currently reports NOASSERTION."
+        },
+        {
+          "source": "https://github.com/agent0ai/agent-zero/blob/main/helpers/subagents.py",
+          "verified_on": "2026-09-27",
+          "note": "Source verifies layered default/plugin/user/project subagent definitions."
+        },
+        {
+          "source": "https://github.com/agent0ai/agent-zero/blob/main/requirements.txt",
+          "verified_on": "2026-09-27",
+          "note": "Dependency manifest includes explicit security-floor pins and broad execution/browser/model dependencies."
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "letta-code",
+      "name": "Letta Code",
+      "category": "ai-agents-memory",
+      "kind": "application",
+      "upstream": "https://github.com/letta-ai/letta-code",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "FORK_CANDIDATE",
+      "self_hosted": true,
+      "unlimited_basis": "local backend and Apache-licensed source can run without vendor request quotas; some optional product features remain Letta-account/cloud coupled",
+      "what_it_does": "Stateful agent harness with persistent identity, recall, mutable memory blocks, skills, subagents, schedules and git-backed memory filesystem concepts.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Sigma knowledge and workforce infrastructure"
+      ],
+      "integration_strategy": "Port/adapt persistent-memory, recall, skill and reflection patterns into Sigma-owned private storage; do not make Letta cloud identity or cloud-only features a Sigma dependency.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/letta-ai/letta-code/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Apache-2.0 licence verified from repository."
+        },
+        {
+          "source": "https://github.com/letta-ai/letta-code/blob/main/README.md",
+          "verified_on": "2026-09-27",
+          "note": "README verifies local backend plus memory, skills, subagents and schedules; remote computers and managed secrets are marked as requiring Letta sign-in."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "aorchestra",
+      "name": "AOrchestra",
+      "category": "ai-agents-orchestration",
+      "kind": "library",
+      "upstream": "https://github.com/FoundationAgents/AOrchestra",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "FORK_CANDIDATE",
+      "self_hosted": false,
+      "unlimited_basis": "open library code has no vendor usage quota; model inference is a separate dependency",
+      "what_it_does": "Research-oriented multi-agent orchestrator that dynamically delegates subtasks to subagents and can select among multiple models.",
+      "portfolio_fit": [
+        "Sigma Mission Router",
+        "temporary specialist creation",
+        "algorithmic engineering"
+      ],
+      "integration_strategy": "Port dynamic delegation/model-selection ideas into Sigma's existing router and bounded specialist model rather than adopting AOrchestra as the root runtime.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/FoundationAgents/AOrchestra/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Apache-2.0 licence verified from repository."
+        },
+        {
+          "source": "https://github.com/FoundationAgents/AOrchestra/blob/main/aorchestra/main_agent.py",
+          "verified_on": "2026-09-27",
+          "note": "Source verifies main-agent orchestration, subtask history and multi-model delegation structure."
+        },
+        {
+          "source": "https://github.com/FoundationAgents/AOrchestra/blob/main/base/engine/async_llm.py",
+          "verified_on": "2026-09-27",
+          "note": "Source contains hosted-model pricing assumptions; local/self-hosted model integration requires Sigma adaptation."
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "openhands-agent-stack",
+      "name": "OpenHands Agent Stack",
+      "category": "ai-coding-agents",
+      "kind": "application",
+      "upstream": "https://github.com/OpenHands/OpenHands",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted MIT-licensed Canvas/Agent Server/automation stack has no vendor usage quota; compute/model capacity is infrastructure dependent",
+      "what_it_does": "Self-hosted control center plus Agent Server/SDK and automation components for coding agents, workspaces, tools, conversations and scheduled/event-driven runs.",
+      "portfolio_fit": [
+        "Sigma Engineering Support Desk",
+        "Sigma Algorithmic Engineering",
+        "product-repository repair workers"
+      ],
+      "integration_strategy": "Use OpenHands Agent Server/software-agent-sdk as a sandboxed coding worker behind Sigma WorkerAdapter; do not expose host filesystem or production secrets.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/OpenHands/OpenHands/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Agent Canvas repository licence verified as MIT."
+        },
+        {
+          "source": "https://github.com/OpenHands/software-agent-sdk/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Agent Server/software-agent-sdk licence verified as MIT."
+        },
+        {
+          "source": "https://github.com/OpenHands/automation/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Automation repository licence verified as MIT."
+        },
+        {
+          "source": "https://github.com/OpenHands/OpenHands/blob/main/README.md",
+          "verified_on": "2026-09-27",
+          "note": "README explicitly warns direct host mode gives the agent full filesystem access and documents Docker-sandbox operation."
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "agent-s",
+      "name": "Agent-S",
+      "category": "computer-use",
+      "kind": "library",
+      "upstream": "https://github.com/simular-ai/Agent-S",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "FORK_CANDIDATE",
+      "self_hosted": false,
+      "unlimited_basis": "open library code has no vendor usage quota; model/grounding inference is a separate dependency",
+      "what_it_does": "Computer-use framework that operates graphical interfaces through screen observations, grounding and mouse/keyboard actions.",
+      "portfolio_fit": [
+        "Sigma User Tester native-app coverage",
+        "desktop application testing",
+        "OS-level workflows"
+      ],
+      "integration_strategy": "Use only as an isolated native/desktop GUI worker where Playwright/browser testing is insufficient; disable local code execution by default and run in disposable test environments.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/simular-ai/Agent-S/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "Apache-2.0 licence verified from repository."
+        },
+        {
+          "source": "https://github.com/simular-ai/Agent-S/blob/main/gui_agents/s3/agents/agent_s.py",
+          "verified_on": "2026-09-27",
+          "note": "Source verifies AgentS3 worker + grounding-agent execution model."
+        },
+        {
+          "source": "https://github.com/simular-ai/Agent-S/blob/main/gui_agents/s3/utils/local_env.py",
+          "verified_on": "2026-09-27",
+          "note": "Source explicitly warns optional local controller executes arbitrary Bash/Python and therefore requires isolation."
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "deepagents",
+      "name": "Deep Agents",
+      "category": "ai-agents-orchestration",
+      "kind": "library",
+      "upstream": "https://github.com/langchain-ai/deepagents",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "ACCEPT",
+      "self_hosted": false,
+      "unlimited_basis": "MIT-licensed harness has no vendor usage quota; model inference and optional remote sandbox providers are separate dependencies",
+      "what_it_does": "Agent harness over LangChain/LangGraph providing middleware, planning, subagents, skills, memory, backends, permissions, persistence and long-running execution patterns.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Sigma worker runtime",
+        "long-running autonomous jobs"
+      ],
+      "integration_strategy": "Use as the first execution-harness candidate behind Sigma WorkerAdapter while keeping Sigma authority, routing, critic, verifier and security gates above it; use sandbox-capable backends for side effects.",
+      "verified_on": "2026-09-27",
+      "evidence": [
+        {
+          "source": "https://github.com/langchain-ai/deepagents/blob/main/LICENSE",
+          "verified_on": "2026-09-27",
+          "note": "MIT licence verified from repository."
+        },
+        {
+          "source": "https://github.com/langchain-ai/deepagents/blob/main/libs/ARCHITECTURE.md",
+          "verified_on": "2026-09-27",
+          "note": "Architecture verifies create_deep_agent composition, subagents, memory, permissions, backends and LangGraph persistence."
+        },
+        {
+          "source": "https://github.com/langchain-ai/deepagents/blob/main/libs/code/THREAT_MODEL.md",
+          "verified_on": "2026-09-27",
+          "note": "Threat model documents host-filesystem and unattended execution risks and sandbox/approval boundaries."
+        }
+      ],
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
     }
   ]
 }

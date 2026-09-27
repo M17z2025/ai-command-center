@@ -4,6 +4,19 @@ Last updated: 2026-09-26
 Repository: `M17z2025/ai-command-center`
 Default branch: `main`
 
+## Sigma Open-Source Agent Framework Audit — Issue #57
+
+**AUDIT CANDIDATE IMPLEMENTED ON `research/57-agent-framework-audit`; VALIDATION/REVIEW PENDING.**
+
+Source-level review covers Agent Zero, Letta Code, AOrchestra, OpenHands, Agent-S and Deep Agents. The branch adds `docs/SIGMA_OPEN_AGENT_FRAMEWORK_ADOPTION_AUDIT.md` and registers all six in the Sigma Scouter catalogue with repository-file licence evidence.
+
+Current architecture decision: Sigma remains the authority/orchestration layer; external frameworks may only operate behind a Sigma-owned WorkerAdapter and explicit capability policy. Deep Agents is the first execution-harness candidate; OpenHands is the first sandboxed coding-worker candidate; Agent-S is restricted to native/desktop GUI work; Agent Zero is optional/isolation-only; Letta and AOrchestra are initially design-pattern sources rather than authority/runtime replacements.
+
+Security boundary: foreign agent runtimes do not receive implicit host filesystem, secrets, production, financial or destructive authority. Side-effecting execution requires a restricted disposable sandbox/VM and independent Sigma verification.
+
+Next executable slice: implement WorkerAdapter + deterministic CI adapter + fail-closed capability policy, then prove a sandboxed Deep Agents adapter before integrating OpenHands Agent Server.
+
+
 ## Sigma Scouter + Persistent Chat Build Ownership — Issues #54 / #55
 
 **MERGED / ACTIVE ON `main` VIA PR #56 AT `dd0f329a47d05721f5471db12ec5d46072c63e1c`; MERGED-MAIN CI GREEN.**
