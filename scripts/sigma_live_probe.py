@@ -10,7 +10,13 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-def request_json(url: str, token: str, method: str = "GET", payload=None):
+def request_json(
+    url: str,
+    token: str,
+    method: str = "GET",
+    payload=None,
+    timeout: int | None = None,
+):
     data = None
     headers = {"Authorization": f"Bearer {token}"}
     if payload is not None:
@@ -18,13 +24,18 @@ def request_json(url: str, token: str, method: str = "GET", payload=None):
         headers["Content-Type"] = "application/json"
     req = Request(url, data=data, method=method, headers=headers)
     try:
-        with urlopen(req, timeout=180) as response:
+        effective_timeout = timeout or int(
+            os.getenv("SIGMA_LIVE_PROBE_TIMEOUT_SECONDS", "600")
+        )
+        with urlopen(req, timeout=effective_timeout) as response:
             return response.status, json.loads(response.read().decode("utf-8"))
     except HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:1000]
         raise RuntimeError(f"HTTP {exc.code}: {detail}") from exc
     except URLError as exc:
         raise RuntimeError(f"Connection failed: {exc.reason}") from exc
+    except TimeoutError as exc:
+        raise RuntimeError("Sigma commissioning request timed out") from exc
 
 
 def main(argv=None):
@@ -32,6 +43,11 @@ def main(argv=None):
     parser.add_argument("--url", default="http://127.0.0.1:8080")
     parser.add_argument("--prompt")
     parser.add_argument("--read", dest="mission_id")
+    parser.add_argument(
+        "--timeout",
+        type=int,
+        default=int(os.getenv("SIGMA_LIVE_PROBE_TIMEOUT_SECONDS", "600")),
+    )
     args = parser.parse_args(argv)
 
     token = os.getenv("SIGMA_RUNTIME_TOKEN")
@@ -47,7 +63,7 @@ def main(argv=None):
     if not args.prompt:
         raise SystemExit("--prompt or --read is required")
 
-    _, health = request_json(f"{base}/health", token)
+    _, health = request_json(f"{base}/health", token, timeout=args.timeout)
     if health.get("status") != "ok":
         raise SystemExit("Sigma health check failed")
 
@@ -67,6 +83,7 @@ def main(argv=None):
                 }
             ],
         },
+        timeout=args.timeout,
     )
     if status != 201:
         raise SystemExit(f"Unexpected create status: {status}")
@@ -79,7 +96,9 @@ def main(argv=None):
         print(json.dumps(mission, indent=2))
         raise SystemExit("Mission did not reach a successful terminal state")
 
-    _, persisted = request_json(f"{base}/missions/{mission_id}", token)
+    _, persisted = request_json(
+        f"{base}/missions/{mission_id}", token, timeout=args.timeout
+    )
     required = {
         "expert-routing",
         "team-formation",
