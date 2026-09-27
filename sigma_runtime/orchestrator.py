@@ -390,7 +390,16 @@ class SigmaOrchestrator:
             "Return a concise expert analysis, dependencies, risks, assumptions and what must be verified."
         )
         return self.provider.complete(
-            CompletionRequest("analysis", system, user, {"domain": domain_id, "specialist": specialist.id})
+            CompletionRequest(
+                "analysis",
+                system,
+                user,
+                {
+                    "domain": domain_id,
+                    "specialist": specialist.id,
+                    "max_tokens": 512,
+                },
+            )
         )
 
     def _development_plan(
@@ -565,12 +574,14 @@ class SigmaOrchestrator:
             "Start with exactly VERDICT: PASS or VERDICT: REPAIR."
         )
         user = (
-            f"MISSION:\n{prompt}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:34000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:12000]}\n\n"
-            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:14000]}\n\n"
-            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}"
+            f"MISSION:\n{prompt[:4000]}\n\nANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:14000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:5000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:5000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:3000]}"
         )
-        return self.provider.complete(CompletionRequest("critic", system, user))
+        return self.provider.complete(
+            CompletionRequest("critic", system, user, {"max_tokens": 384})
+        )
 
     def _verify(
         self,
@@ -591,14 +602,16 @@ class SigmaOrchestrator:
             "otherwise VERDICT: REPAIR."
         )
         user = (
-            f"MISSION:\n{prompt}\n\nEVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:25000]}\n\n"
-            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:10000]}\n\n"
-            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:12000]}\n\n"
-            f"ENGINEERING JUDGE:\n{engineering_judge[:7000]}\n\n"
-            f"CRITIC:\n{critic[:10000]}"
+            f"MISSION:\n{prompt[:4000]}\n\nEVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:8000]}\n\n"
+            f"ANALYSES:\n{json.dumps(outputs, ensure_ascii=False)[:12000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:4000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:4000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:2500]}\n\n"
+            f"CRITIC:\n{critic[:4000]}"
         )
-        return self.provider.complete(CompletionRequest("verifier", system, user))
+        return self.provider.complete(
+            CompletionRequest("verifier", system, user, {"max_tokens": 384})
+        )
 
     def _repair(
         self,
@@ -618,13 +631,21 @@ class SigmaOrchestrator:
                 "Address the findings directly, preserve uncertainty and do not invent evidence."
             )
             user = (
-                f"MISSION:\n{prompt}\n\nPRIOR ANALYSIS:\n{prior[:16000]}\n\n"
-                f"CRITIC:\n{critic[:7000]}\n\nVERIFIER:\n{verifier[:7000]}\n\n"
-                f"ENGINEERING JUDGE:\n{engineering_judge[:6000]}\n\n"
-                f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:12000]}"
+                f"MISSION:\n{prompt[:3000]}\n\nPRIOR ANALYSIS:\n{prior[:6000]}\n\n"
+                f"CRITIC:\n{critic[:3000]}\n\nVERIFIER:\n{verifier[:3000]}\n\n"
+                f"ENGINEERING JUDGE:\n{engineering_judge[:2000]}\n\n"
+                f"EVIDENCE:\n{json.dumps(evidence, ensure_ascii=False)[:4000]}"
             )
             repaired[specialist.id] = self.provider.complete(
-                CompletionRequest("repair", system, user, {"domain": specialist.domain_scope[0]})
+                CompletionRequest(
+                    "repair",
+                    system,
+                    user,
+                    {
+                        "domain": specialist.domain_scope[0],
+                        "max_tokens": 384,
+                    },
+                )
             )
         return repaired
 
@@ -648,16 +669,18 @@ class SigmaOrchestrator:
             "that the Evidence Verifier did not establish."
         )
         user = (
-            f"MISSION:\n{prompt}\n\nRISK GATES: {plan.risk_gates}\n"
-            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:26000]}\n\n"
-            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:12000]}\n\n"
-            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:12000]}\n\n"
-            f"ENGINEERING JUDGE:\n{engineering_judge[:6000]}\n\n"
-            f"ENGINEERING RESCUE REPORT:\n{rescue_report[:10000]}\n\n"
-            f"CRITIC:\n{critic[:8000]}\n\nVERIFIER:\n{verifier[:8000]}\n\n"
+            f"MISSION:\n{prompt[:4000]}\n\nRISK GATES: {plan.risk_gates}\n"
+            f"EXPERT OUTPUTS:\n{json.dumps(outputs, ensure_ascii=False)[:14000]}\n\n"
+            f"DEVELOPMENT ADVISORY PLAN:\n{advisory_plan[:5000]}\n\n"
+            f"ALGORITHMIC SOLUTION REPORT:\n{algorithmic_report[:5000]}\n\n"
+            f"ENGINEERING JUDGE:\n{engineering_judge[:2500]}\n\n"
+            f"ENGINEERING RESCUE REPORT:\n{rescue_report[:4000]}\n\n"
+            f"CRITIC:\n{critic[:4000]}\n\nVERIFIER:\n{verifier[:4000]}\n\n"
             f"EVIDENCE COUNT: {len(evidence)}"
         )
-        return self.provider.complete(CompletionRequest("synthesis", system, user))
+        return self.provider.complete(
+            CompletionRequest("synthesis", system, user, {"max_tokens": 512})
+        )
 
     def _postmortem(
         self,
@@ -673,10 +696,12 @@ class SigmaOrchestrator:
             "Include at most one line beginning LESSON:."
         )
         user = (
-            f"MISSION SUMMARY: {prompt[:6000]}\nSTATUS: {status}\n"
-            f"DOMAINS: {plan.domains}\nCRITIC: {critic[:5000]}\nVERIFIER: {verifier[:5000]}"
+            f"MISSION SUMMARY: {prompt[:3000]}\nSTATUS: {status}\n"
+            f"DOMAINS: {plan.domains}\nCRITIC: {critic[:2500]}\nVERIFIER: {verifier[:2500]}"
         )
-        return self.provider.complete(CompletionRequest("postmortem", system, user))
+        return self.provider.complete(
+            CompletionRequest("postmortem", system, user, {"max_tokens": 256})
+        )
 
     @staticmethod
     def _extract_lesson(postmortem: str) -> str | None:
