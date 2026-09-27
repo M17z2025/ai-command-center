@@ -23,7 +23,12 @@ class FakeGitHub:
 
 class FakeWorker:
     def dispatch(self, payload):
-        return {"status": "CHANGED", "evidence": ["worker-proof"]}
+        return {
+            "status": "CHANGED",
+            "evidence": ["worker-proof"],
+            "branch": "sigma/issue-7",
+            "pull_request_url": "https://github.com/owner/repo/pull/8",
+        }
 
 
 class PortfolioRunnerTests(unittest.TestCase):
@@ -104,6 +109,32 @@ class PortfolioRunnerTests(unittest.TestCase):
             result = runner.cycle(trigger="test", execute=True)
             self.assertEqual(result["state"], "BLOCKED")
             self.assertIn("worker", result["blocker"].lower())
+
+    def test_worker_claim_without_repository_evidence_is_rejected(self):
+        class WeakWorker:
+            def dispatch(self, payload):
+                return {"status": "CHANGED"}
+
+        selected = WorkItem(
+            "owner/repo", 7, "Implement feature", "criteria", 1, (), True, ()
+        )
+        snap = RepositorySnapshot(
+            "Repo", "owner/repo", "active", "product",
+            accessible=True, default_branch="main",
+            manifest_present=True, status_present=True,
+            work_items=[selected],
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            runner = PortfolioRunner(
+                FakeGitHub(),
+                FakeOrchestrator(),
+                RunnerStore(Path(tmp) / "runtime.db"),
+                worker=WeakWorker(),
+            )
+            runner.discover = lambda: [snap]
+            result = runner.cycle(trigger="test", execute=True)
+            self.assertEqual(result["state"], "BLOCKED")
+            self.assertIn("runner_rejection", result["worker"])
 
     def test_worker_changed_still_requires_independent_gate(self):
         selected = WorkItem(
