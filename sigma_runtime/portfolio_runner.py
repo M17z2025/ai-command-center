@@ -446,6 +446,21 @@ class RunnerStore:
         item["payload"] = json.loads(item.pop("payload_json") or "{}")
         return item
 
+    def status_summary(self) -> dict[str, Any]:
+        with self._connect() as conn:
+            counts = {
+                row["status"]: row["count"]
+                for row in conn.execute(
+                    """SELECT status, COUNT(*) AS count
+                    FROM runner_cycles GROUP BY status"""
+                ).fetchall()
+            }
+        return {
+            "active_lease": self.active_lease(),
+            "counts": counts,
+            "recent_cycles": self.list(limit=10),
+        }
+
 
 _PRIORITY_RE = re.compile(r"\bP([0-3])\b", re.IGNORECASE)
 _BLOCK_WORDS = (
