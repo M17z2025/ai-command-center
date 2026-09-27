@@ -10,6 +10,7 @@ from .config import MeshConfig
 from .provider import CompletionRequest, ModelProvider, ProviderError
 from .router import MissionPlan, MissionRouter, Specialist
 from .store import MissionStore
+from .memory import KnowledgeMemory, MemoryQuery, NullKnowledgeMemory
 
 
 MAX_PROMPT_CHARS = 50000
@@ -34,11 +35,13 @@ class SigmaOrchestrator:
         router: MissionRouter,
         provider: ModelProvider,
         store: MissionStore,
+        memory: KnowledgeMemory | None = None,
     ) -> None:
         self.config = config
         self.router = router
         self.provider = provider
         self.store = store
+        self.memory = memory or NullKnowledgeMemory()
 
     def plan(self, prompt: str) -> dict[str, Any]:
         self._validate_prompt(prompt)
@@ -57,7 +60,32 @@ class SigmaOrchestrator:
         plan = self.router.route(prompt)
         mission_id = plan.mission_id
         evidence = evidence or []
+        recalled = self.memory.search(MemoryQuery(text=prompt, limit=8))
+        if recalled:
+            evidence = [
+                *evidence,
+                *[
+                    {
+                        "id": f"memory-{index}",
+                        "source": item.source or "sigma-memory",
+                        "content": item.text,
+                        "memory_status": item.status,
+                        "valid_at": item.valid_at,
+                        "invalid_at": item.invalid_at,
+                        "provenance": item.provenance,
+                    }
+                    for index, item in enumerate(recalled, start=1)
+                ],
+            ]
         self.store.create_mission(mission_id, prompt, requested_by, plan.to_dict())
+        self.store.event(
+            mission_id,
+            "memory-retrieval",
+            {
+                "adapter": getattr(self.memory, "adapter_id", "unknown"),
+                "results": len(recalled),
+            },
+        )
         self.store.event(mission_id, "authority-check", {"requested_by": requested_by, "risk_gates": plan.risk_gates})
         self.store.event(mission_id, "expert-routing", {
             "domains": plan.domains,
