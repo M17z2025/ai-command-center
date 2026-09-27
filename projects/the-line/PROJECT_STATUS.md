@@ -1,11 +1,16 @@
 # THE LINE — Project Status
 
-**State:** PLANNED / PRE-PRODUCTION STARTED
+**State:** BUILDING / PRE-PRODUCTION PACKAGE ACTIVE
 **Current milestone:** Pilot package
 **Episode:** S01E01 — The Driver
 **Runtime target:** 28–32 minutes
 
 ## Completed
+- Shooting script v1 committed.
+- Timed scene list committed.
+- Character/casting bible v1 committed.
+- Initial shot list committed.
+- Open-source generation pipeline committed.
 - Animal character bible: Atlas, Mitz Patel's Doberman, locked as a recurring principal companion.
 - Core series concept.
 - Underdog/rich-power-reversal spine.
