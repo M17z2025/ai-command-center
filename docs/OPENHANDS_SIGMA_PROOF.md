@@ -58,3 +58,40 @@ No paid model/provider is authorised by this proof design.
 ## Current state
 
 The adapter, SDK runner contract and benchmark data model exist in source. A real OpenHands execution is **NOT YET RUN** because the command-center runtime has no commissioned private inference endpoint/model configuration in repository-accessible evidence. That remains an owner-gated runtime commissioning dependency and must not be fabricated.
+
+
+## Private LocalWorkspace worker service
+
+Sigma now has a dedicated `sigma-worker` service design for the first live autonomous engineering proof.
+
+Properties:
+- OpenHands SDK/tools pinned to `1.49.6`;
+- `LocalWorkspace` runs inside the dedicated worker container;
+- terminal-only OpenHands agent for small/local-model reliability;
+- private Ollama endpoint only;
+- default worker model `qwen2.5:7b`;
+- worker service has no published host port;
+- no host Docker socket is mounted;
+- GitHub credential remains in the wrapper process and is not passed to the OpenHands agent;
+- repository allowlist defaults to `M17z2025/ai-command-center`;
+- write mode defaults to disabled;
+- wrapper, not the agent, performs clone/branch/push/PR operations;
+- independent verification runs after the agent edit and before any push;
+- worker can report at most `TESTED`, never `VERIFIED` or `RELEASED`.
+
+Runtime switches:
+
+```text
+SIGMA_WORKER_TOKEN=<private runtime token>
+SIGMA_WORKER_ALLOW_WRITE=0
+SIGMA_WORKER_ALLOWED_REPOSITORIES=M17z2025/ai-command-center
+OLLAMA_WORKER_MODEL=qwen2.5:7b
+SIGMA_WORKER_MODEL_TIMEOUT_SECONDS=900
+SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS=900
+```
+
+The runner defaults its private endpoint to:
+
+`http://sigma-worker:8091/missions`
+
+Live write commissioning requires a least-privilege GitHub runtime token and deliberate `SIGMA_WORKER_ALLOW_WRITE=1`. This does not grant production-release authority.
