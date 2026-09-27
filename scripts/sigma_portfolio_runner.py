@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 from sigma_runtime import MeshConfig, MissionRouter, MissionStore, SigmaOrchestrator
 from sigma_runtime.portfolio_runner import runner_from_env
 from sigma_runtime.provider import provider_from_env
+from sigma_runtime.memory import memory_from_env
 
 
 def main(argv=None) -> int:
@@ -43,7 +44,8 @@ def main(argv=None) -> int:
         return 0
 
     provider = provider_from_env()
-    orchestrator = SigmaOrchestrator(config, router, provider, mission_store)
+    memory = memory_from_env()
+    orchestrator = SigmaOrchestrator(config, router, provider, mission_store, memory)
     runner = runner_from_env(orchestrator, args.db, registry_path=args.registry)
     result = runner.cycle(trigger=args.trigger, execute=args.execute)
     print(json.dumps(result, indent=2))
