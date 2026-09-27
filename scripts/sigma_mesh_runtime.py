@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 from sigma_runtime import MeshConfig, MissionRouter, MissionStore, SigmaOrchestrator
 from sigma_runtime.provider import provider_from_env
 from sigma_runtime.memory import memory_from_env
+from sigma_runtime.learning import LearningController, LessonEvaluation
 from sigma_runtime.server import build_server
 from sigma_runtime.portfolio_runner import runner_from_env
 
@@ -59,6 +60,24 @@ def main(argv=None) -> int:
     mission_p.add_argument("mission_id")
     sub.add_parser("lessons")
 
+    eval_p = sub.add_parser("lesson-evaluate")
+    eval_p.add_argument("lesson_id")
+    eval_p.add_argument("--evaluator", required=True)
+    eval_p.add_argument("--benchmark-id", required=True)
+    eval_p.add_argument("--benchmark-passed", action="store_true")
+    eval_p.add_argument("--security-passed", action="store_true")
+    eval_p.add_argument("--regression-passed", action="store_true")
+    eval_p.add_argument("--rationale", required=True)
+
+    promote_p = sub.add_parser("lesson-promote")
+    promote_p.add_argument("lesson_id")
+    promote_p.add_argument("--project", default=None)
+
+    reject_p = sub.add_parser("lesson-reject")
+    reject_p.add_argument("lesson_id")
+    reject_p.add_argument("--reviewer", required=True)
+    reject_p.add_argument("--reason", required=True)
+
     serve_p = sub.add_parser("serve")
     serve_p.add_argument("--host", default=os.getenv("SIGMA_RUNTIME_HOST", "127.0.0.1"))
     serve_p.add_argument("--port", type=int, default=int(os.getenv("PORT", os.getenv("SIGMA_RUNTIME_PORT", "8080"))))
@@ -85,6 +104,32 @@ def main(argv=None) -> int:
         return 0
     if args.command == "lessons":
         print(json.dumps(store.list_lessons(), indent=2))
+        return 0
+
+    if args.command in {"lesson-evaluate", "lesson-promote", "lesson-reject"}:
+        memory = memory_from_env()
+        learning = LearningController(store, memory)
+        if args.command == "lesson-evaluate":
+            result = learning.evaluate(
+                args.lesson_id,
+                LessonEvaluation(
+                    evaluator=args.evaluator,
+                    benchmark_id=args.benchmark_id,
+                    benchmark_passed=args.benchmark_passed,
+                    security_passed=args.security_passed,
+                    regression_passed=args.regression_passed,
+                    rationale=args.rationale,
+                ),
+            )
+        elif args.command == "lesson-promote":
+            result = learning.promote(args.lesson_id, project=args.project)
+        else:
+            result = learning.reject(
+                args.lesson_id,
+                reviewer=args.reviewer,
+                reason=args.reason,
+            )
+        print(json.dumps(result, indent=2))
         return 0
 
     allow_test = args.command == "smoke"
