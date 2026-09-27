@@ -51,3 +51,12 @@ The pilot is not DONE until the full 28–32 minute master exists, passes contin
 
 ## Hard render gate
 A live ComfyUI GPU endpoint and validated exported Wan/LTX API workflow JSON are still required before a real video shot can be rendered. The project must not be described as a finished film until that generation and subsequent edit/QC occur.
+
+
+## Renderer verification evidence
+- ALISHA open-source movie runner branch: feat/the-line-movie-runner.
+- Draft PR: M17z2025/alisha-os#11.
+- GitHub Actions Movie Runner Check run 36343139904: SUCCESS.
+- Compile runner: PASS.
+- Unit tests: PASS.
+- GPU/render test: NOT YET RUN — requires reachable GPU ComfyUI endpoint plus validated Wan/LTX API workflow and approved model weights.
