@@ -7,7 +7,7 @@ authority. Mutations and worker execution require explicit runtime configuration
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import base64
 import json
 import os
@@ -239,21 +239,161 @@ class RunnerStore:
                   selected_repository TEXT,
                   selected_issue INTEGER,
                   mission_id TEXT,
-                  payload_json TEXT NOT NULL
+                  payload_json TEXT NOT NULL,
+                  heartbeat_at TEXT
+                );
+                CREATE TABLE IF NOT EXISTS runner_leases (
+                  name TEXT PRIMARY KEY,
+                  owner_id TEXT NOT NULL,
+                  acquired_at TEXT NOT NULL,
+                  heartbeat_at TEXT NOT NULL,
+                  expires_at TEXT NOT NULL
                 );
                 """
             )
+            columns = {
+                row["name"]
+                for row in conn.execute("PRAGMA table_info(runner_cycles)").fetchall()
+            }
+            if "heartbeat_at" not in columns:
+                conn.execute("ALTER TABLE runner_cycles ADD COLUMN heartbeat_at TEXT")
 
-    def start(self, trigger: str) -> str:
-        cycle_id = str(uuid.uuid4())
+    def start(
+        self,
+        trigger: str,
+        *,
+        cycle_id: str | None = None,
+        status: str = "RUNNING",
+        payload: dict[str, Any] | None = None,
+    ) -> str:
+        cycle_id = cycle_id or str(uuid.uuid4())
+        now = utcnow()
         with self._connect() as conn:
             conn.execute(
                 """INSERT INTO runner_cycles
-                (id, created_at, trigger, status, payload_json)
-                VALUES (?, ?, ?, ?, ?)""",
-                (cycle_id, utcnow(), trigger, "RUNNING", "{}"),
+                (id, created_at, trigger, status, payload_json, heartbeat_at)
+                VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    cycle_id,
+                    now,
+                    trigger,
+                    status,
+                    json.dumps(payload or {}),
+                    now,
+                ),
             )
         return cycle_id
+
+    def heartbeat(self, cycle_id: str) -> None:
+        now = utcnow()
+        with self._connect() as conn:
+            conn.execute(
+                "UPDATE runner_cycles SET heartbeat_at=? WHERE id=? AND status='RUNNING'",
+                (now, cycle_id),
+            )
+            conn.execute(
+                """UPDATE runner_leases
+                SET heartbeat_at=?
+                WHERE name='portfolio' AND owner_id=?""",
+                (now, cycle_id),
+            )
+
+    def acquire_lease(self, owner_id: str, ttl_seconds: int) -> bool:
+        ttl_seconds = max(60, int(ttl_seconds))
+        now_dt = datetime.now(timezone.utc)
+        expires = (now_dt + timedelta(seconds=ttl_seconds)).isoformat()
+        now = now_dt.isoformat()
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            row = conn.execute(
+                "SELECT owner_id, expires_at FROM runner_leases WHERE name='portfolio'"
+            ).fetchone()
+            if row:
+                try:
+                    expires_at = datetime.fromisoformat(row["expires_at"])
+                    if expires_at.tzinfo is None:
+                        expires_at = expires_at.replace(tzinfo=timezone.utc)
+                except ValueError:
+                    expires_at = now_dt - timedelta(seconds=1)
+                if row["owner_id"] != owner_id and expires_at > now_dt:
+                    return False
+            conn.execute(
+                """INSERT INTO runner_leases
+                (name, owner_id, acquired_at, heartbeat_at, expires_at)
+                VALUES ('portfolio', ?, ?, ?, ?)
+                ON CONFLICT(name) DO UPDATE SET
+                  owner_id=excluded.owner_id,
+                  acquired_at=excluded.acquired_at,
+                  heartbeat_at=excluded.heartbeat_at,
+                  expires_at=excluded.expires_at""",
+                (owner_id, now, now, expires),
+            )
+        return True
+
+    def renew_lease(self, owner_id: str, ttl_seconds: int) -> bool:
+        ttl_seconds = max(60, int(ttl_seconds))
+        now_dt = datetime.now(timezone.utc)
+        expires = (now_dt + timedelta(seconds=ttl_seconds)).isoformat()
+        now = now_dt.isoformat()
+        with self._connect() as conn:
+            cursor = conn.execute(
+                """UPDATE runner_leases
+                SET heartbeat_at=?, expires_at=?
+                WHERE name='portfolio' AND owner_id=?""",
+                (now, expires, owner_id),
+            )
+        return cursor.rowcount == 1
+
+    def release_lease(self, owner_id: str) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                "DELETE FROM runner_leases WHERE name='portfolio' AND owner_id=?",
+                (owner_id,),
+            )
+
+    def active_lease(self) -> dict[str, Any] | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                """SELECT name, owner_id, acquired_at, heartbeat_at, expires_at
+                FROM runner_leases WHERE name='portfolio'"""
+            ).fetchone()
+        return dict(row) if row else None
+
+    def mark_stale_running(self, older_than_seconds: int) -> list[str]:
+        threshold = max(60, int(older_than_seconds))
+        cutoff = datetime.now(timezone.utc) - timedelta(seconds=threshold)
+        stale_ids: list[str] = []
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT id, created_at, heartbeat_at, payload_json
+                FROM runner_cycles WHERE status='RUNNING'"""
+            ).fetchall()
+            for row in rows:
+                raw = row["heartbeat_at"] or row["created_at"]
+                try:
+                    heartbeat = datetime.fromisoformat(raw)
+                    if heartbeat.tzinfo is None:
+                        heartbeat = heartbeat.replace(tzinfo=timezone.utc)
+                except ValueError:
+                    heartbeat = cutoff - timedelta(seconds=1)
+                if heartbeat >= cutoff:
+                    continue
+                payload = json.loads(row["payload_json"] or "{}")
+                payload["stale_reason"] = "heartbeat threshold exceeded"
+                payload["stale_threshold_seconds"] = threshold
+                now = utcnow()
+                conn.execute(
+                    """UPDATE runner_cycles
+                    SET status='STALE', completed_at=?, payload_json=?
+                    WHERE id=?""",
+                    (now, json.dumps(payload), row["id"]),
+                )
+                conn.execute(
+                    "DELETE FROM runner_leases WHERE name='portfolio' AND owner_id=?",
+                    (row["id"],),
+                )
+                stale_ids.append(row["id"])
+        return stale_ids
 
     def finish(
         self,
@@ -384,12 +524,16 @@ class PortfolioRunner:
         *,
         registry_path: str | Path = "projects/registry.yaml",
         worker: WorkerGateway | None = None,
+        lease_ttl_seconds: int = 1800,
+        stale_after_seconds: int = 1800,
     ) -> None:
         self.github = github
         self.orchestrator = orchestrator
         self.store = store
         self.registry_path = Path(registry_path)
         self.worker = worker
+        self.lease_ttl_seconds = max(60, int(lease_ttl_seconds))
+        self.stale_after_seconds = max(60, int(stale_after_seconds))
 
     def discover(self) -> list[RepositorySnapshot]:
         snapshots = []
@@ -439,137 +583,188 @@ class PortfolioRunner:
         return candidates[0]
 
     def cycle(self, *, trigger: str = "manual", execute: bool = False) -> dict[str, Any]:
-        cycle_id = self.store.start(trigger)
-        snapshots = self.discover()
-        selected = self.select(snapshots)
-        discovery_summary = {
-            "repositories": len(snapshots),
-            "discovered": sum(1 for item in snapshots if item.state == "DISCOVERED"),
-            "contract_gaps": sum(1 for item in snapshots if item.state == "CONTRACT_GAP"),
-            "inaccessible": sum(1 for item in snapshots if item.state == "INACCESSIBLE"),
-        }
+        self.store.mark_stale_running(self.stale_after_seconds)
+        cycle_id = str(uuid.uuid4())
 
-        if selected is None:
+        if not self.store.acquire_lease(cycle_id, self.lease_ttl_seconds):
+            active = self.store.active_lease()
             payload = {
                 "cycle_id": cycle_id,
-                "state": "NO_EXECUTABLE_WORK",
-                "discovery": discovery_summary,
+                "state": "SKIPPED",
+                "reason": "Another portfolio runner cycle already holds the active lease.",
+                "active_lease": active,
             }
-            self.store.finish(cycle_id, "IDLE", payload)
+            self.store.start(
+                trigger,
+                cycle_id=cycle_id,
+                status="SKIPPED",
+                payload=payload,
+            )
+            self.store.finish(cycle_id, "SKIPPED", payload)
             return payload
 
-        prompt = (
-            f"Sigma autonomous portfolio runner selected GitHub issue "
-            f"{selected.repository}#{selected.issue_number}: {selected.title}\n\n"
-            f"{selected.body}\n\n"
-            "Produce an executable development plan that obeys repository contracts, "
-            "security gates, branch/PR workflow, independent verification and Sigma User Tester "
-            "requirements. Do not claim implementation occurred unless worker/repository evidence proves it."
-        )
-        mission = self.orchestrator.run(
-            prompt,
-            evidence=[
-                {
-                    "id": "runner-selection",
-                    "source": f"github:{selected.repository}#{selected.issue_number}",
-                    "content": json.dumps(asdict(selected)),
+        self.store.start(trigger, cycle_id=cycle_id)
+        try:
+            snapshots = self.discover()
+            self.store.heartbeat(cycle_id)
+            self.store.renew_lease(cycle_id, self.lease_ttl_seconds)
+
+            selected = self.select(snapshots)
+            discovery_summary = {
+                "repositories": len(snapshots),
+                "discovered": sum(
+                    1 for item in snapshots if item.state == "DISCOVERED"
+                ),
+                "contract_gaps": sum(
+                    1 for item in snapshots if item.state == "CONTRACT_GAP"
+                ),
+                "inaccessible": sum(
+                    1 for item in snapshots if item.state == "INACCESSIBLE"
+                ),
+            }
+
+            if selected is None:
+                payload = {
+                    "cycle_id": cycle_id,
+                    "state": "NO_EXECUTABLE_WORK",
+                    "discovery": discovery_summary,
                 }
-            ],
-            requested_by="sigma-portfolio-runner",
-            max_cycles=2,
-        )
-        mission_id = mission.get("id")
+                self.store.finish(cycle_id, "IDLE", payload)
+                return payload
 
-        if not execute:
+            prompt = (
+                f"Sigma autonomous portfolio runner selected GitHub issue "
+                f"{selected.repository}#{selected.issue_number}: {selected.title}\n\n"
+                f"{selected.body}\n\n"
+                "Produce an executable development plan that obeys repository contracts, "
+                "security gates, branch/PR workflow, independent verification and Sigma "
+                "User Tester requirements. Do not claim implementation occurred unless "
+                "worker/repository evidence proves it."
+            )
+            mission = self.orchestrator.run(
+                prompt,
+                evidence=[
+                    {
+                        "id": "runner-selection",
+                        "source": (
+                            f"github:{selected.repository}#{selected.issue_number}"
+                        ),
+                        "content": json.dumps(asdict(selected)),
+                    }
+                ],
+                requested_by="sigma-portfolio-runner",
+                max_cycles=2,
+            )
+            mission_id = mission.get("id")
+            self.store.heartbeat(cycle_id)
+            self.store.renew_lease(cycle_id, self.lease_ttl_seconds)
+
+            if not execute:
+                payload = {
+                    "cycle_id": cycle_id,
+                    "state": "PLANNED",
+                    "selected": asdict(selected),
+                    "mission_id": mission_id,
+                    "discovery": discovery_summary,
+                    "execution": "disabled",
+                }
+                self.store.finish(
+                    cycle_id,
+                    "PLANNED",
+                    payload,
+                    repository=selected.repository,
+                    issue_number=selected.issue_number,
+                    mission_id=mission_id,
+                )
+                return payload
+
+            if self.worker is None:
+                payload = {
+                    "cycle_id": cycle_id,
+                    "state": "BLOCKED",
+                    "selected": asdict(selected),
+                    "mission_id": mission_id,
+                    "discovery": discovery_summary,
+                    "blocker": "No governed worker endpoint configured.",
+                }
+                self.store.finish(
+                    cycle_id,
+                    "BLOCKED",
+                    payload,
+                    repository=selected.repository,
+                    issue_number=selected.issue_number,
+                    mission_id=mission_id,
+                )
+                return payload
+
+            worker_result = self.worker.dispatch(
+                {
+                    "mission_id": mission_id,
+                    "repository": selected.repository,
+                    "issue_number": selected.issue_number,
+                    "objective": selected.title,
+                    "issue_body": selected.body,
+                    "sigma_mission": mission,
+                    "authority": {
+                        "production_release": False,
+                        "destructive_actions": False,
+                        "paid_spend": False,
+                        "direct_main_push": False,
+                    },
+                }
+            )
+            self.store.heartbeat(cycle_id)
+            self.store.renew_lease(cycle_id, self.lease_ttl_seconds)
+
+            worker_status = str(worker_result.get("status", "BLOCKED")).upper()
+            repository_evidence = bool(
+                worker_result.get("branch") and worker_result.get("pull_request_url")
+            )
+            final_status = (
+                "WORKER_CHANGED"
+                if worker_status in {"CHANGED", "TESTED"} and repository_evidence
+                else "BLOCKED"
+            )
+            if worker_status in {"CHANGED", "TESTED"} and not repository_evidence:
+                worker_result = dict(worker_result)
+                worker_result["runner_rejection"] = (
+                    "Worker claimed repository change without branch and "
+                    "pull_request_url evidence."
+                )
+
             payload = {
                 "cycle_id": cycle_id,
-                "state": "PLANNED",
+                "state": final_status,
                 "selected": asdict(selected),
                 "mission_id": mission_id,
                 "discovery": discovery_summary,
-                "execution": "disabled",
+                "worker": worker_result,
+                "next_gate": (
+                    "independent repository tests/security/user-test evidence"
+                    if final_status == "WORKER_CHANGED"
+                    else "worker blocker resolution"
+                ),
             }
             self.store.finish(
                 cycle_id,
-                "PLANNED",
+                final_status,
                 payload,
                 repository=selected.repository,
                 issue_number=selected.issue_number,
                 mission_id=mission_id,
             )
             return payload
-
-        if self.worker is None:
+        except Exception as exc:
             payload = {
                 "cycle_id": cycle_id,
-                "state": "BLOCKED",
-                "selected": asdict(selected),
-                "mission_id": mission_id,
-                "discovery": discovery_summary,
-                "blocker": "No governed worker endpoint configured.",
+                "state": "FAILED",
+                "error_type": type(exc).__name__,
+                "error": str(exc),
             }
-            self.store.finish(
-                cycle_id,
-                "BLOCKED",
-                payload,
-                repository=selected.repository,
-                issue_number=selected.issue_number,
-                mission_id=mission_id,
-            )
-            return payload
-
-        worker_result = self.worker.dispatch(
-            {
-                "mission_id": mission_id,
-                "repository": selected.repository,
-                "issue_number": selected.issue_number,
-                "objective": selected.title,
-                "issue_body": selected.body,
-                "sigma_mission": mission,
-                "authority": {
-                    "production_release": False,
-                    "destructive_actions": False,
-                    "paid_spend": False,
-                    "direct_main_push": False,
-                },
-            }
-        )
-        worker_status = str(worker_result.get("status", "BLOCKED")).upper()
-        repository_evidence = bool(
-            worker_result.get("branch") and worker_result.get("pull_request_url")
-        )
-        final_status = (
-            "WORKER_CHANGED"
-            if worker_status in {"CHANGED", "TESTED"} and repository_evidence
-            else "BLOCKED"
-        )
-        if worker_status in {"CHANGED", "TESTED"} and not repository_evidence:
-            worker_result = dict(worker_result)
-            worker_result["runner_rejection"] = (
-                "Worker claimed repository change without branch and pull_request_url evidence."
-            )
-        payload = {
-            "cycle_id": cycle_id,
-            "state": final_status,
-            "selected": asdict(selected),
-            "mission_id": mission_id,
-            "discovery": discovery_summary,
-            "worker": worker_result,
-            "next_gate": (
-                "independent repository tests/security/user-test evidence"
-                if final_status == "WORKER_CHANGED"
-                else "worker blocker resolution"
-            ),
-        }
-        self.store.finish(
-            cycle_id,
-            final_status,
-            payload,
-            repository=selected.repository,
-            issue_number=selected.issue_number,
-            mission_id=mission_id,
-        )
-        return payload
+            self.store.finish(cycle_id, "FAILED", payload)
+            raise
+        finally:
+            self.store.release_lease(cycle_id)
 
 
 def runner_from_env(
@@ -597,4 +792,6 @@ def runner_from_env(
         RunnerStore(db_path),
         registry_path=registry_path,
         worker=worker,
+        lease_ttl_seconds=int(os.getenv("SIGMA_RUNNER_LEASE_TTL_SECONDS", "1800")),
+        stale_after_seconds=int(os.getenv("SIGMA_RUNNER_STALE_AFTER_SECONDS", "1800")),
     )
