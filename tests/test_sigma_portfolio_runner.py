@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import tempfile
+from datetime import datetime, timedelta, timezone
 import unittest
 
 from sigma_runtime.portfolio_runner import (
@@ -157,6 +158,97 @@ class PortfolioRunnerTests(unittest.TestCase):
             result = runner.cycle(trigger="test", execute=True)
             self.assertEqual(result["state"], "WORKER_CHANGED")
             self.assertIn("independent", result["next_gate"])
+
+    def test_second_cycle_is_skipped_when_lease_is_active(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            self.assertTrue(store.acquire_lease("active-cycle", 1800))
+            runner = PortfolioRunner(
+                FakeGitHub(),
+                FakeOrchestrator(),
+                store,
+            )
+            result = runner.cycle(trigger="test", execute=False)
+            self.assertEqual(result["state"], "SKIPPED")
+            self.assertEqual(
+                result["active_lease"]["owner_id"],
+                "active-cycle",
+            )
+
+    def test_stale_running_cycle_is_marked_stale_and_lock_released(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            cid = store.start("test")
+            self.assertTrue(store.acquire_lease(cid, 1800))
+            old = (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat()
+            with store._connect() as conn:
+                conn.execute(
+                    "UPDATE runner_cycles SET heartbeat_at=? WHERE id=?",
+                    (old, cid),
+                )
+            stale = store.mark_stale_running(1800)
+            self.assertEqual(stale, [cid])
+            self.assertEqual(store.get(cid)["status"], "STALE")
+            self.assertIsNone(store.active_lease())
+
+    def test_fresh_running_cycle_is_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            cid = store.start("test")
+            self.assertTrue(store.acquire_lease(cid, 1800))
+            stale = store.mark_stale_running(1800)
+            self.assertEqual(stale, [])
+            self.assertEqual(store.get(cid)["status"], "RUNNING")
+            self.assertEqual(store.active_lease()["owner_id"], cid)
+
+    def test_lease_is_released_after_successful_cycle(self):
+        selected = WorkItem(
+            "owner/repo", 7, "Implement feature", "criteria", 1, (), True, ()
+        )
+        snap = RepositorySnapshot(
+            "Repo", "owner/repo", "active", "product",
+            accessible=True, default_branch="main",
+            manifest_present=True, status_present=True,
+            work_items=[selected],
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            runner = PortfolioRunner(
+                FakeGitHub(),
+                FakeOrchestrator(),
+                store,
+            )
+            runner.discover = lambda: [snap]
+            result = runner.cycle(trigger="test", execute=False)
+            self.assertEqual(result["state"], "PLANNED")
+            self.assertIsNone(store.active_lease())
+
+    def test_lease_is_released_after_failed_cycle(self):
+        class FailingOrchestrator:
+            def run(self, prompt, **kwargs):
+                raise RuntimeError("boom")
+
+        selected = WorkItem(
+            "owner/repo", 7, "Implement feature", "criteria", 1, (), True, ()
+        )
+        snap = RepositorySnapshot(
+            "Repo", "owner/repo", "active", "product",
+            accessible=True, default_branch="main",
+            manifest_present=True, status_present=True,
+            work_items=[selected],
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            runner = PortfolioRunner(
+                FakeGitHub(),
+                FailingOrchestrator(),
+                store,
+            )
+            runner.discover = lambda: [snap]
+            with self.assertRaises(RuntimeError):
+                runner.cycle(trigger="test", execute=False)
+            self.assertIsNone(store.active_lease())
+            self.assertEqual(store.list()[0]["status"], "FAILED")
 
 
 if __name__ == "__main__":
