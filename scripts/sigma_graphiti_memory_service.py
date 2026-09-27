@@ -74,6 +74,11 @@ class MemoryApp:
         self.runner.run(self.graphiti.build_indices_and_constraints())
 
     def add_episode(self, payload: dict[str, Any]) -> dict[str, Any]:
+        status = str(payload.get("status", "RAW")).upper()
+        if status not in {"VERIFIED", "PROMOTED"}:
+            raise ValueError(
+                "Graphiti trusted memory accepts only VERIFIED or PROMOTED episodes"
+            )
         reference_time = datetime.fromisoformat(
             str(payload["reference_time"]).replace("Z", "+00:00")
         )
