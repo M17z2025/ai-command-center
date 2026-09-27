@@ -8,6 +8,9 @@ services:
       - "11434"
     networks:
       - sigma-private
+    environment:
+      OLLAMA_MAX_LOADED_MODELS: "1"
+      OLLAMA_NUM_PARALLEL: "1"
     security_opt:
       - no-new-privileges:true
 
@@ -18,6 +21,7 @@ services:
       OLLAMA_HOST: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:?set OLLAMA_MODEL}
       OLLAMA_EMBEDDING_MODEL: ${OLLAMA_EMBEDDING_MODEL:?set OLLAMA_EMBEDDING_MODEL}
+      OLLAMA_WORKER_MODEL: ${OLLAMA_WORKER_MODEL:-qwen2.5:7b}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - >
@@ -69,7 +73,7 @@ services:
       SIGMA_RUNNER_EXECUTE: ${SIGMA_RUNNER_EXECUTE:-0}
       SIGMA_RUNNER_ALLOW_WRITE: ${SIGMA_RUNNER_ALLOW_WRITE:-0}
       SIGMA_GITHUB_TOKEN: ${SIGMA_GITHUB_TOKEN:-}
-      SIGMA_WORKER_ENDPOINT: ${SIGMA_WORKER_ENDPOINT:-}
+      SIGMA_WORKER_ENDPOINT: ${SIGMA_WORKER_ENDPOINT:-http://sigma-worker:8091/missions}
       SIGMA_WORKER_TOKEN: ${SIGMA_WORKER_TOKEN:-}
       SIGMA_WORKER_TIMEOUT_SECONDS: ${SIGMA_WORKER_TIMEOUT_SECONDS:-900}
     volumes:
@@ -82,5 +86,36 @@ services:
       ollama-model-init:
         condition: service_completed_successfully
 
+  sigma-worker:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-worker
+    restart: unless-stopped
+    environment:
+      SIGMA_WORKER_HOST: 0.0.0.0
+      SIGMA_WORKER_PORT: "8091"
+      SIGMA_WORKER_TOKEN: ${SIGMA_WORKER_TOKEN:?set SIGMA_WORKER_TOKEN}
+      SIGMA_WORKER_ALLOW_WRITE: ${SIGMA_WORKER_ALLOW_WRITE:-0}
+      SIGMA_WORKER_ALLOWED_REPOSITORIES: ${SIGMA_WORKER_ALLOWED_REPOSITORIES:-M17z2025/ai-command-center}
+      SIGMA_WORKER_ROOT: /workspaces
+      SIGMA_WORKER_MODEL: ${OLLAMA_WORKER_MODEL:-qwen2.5:7b}
+      SIGMA_WORKER_OLLAMA_URL: http://ollama:11434
+      SIGMA_WORKER_MODEL_TIMEOUT_SECONDS: ${SIGMA_WORKER_MODEL_TIMEOUT_SECONDS:-900}
+      SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS: ${SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS:-900}
+      SIGMA_WORKER_KEEP_WORKSPACE: ${SIGMA_WORKER_KEEP_WORKSPACE:-0}
+      SIGMA_GITHUB_TOKEN: ${SIGMA_GITHUB_TOKEN:-}
+    volumes:
+      - sigma-worker-workspaces:/workspaces
+    expose:
+      - "8091"
+    networks:
+      - sigma-private
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      ollama-model-init:
+        condition: service_completed_successfully
+
 volumes:
   ollama-data:
+  sigma-worker-workspaces:
