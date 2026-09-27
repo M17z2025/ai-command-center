@@ -1,6 +1,6 @@
 # THE LINE — Project Status
 
-**State:** BUILDING / PRE-PRODUCTION PACKAGE ACTIVE
+**State:** BUILDING / PRODUCTION PACKAGE COMPLETE — RENDERER COMMISSIONING
 **Current milestone:** Pilot package
 **Episode:** S01E01 — The Driver
 **Runtime target:** 28–32 minutes
@@ -37,3 +37,17 @@
 
 ## Definition of done
 The pilot is not DONE until the full 28–32 minute master exists, passes continuity/audio/story QC, and is exportable as a finished episode.
+
+
+## Current verified build
+- Episode 1 shooting script, timed scene list and shot list exist.
+- Character, voice, wardrobe, makeup, locations, stunts, music/sound, continuity, legal/IP and QC bibles exist.
+- Full 16-scene prompt bible exists.
+- Generation queue and shot tracker exist.
+- Canonical TJ+Atlas and Patel Performance still references generated.
+- Eight additional canonical keyframes are generated or queued.
+- Open-source movie runner controller has been built on M17z2025/alisha-os branch feat/the-line-movie-runner.
+- Python runner syntax check passed.
+
+## Hard render gate
+A live ComfyUI GPU endpoint and validated exported Wan/LTX API workflow JSON are still required before a real video shot can be rendered. The project must not be described as a finished film until that generation and subsequent edit/QC occur.
