@@ -159,3 +159,29 @@ Every shot receives PASS / REGENERATE / REPAIR against:
 10. visible AI artefacts.
 
 Any obvious AI artefact blocks the final master.
+
+
+## Generation Provider Policy
+
+### Primary production route
+THE LINE must be produced through the open-source ALISHA/Sigma movie pipeline:
+- ComfyUI
+- Wan / Wan2.x
+- LTX-Video / LTX-AV
+- AnimateDiff where appropriate
+- Wav2Lip
+- Kokoro / Chatterbox
+- ACE-Step
+- Real-ESRGAN / GFPGAN
+- Blender
+- FFmpeg
+
+### Runway policy
+Runway is NOT the primary production engine and is not required for completion.
+It may only be used as:
+- optional visual reference generation;
+- optional benchmark/fallback for a difficult shot;
+- non-blocking comparison against the open-source pipeline.
+
+No production milestone may depend on a paid Runway plan.
+The film must remain buildable without Runway.
