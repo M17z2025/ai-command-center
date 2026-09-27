@@ -37,9 +37,14 @@ class HTTPModelProvider(ModelProvider):
         api_key: str | None = None,
         protocol: str = "responses",
         timeout: int = 120,
+        max_tokens: int = 768,
+        context_tokens: int = 4096,
+        disable_thinking: bool = False,
     ) -> None:
-        if protocol not in {"responses", "chat-completions"}:
-            raise ProviderError("SIGMA_LLM_PROTOCOL must be responses or chat-completions")
+        if protocol not in {"responses", "chat-completions", "ollama-chat"}:
+            raise ProviderError(
+                "SIGMA_LLM_PROTOCOL must be responses, chat-completions or ollama-chat"
+            )
         if not endpoint.startswith(("https://", "http://")):
             raise ProviderError("SIGMA_LLM_ENDPOINT must be an absolute HTTP(S) URL")
         if not model:
@@ -49,6 +54,9 @@ class HTTPModelProvider(ModelProvider):
         self.api_key = api_key
         self.protocol = protocol
         self.timeout = timeout
+        self.max_tokens = max(64, int(max_tokens))
+        self.context_tokens = max(1024, int(context_tokens))
+        self.disable_thinking = bool(disable_thinking)
 
     def complete(self, request: CompletionRequest) -> str:
         if self.protocol == "responses":
@@ -59,7 +67,7 @@ class HTTPModelProvider(ModelProvider):
                     {"role": "user", "content": request.user},
                 ],
             }
-        else:
+        elif self.protocol == "chat-completions":
             payload = {
                 "model": self.model,
                 "messages": [
@@ -67,6 +75,22 @@ class HTTPModelProvider(ModelProvider):
                     {"role": "user", "content": request.user},
                 ],
                 "temperature": 0.2,
+                "max_tokens": self.max_tokens,
+            }
+        else:
+            payload = {
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": request.system},
+                    {"role": "user", "content": request.user},
+                ],
+                "stream": False,
+                "think": not self.disable_thinking,
+                "options": {
+                    "temperature": 0.2,
+                    "num_predict": self.max_tokens,
+                    "num_ctx": self.context_tokens,
+                },
             }
 
         headers = {
@@ -99,6 +123,9 @@ class HTTPModelProvider(ModelProvider):
     def _extract_text(self, data: dict[str, Any]) -> str:
         if isinstance(data.get("output_text"), str):
             return data["output_text"]
+        message = data.get("message")
+        if isinstance(message, dict) and isinstance(message.get("content"), str):
+            return message["content"]
         choices = data.get("choices")
         if isinstance(choices, list) and choices:
             message = choices[0].get("message", {})
@@ -201,4 +228,7 @@ def provider_from_env(*, allow_test: bool = False) -> ModelProvider:
         api_key=os.getenv("SIGMA_LLM_API_KEY") or None,
         protocol=os.getenv("SIGMA_LLM_PROTOCOL", "responses"),
         timeout=int(os.getenv("SIGMA_LLM_TIMEOUT_SECONDS", "120")),
+        max_tokens=int(os.getenv("SIGMA_LLM_MAX_TOKENS", "768")),
+        context_tokens=int(os.getenv("SIGMA_LLM_CONTEXT_TOKENS", "4096")),
+        disable_thinking=os.getenv("SIGMA_LLM_DISABLE_THINKING", "0") == "1",
     )
