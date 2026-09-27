@@ -93,3 +93,24 @@ Original score families:
 10. AI generation + versioning pipeline.
 11. Legal/IP checklist.
 12. Continuity/QC checklist.
+
+
+## Calendar / News / Radio Continuity
+
+### Series clock
+- Every episode advances exactly **7 calendar days**.
+- Season One therefore covers approximately **8 consecutive weeks**.
+- The production bible must record a canonical in-story date for every episode and scene.
+- Weather, sunrise/sunset, clothing layers, foliage, school terms, football calendar, traffic, public events and seasonal behaviour must match the story week.
+
+### News and radio
+- Background television, radio, podcasts, phone alerts, newspapers and public screens must be relevant to the specific story week.
+- News should help make the world feel alive and may foreshadow plot developments, but must never overwhelm the principal story.
+- Where real-world news is used, it must be contemporaneous to the in-story date and independently verified during episode production.
+- Fictional local news may be used for Blackthorn, crime, business and community storylines, but must be clearly fictional and must not falsely depict real people or organisations as involved in fictional wrongdoing.
+- Radio music, presenters and station branding require rights clearance unless created as original fictional equivalents.
+- Recurring fictional station/news brands should be created so we can control continuity and avoid unnecessary licensing.
+
+### Recommended Season One calendar
+Unless superseded by the owner, anchor S01E01 in **late September 2026** and move forward one week per episode, taking the season through **mid-November 2026**.
+This gives visible seasonal progression: early-autumn evenings -> colder/wetter October -> darker November, supporting the tone and wardrobe evolution.
