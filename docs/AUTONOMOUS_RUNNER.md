@@ -139,3 +139,24 @@ The runner separates:
 - READY/VERIFIED/RELEASED — never issued solely by the runner worker path.
 
 A material user-facing candidate still requires the independent Sigma Full User Tester on the exact deployed candidate.
+
+
+## Singleton lease and stale-cycle recovery
+
+The portfolio runner now uses a durable SQLite singleton lease named `portfolio`.
+
+Rules:
+- only one runner cycle may hold the lease at a time;
+- a second cycle records `SKIPPED` with the active lease evidence instead of starting another mission;
+- active cycles write heartbeats;
+- `SIGMA_RUNNER_LEASE_TTL_SECONDS` controls lease expiry;
+- `SIGMA_RUNNER_STALE_AFTER_SECONDS` controls stale RUNNING-cycle detection;
+- stale cycles become `STALE` and remain in the audit history;
+- stale lease ownership is released so later work can continue;
+- leases are released in a `finally` path after success or failure.
+
+Operational status is available at:
+
+`GET /runner/status`
+
+The response includes the current active lease, per-status cycle counts, and recent cycle records.

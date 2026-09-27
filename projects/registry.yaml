@@ -166,10 +166,3 @@ projects:
     repository: "M17z2025/mi7z_core_Intelliegence"
     lifecycle: discovered
     category: ai-platform
-
-
-  - name: "THE LINE"
-    repository: "M17z2025/ai-command-center"
-    lifecycle: active
-    category: ai-film-production
-    notes: "Managed production package at projects/the-line/. Pilot: S01E01 The Driver. Sigma Full Mesh production mission tracked in issue #76."

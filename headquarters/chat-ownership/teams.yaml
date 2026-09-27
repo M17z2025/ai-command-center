@@ -131,6 +131,11 @@ projects:
     domain_team: ["chief-ai-scientist", "research-director", "systems-decision-master", "ai-agent-engineering-master"]
 
 intake_projects:
+  - project: "THE LINE"
+    repository: null
+    state: "MANAGED_PACKAGE_IN_COMMAND_CENTER"
+    aliases: ["the line", "the driver", "ai pilot", "30-minute ai pilot"]
+    domain_team: ["film-director-master", "film-production-master", "film-editing-master", "scriptwriting-master", "arts-creative-director"]
   - project: "AutoHedge – FXHedge"
     repository: null
     state: "PROJECT_REPOSITORY_REQUIRED"

@@ -96,6 +96,12 @@ def build_server(
             if path == "/lessons":
                 self._json(200, {"lessons": store.list_lessons()})
                 return
+            if path == "/runner/status":
+                if portfolio_runner is None:
+                    self._json(503, {"error": "portfolio runner not configured"})
+                else:
+                    self._json(200, portfolio_runner.store.status_summary())
+                return
             if path == "/runner/cycles":
                 if portfolio_runner is None:
                     self._json(503, {"error": "portfolio runner not configured"})
