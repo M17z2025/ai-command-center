@@ -1,0 +1,53 @@
+schema_version: 1
+project: THE LINE
+episode: S01E01
+title: The Driver
+story_date: 2026-09-27
+runtime_target_minutes: 30
+pipeline:
+  keyframe: comfyui
+  video_primary: wan
+  video_secondary: ltx-video
+  lipsync: wav2lip
+  voice_primary: chatterbox
+  voice_secondary: kokoro
+  music: ace-step
+  upscale: realesrgan
+  assembly: ffmpeg
+jobs:
+  - id: KF01
+    subject: TJ Patel + Atlas
+    asset_id: CHAR-TJ-DOG-ATLAS-REF01
+    status: generated_qc_pending
+  - id: KF02
+    subject: Patel Performance
+    asset_id: LOC-PATEL-GARAGE-REF01
+    status: generated_qc_pending
+  - id: KF03
+    subject: Marcus Vale
+    asset_id: CHAR-MARCUS-REF01
+    status: generating
+  - id: KF04
+    subject: Tommy Quinn
+    asset_id: CHAR-TOMMY-REF01
+    status: generating
+  - id: KF05
+    subject: Hawthorne Estate
+    asset_id: LOC-HAWTHORNE-REF01
+    status: generating
+  - id: KF06
+    subject: Noah Cole
+    asset_id: CHAR-NOAH-REF01
+    status: generating
+  - id: KF07
+    subject: Sofia Al-Hassan
+    status: planned
+  - id: KF08
+    subject: Ellie Hawthorne
+    status: planned
+  - id: KF09
+    subject: Docklands chase
+    status: planned
+  - id: KF10
+    subject: THE LINE case reveal
+    status: planned
