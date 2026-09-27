@@ -6,7 +6,7 @@
 **Runtime target:** 28–32 minutes
 
 ## Completed
-- Animal character bible: Atlas, Jay Malik's Doberman, locked as a recurring principal companion.
+- Animal character bible: Atlas, Mitz Patel's Doberman, locked as a recurring principal companion.
 - Core series concept.
 - Underdog/rich-power-reversal spine.
 - Pilot beat structure.
