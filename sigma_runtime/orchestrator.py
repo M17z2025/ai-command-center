@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import os
 from typing import Any
 
 from .config import MeshConfig
@@ -36,12 +37,19 @@ class SigmaOrchestrator:
         provider: ModelProvider,
         store: MissionStore,
         memory: KnowledgeMemory | None = None,
+        max_parallel_specialists: int | None = None,
     ) -> None:
         self.config = config
         self.router = router
         self.provider = provider
         self.store = store
         self.memory = memory or NullKnowledgeMemory()
+        configured_workers = (
+            max_parallel_specialists
+            if max_parallel_specialists is not None
+            else int(os.getenv("SIGMA_MAX_PARALLEL_SPECIALISTS", "2"))
+        )
+        self.max_parallel_specialists = max(1, min(int(configured_workers), 6))
 
     def plan(self, prompt: str) -> dict[str, Any]:
         self._validate_prompt(prompt)
@@ -345,7 +353,7 @@ class SigmaOrchestrator:
         evidence: list[dict[str, Any]],
     ) -> dict[str, str]:
         outputs: dict[str, str] = {}
-        workers = max(1, min(len(plan.specialists), 6))
+        workers = max(1, min(len(plan.specialists), self.max_parallel_specialists))
         with ThreadPoolExecutor(max_workers=workers) as pool:
             futures = {
                 pool.submit(self._analyze, plan, specialist, prompt, evidence): specialist
