@@ -6,13 +6,13 @@ Create a finished 28–32 minute AI pilot, S01E01 **The Driver**, that can also 
 ## Department decisions
 
 ### Writers Room
-The pilot must be emotionally understandable without exposition overload. Jay Malik is the audience anchor. Every other storyline must either threaten, assist, reveal, or foreshadow Jay's rise.
+The pilot must be emotionally understandable without exposition overload. Mitz Patel is the audience anchor. Every other storyline must either threaten, assist, reveal, or foreshadow Mitz's rise.
 
 ### Casting
 Use original faces, not celebrity lookalikes. Primary cast should visibly reflect modern Britain. Character silhouettes must be immediately distinguishable in low light and action scenes.
 
 ### Wardrobe / Costume
-Jay: practical workshop layers, contemporary trainers/boots, restrained palette; upgrades only gradually.
+Mitz: practical workshop layers, contemporary trainers/boots, restrained palette; upgrades only gradually.
 Kai: more fashion-forward, impulsive, streetwear influenced.
 Marcus: quiet-luxury tailoring, modern rather than old-school mob costume.
 Sofia: low-profile premium professional clothing that works for surveillance/action.
@@ -25,8 +25,8 @@ Create immutable continuity records per character: haircut, facial hair, skin de
 
 ### Locations
 Core reusable sets:
-- Malik Performance — East London industrial unit; electric conversion/performance workshop.
-- Malik family home — modest, lived-in, warm.
+- Patel Performance — East London industrial unit; electric conversion/performance workshop.
+- Patel family home — modest, lived-in, warm.
 - Vale residence/private club — contemporary understated wealth.
 - Community football ground — multicultural East London.
 - Hawthorne Estate — Essex countryside; heritage property under financial pressure.
@@ -36,7 +36,7 @@ Core reusable sets:
 
 ### Vehicles — EV-first
 Hero action vehicles should be current high-performance EVs or fictionalised equivalents based on the same architecture.
-- Jay hero car: high-performance electric saloon/GT; instant torque and understated exterior.
+- Mitz hero car: high-performance electric saloon/GT; instant torque and understated exterior.
 - Kai: modified electric performance hatch/crossover.
 - Marcus: premium luxury electric saloon/SUV.
 - Sofia: anonymous fast electric executive car.
@@ -59,7 +59,7 @@ No fake V8 soundtrack for EV hero cars. Build excitement with inverter/drivetrai
 
 ### Music
 Original score families:
-- Jay: UK garage / grime / drum-and-bass pulse.
+- Mitz: UK garage / grime / drum-and-bass pulse.
 - Marcus: modern soul / restrained jazz / luxury hip-hop.
 - Blackthorn: industrial electronic pressure.
 - Sofia/Noah: minimal electronic/military texture.
@@ -68,7 +68,7 @@ Original score families:
 
 ## Pilot structure
 1. Cold-open Docklands EV chase.
-2. 48 hours earlier — Malik Performance.
+2. 48 hours earlier — Patel Performance.
 3. Marcus Vale's world.
 4. Tommy and youth football.
 5. Noah/Maya mystery.
@@ -77,8 +77,8 @@ Original score families:
 8. Pursuit converges with cold open.
 9. Case reveals THE LINE.
 10. Amira is taken.
-11. Marcus hears the Malik name.
-12. Archival photo: Ravi Malik + younger Marcus + Victor Sloane.
+11. Marcus hears the Patel name.
+12. Archival photo: Ravi Patel + younger Marcus + Victor Sloane.
 
 ## Required next production artefacts
 1. Full shooting screenplay.
