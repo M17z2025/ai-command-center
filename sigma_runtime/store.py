@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import json
 from pathlib import Path
 import sqlite3
@@ -150,6 +150,48 @@ class MissionStore:
             ).fetchall()
             mission["artifacts"] = {item["name"]: item["content"] for item in artifacts}
             return mission
+
+    def mark_stale_running(self, older_than_seconds: int = 1800) -> list[str]:
+        cutoff = datetime.now(timezone.utc) - timedelta(
+            seconds=max(60, int(older_than_seconds))
+        )
+        stale_ids: list[str] = []
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT id, updated_at FROM missions WHERE status='RUNNING'"""
+            ).fetchall()
+            for row in rows:
+                try:
+                    updated = datetime.fromisoformat(row["updated_at"])
+                except ValueError:
+                    continue
+                if updated.tzinfo is None:
+                    updated = updated.replace(tzinfo=timezone.utc)
+                if updated >= cutoff:
+                    continue
+                stale_ids.append(row["id"])
+                now = utcnow()
+                conn.execute(
+                    """UPDATE missions SET updated_at=?, status=? WHERE id=?""",
+                    (now, "STALE", row["id"]),
+                )
+                conn.execute(
+                    """INSERT INTO events
+                    (mission_id, at, stage, payload_json)
+                    VALUES (?, ?, ?, ?)""",
+                    (
+                        row["id"],
+                        now,
+                        "stale-detected",
+                        json.dumps(
+                            {
+                                "reason": "RUNNING mission exceeded stale threshold",
+                                "older_than_seconds": int(older_than_seconds),
+                            }
+                        ),
+                    ),
+                )
+        return stale_ids
 
     def list_missions(self, limit: int = 50) -> list[dict[str, Any]]:
         limit = max(1, min(int(limit), 200))
