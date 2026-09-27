@@ -1,0 +1,67 @@
+name: Sigma hardware audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sigma-hardware-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: self-hosted
+    timeout-minutes: 5
+    steps:
+      - name: Host identity
+        shell: bash
+        run: |
+          echo "=== DATE ==="
+          date -Is
+          echo "=== HOST ==="
+          hostname
+          uname -a
+      - name: CPU and memory
+        shell: bash
+        run: |
+          echo "=== CPU ==="
+          lscpu || true
+          echo "=== MEMORY ==="
+          free -h || true
+      - name: Storage
+        shell: bash
+        run: |
+          echo "=== STORAGE ==="
+          df -hT || true
+      - name: GPU probe
+        shell: bash
+        run: |
+          echo "=== NVIDIA-SMI ==="
+          if command -v nvidia-smi >/dev/null 2>&1; then
+            nvidia-smi
+          else
+            echo "nvidia-smi: NOT INSTALLED / NO NVIDIA DRIVER VISIBLE"
+          fi
+          echo "=== PCI DISPLAY DEVICES ==="
+          if command -v lspci >/dev/null 2>&1; then
+            lspci | grep -Ei 'vga|3d|display|nvidia|amd' || true
+          else
+            echo "lspci not installed"
+          fi
+      - name: Docker runtime
+        shell: bash
+        run: |
+          echo "=== DOCKER ==="
+          docker --version || true
+          docker compose version || true
+          echo "=== DOCKER INFO GPU RUNTIMES ==="
+          docker info 2>/dev/null | grep -Ei 'Runtimes|Default Runtime|nvidia' || true
+      - name: Python and FFmpeg
+        shell: bash
+        run: |
+          echo "=== PYTHON ==="
+          python3 --version || true
+          echo "=== FFMPEG ==="
+          ffmpeg -version 2>/dev/null | head -n 3 || echo "ffmpeg not installed"
