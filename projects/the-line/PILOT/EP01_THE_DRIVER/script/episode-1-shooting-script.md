@@ -91,7 +91,7 @@ Atlas watches him.
 ---
 
 ## SCENE 3 — EXT. PATEL PERFORMANCE — LATER
-A Bentley Torcal S glides to a stop.
+A Bentley Torcal glides to a stop.
 
 Atlas gets to his feet before TJ hears anything.
 
