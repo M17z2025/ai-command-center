@@ -1,0 +1,44 @@
+schema_version: 1
+project: THE_LINE
+season: 1
+episode_count: 8
+episode_runtime_minutes:
+  min: 28
+  max: 32
+calendar:
+  step_days: 7
+  episodes:
+    S01E01: 2026-09-27
+    S01E02: 2026-10-04
+    S01E03: 2026-10-11
+    S01E04: 2026-10-18
+    S01E05: 2026-10-25
+    S01E06: 2026-11-01
+    S01E07: 2026-11-08
+    S01E08: 2026-11-15
+render_policy:
+  primary: open_source
+  required_stack:
+    - ComfyUI
+    - Wan
+    - LTX-Video
+    - FFmpeg
+  optional_fallbacks:
+    - Runway
+  paid_provider_dependency_allowed: false
+quality:
+  target: photoreal_live_action
+  anti_ai_gate_required: true
+  final_master_requires_qc: true
+vehicles:
+  marcus: VEH-MARCUS-TORCAL
+  tj_pilot: VEH-TJ-IONIQ5N
+  tj_later: VEH-TJ-CAYENNE-TURBO-E
+  sofia: VEH-SOFIA-I5M60
+  noah: VEH-NOAH-POLESTAR4
+  ellie: VEH-ELLIE-EX90
+  tommy: VEH-TOMMY-IDBUZZ
+  blackthorn_pursuit: VEH-BLACKTHORN-MACAN
+  blackthorn_freight: VEH-BLACKTHORN-ESPRINTER
+animal:
+  atlas: DOG-ATLAS
