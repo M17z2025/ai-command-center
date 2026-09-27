@@ -60,6 +60,13 @@ def main(argv=None) -> int:
     mission_p.add_argument("mission_id")
     sub.add_parser("lessons")
 
+    stale_p = sub.add_parser("missions-mark-stale")
+    stale_p.add_argument("--older-than-seconds", type=int, default=1800)
+
+    memory_p = sub.add_parser("memory-search")
+    memory_p.add_argument("query")
+    memory_p.add_argument("--limit", type=int, default=8)
+
     add_p = sub.add_parser("lesson-add")
     add_p.add_argument("mission_id")
     add_p.add_argument("--lesson", required=True)
@@ -113,6 +120,41 @@ def main(argv=None) -> int:
         return 0
     if args.command == "lessons":
         print(json.dumps(store.list_lessons(), indent=2))
+        return 0
+    if args.command == "missions-mark-stale":
+        print(
+            json.dumps(
+                {
+                    "stale_missions": store.mark_stale_running(
+                        args.older_than_seconds
+                    )
+                },
+                indent=2,
+            )
+        )
+        return 0
+    if args.command == "memory-search":
+        memory = memory_from_env()
+        from sigma_runtime.memory import MemoryQuery
+        results = memory.search(
+            MemoryQuery(text=args.query, limit=max(1, min(args.limit, 50)))
+        )
+        print(
+            json.dumps(
+                [
+                    {
+                        "text": item.text,
+                        "score": item.score,
+                        "source": item.source,
+                        "project": item.project,
+                        "status": item.status,
+                        "provenance": item.provenance,
+                    }
+                    for item in results
+                ],
+                indent=2,
+            )
+        )
         return 0
     if args.command == "lesson-add":
         if not store.get_mission(args.mission_id):
