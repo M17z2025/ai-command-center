@@ -5,7 +5,7 @@ British-Indian.
 
 At Series Start:
 - owns/runs a modest mobile-phone shop;
-- married to Rhea;
+- married to Kay;
 - father to Asha;
 - both parents deceased;
 - keeps wider family at arm's length;
@@ -32,7 +32,7 @@ shopkeeper -> consultant -> fixer -> operator -> international dealmaker -> mini
 
 The feared reputation must take years to earn.
 
-## RHEA — early/mid-30s
+## KAY — early/mid-30s
 M's wife.
 Grounded, intelligent and emotionally direct.
 She knew M before status.
@@ -40,14 +40,14 @@ She is one of the few people who can challenge him without being intimidated.
 Her central conflict is not "does she love him?" but "what version of him is she agreeing to live with?"
 
 ## ASHA — child at series start
-M and Rhea's daughter.
+M and Kay's daughter.
 Bright, observant and deeply loved.
 Her age progression helps show the passage of years.
 M wants to give her security but risks creating distance through secrecy and work.
 
 ## ATLAS — Doberman
 Male, black-and-rust, natural ears and tail.
-Gentle with Rhea and Asha.
+Gentle with Kay and Asha.
 Highly bonded to M.
 Protective, disciplined and calm.
 
