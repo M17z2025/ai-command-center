@@ -4,7 +4,7 @@
 ### Position in saga
 Book One begins before anyone calls M "Bossman" seriously.
 
-He is a British-Indian man in his mid-30s running a modest mobile-phone shop. He is married to Rhea, father to Asha, and both his parents have died. Atlas, his Doberman, is his near-constant companion.
+He is a British-Indian man in his mid-30s running a modest mobile-phone shop. He is married to Kay, father to Asha, and both his parents have died. Atlas, his Doberman, is his near-constant companion.
 
 M keeps wider relatives at a distance. His real family unit is intentionally small.
 
@@ -21,7 +21,7 @@ It must NOT make him rich or feared by the end.
 
 ### Chapter 1 — Opening Time
 M opens the phone shop before the neighbouring businesses.
-We learn the rhythm: repairs, impatient customers, supplier calls, margins, cashflow, warranty arguments, Asha's school messages, Rhea checking whether he will be home for dinner.
+We learn the rhythm: repairs, impatient customers, supplier calls, margins, cashflow, warranty arguments, Asha's school messages, Kay checking whether he will be home for dinner.
 
 A customer arrives with a problem that has nothing to do with a phone: a small business has £40,000 of imported stock trapped because the paperwork is wrong.
 
@@ -46,10 +46,10 @@ A landlord hints at a rent review.
 We see why M hates dependency.
 
 ### Chapter 3 — Home
-Rhea and Asha.
+Kay and Asha.
 Atlas instantly soft around both of them.
 
-Rhea knows M is restless.
+Kay knows M is restless.
 
 She doesn't want another shop merely for the sake of saying they have two shops.
 
@@ -124,8 +124,8 @@ M refunds some of his fee and fixes what he can.
 Important:
 M's reputation for reliability begins because he owns mistakes, not because he is infallible.
 
-### Chapter 10 — Rhea's Warning
-Rhea:
+### Chapter 10 — Kay's Warning
+Kay:
 "You like being the man people call."
 
 M denies it.
@@ -249,7 +249,7 @@ A real business problem with powerful people involved.
 M accepts under his own terms.
 
 ### Chapter 22 — The Cost
-Rhea sees what is happening:
+Kay sees what is happening:
 the phone shop is no longer the centre of M's attention.
 
 She is not against ambition.
@@ -285,7 +285,7 @@ M goes to his first serious consulting meeting under his own newly formed adviso
 He still drives himself.
 Still checks the phone shop.
 Still worries about cash.
-Still goes home to Rhea and Asha.
+Still goes home to Kay and Asha.
 
 But the receptionist says:
 
