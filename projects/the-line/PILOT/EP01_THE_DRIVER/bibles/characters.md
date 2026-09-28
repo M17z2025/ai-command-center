@@ -1,51 +1,75 @@
-# THE LINE — Character / Casting Bible v1
+# THE LINE — Character Bible v2
 
-## TJ PATEL — 31
-British-Indian, East London. Lean athletic build. Intelligent, grounded, capable. Owns struggling Patel Performance. Protective of family, technically gifted, refuses to be owned by criminals. Arc: overlooked underdog to legitimate power broker.
-**Visual:** short dark textured hair, neat stubble, natural skin texture, practical premium workwear.
-**Voice:** East London British accent with natural family-code-switching; calm under pressure.
-**Vehicle arc:** starts with customer/older performance EVs; rises eventually to Porsche Cayenne Turbo Electric.
-**Relationship:** Atlas is almost always nearby when safe.
+## BOSSMAN "M" — mid-30s
+British-Indian.
 
-## KAI PATEL — 24
-TJ’s younger brother. Charismatic, impulsive, fashion-aware, ambitious. Makes the mistake that triggers the series.
-**Voice:** quicker, more playful, more emotionally transparent than TJ.
+At Series Start:
+- owns/runs a modest mobile-phone shop;
+- married to Rhea;
+- father to Asha;
+- both parents deceased;
+- keeps wider family at arm's length;
+- has Atlas, a Doberman, constantly close when practical;
+- commercially gifted but not yet powerful.
 
-## AMIRA PATEL — 27
-Emergency doctor. Warm, direct, morally grounded. Family glue.
-**Visual:** modern professional, practical, understated.
-**Role:** stakes, conscience, resilience—not merely a victim.
+Core strengths:
+- pattern recognition;
+- negotiation;
+- calm under pressure;
+- memory for people/details;
+- ability to connect apparently unrelated opportunities;
+- willingness to learn unfamiliar industries.
 
-## ATLAS — 4
-Male Doberman. Natural ears and tail. Black-and-rust. Gentle with family, alert around strangers, highly bonded to TJ.
+Core flaws:
+- secrecy;
+- difficulty asking for help;
+- increasing appetite for control;
+- tendency to protect family by withholding information;
+- can confuse loyalty with obedience.
 
-## MARCUS VALE — 52
-Black British. Wealthy, controlled, elegant. Criminal strategist who thinks in systems, not street theatrics.
-**Visual:** quiet luxury, modern tailoring, Bentley Torcal.
-**Arc:** begins untouchable; power erodes while TJ rises.
+Long arc:
+shopkeeper -> consultant -> fixer -> operator -> international dealmaker -> mining power broker -> Bossman.
 
-## LENA VALE — 26
-Marcus’s daughter. Corporate lawyer. Intelligent, initially believes family wealth is legitimate.
+The feared reputation must take years to earn.
 
-## TOMMY QUINN — 48
-Irish-English former elite football coach. Disgraced publicly, but emotionally perceptive and funny.
-**Role:** moral compass and unexpected strategist.
+## RHEA — early/mid-30s
+M's wife.
+Grounded, intelligent and emotionally direct.
+She knew M before status.
+She is one of the few people who can challenge him without being intimidated.
+Her central conflict is not "does she love him?" but "what version of him is she agreeing to live with?"
 
-## NOAH COLE — 42
-Mixed-race British-American former special forces. Searching for missing sister Maya.
-**Visual:** minimal, low-logo, physically imposing, quiet.
+## ASHA — child at series start
+M and Rhea's daughter.
+Bright, observant and deeply loved.
+Her age progression helps show the passage of years.
+M wants to give her security but risks creating distance through secrecy and work.
 
-## MAYA COLE — 34
-Forensic accountant. Missing. Her work links Ravi Patel, Marcus Vale and Blackthorn.
+## ATLAS — Doberman
+Male, black-and-rust, natural ears and tail.
+Gentle with Rhea and Asha.
+Highly bonded to M.
+Protective, disciplined and calm.
 
-## SOFIA AL-HASSAN — 36
-British-Moroccan intelligence officer. Controlled, analytical, increasingly suspicious of her own chain of command.
+## MARCUS VALE — 50s
+Existing wealthy power figure.
+Marcus is not immediately defeated.
+For several seasons he is an example of the world M wants access to.
+Their relationship can shift through mentor / rival / ally / adversary phases.
 
-## ELLIE HAWTHORNE — 39
-British landowner fighting to save a heavily indebted estate. Smart, practical, stubborn.
+## SOFIA AL-HASSAN
+Retain as an intelligence/compliance/investigative strand once M's deals become international.
 
-## DANIEL HAWTHORNE — 44
-Ellie’s brother. Financially rational on the surface; secretly entangled with Blackthorn.
+## NOAH COLE
+Retain as a security/investigative character introduced when the business network becomes dangerous enough to justify him.
 
-## VICTOR SLOANE — 58
-Blackthorn CEO. Calm, polished, strategic. Represents institutional power rather than theatrical villainy.
+## ELLIE HAWTHORNE
+May remain as an early distressed-business/property client rather than the original central land-conspiracy plot.
+
+## Old Patel siblings
+KAI PATEL and AMIRA PATEL are removed from core canon in this version unless deliberately reintroduced later as unrelated characters.
+
+## Parents
+M's mother and father are deceased before Episode 1.
+Their history should be revealed in fragments over several books/seasons.
+Neither should secretly turn out to be alive.
