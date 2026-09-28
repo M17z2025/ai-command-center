@@ -92,3 +92,47 @@ KAI PATEL and AMIRA PATEL are removed from core canon in this version unless del
 M's mother and father are deceased before Episode 1.
 Their history should be revealed in fragments over several books/seasons.
 Neither should secretly turn out to be alive.
+
+
+## JAY — RIGHT-HAND MAN
+Age: late 30s to early 40s.
+
+Former special forces. M's closest confidant, protector, fixer and operational lead.
+
+### Presence
+Jay is quieter than M and even harder to read.
+
+He is:
+- sharp;
+- disciplined;
+- physically capable;
+- observant;
+- analytical;
+- calm in dangerous situations;
+- respected and feared by people who know his reputation.
+
+### Function
+Jay does the running M no longer needs to do personally:
+- checks people and situations;
+- handles travel/security logistics;
+- resolves operational issues;
+- attends difficult meetings;
+- protects M's family when necessary;
+- acts as M's eyes and ears.
+
+### Relationship with M
+M trusts Jay with information he tells nobody else.
+
+Their bond is built over years, not introduced as instant loyalty.
+
+Jay can disagree with M privately and is one of the few people whose judgement M genuinely weighs.
+
+### Relationship with Kay and Asha
+Kay trusts Jay because she knows he protects the family without intruding on it.
+
+Asha grows up seeing Jay as part of the extended inner family.
+
+### Reputation
+If M's name creates pressure, Jay's arrival confirms that the situation is now serious.
+
+Jay should never be written as a mindless enforcer. His intelligence and judgement are as important as his physical capability.
