@@ -1,5 +1,41 @@
 # Sigma Development Command Center Status
 
+## 28 September 2026 — P0 recovery audit: Sigma cannot yet finish projects autonomously
+
+**CURRENT CLASSIFICATION: SOURCE COMPONENTS STRONG; END-TO-END AUTONOMOUS PROJECT COMPLETION NOT YET PROVEN.**
+
+Deep audit across the control plane and all 15 active repositories established the following:
+
+- current `main`: `d8faf0789d6f3148d696d683c304ce29d37756b6`;
+- OpenHands coding worker is merged via PR #81 with exact-head Sigma mesh/control-plane CI green;
+- runner singleton lease/stale recovery is merged via PR #79;
+- portfolio runner still terminates at `WORKER_CHANGED` after branch/PR creation;
+- no automatic PR-CI watcher / repair / independent security / merge / deploy / user-test / closure / next-task loop exists yet;
+- sigma-worker verification is hard-coded to `M17z2025/ai-command-center`;
+- sigma-worker image is Python/Git/Bash only and is not sufficient for the Node/browser/Android-heavy portfolio;
+- active repository contract gaps remain on Lycia Zambia, Tattooit, Signit and Designit;
+- only 7/15 active repositories currently expose GitHub workflow files;
+- every active repository's `main` branch currently reports `protected:false` with no required status checks;
+- stale source-complete Sigma issues were polluting selection; issues #60, #62, #78 and #80 were closed during this audit based on merged PR evidence;
+- live OVH runtime + worker commissioning and Issue #77's first real unattended end-to-end engineering proof remain mandatory before Sigma may be called operational.
+
+Master recovery programme: **Issue #88**.
+
+Implementation work packages:
+1. **#89** — PR supervisor, CI/log watcher, bounded repair loop, independent gates, merge/closure state machine.
+2. **#90** — manifest-driven portfolio worker profiles/toolchains and per-repo independent verification.
+3. **#91** — complete contracts + CI + repo-local security gates across all active repositories.
+4. **#92** — authorised deployment adapters + Sigma Full User Tester runtime integration.
+5. **#93** — lifecycle-aware work selection and stale/superseded issue handling.
+
+Owner/admin safety gates remain:
+- #14 protect command-center `main`;
+- equivalent branch protection is required across the active portfolio before autonomous merge is enabled;
+- #4 public/private visibility decision for the command center.
+
+The acceptance test for calling Sigma capable of finishing projects is Issue #77 + #88 Phase A: one real repository task must complete **issue selection -> plan -> worker change -> exact-head CI -> repair if needed -> independent critic/security/evidence -> PR merge -> durable issue/status update -> lesson -> next task**, with no owner terminal operation for ordinary reversible work.
+
+No production release, destructive data action, paid-provider activation or secret exposure is authorised by this status.
 
 ## Autonomous Runner + Self-Hosted Inference Runtime — Issue #62 / PR #63
 
