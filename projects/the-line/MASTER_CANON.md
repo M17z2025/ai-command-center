@@ -161,3 +161,36 @@ Later M thinks, "I don't need them to see it."
 By the Bossman years, some members of the maternal family seek access to his network and influence. M remains civil but emotionally detached and does not forget how they treated him when he had little.
 
 Their wealth should remain credible throughout. M does not need them to fail financially for him to win. The reversal is that they once judged his value from his position, and later need something from the man they dismissed.
+
+
+## Father's family
+M's father's side of the family is comparatively modest and close-knit.
+
+They do not have the generational wealth or social status of his mother's family. Their world is more ordinary, practical and family-centred.
+
+They genuinely love M, Rhea and Asha and enjoy spending time with them.
+
+They respect M because:
+- he always speaks his mind;
+- he does not pretend to agree for the sake of keeping the peace;
+- he is direct when something is wrong;
+- he protects people he cares about;
+- he follows through when he says he will help;
+- he is willing to have difficult conversations others avoid.
+
+That respect also creates caution.
+
+Sometimes members of the family avoid telling M about a problem immediately because they know that once he knows:
+- he will ask questions;
+- he will find out what actually happened;
+- he may confront the person responsible;
+- he will try to solve the problem rather than simply sympathise.
+
+At other times, when an issue becomes too difficult, they deliberately turn to M because they know he will take responsibility and sort it out.
+
+This becomes part of the origin of his Bossman reputation:
+not fear based on violence, but the knowledge that M is decisive, difficult to mislead and uncomfortable to face when someone has behaved badly.
+
+Within his father's family, however, he is still family first. They tease him, challenge him and refuse to treat him like a celebrity even when the outside world becomes cautious around him.
+
+Their relationship with M should remain one of the few places where status has almost no value.
