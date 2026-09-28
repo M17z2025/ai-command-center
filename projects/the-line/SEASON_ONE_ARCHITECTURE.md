@@ -7,7 +7,7 @@ The story covers years, not eight weeks.
 
 ## Season 1 — THE SHOP
 M runs one struggling mobile-phone shop.
-We meet Rhea, Asha and Atlas.
+We meet Kay, Asha and Atlas.
 His talent is solving customer and supplier problems.
 A small commercial favour introduces him to people far above his current status.
 Season end: M lands his first meaningful consulting assignment. Nobody fears him yet.
@@ -61,7 +61,7 @@ M reaches the feared-boss position promised by the premise.
 The final conflict tests whether he built an empire or merely another system that owns him.
 
 ## Family rule
-Rhea and Asha are not collateral plot devices.
+Kay and Asha are not collateral plot devices.
 They have independent emotional arcs and agency.
 M actively keeps wider relatives and business contacts away from the home.
 
