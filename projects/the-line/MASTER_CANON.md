@@ -555,3 +555,102 @@ His primary identity remains:
 businessman, adviser, dealmaker, investor, husband, father and strategist.
 
 The shadow reputation exists underneath the legitimate empire and should make the audience question how clean any great rise can truly be.
+
+
+## Commanding the room — fear without explanation
+By the middle and later stages of the saga, M can stop a dangerous situation simply by entering it.
+
+Example:
+A dispute has escalated.
+Voices are raised.
+Weapons are visible.
+Nobody is backing down.
+
+M walks in.
+
+He does not shout.
+He does not reach for anything.
+He barely needs to speak.
+
+The temperature of the room changes immediately.
+
+People who were prepared to hurt each other suddenly become careful.
+
+Weapons lower.
+People step back.
+Someone says:
+"Leave it. M's here."
+
+The outsiders in the room do not understand why.
+
+That mystery is essential.
+
+### Why people react that way
+M's reputation has accumulated over decades through stories:
+- powerful criminals tried to intimidate him and failed;
+- senior business figures tried to destroy him and ended up needing him;
+- people who crossed him sometimes disappeared from business or influence;
+- rivals found doors closing without knowing who closed them;
+- international operators discovered that M had relationships in places they did not expect;
+- people who threatened those close to him encountered consequences nobody could trace back to him.
+
+No single story explains his reputation.
+
+Together they create it.
+
+### Failed attempts against M
+Several established underworld figures, criminal bosses and aggressive business operators try at different points to pressure, frighten, control or remove M.
+
+They do not succeed.
+
+The audience should not always know exactly why.
+
+Sometimes M anticipated them.
+Sometimes Jay intervened.
+Sometimes an ally protected him.
+Sometimes M used commercial leverage.
+Sometimes the threatening party discovered that attacking M would cost them relationships in several countries.
+Sometimes the explanation remains deliberately unknown.
+
+This creates a worldwide mythology:
+"People have tried M before."
+
+Nobody needs to finish the sentence.
+
+### Global fixer status
+The same people who are wary of M also seek him out.
+
+As his reputation grows, M becomes the person powerful people call when:
+- negotiations have collapsed;
+- two sides will not speak;
+- a commercial dispute is becoming dangerous;
+- a deal crosses several countries;
+- somebody needs a discreet introduction;
+- partners no longer trust each other;
+- an asset or company is stuck;
+- nobody can establish what is actually true.
+
+M's value is that he can speak to both legitimate power and people outside conventional business circles without publicly belonging to either.
+
+He becomes a neutral fixer in situations where very few people are trusted by both sides.
+
+### International effect
+By the later books, the effect is visible in multiple countries.
+
+A person may have never met M but still know the name.
+
+Someone says:
+"M is coming."
+
+The reaction tells the audience more than exposition ever could.
+
+### Character rule
+M should never explain his reputation himself.
+
+If someone asks:
+"Why are they frightened of you?"
+
+M may smile, ignore the question or say:
+"You'd have to ask them."
+
+The mythology must always be bigger than the confirmed facts.
