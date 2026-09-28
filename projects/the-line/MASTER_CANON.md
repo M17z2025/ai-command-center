@@ -407,3 +407,42 @@ When he is absent, it is usually because business requires it.
 The tension in the marriage should come mainly from the cost of M's work obsession and time away, not from constant rows, affairs or manufactured domestic conflict.
 
 Their relationship is one of the stable foundations of the entire saga.
+
+
+## Cars and driving
+Cars are one of M's genuine lifelong passions.
+
+He loves:
+- driving;
+- performance engineering;
+- handling;
+- precision;
+- road feel;
+- high-performance and luxury cars.
+
+M drives fast when conditions allow, but he is not reckless.
+
+He is unusually skilled behind the wheel:
+- smooth;
+- calm;
+- mechanically sympathetic;
+- excellent at judging grip, braking and weight transfer;
+- rarely panics;
+- understands the limits of a car.
+
+His ability should feel earned through years of enthusiasm and driving rather than superhero-level stunt ability.
+
+Cars become a visual marker of M's rise:
+- early years: modest but interesting cars he genuinely enjoys;
+- growth years: increasingly capable performance cars;
+- established wealth: understated high-end vehicles;
+- Bossman era: rare, prestigious cars chosen for engineering and taste rather than showing off.
+
+Driving remains one of the few activities that genuinely clears M's head.
+
+## Kay's family
+M gets on well with Kay's family and is happy spending time with them.
+
+They are a warm background presence, not a major source of conflict.
+
+The story should not over-expand either side of the extended family. The central focus remains M, Kay, Asha, Jay, business, loyalty, ambition and the consequences of M's rise.
