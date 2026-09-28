@@ -69,3 +69,7 @@ M actively keeps wider relatives and business contacts away from the home.
 The earlier "one week per episode" rule is retired.
 Episodes may advance days, weeks or months depending on the business story.
 Every episode still receives an explicit canonical date for news/weather/technology continuity.
+
+
+## Character baseline correction
+M is 30 at the start of Season 1 and is from Essex. He has no formal school qualifications and built the early phone business himself with help from his mother. Kay is a former jewellery buyer who now stays at home with Asha while helping M with the business. Their marriage is strong and stable.
