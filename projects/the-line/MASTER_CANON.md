@@ -258,9 +258,21 @@ The darker side must remain rare enough that M's authority primarily comes from 
 
 
 ## Jay — M's right-hand man
+Jay is English and grew up with M.
+
+They have known each other since childhood/teenage years and are effectively brothers, even though they are not related by blood.
+
+Their bond predates:
+- business;
+- money;
+- status;
+- mining;
+- the Bossman reputation.
+
 Jay is M's most trusted confidant and operational right-hand man.
 
 He is:
+- English;
 - former special forces;
 - highly disciplined;
 - physically capable;
@@ -294,7 +306,7 @@ His reputation is feared because:
 - he is capable of handling pressure without emotion;
 - he finishes what he is asked to resolve.
 
-M and Jay have a relationship closer to brothers than employer/employee, but both understand the hierarchy.
+M and Jay are brothers in everything except blood. There is no conventional employer/employee relationship between them emotionally, although Jay respects M's final authority in business matters.
 
 Jay can challenge M privately in a way almost nobody else can.
 
