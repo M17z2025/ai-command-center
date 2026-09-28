@@ -56,3 +56,20 @@ The screen adaptation may compress or combine events but cannot contradict the e
 Business rise saga + crime thriller + family drama + international mining/political thriller + dry humour.
 
 The books should make business negotiations and deal mechanics dramatic without turning them into lectures.
+
+
+## Lifetime architecture
+The franchise is no longer limited to M's 30s and 40s.
+
+The full literary/screen saga may track M from age 30 into his 80s.
+
+Later books should explore:
+- mature leadership;
+- succession;
+- Asha as an adult;
+- grandchildren if appropriate;
+- old allies and old enemies;
+- the difference between building power and preserving it;
+- whether a man who spent his life solving everyone else's problems can eventually step away.
+
+The audience should experience M's life as a true multi-decade saga rather than a compressed rise.
