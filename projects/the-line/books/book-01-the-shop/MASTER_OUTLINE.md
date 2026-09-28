@@ -329,3 +329,16 @@ The audience should immediately feel that they are like brothers:
 - automatic trust.
 
 As M's world becomes more complex, Jay gradually becomes his permanent right-hand man because both realise that nobody else can combine that level of trust with Jay's judgement and operational ability.
+
+
+## Book One canon corrections
+- M is 30 at the start.
+- He grew up in Essex.
+- He left school with no qualifications.
+- The phone business was built by M, with important early help from his mother.
+- His father died when M was young and was only in his early 30s.
+- His mother raised him and dies shortly before Book One begins.
+- Do not open the novel with her death or funeral; her absence should be felt quietly.
+- Kay is a former jewellery buyer who became a housewife after Asha's birth while still helping with the business.
+- M and Kay are a strong couple and usually appear socially as a pair.
+- M's work obsession, rather than marital conflict, creates the main home-life pressure.
