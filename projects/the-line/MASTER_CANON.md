@@ -194,3 +194,64 @@ not fear based on violence, but the knowledge that M is decisive, difficult to m
 Within his father's family, however, he is still family first. They tease him, challenge him and refuse to treat him like a celebrity even when the outside world becomes cautious around him.
 
 Their relationship with M should remain one of the few places where status has almost no value.
+
+
+## Presence and reputation
+When M enters a room, people notice him even though he says very little.
+
+His presence comes from:
+- composure;
+- silence;
+- eye contact;
+- self-control;
+- the way other people react to him;
+- the sense that he is always listening and processing more than he reveals.
+
+He does not chase attention. Attention comes to him.
+
+As his reputation grows, people actively want to meet him because M is known as a source of useful advice on almost anything:
+- business;
+- negotiation;
+- people;
+- money;
+- strategy;
+- relationships;
+- risk;
+- property;
+- logistics;
+- mining;
+- difficult decisions.
+
+He has become a wealth of practical knowledge because he has spent years learning from different industries, countries and people.
+
+M should often say very little in meetings, then ask one question or make one observation that changes the direction of the room.
+
+## Compartmentalised dark side
+M's legitimate business life and darker reputation must remain separate.
+
+Publicly and commercially he is:
+- legitimate;
+- professional;
+- strategic;
+- discreet;
+- respected.
+
+Any darker network sits at arm's length and is never casually mixed into his companies, home life, wife, daughter or public-facing relationships.
+
+M does not boast, threaten people loudly or perform violence himself to prove status.
+
+When he decides that a serious problem must be dealt with, he acts through distance and discretion. The result may be:
+- a warning;
+- social or commercial exclusion;
+- loss of access;
+- financial pressure;
+- reputational consequences;
+- or, in the most serious storylines, severe off-screen harm.
+
+The audience should often be unsure whether the more extreme stories about M are true.
+
+That uncertainty is part of his power.
+
+He never discusses this side with Kay or Asha and actively protects them from it.
+
+The darker side must remain rare enough that M's authority primarily comes from intelligence, leverage, loyalty, competence and reputation—not routine violence.
