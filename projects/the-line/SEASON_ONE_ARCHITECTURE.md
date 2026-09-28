@@ -73,3 +73,11 @@ Every episode still receives an explicit canonical date for news/weather/technol
 
 ## Character baseline correction
 M is 30 at the start of Season 1 and is from Essex. He has no formal school qualifications and built the early phone business himself with help from his mother. Kay is a former jewellery buyer who now stays at home with Asha while helping M with the business. Their marriage is strong and stable.
+
+
+## Ultimate destination
+Season 1 remains deliberately small-scale. The audience should not see a mining empire yet.
+
+Across later seasons, M progresses into African mining and natural resources until the mature business includes metals, precious metals, precious stones, mineral trading and selected oil/energy interests across multiple African countries.
+
+This destination should be visible only as distant foreshadowing in the early seasons.
