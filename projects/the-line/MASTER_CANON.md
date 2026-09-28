@@ -808,3 +808,87 @@ The central moral pressure of the saga becomes:
 Can M keep the legitimate empire clean while continuing to benefit from a darker network that helped him survive and rise?
 
 As M grows older and more powerful, keeping those two worlds separate becomes increasingly difficult.
+
+
+## State, military and intelligence reputation
+
+By the mature Bossman era, M is known well beyond ordinary business circles.
+
+### Governments
+Governments in countries where M operates know him because his group is involved in:
+- mining;
+- strategic minerals;
+- infrastructure;
+- energy;
+- logistics;
+- employment;
+- investment;
+- cross-border commercial relationships.
+
+Senior officials may know him personally.
+
+Some governments value him as:
+- an investor;
+- an adviser;
+- a problem-solver;
+- a connector between commercial interests;
+- a person who can calm difficult negotiations.
+
+Others remain cautious because they know M has relationships outside normal corporate channels.
+
+M must never be portrayed as casually controlling states. His influence comes from access, credibility, economic importance and accumulated relationships.
+
+### Military relationships
+Senior military and security figures often respect M.
+
+This develops because:
+- he understands logistics and supply chains;
+- he respects discipline and hierarchy;
+- he does not waste people's time;
+- he has helped resolve difficult commercial or security-adjacent problems;
+- Jay's military background gives M's circle credibility with professionals from that world;
+- M is known for keeping sensitive conversations private.
+
+The relationship is respect, not command.
+
+M does not have a private army and does not control national armed forces.
+
+### Intelligence services
+Intelligence officers are cautious around M.
+
+Not because he is a spy.
+
+They are cautious because his network crosses:
+- governments;
+- mining;
+- finance;
+- logistics;
+- security;
+- business;
+- local power structures;
+- underworld intermediaries.
+
+That makes him difficult to categorise.
+
+Some intelligence services want to understand him.
+Some may try to cultivate him.
+Some may monitor him.
+Some may occasionally need information or access that only his network can provide.
+
+M is especially unsettling to intelligence professionals because he rarely reveals how much he knows.
+
+### Reputation effect
+A later-era scene may have three completely different reactions to the same man:
+
+A minister:
+"M is useful."
+
+A general:
+"M keeps his word."
+
+An intelligence officer:
+"That is exactly why you should be careful."
+
+The audience should understand that M's influence is not based on one title or office.
+
+It is based on decades of relationships, information, trust, favours, commercial weight and stories nobody can fully verify.
