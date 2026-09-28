@@ -27,7 +27,7 @@ M resolving three apparently unrelated problems from behind the counter of his m
 By the end of the opening sequence the audience understands:
 this man sees systems.
 
-Then we meet Rhea, Asha and Atlas.
+Then we meet Kay, Asha and Atlas.
 
 The hook is competence and character first; crime/action grows later.
 
