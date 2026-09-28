@@ -312,3 +312,20 @@ He is NOT:
 - feared.
 
 Those are future books.
+
+
+### Jay seed
+Jay should be introduced in Book One before he becomes M's permanent right-hand man.
+
+Initially he may appear through a legitimate security, logistics or crisis-management problem.
+
+M notices that Jay:
+- thinks before he speaks;
+- does not exaggerate;
+- sees risks quickly;
+- is comfortable around pressure;
+- does not flatter him.
+
+Their trust develops gradually.
+
+By the end of Book One or during Book Two, Jay becomes the person M calls when a problem requires discretion, judgement and execution beyond ordinary consultancy.
