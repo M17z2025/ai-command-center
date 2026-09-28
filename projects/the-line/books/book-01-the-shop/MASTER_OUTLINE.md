@@ -315,17 +315,17 @@ Those are future books.
 
 
 ### Jay seed
-Jay should be introduced in Book One before he becomes M's permanent right-hand man.
+Jay is already part of M's life in Book One because they grew up together.
 
-Initially he may appear through a legitimate security, logistics or crisis-management problem.
+He is English, former special forces, and one of the very few people who knows M without the mythology.
 
-M notices that Jay:
-- thinks before he speaks;
-- does not exaggerate;
-- sees risks quickly;
-- is comfortable around pressure;
-- does not flatter him.
+At the start he may not yet work for M formally. He has his own life and career, but he naturally steps in when M needs help with something sensitive or operational.
 
-Their trust develops gradually.
+The audience should immediately feel that they are like brothers:
+- shorthand conversation;
+- old jokes;
+- blunt honesty;
+- no need to impress each other;
+- automatic trust.
 
-By the end of Book One or during Book Two, Jay becomes the person M calls when a problem requires discretion, judgement and execution beyond ordinary consultancy.
+As M's world becomes more complex, Jay gradually becomes his permanent right-hand man because both realise that nobody else can combine that level of trust with Jay's judgement and operational ability.
