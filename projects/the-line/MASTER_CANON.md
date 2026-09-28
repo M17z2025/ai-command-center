@@ -25,7 +25,7 @@ The transformation must take several seasons and multiple novels.
 ## Home life
 M is married.
 
-### RHEA
+### KAY
 M's wife. Intelligent, emotionally perceptive and far less impressed by status than everyone around him. She understands that M is ambitious long before he admits it to himself.
 
 ### ASHA
@@ -39,7 +39,7 @@ Both of M's parents are deceased before the story begins. Their absence matters 
 
 ## Atlas
 Atlas remains M's Doberman:
-- gentle with Rhea and Asha;
+- gentle with Kay and Asha;
 - extremely bonded to M;
 - protective without being uncontrollably aggressive;
 - a recurring visual symbol of trust and loyalty.
@@ -120,7 +120,7 @@ M eventually becomes feared because:
 He should not become feared because he suddenly becomes gratuitously violent.
 
 ## Family boundary
-M deliberately keeps Rhea and Asha outside his commercial world as much as possible.
+M deliberately keeps Kay and Asha outside his commercial world as much as possible.
 
 This creates tension:
 the more powerful he becomes, the more difficult it is to keep those worlds separate.
@@ -168,7 +168,7 @@ M's father's side of the family is comparatively modest and close-knit.
 
 They do not have the generational wealth or social status of his mother's family. Their world is more ordinary, practical and family-centred.
 
-They genuinely love M, Rhea and Asha and enjoy spending time with them.
+They genuinely love M, Kay and Asha and enjoy spending time with them.
 
 They respect M because:
 - he always speaks his mind;
