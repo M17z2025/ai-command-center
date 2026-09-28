@@ -23,6 +23,7 @@ import uuid
 import yaml
 
 from .orchestrator import SigmaOrchestrator
+from .pr_supervisor import PullRequestSupervisor
 
 
 def utcnow() -> str:
@@ -124,6 +125,19 @@ class GitHubClient:
             "GET", f"/repos/{repository}/commits?sha={quote(branch)}&per_page=1"
         )
         return data[0] if data else None
+
+    def pull_request(self, repository: str, number: int) -> dict[str, Any]:
+        return self.request("GET", f"/repos/{repository}/pulls/{int(number)}")
+
+    def workflow_runs_for_head(
+        self, repository: str, head_sha: str
+    ) -> list[dict[str, Any]]:
+        query = urlencode({"head_sha": head_sha, "per_page": 100})
+        data = self.request(
+            "GET", f"/repos/{repository}/actions/runs?{query}"
+        )
+        runs = data.get("workflow_runs", []) if isinstance(data, dict) else []
+        return [item for item in runs if item.get("head_sha") == head_sha]
 
     def create_issue(
         self, repository: str, title: str, body: str, labels: list[str] | None = None
@@ -747,6 +761,15 @@ class PortfolioRunner:
                     "pull_request_url evidence."
                 )
 
+            pr_assessment = None
+            if final_status == "WORKER_CHANGED":
+                supervisor = PullRequestSupervisor(self.github)
+                pr_assessment = supervisor.assess(
+                    selected.repository,
+                    str(worker_result.get("pull_request_url", "")),
+                )
+                final_status = pr_assessment.state
+
             payload = {
                 "cycle_id": cycle_id,
                 "state": final_status,
@@ -754,9 +777,12 @@ class PortfolioRunner:
                 "mission_id": mission_id,
                 "discovery": discovery_summary,
                 "worker": worker_result,
+                "pr_assessment": (
+                    pr_assessment.as_dict() if pr_assessment is not None else None
+                ),
                 "next_gate": (
-                    "independent repository tests/security/user-test evidence"
-                    if final_status == "WORKER_CHANGED"
+                    pr_assessment.next_gate
+                    if pr_assessment is not None
                     else "worker blocker resolution"
                 ),
             }
