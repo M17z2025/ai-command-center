@@ -316,3 +316,94 @@ He is also one of the few people who can tell M:
 That trust is critical to the story.
 
 Jay's darker capabilities should remain largely implied rather than constantly shown. His primary value is judgement, discretion, intelligence and execution.
+
+
+## Canon update — M origin and family
+M remains known only as **M**. His full legal name is intentionally withheld from the audience and wider business world for as long as possible. The mystery is part of his identity.
+
+### Age and life span
+- M is 30 when the story begins.
+- The saga follows his rise across decades, potentially into his 80s.
+- The audience should watch him age, change, accumulate power, lose people, adapt and build a legacy.
+
+### Childhood and education
+- M grew up in Essex.
+- He left school with no formal qualifications.
+- He is largely self-educated through work, people, observation, reading and experience.
+- His lack of qualifications should never be confused with lack of intelligence.
+
+### Early business
+- M built his mobile-phone business and eventual chain himself.
+- His mother materially helped him during the early years.
+- The business was not inherited ready-made.
+- His success comes through persistence, customer instinct, buying, selling, negotiation and learning by doing.
+
+### Parents
+M's father died when M was young. His father was only in his early 30s.
+
+M's father was quiet, well-liked and widely respected. People remembered him with affection rather than fear or status.
+
+M was then largely brought up by his mother.
+
+His mother supported him emotionally and practically and helped him build the early phone business.
+
+She dies shortly before the main story begins.
+
+Her death should sit in the background rather than become the opening melodrama. The audience can gradually understand how much her loss affected M without dwelling on funeral/grief exposition in the opening episodes.
+
+### M's strengths
+M's defining strength is people.
+
+People naturally like him, listen to him and want his opinion.
+
+He is:
+- cool;
+- calm;
+- composed;
+- socially magnetic without being loud;
+- a natural adviser;
+- difficult to rattle;
+- able to make people feel heard;
+- extremely driven.
+
+### M's weaknesses
+- he is not naturally forgiving;
+- he remembers betrayal;
+- he can become obsessive about work;
+- success can become more important than balance;
+- he struggles to stop once he has set a goal.
+
+## Kay
+Kay previously worked as a jewellery buyer.
+
+After Asha was born, Kay became primarily a housewife and mother, while continuing to help M with the business.
+
+Kay understands:
+- buying;
+- margins;
+- quality;
+- suppliers;
+- presentation;
+- customer taste;
+- negotiation.
+
+This makes her genuinely useful to M's early business rather than a passive spouse.
+
+### Marriage
+M and Kay have a very strong marriage.
+
+They:
+- rarely argue;
+- make decisions together;
+- attend most social occasions as a pair;
+- enjoy each other's company;
+- share information;
+- remain emotionally close throughout the rise.
+
+M very rarely chooses to spend leisure time away from Kay.
+
+When he is absent, it is usually because business requires it.
+
+The tension in the marriage should come mainly from the cost of M's work obsession and time away, not from constant rows, affairs or manufactured domestic conflict.
+
+Their relationship is one of the stable foundations of the entire saga.
