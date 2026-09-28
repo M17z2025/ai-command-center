@@ -143,3 +143,21 @@ The transformation should require:
 - personal sacrifice.
 
 The final Bossman must feel earned.
+
+
+## Mother's family
+M's mother's side of the family is extremely wealthy, socially established and status-conscious.
+
+They have established businesses, expensive homes, elite education, strong networks and generational capital.
+
+At the beginning they tend to see M as the relative who runs a small mobile-phone shop and has not reached their level. Their attitude is usually subtle rather than openly hostile: condescending advice, jokes about the shop, comparisons with wealthier cousins, surprise when M understands serious business, and excluding him from conversations they consider above his level.
+
+That treatment becomes one of the deep early drivers of M's ambition. He wants to prove that he can build wealth without family money, inherited connections or their approval.
+
+His long-term emotional arc is important:
+early M thinks, "I'll show them."
+Later M thinks, "I don't need them to see it."
+
+By the Bossman years, some members of the maternal family seek access to his network and influence. M remains civil but emotionally detached and does not forget how they treated him when he had little.
+
+Their wealth should remain credible throughout. M does not need them to fail financially for him to win. The reversal is that they once judged his value from his position, and later need something from the man they dismissed.
