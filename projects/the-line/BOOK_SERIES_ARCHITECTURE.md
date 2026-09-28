@@ -73,3 +73,14 @@ Later books should explore:
 - whether a man who spent his life solving everyone else's problems can eventually step away.
 
 The audience should experience M's life as a true multi-decade saga rather than a compressed rise.
+
+
+## Resources empire destination
+The long-form destination of the saga is a pan-African natural-resources group.
+
+The franchise should show the progression from:
+phone retail -> consultancy -> ownership -> logistics -> African transactions -> mining equity -> operating assets -> diversified metals/precious-stones portfolio -> energy/oil interests -> institutional resources group.
+
+Later books should cover the transition from dealmaker to operator and then from operator to chairman/legacy builder.
+
+The story must preserve the distinction between acquiring a mining interest and successfully operating one. Geology, permitting, finance, community relationships, production, processing, logistics, buyers and political risk should all create story pressure.
