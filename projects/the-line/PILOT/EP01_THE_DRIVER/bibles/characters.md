@@ -141,3 +141,46 @@ Asha grows up seeing Jay as part of the extended inner family.
 If M's name creates pressure, Jay's arrival confirms that the situation is now serious.
 
 Jay should never be written as a mindless enforcer. His intelligence and judgement are as important as his physical capability.
+
+
+## CANON UPDATE — M
+- Known only as M; full name remains mysterious.
+- Age 30 at series start.
+- Grew up in Essex.
+- Left school with no qualifications.
+- Self-educated through work and experience.
+- Built his phone-shop chain himself with important early help from his mother.
+- Naturally liked and listened to.
+- Cool, calm and socially magnetic.
+- Work-obsessed and highly success-driven.
+- Not forgiving when seriously betrayed.
+- Story follows him across decades into old age.
+
+## CANON UPDATE — KAY
+Former jewellery buyer.
+
+After Asha's birth she becomes primarily a housewife and mother, but continues to help M in the business.
+
+Her buying background gives her strong instincts for:
+- product;
+- pricing;
+- suppliers;
+- quality;
+- presentation;
+- margins.
+
+M and Kay have a strong, unusually stable marriage. They operate socially as a pair, rarely argue, and prefer spending time together. Business is the main reason M is ever away from her for extended periods.
+
+## CANON UPDATE — M'S PARENTS
+Father:
+- died when M was young;
+- only in his early 30s;
+- quiet;
+- universally well-liked;
+- remembered warmly.
+
+Mother:
+- raised M after his father's death;
+- helped him build the early phone business;
+- died shortly before the main story begins;
+- her death remains background emotional context rather than an opening plot event.
