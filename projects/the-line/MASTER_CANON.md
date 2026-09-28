@@ -255,3 +255,52 @@ That uncertainty is part of his power.
 He never discusses this side with Kay or Asha and actively protects them from it.
 
 The darker side must remain rare enough that M's authority primarily comes from intelligence, leverage, loyalty, competence and reputation—not routine violence.
+
+
+## Jay — M's right-hand man
+Jay is M's most trusted confidant and operational right-hand man.
+
+He is:
+- former special forces;
+- highly disciplined;
+- physically capable;
+- exceptionally calm under pressure;
+- a fast strategic thinker;
+- discreet;
+- loyal to M, Kay and Asha;
+- trusted with information M shares with almost nobody else.
+
+Jay is not just security or muscle.
+
+He handles:
+- difficult meetings;
+- logistics;
+- sensitive travel;
+- background checking;
+- operational problems;
+- crisis management;
+- discreet negotiations;
+- situations where M does not want to be directly visible.
+
+Jay is a fixer in his own right.
+
+People who know the inner circle understand that if Jay turns up, M has taken the matter seriously.
+
+His reputation is feared because:
+- he rarely wastes words;
+- he does not bluff;
+- he understands risk;
+- he notices details others miss;
+- he is capable of handling pressure without emotion;
+- he finishes what he is asked to resolve.
+
+M and Jay have a relationship closer to brothers than employer/employee, but both understand the hierarchy.
+
+Jay can challenge M privately in a way almost nobody else can.
+
+He is also one of the few people who can tell M:
+"You're wrong."
+
+That trust is critical to the story.
+
+Jay's darker capabilities should remain largely implied rather than constantly shown. His primary value is judgement, discretion, intelligence and execution.
