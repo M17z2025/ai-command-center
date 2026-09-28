@@ -16,7 +16,7 @@ These artefacts remain in Git history but are **DEPRECATED — DO NOT RENDER** u
 ## Current canon
 - protagonist: Bossman "M", British-Indian, mid-30s;
 - starts with a mobile-phone shop;
-- married to Rhea;
+- married to Kay;
 - daughter Asha;
 - both parents deceased;
 - wider family kept at distance;
