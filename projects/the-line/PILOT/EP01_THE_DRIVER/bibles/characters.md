@@ -30,6 +30,25 @@ Core flaws:
 Long arc:
 shopkeeper -> consultant -> fixer -> operator -> international dealmaker -> mining power broker -> Bossman.
 
+### Presence
+M is cool, quiet and observant. He never needs to command attention deliberately. When he enters a room, people notice him because of reputation, calm and the expectation that he will understand what others have missed.
+
+People actively want to meet him because he gives useful advice across many subjects and remembers what people tell him.
+
+### Dark side
+M keeps any darker relationships or enforcement activity at arm's length and separate from his legitimate businesses and family life.
+
+He does not posture or make theatrical threats.
+
+If someone seriously crosses a line, the story may imply that consequences follow through people around him or through quiet pressure. Those consequences can be severe, but should remain narratively ambiguous and non-procedural rather than turning M into an overt street criminal.
+
+His fear factor is built on:
+- silence;
+- decisiveness;
+- follow-through;
+- uncertainty;
+- the belief that once M decides something must be handled, it gets handled.
+
 The feared reputation must take years to earn.
 
 ## KAY — early/mid-30s
