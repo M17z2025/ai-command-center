@@ -1,54 +1,71 @@
-# THE LINE — Season One Architecture v1
-**Format:** 8 x 28–32 minutes
-**Calendar rule:** each episode advances exactly seven days.
+# THE LINE — Screen Architecture v2
 
-## S01E01 — THE DRIVER — 27 Sep 2026
-TJ Patel and Kai are pulled into Blackthorn's network after the wrong collection. Marcus recognises the Patel name. Amira disappears.
-End hook: Ravi Patel, Marcus Vale and Victor Sloane are revealed to have shared history.
+## Long horizon
+Target: 8–10 seasons, 6–8 episodes per season, ~30 minutes per episode.
 
-## S01E02 — THE KING — 04 Oct 2026
-Marcus's empire and family are opened up. TJ seeks Marcus's help while refusing to work for him. Sofia learns someone inside government ordered Blackthorn left alone.
-Underdog move: TJ discovers Marcus needs him more than expected.
+The story covers years, not eight weeks.
 
-## S01E03 — THE LAND — 11 Oct 2026
-Ellie Hawthorne's estate, debt and Blackthorn offer become central. Noah arrives looking for Maya.
-End hook: the estate contains infrastructure Blackthorn cannot afford to lose.
+## Season 1 — THE SHOP
+M runs one struggling mobile-phone shop.
+We meet Rhea, Asha and Atlas.
+His talent is solving customer and supplier problems.
+A small commercial favour introduces him to people far above his current status.
+Season end: M lands his first meaningful consulting assignment. Nobody fears him yet.
 
-## S01E04 — THE GHOST — 18 Oct 2026
-Noah and Sofia collide. Maya's accounting trail exposes Ravi Patel's hidden role.
-TJ begins using his father's forgotten network of drivers, mechanics and dock workers.
+## Season 2 — THE SECOND DOOR
+M expands the shop business and begins taking paid business problems on the side.
+Cashflow is still tight.
+He learns that introductions, information and trust have financial value.
+Season end: first serious acquisition or equity position.
 
-## S01E05 — THE COACH — 25 Oct 2026
-Tommy becomes fully involved after the network reaches the football community.
-Marcus loses his first meaningful asset/protection.
-TJ wins trust rather than money.
+## Season 3 — THE FIXER
+M becomes known among business owners, lawyers and accountants as a discreet problem-solver.
+He deals with distressed companies, procurement and negotiations.
+"BOSS" / "Bossman" begins as an informal nickname.
 
-## S01E06 — THE LINE — 01 Nov 2026
-The group decrypts enough of the network to understand what Blackthorn really controls.
-TJ sees failing logistics assets as an opportunity to build something legitimate.
-Sofia discovers an internal betrayal.
+## Season 4 — LEVERAGE
+M learns to use structure rather than confrontation:
+contracts, ownership, debt, supply chains, reputation and relationships.
+A wealthy rival collapses partly because he underestimates M.
+M's family starts noticing that his world is changing.
 
-## S01E07 — THE CONVOY — 08 Nov 2026
-Preparation and execution of the convoy interception.
-The wealthy factions turn on each other.
-Daniel Hawthorne's involvement is exposed.
-Cliffhanger mid-operation.
+## Season 5 — AFRICA
+M's first substantial Africa-facing consultancy.
+He travels for business and enters the mining ecosystem.
+He makes expensive mistakes and encounters operators who know far more than him.
+Season end: he decides to become genuinely competent rather than merely connected.
 
-## S01E08 — NO SUCH THING AS CLEAN — 15 Nov 2026
-Maya is found. Blackthorn's UK structure falls.
-Marcus loses substantial wealth and protection.
-TJ acquires the first distressed logistics asset and keeps the workforce together.
-Season-end image: the underdog owns his first serious piece of the system, but the global network remains.
+## Season 6 — THE CONCESSION
+Zambia/mining becomes central.
+Licences, geology, JV structures, buyers, legal advisers and government relationships.
+M completes his first transformative mining transaction.
 
-## Season spine
-At the start, TJ has skill but little capital or access. Marcus, Victor and Blackthorn own money, property and institutional power.
-Across eight weeks:
-- the powerful fracture;
-- corrupt protection fails;
-- expensive assets become liabilities;
-- TJ's community relationships become leverage;
-- TJ's rise remains legitimate and earned, not instant gangster wealth.
+## Season 7 — THE GROUP
+M now operates several businesses.
+The mobile-phone shop still exists symbolically but is no longer his economic centre.
+He begins employing serious executives and advisers.
+Some former patrons now come to him.
 
-## Series continuation
-Season 2: expansion into international logistics / Dubai / Tangier.
-Season 3: TJ's business becomes materially powerful and the moral question changes from 'can he rise?' to 'what will he become with power?'
+## Season 8 — THE NETWORK
+Europe, Africa and Gulf relationships converge.
+M becomes difficult to bypass.
+Rivals start calling him Bossman sincerely.
+
+## Season 9 — FEARED
+M is powerful enough that reputation precedes him.
+His decisions move deals and careers.
+The cost to home life becomes serious.
+
+## Season 10 — BOSSMAN
+M reaches the feared-boss position promised by the premise.
+The final conflict tests whether he built an empire or merely another system that owns him.
+
+## Family rule
+Rhea and Asha are not collateral plot devices.
+They have independent emotional arcs and agency.
+M actively keeps wider relatives and business contacts away from the home.
+
+## Time rule
+The earlier "one week per episode" rule is retired.
+Episodes may advance days, weeks or months depending on the business story.
+Every episode still receives an explicit canonical date for news/weather/technology continuity.
