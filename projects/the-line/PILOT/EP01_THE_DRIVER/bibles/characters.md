@@ -96,6 +96,9 @@ Neither should secretly turn out to be alive.
 
 ## JAY — RIGHT-HAND MAN
 Age: late 30s to early 40s.
+Nationality: English.
+
+Jay grew up with M. They have known each other since childhood/teenage years and are like brothers.
 
 Former special forces. M's closest confidant, protector, fixer and operational lead.
 
@@ -123,7 +126,9 @@ Jay does the running M no longer needs to do personally:
 ### Relationship with M
 M trusts Jay with information he tells nobody else.
 
-Their bond is built over years, not introduced as instant loyalty.
+Their bond was built long before the story begins. They grew up together, know each other's history, weaknesses and tells, and speak to each other with the familiarity of brothers.
+
+Jay knew M before the phone shop, before the money and before anyone called him Bossman.
 
 Jay can disagree with M privately and is one of the few people whose judgement M genuinely weighs.
 
