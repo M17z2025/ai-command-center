@@ -654,3 +654,77 @@ M may smile, ignore the question or say:
 "You'd have to ask them."
 
 The mythology must always be bigger than the confirmed facts.
+
+
+## End-state business — pan-African resources group
+By the later decades of the saga, M's principal business is a diversified pan-African natural-resources group.
+
+The group spans:
+- gold;
+- copper;
+- cobalt;
+- nickel;
+- lithium and battery minerals;
+- iron and base metals;
+- diamonds;
+- emeralds and other precious stones;
+- platinum-group metals;
+- other precious metals;
+- oil and energy interests where commercially appropriate;
+- mineral trading, processing, logistics and strategic infrastructure linked to those assets.
+
+The business should evolve gradually from advisory and dealmaking into ownership, equity, joint ventures, operating companies and strategic holdings.
+
+M does not begin as a mining magnate.
+
+He first learns the sector by:
+- advising;
+- introducing parties;
+- helping structure transactions;
+- solving logistics and procurement problems;
+- understanding licences and due diligence;
+- working with geologists, lawyers, financiers and local partners;
+- taking small equity positions;
+- learning from failed transactions.
+
+Over decades, successful positions compound.
+
+Eventually the public sees M primarily as an African resources businessman rather than the man who once owned phone shops.
+
+### Geographic evolution
+The group may ultimately operate across several African jurisdictions rather than relying on a single country.
+
+Zambia can be an important early anchor, followed over time by other commercially and narratively relevant markets in Southern, Central, Eastern and West Africa.
+
+Each country must have its own partners, laws, political realities, geology and business culture rather than being treated as interchangeable.
+
+### Business structure
+By the mature Bossman era, M's group may include:
+- mine ownership;
+- joint ventures;
+- exploration interests;
+- mineral buying and trading;
+- processing;
+- commodity offtake;
+- logistics;
+- warehousing;
+- energy;
+- oil interests;
+- strategic infrastructure;
+- advisory and investment arms.
+
+The mature group is legitimate, professional and institutionally credible.
+
+The shadow reputation exists around M personally and should never replace the real commercial substance required to build and operate these businesses.
+
+### Legacy
+In M's later life, the challenge shifts from acquiring assets to:
+- governing them;
+- managing country risk;
+- succession;
+- professional management;
+- preserving reputation;
+- deciding what Asha inherits;
+- determining whether the empire can survive without M personally holding every relationship together.
+
+The mobile-phone shop should remain an important symbolic origin story even when M controls assets worth vastly more.
