@@ -38,6 +38,14 @@ why isolated gateway mode is required: [network internal mode](https://docs.dock
 and [isolated gateway mode](https://docs.docker.com/engine/network/port-publishing/).
 Docker Engine 28 or newer is needed for this network mode.
 
+## GitHub authority in proof mode
+
+Read-only worker proof against a public allowlisted repository may fetch the exact
+source SHA anonymously. This exception never grants branch, PR, issue, repository
+setting or private-repository access. If `SIGMA_WORKER_ALLOW_WRITE=1`, a governed
+GitHub credential is mandatory and the broker fails closed when it is absent.
+Private repositories likewise cannot be fetched anonymously.
+
 ## Commissioning
 
 Build `Dockerfile.sigma-worker`, `Dockerfile.sigma-worker-sandbox` and
