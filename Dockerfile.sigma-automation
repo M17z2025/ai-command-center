@@ -1,0 +1,13 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements-control.txt ./
+RUN pip install --no-cache-dir -r requirements-control.txt
+COPY . .
+# Only four pinned, hash-checked text files. No upstream executable installer.
+RUN python scripts/sigma_gstack_install.py --cache-dir /opt/sigma-gstack \
+    && chmod -R a+rX /opt/sigma-gstack
+RUN groupadd --gid 10001 sigma && useradd --uid 10001 --gid sigma --no-create-home sigma \
+    && mkdir /data && chown sigma:sigma /data
+USER 10001:10001
+ENV PYTHONUNBUFFERED=1 SIGMA_GSTACK_CACHE=/opt/sigma-gstack
+CMD ["python", "scripts/sigma_automation.py", "worker"]

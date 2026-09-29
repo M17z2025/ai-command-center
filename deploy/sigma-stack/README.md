@@ -176,3 +176,10 @@ Sigma retrieves promoted memory before expert execution and appends it to the mi
 The Ollama/local model used for Graphiti extraction must pass structured-output ingestion tests before bulk knowledge import. A chat-capable local model is not automatically a reliable graph-extraction model.
 
 Graphiti is pinned through `graphiti-core[falkordb]==0.30.2`. FalkorDB is pinned to `v4.20.7`. Reverify licences/security before upgrades.
+# Durable event and schedule automation
+
+See [Sigma + gstack automation](../../docs/SIGMA_AUTOMATION.md) for the optional
+`docker-compose.automation.yml` overlay, host watchdog, signed GitHub webhook
+registration, backup/recovery and gated commissioning checklist. Layer it after
+the base and Ollama compose files. It replaces the existing `sigma-runner` command.
+Keep execution disabled pending independent worker isolation evidence.

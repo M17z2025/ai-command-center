@@ -1,0 +1,9 @@
+schema_version: 1
+# Review changes through PR. Enabling schedules does not grant write authority.
+# Product .sigma/project.yaml must separately opt in to execution.
+projects:
+  M17z2025/ai-command-center:
+    enabled: true
+    execute: false
+    interval_seconds: 900
+    gstack: false

@@ -1,0 +1,62 @@
+# Layer after docker-compose.yml and docker-compose.ollama.yml.
+services:
+  sigma-runner:
+    # Replaces the old loop; do not run both schedulers.
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-automation
+    command: ["python", "scripts/sigma_automation.py", "worker"]
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    pids_limit: 128
+    mem_limit: 1g
+    stop_grace_period: 30s
+    tmpfs: [/tmp:size=64m,mode=1777]
+    environment:
+      SIGMA_RUNTIME_DB: /data/sigma-runtime.db
+      SIGMA_AUTOMATION_JOB_TIMEOUT: ${SIGMA_AUTOMATION_JOB_TIMEOUT:-3600}
+      SIGMA_GSTACK_CACHE: /opt/sigma-gstack
+      # Separate runner and worker credentials in the private environment.
+      SIGMA_GITHUB_TOKEN: ${SIGMA_AUTOMATION_GITHUB_TOKEN:-}
+      SIGMA_AUTOMATION_REPORT_TOKEN: ${SIGMA_AUTOMATION_REPORT_TOKEN:-}
+      SIGMA_AUTOMATION_REPORT_WRITE: ${SIGMA_AUTOMATION_REPORT_WRITE:-0}
+      SIGMA_AUTOMATION_REPORT_ISSUE: ${SIGMA_AUTOMATION_REPORT_ISSUE:-97}
+    volumes:
+      - sigma-automation-data:/data
+    healthcheck:
+      test: [CMD, python, scripts/sigma_automation.py, health]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  sigma-intake:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.sigma-automation
+    command: [python, scripts/sigma_automation.py, intake]
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    pids_limit: 64
+    mem_limit: 256m
+    tmpfs: [/tmp:size=32m,mode=1777]
+    environment:
+      SIGMA_RUNTIME_DB: /data/sigma-runtime.db
+      SIGMA_WEBHOOK_SECRET: ${SIGMA_WEBHOOK_SECRET:?provision a private webhook secret}
+    volumes:
+      - sigma-automation-data:/data
+    ports:
+      - "127.0.0.1:${SIGMA_INTAKE_PORT:-8092}:8092"
+    networks: [sigma-private]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8092/healthz', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  sigma-automation-data:

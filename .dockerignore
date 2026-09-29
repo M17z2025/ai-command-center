@@ -1,0 +1,13 @@
+.git
+.test-deps
+**/__pycache__
+**/*.pyc
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/.env
+runtime-data
+artifacts
+.sigma/gstack
+.runtime-gstack-verification
+test-results*.txt

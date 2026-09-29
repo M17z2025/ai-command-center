@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "repository": "garrytan/gstack",
+  "revision": "65bfb0ce49da807698359ca033a05709e342c684",
+  "license": "MIT",
+  "mode": "advisory_only",
+  "files": {
+    "LICENSE": {
+      "sha256": "e56fbb5b3d95756f3fa1cfefa24732ec79f18ece1ad08a4e79e00df57e8b198c",
+      "size": 1066
+    },
+    "review/checklist.md": {
+      "sha256": "55712427735c67bb942de7c00238c80a09ccefaf8c09c2f81ba913650af16718",
+      "size": 12411
+    },
+    "review/specialists/testing.md": {
+      "sha256": "dd1e5d8535e99e6a410914ae09e526657cba2605ca41f71ec5dbbdc42dd2bd3a",
+      "size": 3433
+    },
+    "review/specialists/maintainability.md": {
+      "sha256": "8aa54c01d429a4461510daac2f4b4bbda6301f1e6b4beaa1d49c3650cf9045e9",
+      "size": 2500
+    }
+  }
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone, timedelta
+from contextlib import contextmanager
 import json
 from pathlib import Path
 import sqlite3
@@ -20,10 +21,15 @@ class MissionStore:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._init()
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self):
         conn = sqlite3.connect(self.path, timeout=30)
         conn.row_factory = sqlite3.Row
-        return conn
+        try:
+            with conn:
+                yield conn
+        finally:
+            conn.close()
 
     def _init(self) -> None:
         with self._connect() as conn:

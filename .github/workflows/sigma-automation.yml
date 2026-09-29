@@ -1,0 +1,39 @@
+name: Sigma automation and container
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  automation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-control.txt
+      - run: python -m unittest discover -s tests -p 'test_sigma_automation*.py'
+      - run: python -m unittest discover -s tests -p 'test_sigma_gstack.py'
+      - run: python scripts/validate_control_plane.py
+      - name: Build non-root automation image and verify pinned gstack download
+        run: docker build -f Dockerfile.sigma-automation -t sigma-automation:test .
+      - name: Run real process tests inside Linux container
+        run: docker run --rm --read-only --tmpfs /tmp:mode=1777 --cap-drop ALL sigma-automation:test python -m unittest discover -s tests -p 'test_sigma_automation_process.py'
+      - name: Verify non-root access to pinned advisory references
+        run: >-
+          docker run --rm --read-only sigma-automation:test python -c
+          "from pathlib import Path; from sigma_runtime.gstack import advisory_context; print(advisory_context(Path('/app'), enabled=True, cache_dir=Path('/opt/sigma-gstack'), max_chars=4000)['revision'])"
+      - name: Validate composed VPS configuration
+        env:
+          SIGMA_LLM_ENDPOINT: http://ollama:11434/api/chat
+          SIGMA_LLM_MODEL: ci-config-only
+          OLLAMA_MODEL: ci-config-only
+          OLLAMA_EMBEDDING_MODEL: ci-config-only
+          SIGMA_RUNTIME_TOKEN: ci-config-only
+          SIGMA_WORKER_TOKEN: ci-config-only
+          SIGMA_WEBHOOK_SECRET: ci-configuration-only-not-a-production-secret
+        run: docker compose -f deploy/sigma-stack/docker-compose.yml -f deploy/sigma-stack/docker-compose.ollama.yml -f deploy/sigma-stack/docker-compose.automation.yml config --quiet

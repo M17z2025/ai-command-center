@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart unhealthy Sigma automation containers
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/ai-command-center
+ExecStart=/bin/bash scripts/sigma_automation_watchdog.sh
+NoNewPrivileges=true

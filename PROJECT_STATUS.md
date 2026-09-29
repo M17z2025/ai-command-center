@@ -1,5 +1,33 @@
 # Sigma Development Command Center Status
 
+## 29 September 2026 — Sigma + gstack durable automation candidate (#97)
+
+**SOURCE CANDIDATE; LIVE OVH DEPLOYMENT AND WRITE COMMISSIONING NOT VERIFIED.**
+
+- Adds persistent per-project queue/schedules, signed webhook intake, replay protection,
+  supervised worker, bounded retry/recovery holds, private status/provenance and optional
+  safe GitHub status outbox around the existing portfolio runner.
+- Adds pinned, integrity-checked gstack review references; upstream code/installer and
+  release authority are excluded. Context is opt-in and capped at 4,000 characters.
+- Existing OVH Docker overlay replaces the old timer, runs non-root with bounded
+  resources, and includes health checks plus a host watchdog timer.
+- Execution remains disabled by default and requires local project policy, global
+  write/execute switches, product contract and current `sigma:autonomous` issue opt-in.
+- Independent review identified an existing credential-bearing OpenHands execution
+  boundary and absent source-head enforcement. Isolated credential-free execution,
+  brokered writes and independent evidence are required before unattended writes.
+- PR #96 / #89 retains CI-supervisor ownership. No automatic merge, deployed product
+  certification or end-to-end project completion is claimed.
+
+Runbook, recovery and exact commissioning checklist: `docs/SIGMA_AUTOMATION.md`.
+Independent advisory/security reports accompany this candidate. Test/CI commit
+identities and deployment gates are recorded on issue #97 and its pull request.
+
+Next gated action: inspect exact-head CI and independent security evidence, obtain
+approved OVH host access and runtime-only webhook secret, commission planning-only
+services, and attach real webhook/restart/scheduled-cycle evidence to #97. Keep write
+mode disabled until the worker isolation gate is cleared.
+
 ## 28 September 2026 — P0 recovery audit: Sigma cannot yet finish projects autonomously
 
 **CURRENT CLASSIFICATION: SOURCE COMPONENTS STRONG; END-TO-END AUTONOMOUS PROJECT COMPLETION NOT YET PROVEN.**
