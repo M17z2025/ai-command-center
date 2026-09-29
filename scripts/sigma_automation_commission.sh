@@ -87,7 +87,7 @@ for line in lines:
 
 required = ["OLLAMA_MODEL"]
 if args.mode == "worker-readonly":
-    required += ["SIGMA_AUTOMATION_GITHUB_TOKEN", "SIGMA_RUNTIME_TOKEN", "SIGMA_MEMORY_TOKEN", "SIGMA_WORKER_TOKEN",
+    required += ["SIGMA_RUNTIME_TOKEN", "SIGMA_MEMORY_TOKEN", "SIGMA_WORKER_TOKEN",
                  "SIGMA_WEBHOOK_SECRET", "OLLAMA_WORKER_MODEL", "OLLAMA_EMBEDDING_MODEL",
                  "SIGMA_LLM_ENDPOINT", "SIGMA_LLM_MODEL"]
 missing = [key for key in required if not values.get(key)]
