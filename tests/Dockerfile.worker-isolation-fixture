@@ -1,0 +1,5 @@
+# No model dependency or paid inference: uses production executor in verify mode.
+FROM python:3.12-slim
+COPY scripts/sigma_worker_sandbox.py /app/sigma_worker_sandbox.py
+RUN useradd --create-home --uid 10001 sigmaworker
+USER 10001:10001

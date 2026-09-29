@@ -214,7 +214,7 @@ class GatewayTests(AutomationCase):
         self.assertEqual(self.gateway.dispatch(self.payload), {'status': 'TESTED'})
         self.assertEqual(self.row(self.job['id'])['dispatch_started'], 1)
         self.assertEqual(self.payload['automation_job_id'], self.job['id'])
-        self.assertEqual(self.payload['source_commit'], 'a' * 40)
+        self.assertEqual(self.payload['source_sha'], 'a' * 40)
         self.assertFalse(any(self.payload['authority'].values()))
         for call in self.github.file_text.call_args_list:
             self.assertEqual(call.args[2], 'a' * 40)

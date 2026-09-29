@@ -236,6 +236,7 @@ def main(argv=None) -> int:
             store,
             token,
             portfolio_runner=portfolio_runner,
+            runner_execute_enabled=os.getenv("SIGMA_RUNNER_EXECUTE", "0") == "1",
         )
         print(f"Sigma mesh runtime listening on http://{args.host}:{server.server_port}")
         try:

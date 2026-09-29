@@ -724,6 +724,10 @@ class PortfolioRunner:
                     "repository": selected.repository,
                     "issue_number": selected.issue_number,
                     "objective": selected.title,
+                    "source_sha": next(
+                        (item.latest_commit_sha for item in snapshots
+                         if item.repository == selected.repository), ""
+                    ),
                     "issue_body": selected.body,
                     "sigma_mission": mission,
                     "authority": {

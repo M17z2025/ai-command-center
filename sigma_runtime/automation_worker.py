@@ -91,7 +91,7 @@ class GuardedGateway:
                                 "paid_spend": False, "direct_main_push": False,
                                 "secret_management": False, "security_control_reduction": False}
         payload["automation_job_id"] = self.job["id"]
-        payload["source_commit"] = head
+        payload["source_sha"] = head
         # Commit dispatch intent BEFORE HTTP: crashes/timeouts now require reconciliation.
         self.queue.dispatching(self.job["id"], self.job["claim"])
         return self.delegate.dispatch(payload)

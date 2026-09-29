@@ -107,6 +107,16 @@ class RuntimeRunnerAPITests(unittest.TestCase):
         self.assertEqual(body["state"], "PLANNED")
         self.assertEqual(body["trigger"], "operator")
 
+    def test_api_cannot_elevate_disabled_execution(self):
+        with self.assertRaises(HTTPError) as ctx:
+            self.request("/runner/cycle", method="POST", payload={"execute": True})
+        self.assertEqual(ctx.exception.code, 403)
+
+    def test_execution_requires_boolean(self):
+        with self.assertRaises(HTTPError) as ctx:
+            self.request("/runner/cycle", method="POST", payload={"execute": "false"})
+        self.assertEqual(ctx.exception.code, 400)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,37 @@
+# Add after docker-compose.ollama.yml. Build images first and record their IDs.
+services:
+  sigma-worker:
+    environment:
+      SIGMA_WORKER_SANDBOX_IMAGE: ${SIGMA_WORKER_SANDBOX_IMAGE:?set immutable sandbox image ID}
+      SIGMA_WORKER_GATEWAY_IMAGE: ${SIGMA_WORKER_GATEWAY_IMAGE:?set immutable gateway image ID}
+      SIGMA_WORKER_INFERENCE_NETWORK: sigma-worker-inference
+    group_add:
+      - ${SIGMA_DOCKER_GID:?set host Docker socket group ID}
+    volumes:
+      # Trusted broker only. Disposable jobs get no mounts or broker credentials.
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - inference-gateway
+
+  inference-gateway:
+    image: ${SIGMA_WORKER_GATEWAY_IMAGE:?set immutable gateway image ID}
+    restart: unless-stopped
+    labels:
+      sigma.role: inference-gateway
+    environment:
+      SIGMA_GATEWAY_MODEL: ${OLLAMA_WORKER_MODEL:-qwen2.5:7b}
+    networks:
+      - sigma-private
+      - sigma-worker-inference
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 32
+    mem_limit: 128m
+
+networks:
+  sigma-worker-inference:
+    name: sigma-worker-inference
+    internal: true
+    driver_opts:
+      com.docker.network.bridge.gateway_mode_ipv4: isolated

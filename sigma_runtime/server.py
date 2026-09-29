@@ -25,6 +25,7 @@ def build_server(
     token: str | None,
     *,
     portfolio_runner: Any | None = None,
+    runner_execute_enabled: bool = False,
 ) -> ThreadingHTTPServer:
     if host not in {"127.0.0.1", "localhost", "::1"} and not token:
         raise RuntimeError("SIGMA_RUNTIME_TOKEN is required for non-loopback API binding")
@@ -148,9 +149,18 @@ def build_server(
                     if portfolio_runner is None:
                         self._json(503, {"error": "portfolio runner not configured"})
                         return
+                    execute = payload.get("execute", False)
+                    if not isinstance(execute, bool):
+                        raise ValueError("execute must be a boolean")
+                    if execute and not (
+                        runner_execute_enabled
+                        and portfolio_runner.github.allow_write
+                    ):
+                        self._json(403, {"error": "runner execution disabled by server authority"})
+                        return
                     result = portfolio_runner.cycle(
                         trigger=payload.get("trigger") or "api",
-                        execute=bool(payload.get("execute", False)),
+                        execute=execute,
                     )
                     status = 409 if result.get("state") == "BLOCKED" else 201
                     self._json(status, result)

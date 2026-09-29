@@ -1,0 +1,40 @@
+name: Sigma worker isolation
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hostile-docker-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Record exact source and Docker engine
+        run: |
+          git rev-parse HEAD
+          docker version
+      - name: Build production-executor fixture without model dependencies
+        run: docker build -f tests/Dockerfile.worker-isolation-fixture -t sigma-isolation-fixture .
+      - name: Run actual hostile processes and network isolation tests
+        run: |
+          export SIGMA_WORKER_ISOLATION_TEST_IMAGE="$(docker image inspect sigma-isolation-fixture --format '{{.Id}}')"
+          printf 'Fixture image: %s\n' "$SIGMA_WORKER_ISOLATION_TEST_IMAGE"
+          python -m unittest discover -s tests -p test_sigma_worker_isolation.py -v
+          python -m unittest discover -s tests -p test_sigma_worker_gateway.py -v
+          python -m unittest discover -s tests -p test_sigma_private_worker.py -v
+      - name: Build trusted broker and narrow inference gateway
+        run: |
+          docker build -f Dockerfile.sigma-worker -t sigma-worker-broker:test .
+          docker build -f Dockerfile.sigma-worker-gateway -t sigma-worker-gateway:test .
+          docker run --rm --group-add "$(stat -c '%g' /var/run/docker.sock)" -v /var/run/docker.sock:/var/run/docker.sock sigma-worker-broker:test docker version
+      - name: Confirm disposable jobs were removed
+        if: always()
+        run: |
+          test -z "$(docker ps -aq --filter name=sigma-job-)"
+          test -z "$(docker ps -aq --filter name=sigma-proof-)"
