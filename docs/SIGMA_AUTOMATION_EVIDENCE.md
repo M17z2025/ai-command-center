@@ -62,7 +62,19 @@ Ollama has `qwen3:4b-instruct` and `qwen3-embedding:0.6b`. No host services chan
 Worker isolation source was added at `8db1f82c245681daf2963cc00e3246df2c4edfea`.
 All three existing workflows passed. [Dedicated Docker run](https://github.com/M17z2025/ai-command-center/actions/runs/36572863412)
 passed hostile container/network/recovery tests but found the broker image lacked
-the Docker client. That image defect is under repair; this run is not a release pass.
+the Docker client. This was repaired using a digest-pinned Docker CLI at
+`7f58e4928dfe503c5a5fe329859bc0a6ab459b17`. All four workflows passed there:
+[worker isolation and production SDK image smoke](https://github.com/M17z2025/ai-command-center/actions/runs/36573420112),
+[automation](https://github.com/M17z2025/ai-command-center/actions/runs/36573420246),
+[mesh](https://github.com/M17z2025/ai-command-center/actions/runs/36573420128), and
+[control-plane](https://github.com/M17z2025/ai-command-center/actions/runs/36573420224).
+The worker job ran nine isolation tests (including five real Docker cases), four
+gateway HTTP tests and six worker regressions. The production SDK image built and
+the actual LLM/Agent/LocalWorkspace/Conversation constructors passed offline.
+This is CI evidence; it is not a live model mission or OVH deployment claim.
+
+The commissioning helper and exact protected provisioning steps are in
+[SIGMA_AUTOMATION_COMMISSIONING.md](SIGMA_AUTOMATION_COMMISSIONING.md).
 
 1. Review final PR head and independent reports. Source review findings about replay,
    stale recovery, heartbeat fail-stop and SQLite closure were repaired and tested.

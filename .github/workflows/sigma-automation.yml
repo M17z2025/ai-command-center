@@ -19,6 +19,14 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_sigma_automation*.py'
       - run: python -m unittest discover -s tests -p 'test_sigma_gstack.py'
       - run: python scripts/validate_control_plane.py
+      - name: Validate commissioning entrypoint without host access
+        run: |
+          bash -n scripts/sigma_automation_commission.sh scripts/sigma_automation_watchdog.sh
+          bash scripts/sigma_automation_commission.sh --help
+          if bash scripts/sigma_automation_commission.sh --sha invalid --ci-run 1; then
+            echo "Invalid source SHA was accepted"
+            exit 1
+          fi
       - name: Build non-root automation image and verify pinned gstack download
         run: docker build -f Dockerfile.sigma-automation -t sigma-automation:test .
       - name: Run real process tests inside Linux container

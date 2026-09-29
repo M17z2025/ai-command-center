@@ -177,22 +177,34 @@ class DockerSandbox:
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=clean_env())
         output = bytearray()
         exceeded = threading.Event()
+        stopping = threading.Event()
         def drain(stream, retain):
             total = 0
-            while chunk := stream.read(65536):
-                total += len(chunk)
-                if total > max_output:
-                    exceeded.set()
-                    proc.kill()
-                    break
-                if retain:
-                    output.extend(chunk)
+            try:
+                while not stopping.is_set():
+                    # Unbuffered fd reads avoid a Python BufferedReader lock when
+                    # the bounded shutdown path closes a stalled stream.
+                    chunk = os.read(stream.fileno(), 65536)
+                    if not chunk:
+                        break
+                    total += len(chunk)
+                    if total > max_output:
+                        exceeded.set()
+                        proc.kill()
+                        break
+                    if retain:
+                        output.extend(chunk)
+            except (OSError, ValueError):
+                pass
         def feed():
             try:
                 if data:
-                    proc.stdin.write(data)
+                    remaining = memoryview(data)
+                    while remaining and not stopping.is_set():
+                        size = os.write(proc.stdin.fileno(), remaining[:65536])
+                        remaining = remaining[size:]
                 proc.stdin.close()
-            except (BrokenPipeError, OSError):
+            except (BrokenPipeError, OSError, ValueError):
                 pass
         threads = [threading.Thread(target=drain, args=(proc.stdout, True), daemon=True),
                    threading.Thread(target=drain, args=(proc.stderr, False), daemon=True),
@@ -208,6 +220,11 @@ class DockerSandbox:
         finally:
             for thread in threads:
                 thread.join(timeout=5)
+            stopping.set()
+            for stream in (proc.stdin, proc.stdout, proc.stderr):
+                stream.close()
+        if any(thread.is_alive() for thread in threads):
+            raise IsolationError("Docker stream shutdown exceeded bound")
         if exceeded.is_set():
             raise IsolationError("Docker result exceeds bound")
         if code:

@@ -10,8 +10,9 @@ that missing local SSH or an unknown host path prevented progress.
 
 PR #98 now isolates agent execution and verification from the credential broker,
 pins source SHA, bounds inference and recovers orphan job containers. Independent
-source review completed. Real Docker hostile tests pass in CI; a separate broker
-image client defect is being repaired. Unattended OVH execution remains unverified.
+source review completed. Real Docker hostile tests and production worker image
+build/startup checks pass in CI at `7f58e4928dfe503c5a5fe329859bc0a6ab459b17`.
+Unattended OVH execution remains unverified.
 Owner/admin service credential provisioning is required; then commission the exact
 reviewed images and record a real scheduled branch/PR task and restart recovery.
 Evidence and remaining gates: issue #97 and `docs/SIGMA_AUTOMATION_EVIDENCE.md`.

@@ -7,6 +7,7 @@ import sys
 import tarfile
 import tempfile
 import socket
+import subprocess
 import uuid
 import unittest
 from unittest.mock import patch
@@ -17,6 +18,28 @@ from sigma_worker_isolation import (DockerSandbox, IsolationError, apply_changes
 
 
 class TransferTests(unittest.TestCase):
+    def test_cli_pipe_handles_close_on_success_and_output_limit(self):
+        # Real subprocess/pipe I/O without requiring a local Docker installation.
+        # Only the executable is substituted; the production stream lifecycle runs.
+        real_popen = subprocess.Popen
+        processes = []
+        for code, limit, fails in (("print('done')", 1024, False),
+                                   ("import os\nwhile True: os.write(1, b'x' * 4096)", 1024, True)):
+            def launch(_command, **kwargs):
+                proc = real_popen([sys.executable, "-c", code], **kwargs)
+                processes.append(proc)
+                return proc
+            with patch("sigma_worker_isolation.subprocess.Popen", side_effect=launch):
+                sandbox = DockerSandbox("sha256:" + "a" * 64)
+                if fails:
+                    with self.assertRaises(IsolationError):
+                        sandbox.docker(["version"], max_output=limit, timeout=5)
+                else:
+                    self.assertEqual(sandbox.docker(["version"], max_output=limit, timeout=5).strip(), b"done")
+        for process in processes:
+            self.assertIsNotNone(process.returncode)
+            self.assertTrue(all(stream.closed for stream in (process.stdin, process.stdout, process.stderr)))
+
     def test_hostile_paths_and_payloads(self):
         for path in ("../escape", "/root/x", ".git/config", ".GIT/hooks/x", "a/../../x",
                      "a\\b", "a//b", "a/./b", ".sigma/project.yaml", ".github/workflows/x",

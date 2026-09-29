@@ -6,4 +6,4 @@ projects:
     enabled: true
     execute: false
     interval_seconds: 900
-    gstack: false
+    gstack: true
