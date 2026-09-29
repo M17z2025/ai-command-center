@@ -97,3 +97,23 @@ Implementation findings sent to the implementer:
 3. SQLite connection context managers commit or roll back but do not close connections. Explicitly close connections after each transaction to avoid long-running resource leakage and database-file locks.
 
 Follow-up evidence must record the rerun after repairs and actual dependency availability. Docker process supervision, live model execution, OVH persistence/restart and backup restore remain unverified by these unit tests.
+
+## Final independent engineering review
+
+Implementation candidate: `3719228204ee83debaa442bec16a49f7239197e9`, PR #98. This review is independent of the implementation; the final execution results below were observed and supplied by the lead implementing agent, rather than rerun by this reviewer.
+
+The lead reports repairs for all three engineering findings above: QueueStore, RunnerStore and MissionStore now close their connections; stale recovery rechecks staleness atomically; the worker repeats recovery so recently interrupted jobs cannot permanently block later claims. The test helper was updated for the connection context-manager API. These supersede the first-pass failures; the initial failed evidence is retained above for traceability.
+
+Reported verification on the implementation candidate:
+
+- Local suite: 123 tests passed, with one Linux-only supervisor test skipped on Windows.
+- Additional reporting tests: 3 passed.
+- GitHub automation workflow run `36555229441`: SUCCESS, including Docker build, Linux supervisor checks, read-only/non-root gstack checks and Compose configuration validation.
+- GitHub control-plane workflow run `36555229342`: SUCCESS.
+- GitHub mesh runtime workflow run `36555229460`: SUCCESS.
+
+The lead verified PR #96's overlap: changes to `sigma_runtime/portfolio_runner.py` and its existing tests, plus new `pr_supervisor.py` and supervisor tests. This implementation uses a separate ProjectRunner adapter and leaves PR supervision with that workstream; its existing-runner change closes database connections. Reconcile the actual combined diff before merging either overlapping branch.
+
+Engineering conclusion: the reviewed design and independent acceptance tests support the bounded source implementation, with the discovered recovery and connection defects reported repaired and CI evidence supplied on the exact candidate above. This is not an independent security PASS or a live deployment certification. This reviewer did not personally execute the final repaired suite because its requested elevated dependency access was interrupted; the attribution above is intentional.
+
+Remaining acceptance gates: approved OVH deployment; real signed delivery through a real model/worker to repository evidence; restart and backup-restore evidence on the private persistent volume; independent security verdict; product-specific authority and release gates; and coordination with the existing PR supervisor before autonomous merge/deployment claims. Keep these steps and their exact evidence in GitHub. Source tests and Docker CI do not establish that unattended project completion is already live.

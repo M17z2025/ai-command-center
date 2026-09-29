@@ -20,6 +20,10 @@
   certification or end-to-end project completion is claimed.
 
 Runbook, recovery and exact commissioning checklist: `docs/SIGMA_AUTOMATION.md`.
+Source candidate PR #98 passed all three GitHub workflows at commit
+`3719228204ee83debaa442bec16a49f7239197e9`, including Docker build and real Linux
+process tests. Exact links/image ID and the live deployment boundary are recorded
+in `docs/SIGMA_AUTOMATION_EVIDENCE.md`.
 Independent advisory/security reports accompany this candidate. Test/CI commit
 identities and deployment gates are recorded on issue #97 and its pull request.
 

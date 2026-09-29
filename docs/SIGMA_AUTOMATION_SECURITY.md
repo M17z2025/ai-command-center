@@ -5,7 +5,7 @@
 - Product/repository: Sigma, `M17z2025/ai-command-center`.
 - Date: 29 September 2026.
 - Reviewer: independent security review agent, separate from implementation.
-- Reviewed baseline: `c899c3bb2dfa99e9c4d83467e1bcff80f3282552`, plus the automation working-tree candidate. This is not an immutable final-head certification; the final PR must identify the exact tested head.
+- Reviewed baseline: `8339e20f67a0e4ba4cdc815a50b046a43218871f` (upstream ZIP source), plus the automation candidate. Published implementation head: `3719228204ee83debaa442bec16a49f7239197e9`, PR #98. The initial local Git snapshot was unrelated to upstream history.
 - Environment: local Windows source review. No live OVH access, deployment, credential provisioning or external penetration tests were performed.
 - Verdict: **BLOCKED / NOT VERIFIED for unattended live execution**. An execution-disabled source candidate may proceed through PR review; this report does not certify production readiness.
 
@@ -20,9 +20,9 @@ The queue summary omits issue bodies and model text. Existing runner and mission
 | ID | Severity | Evidence and impact | Required remediation / status |
 | --- | --- | --- | --- |
 | AUTO-SEC-01 | HIGH, existing execution prerequisite | `scripts/sigma_openhands_worker_service.py` runs OpenHands `LocalWorkspace` and `TerminalTool` in the service containing `SIGMA_GITHUB_TOKEN`; verification executes agent-editable project code using the credential-bearing environment. Payload authority booleans and prompt instructions cannot enforce least privilege against malicious issue/repository content. | Keep autonomous execution disabled until a credential-free sandbox and independently controlled branch/PR broker are evidenced. Prove prohibited credentials, host paths, Docker socket, network destinations and protected branches are inaccessible from agent tools and verification subprocesses. |
-| AUTO-SEC-02 | MEDIUM, candidate recovery | Initial `worker()` calls stale recovery only at startup. A restart within 120 seconds leaves the previous RUNNING row fresh; subsequent claims continually refuse it, and recovery never runs again. | Reconcile previous jobs after obtaining exclusive supervisor ownership, preserving UNKNOWN holds for dispatch ambiguity; add immediate-restart regression. Implementation owner notified. |
-| AUTO-SEC-03 | MEDIUM, candidate replay | Initial delivery deduplication uses only unsigned `X-GitHub-Delivery`. Reusing a captured signed body under fresh delivery IDs creates new work and consumes retention capacity. | Deduplicate signed-body digest independently of delivery IDs; test changed-ID replay after terminal job completion. Implementation owner notified. |
-| AUTO-SEC-04 | HIGH before concurrent execution | Initial `LiveRunnerStore` lease heartbeat has no exception handler. A storage exception terminates the daemon thread while the job continues; the runner lease can expire and permit competing work. | Fail-stop the child on heartbeat/renewal failure and test the failure path. Implementation owner notified. |
+| AUTO-SEC-02 | MEDIUM, candidate recovery | Initial `worker()` calls stale recovery only at startup. A restart within 120 seconds leaves the previous RUNNING row fresh; subsequent claims continually refuse it, and recovery never runs again. | Reconcile previous jobs after obtaining exclusive supervisor ownership, preserving UNKNOWN holds for dispatch ambiguity; add immediate-restart regression. REPAIRED in candidate: implementation owner reports regression coverage passing; independent reviewer inspected the corresponding source repair before final publication. |
+| AUTO-SEC-03 | MEDIUM, candidate replay | Initial delivery deduplication uses only unsigned `X-GitHub-Delivery`. Reusing a captured signed body under fresh delivery IDs creates new work and consumes retention capacity. | Deduplicate signed-body digest independently of delivery IDs; test changed-ID replay after terminal job completion. REPAIRED in candidate: implementation owner reports regression coverage passing; independent reviewer inspected the corresponding source repair before final publication. |
+| AUTO-SEC-04 | HIGH before concurrent execution | Initial `LiveRunnerStore` lease heartbeat has no exception handler. A storage exception terminates the daemon thread while the job continues; the runner lease can expire and permit competing work. | Fail-stop the child on heartbeat/renewal failure and test the failure path. REPAIRED in candidate: implementation owner reports regression coverage passing; independent reviewer inspected the corresponding source repair before final publication. |
 | AUTO-SEC-05 | HIGH, existing execution prerequisite | Existing coding worker ignores the supplied `source_commit` and clones the moving default branch. It does not enforce a brokered capability boundary; the repository token can exceed declared authority. | Pin and verify the exact authorised source SHA and repository before executing. Verify per-project token scope and branch protections independently. Keep execution disabled pending evidence. |
 | AUTO-SEC-06 | MEDIUM, live ingress prerequisite | Intake uses a single-thread Python HTTP server with a ten-second socket timeout. Unauthenticated slow requests can occupy its sole handler; app body limits do not establish an edge rate limit or TLS. | Bind intake only to host loopback behind the approved TLS proxy with bounded request size, header/body timeouts, concurrency and request rate. Verify externally before public webhook commissioning. |
 
@@ -51,7 +51,7 @@ The initial independent local invocation `python -m unittest discover -s tests -
 
 ## Exact next gated actions
 
-1. Repair/retest candidate findings AUTO-SEC-02/03/04, with an independent source retest on the final commit.
+1. Preserve repaired candidate findings AUTO-SEC-02/03/04 in regression coverage. Signed-body digest replay rejection, recurring recovery with transactional stale-heartbeat recheck, and lease-heartbeat fail-stop were inspected independently. Explicit SQLite connection closure was also repaired.
 2. Keep project `execute: false` and global execution/write switches disabled while qualifying the new queue and read-only planning cycle.
 3. Render and inspect the OVH Compose overlay; test restart, slow/forged/replayed webhooks, disk/storage faults and database restoration in an authorised non-production container environment.
 4. Independently remediate the credential-bearing coding-worker boundary and exact-source checkout before changing any execution switch. Prove repository restrictions and protected-branch checks with hostile tests.
@@ -59,3 +59,22 @@ The initial independent local invocation `python -m unittest discover -s tests -
 6. Record host, exact image/source commit, test commands, exit statuses, redacted evidence and remaining gates in the implementation PR. Run a single opted-in staging issue through dispatch, independent exact-head CI/security and applicable user testing before expanding the project allowlist.
 
 No owner risk exception, protected-branch bypass or production authority is granted by this report. The reviewer cannot certify a deployment that has not been observed.
+
+## Final source review update — PR #98
+
+Candidate findings AUTO-SEC-02, AUTO-SEC-03 and AUTO-SEC-04 are repaired in source. The corresponding rows and matrix above describe the original finding and live qualification requirements; they are not remaining unfixed source blockers. The independent reviewer inspected digest-based replay deduplication and lease fail-stop repairs; the implementation owner reports the recurring recovery/staleness recheck and explicit database connection closure are covered by the passing suite. No live deployment verdict is inferred from those repairs.
+
+Evidence supplied by the implementation owner, not independently executed by this reviewer:
+
+- Exact implementation commit: `3719228204ee83debaa442bec16a49f7239197e9`, [PR #98](https://github.com/M17z2025/ai-command-center/pull/98).
+- Local suite: 123 tests passed, one Linux supervisor test skipped on Windows; three reporting tests passed separately. Actual local HTTP-process testing and control-plane validation passed.
+- GitHub automation checks: [run 36555229441](https://github.com/M17z2025/ai-command-center/actions/runs/36555229441), reported SUCCESS, including Docker build, Linux process tests, non-root gstack access and Compose validation.
+- GitHub control-plane checks: [run 36555229342](https://github.com/M17z2025/ai-command-center/actions/runs/36555229342), reported SUCCESS.
+- GitHub mesh checks: [run 36555229460](https://github.com/M17z2025/ai-command-center/actions/runs/36555229460), reported SUCCESS.
+- Independent gstack specialist reported eight tests passing and a verified actual pinned-file installation. Those results are delegated evidence; this reviewer did not run the successful installer.
+
+The separate independent test attempt using installed dependencies encountered sandbox read restrictions and Windows SQLite cleanup failures before the connection-closure repair. An escalated rerun was interrupted without a result; it contributes no passing evidence.
+
+The new GitHub status outbox is reported to publish only job/repository identity, state and attempt metadata using a separate issue-only token, with retries and reconciliation independent from job execution. Its final implementation received separate architecture/test review; this reviewer did not independently inspect or execute the final outbox code. Public reporting must continue to exclude mission text, model output, credentials and exception details; repository names may themselves be sensitive if the allowlist is expanded to private products.
+
+**Final independent security disposition:** source candidate may proceed through the execution-disabled PR workflow with the recorded evidence and limitations. **Unattended live execution remains BLOCKED / NOT VERIFIED.** AUTO-SEC-01 and AUTO-SEC-05 remain mandatory coding-worker activation gates; AUTO-SEC-06 requires deployed edge verification. The runbook explicitly keeps the existing credential-bearing worker disabled until isolation and exact-source enforcement are proven. Live secrets, host/network configuration, external alerts, restore evidence and an actual unattended project journey remain unverified. Successful CI does not certify those controls.
