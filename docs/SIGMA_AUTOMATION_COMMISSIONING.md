@@ -29,9 +29,10 @@ its history is not silently imported into the new queue.
 
 Provision privately, without committing or pasting values:
 
-- `SIGMA_AUTOMATION_GITHUB_TOKEN`: a dedicated read credential for the registered
-  repositories and the command-center commit/Actions evidence endpoints.
 - `OLLAMA_MODEL=qwen3:4b-instruct`, if that remains the approved installed model.
+- `SIGMA_AUTOMATION_GITHUB_TOKEN` is optional in planning-only mode while the
+  enabled schedule targets only public repositories such as `M17z2025/ai-command-center`.
+  Private-project discovery and worker mode still require separately governed GitHub authority.
 - Keep `SIGMA_RUNNER_EXECUTE`, `SIGMA_RUNNER_ALLOW_WRITE`,
   `SIGMA_WORKER_ALLOW_WRITE`, and `SIGMA_AUTOMATION_REPORT_WRITE` disabled.
 
