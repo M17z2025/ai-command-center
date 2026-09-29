@@ -45,6 +45,8 @@ class SigmaPrivateWorkerTests(unittest.TestCase):
             "destructive_actions",
             "paid_spend",
             "direct_main_push",
+            "secret_management",
+            "security_control_reduction",
         ):
             with self.subTest(key=key):
                 with self.assertRaises(MOD.WorkerError):

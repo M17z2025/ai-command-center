@@ -50,22 +50,33 @@ deployment and user certification remain in #89/#92, with PR #96 retained.
 
 ## Deployment status and exact next gates
 
-**OVH deployment: NOT PERFORMED / NOT VERIFIED.** No approved host alias/repository
-path or live credentials were supplied in this implementation session. Docker
-source was exercised in GitHub Linux CI, not on the target VPS.
+**Automation deployment: NOT PERFORMED / NOT VERIFIED. Existing Sigma stack: LIVE.**
+The September 29 [fresh host audit](https://github.com/M17z2025/alisha-ai-platform/actions/runs/36563998576)
+supersedes the earlier access assumption. The existing `alisha-ovh-signer` runner
+reaches `vps-082b0c49`. Compose runs from `/opt/ai-command-center/deploy/sigma-stack`
+with base, Ollama and memory overlays. Runtime health on loopback 8080 is 200;
+the scheduler has empty GitHub/worker credentials and worker endpoint. Its protected
+`.env` exists but the runner cannot read it. No secret values were printed.
+Ollama has `qwen3:4b-instruct` and `qwen3-embedding:0.6b`. No host services changed.
+
+Worker isolation source was added at `8db1f82c245681daf2963cc00e3246df2c4edfea`.
+All three existing workflows passed. [Dedicated Docker run](https://github.com/M17z2025/ai-command-center/actions/runs/36572863412)
+passed hostile container/network/recovery tests but found the broker image lacked
+the Docker client. That image defect is under repair; this run is not a release pass.
 
 1. Review final PR head and independent reports. Source review findings about replay,
    stale recovery, heartbeat fail-stop and SQLite closure were repaired and tested.
-2. Provide approved existing OVH access and owner-provisioned runtime secrets through
-   the private channel. Do not place values in GitHub. No new paid service is needed.
+2. Provision persistent service credentials in the protected VPS environment using
+   the owner/admin route. The chat connector is not a persistent service credential.
+   Do not place values in GitHub or chat. No new paid service is needed.
 3. Use `docs/SIGMA_AUTOMATION.md` to replace the old timer with planning-only services.
    Record exact deployed source/image digest, redacted container UID/mount/health
    evidence, valid/forged/replayed webhook outcomes and real scheduled cycle IDs.
 4. Verify actual restart/UNKNOWN-hold behavior, host watchdog, edge rate/TLS controls,
    backup/restore and safe GitHub outbox publication. Keep execution disabled.
-5. Remediate existing worker credential isolation and exact-source checkout under
-   independent security review. This is an engineering gate, not a request for the
-   owner to waive security. Then prove one harmless opted-in branch/PR task before
+5. Commission the reviewed credential-free worker and exact-source checkout on OVH.
+   Record production image identities and repeat the hostile boundary checks there.
+   Then prove one harmless opted-in branch/PR task before
    expanding project execution.
 6. Apply existing repository protections and independent CI/security/user-test gates
    before any merge or product-specific release. Do not close #97 as operational

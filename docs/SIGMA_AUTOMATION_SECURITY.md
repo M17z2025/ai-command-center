@@ -1,4 +1,5 @@
 # Sigma automation independent cybersecurity review
+> Latest reviewed implementation: `8db1f82c245681daf2963cc00e3246df2c4edfea`, PR #98. The worker-isolation follow-up below supersedes the original source findings AUTO-SEC-01 and AUTO-SEC-05: their design defects are repaired in the candidate. Live enforcement remains NOT VERIFIED until OVH commissioning evidence passes. Earlier sections preserve the original audit history and evidence limitations.
 
 ## Review identity
 
@@ -78,3 +79,36 @@ The separate independent test attempt using installed dependencies encountered s
 The new GitHub status outbox is reported to publish only job/repository identity, state and attempt metadata using a separate issue-only token, with retries and reconciliation independent from job execution. Its final implementation received separate architecture/test review; this reviewer did not independently inspect or execute the final outbox code. Public reporting must continue to exclude mission text, model output, credentials and exception details; repository names may themselves be sensitive if the allowlist is expanded to private products.
 
 **Final independent security disposition:** source candidate may proceed through the execution-disabled PR workflow with the recorded evidence and limitations. **Unattended live execution remains BLOCKED / NOT VERIFIED.** AUTO-SEC-01 and AUTO-SEC-05 remain mandatory coding-worker activation gates; AUTO-SEC-06 requires deployed edge verification. The runbook explicitly keeps the existing credential-bearing worker disabled until isolation and exact-source enforcement are proven. Live secrets, host/network configuration, external alerts, restore evidence and an actual unattended project journey remain unverified. Successful CI does not certify those controls.
+
+## Independent worker-isolation follow-up — `8db1f82c245681daf2963cc00e3246df2c4edfea`
+
+Reviewed source: `sigma_worker_isolation.py`, `sigma_worker_sandbox.py`, `sigma_openhands_worker_service.py`, the production inference gateway, worker Dockerfiles/Compose overlay, source-SHA dispatch fields and runtime API execution checks. This review was read-only except for this report.
+
+### Findings resolved in source
+
+- **AUTO-SEC-01, credential boundary:** the trusted broker performs Git transport and Docker operations. Repository scripts, model terminal tools and verification run in disposable non-root containers with no host mounts, Docker socket or broker credential environment. Only bounded, validated regular-file bytes return; a second exact-source checkout receives them. Verification uses a separate network-disabled container and its mutations are discarded. This repairs the previous LocalWorkspace-in-credential-process design.
+- **AUTO-SEC-05, source identity:** a full `source_sha` is required; Git fetch resolves and verifies that exact commit before materialising source. Both runner dispatch paths now supply that field. Source links/submodules are rejected, and Git hooks, ambient configuration, credential helpers and local/ext transports are disabled for trusted Git operations.
+- **Inference abuse:** the gateway serialises requests, bounds request/header/body reads, rejects malformed framing and non-object JSON, fixes the permitted model, replaces model options with context/output limits, and bounds model retention. The sandbox reaches only the pinned gateway on an internal isolated network. Redirects, ambient proxies and Ollama model-management routes are unavailable.
+- **Broker request exhaustion:** request parsing has a ten-second socket timeout from handler setup; pre-authentication threads are bounded to 16. Bearer authentication uses constant-time comparison. Framing rejects transfer encoding and duplicate content length.
+- **Orphan recovery:** disposable containers receive the validated broker identity label. Startup removes only that broker's labelled containers before accepting work, failing closed when cleanup fails. Deploy exactly one broker per identity; other brokers require distinct identities.
+- **Execution switch:** the runtime API validates the execute field as boolean and requires explicit server execution configuration and write authority. This is source inspection, not a live-host authorization test.
+
+### Independently executed local evidence
+
+Commands run against the reviewed shared checkout using local Python:
+
+| Command | Observed result |
+| --- | --- |
+| `python -m unittest discover -s tests -p test_sigma_worker_gateway.py -v` | 4 passed, including real HTTP malformed-request, option replacement, incomplete-body and incomplete-header cases |
+| `python -m unittest discover -s tests -p test_sigma_worker_isolation.py -v` | 4 passed; 5 real-Docker cases explicitly skipped because no fixture image was configured |
+| `python -m unittest discover -s tests -p test_sigma_private_worker.py -v` | 6 passed |
+
+Total independently executed in this follow-up: **14 passed, 5 skipped**. The Docker skips include credential/network isolation and orphan cleanup; they are not passing deployed evidence. No additional confirmed source escape from the regular-file transfer boundary was identified in this review.
+
+### Live disposition and next gate
+
+**BLOCKED / NOT VERIFIED for live unattended writes.** The implementation owner reports a fresh OVH audit found no configured GitHub token, worker endpoint or worker token, and the GitHub runner cannot read the protected `/opt/ai-command-center/deploy/sigma-stack/.env`. This reviewer did not access that host or the protected file. Missing credentials and restricted provisioning access are actual deployment blockers, not a reason to weaken access controls.
+
+The original source-level HIGH findings are now repaired in the candidate; their live enforcement is still an activation gate. Before activation, record exact broker/sandbox/gateway image IDs, approved Docker Engine/network configuration, all five real-Docker hostile tests on OVH, credential scope and branch restrictions, cleanup/restart proof, and one bounded actual model mission. The Docker socket gives the broker host-level authority, so its immutable reviewed code and private authenticated endpoint are mandatory trust assumptions. Keep the existing execution/write switches disabled until those controls are evidenced and missing owner-held configuration is provisioned through the authorised channel.
+
+This disposition permits continued execution-disabled testing and commissioning work. It grants no production release, secret provisioning or security-control reduction authority.

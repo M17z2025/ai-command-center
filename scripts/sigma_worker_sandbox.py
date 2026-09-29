@@ -21,9 +21,9 @@ def snapshot(root):
     return result
 
 
-def edit(root, request):
+def build_agent(request):
     from pydantic import SecretStr
-    from openhands.sdk import Agent, Conversation, LLM, LocalWorkspace
+    from openhands.sdk import Agent, LLM
     from openhands.sdk.tool import Tool
     from openhands.tools.preset.default import register_default_tools
     from openhands.tools.terminal import TerminalTool
@@ -31,8 +31,13 @@ def edit(root, request):
               base_url="http://inference-gateway:8081", api_key=SecretStr("local"),
               reasoning_effort="none", num_retries=1, timeout=300)
     register_default_tools(enable_browser=False)
-    agent = Agent(llm=llm, tools=[Tool(name=TerminalTool.name)],
-                  system_prompt_kwargs={"cli_mode": True})
+    return Agent(llm=llm, tools=[Tool(name=TerminalTool.name)],
+                 system_prompt_kwargs={"cli_mode": True})
+
+
+def edit(root, request):
+    from openhands.sdk import Conversation, LocalWorkspace
+    agent = build_agent(request)
     with LocalWorkspace(working_dir=root) as workspace:
         conversation = Conversation(agent=agent, workspace=workspace)
         try:

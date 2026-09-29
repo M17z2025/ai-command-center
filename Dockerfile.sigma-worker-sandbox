@@ -4,6 +4,7 @@ WORKDIR /app
 COPY requirements-worker.txt requirements-control.txt ./
 RUN pip install --no-cache-dir -r requirements-worker.txt -r requirements-control.txt
 COPY scripts/sigma_worker_sandbox.py /app/sigma_worker_sandbox.py
+COPY scripts/sigma_worker_sdk_smoke.py /app/sigma_worker_sdk_smoke.py
 RUN useradd --create-home --uid 10001 sigmaworker
 USER 10001:10001
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1

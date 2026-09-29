@@ -152,7 +152,8 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     if repository not in _allowed_repositories():
         raise WorkerError("Repository is not in SIGMA_WORKER_ALLOWED_REPOSITORIES")
     authority = payload.get("authority") or {}
-    for forbidden in ("production_release", "destructive_actions", "paid_spend", "direct_main_push"):
+    for forbidden in ("production_release", "destructive_actions", "paid_spend", "direct_main_push",
+                      "secret_management", "security_control_reduction"):
         if authority.get(forbidden):
             raise WorkerError(f"Forbidden worker authority requested: {forbidden}")
     source_sha = str(payload.get("source_sha", ""))

@@ -1,5 +1,21 @@
 # Sigma Development Command Center Status
 
+## 29 September 2026 — Live access verified; worker activation still gated
+
+The existing GitHub runner reaches the OVH host. Fresh audit run `36563998576`
+locates Sigma at `/opt/ai-command-center/deploy/sigma-stack`; health is 200.
+The running scheduler has no GitHub credential, worker credential or endpoint.
+Its protected `.env` cannot be read by the runner. This supersedes earlier claims
+that missing local SSH or an unknown host path prevented progress.
+
+PR #98 now isolates agent execution and verification from the credential broker,
+pins source SHA, bounds inference and recovers orphan job containers. Independent
+source review completed. Real Docker hostile tests pass in CI; a separate broker
+image client defect is being repaired. Unattended OVH execution remains unverified.
+Owner/admin service credential provisioning is required; then commission the exact
+reviewed images and record a real scheduled branch/PR task and restart recovery.
+Evidence and remaining gates: issue #97 and `docs/SIGMA_AUTOMATION_EVIDENCE.md`.
+
 ## 29 September 2026 — Sigma + gstack durable automation candidate (#97)
 
 **SOURCE CANDIDATE; LIVE OVH DEPLOYMENT AND WRITE COMMISSIONING NOT VERIFIED.**

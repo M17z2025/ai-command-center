@@ -9,7 +9,7 @@ permissions:
 jobs:
   hostile-docker-boundary:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -33,6 +33,10 @@ jobs:
           docker build -f Dockerfile.sigma-worker -t sigma-worker-broker:test .
           docker build -f Dockerfile.sigma-worker-gateway -t sigma-worker-gateway:test .
           docker run --rm --group-add "$(stat -c '%g' /var/run/docker.sock)" -v /var/run/docker.sock:/var/run/docker.sock sigma-worker-broker:test docker version
+      - name: Build production SDK image and verify real API constructors offline
+        run: |
+          docker build -f Dockerfile.sigma-worker-sandbox -t sigma-worker-sandbox:test .
+          docker run --rm --network none --read-only --cap-drop=ALL --security-opt=no-new-privileges --tmpfs=/tmp:rw,nosuid,size=128m --tmpfs=/workspace:rw,nosuid,size=64m,uid=10001,gid=10001 --tmpfs=/home/sigmaworker:rw,nosuid,size=32m,uid=10001,gid=10001 sigma-worker-sandbox:test python /app/sigma_worker_sdk_smoke.py
       - name: Confirm disposable jobs were removed
         if: always()
         run: |
