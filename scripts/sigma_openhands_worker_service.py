@@ -47,19 +47,24 @@ def _branch_name(issue_number: int | None, mission_id: str) -> str:
     return BRANCH_RE.sub("-", branch).strip("-/")
 
 
-def _git_env() -> tuple[dict[str, str], Path]:
+def _git_env() -> tuple[dict[str, str], Path | None]:
     token = os.getenv("SIGMA_GITHUB_TOKEN", "")
+    allow_write = os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") == "1"
+    env = clean_env()
+    env.update({"GIT_AUTHOR_NAME": "Sigma Worker", "GIT_AUTHOR_EMAIL": "sigma-worker@localhost",
+                "GIT_COMMITTER_NAME": "Sigma Worker", "GIT_COMMITTER_EMAIL": "sigma-worker@localhost"})
     if not token:
-        raise WorkerError("SIGMA_GITHUB_TOKEN is required")
+        if allow_write:
+            raise WorkerError("SIGMA_GITHUB_TOKEN is required when worker write mode is enabled")
+        # Public read-only proof may fetch anonymously. Private repository fetches
+        # still fail closed, and no write/PR path is reachable without a token.
+        return env, None
     root = Path(os.getenv("SIGMA_WORKER_ROOT", "/workspaces"))
     root.mkdir(parents=True, exist_ok=True, mode=0o700)
     askpass = root / ".git-askpass.sh"
     askpass.write_text('#!/bin/sh\ncase "$1" in\n *Username*) echo x-access-token ;;\n *Password*) echo "$SIGMA_GITHUB_TOKEN" ;;\nesac\n', encoding="utf-8")
     askpass.chmod(0o700)
-    env = clean_env()
-    env.update({"SIGMA_GITHUB_TOKEN": token, "GIT_ASKPASS": str(askpass),
-                "GIT_AUTHOR_NAME": "Sigma Worker", "GIT_AUTHOR_EMAIL": "sigma-worker@localhost",
-                "GIT_COMMITTER_NAME": "Sigma Worker", "GIT_COMMITTER_EMAIL": "sigma-worker@localhost"})
+    env.update({"SIGMA_GITHUB_TOKEN": token, "GIT_ASKPASS": str(askpass)})
     return env, askpass
 
 
