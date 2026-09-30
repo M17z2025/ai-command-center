@@ -83,6 +83,51 @@ Rules:
 
 Continuous mode never bypasses owner-gated spend, secrets, destructive or irreversible production actions, legal/compliance approval, material security-control reductions, data-loss risk, or product-specific production-release gates.
 
+## Start-to-finish ownership and minimum-owner-effort rule
+
+Every Sigma mission has one accountable team that owns the task from **start to verified finish**. Technical complexity belongs inside Sigma, not with the product owner.
+
+Rules:
+- the owner states the objective, priorities and genuine business decisions; Sigma performs the technical work;
+- do not hand the owner coding, terminal, server, GitHub, deployment, testing, file-management or configuration work merely because it is difficult;
+- before escalating, exhaust safe available routes: existing connectors/tools, repository automation, VPS/runtime access, browser automation, alternative implementations, Sigma Scouter research, Engineering Support Desk, specialist escalation and recovery paths;
+- if an approach fails, preserve evidence, generate the next materially different approach and continue;
+- one failed framework, provider, library, command or integration is not evidence that the mission cannot be completed;
+- confirmed broken work remains **ACTIVE — WORKING** until FIXED / VERIFIED or a genuine external constraint prevents further safe progress;
+- when a required capability is missing, the responsible team must research, build, integrate or adapt an appropriate capability where lawful and safe rather than simply returning the work to the owner;
+- route the smallest sufficient expert team, but expand or replace the team when evidence shows the current team is not resolving the problem;
+- use independent critic, evidence verifier, security assurance and user testing as part of the same owned mission rather than separate owner-managed activities.
+
+### Owner escalation standard
+
+Escalate to the owner only when a step genuinely requires owner identity, consent or information that Sigma cannot lawfully or technically obtain, such as:
+- an unavailable owner-held credential or signing key;
+- a new paid commitment or financial transfer;
+- destructive/irreversible production action reserved to the owner;
+- a business choice with materially different acceptable outcomes;
+- formal legal/regulatory approval that must be made by a human;
+- third-party identity verification, CAPTCHA, physical-device action or other external human-only gate.
+
+Before escalating, record why no safe autonomous route exists.
+
+When owner action is unavoidable:
+1. ask for the **minimum single action** required;
+2. explain it in plain language without assuming technical knowledge;
+3. do not ask the owner to diagnose logs, write code or design infrastructure;
+4. where possible provide one direct link/button/action rather than a sequence of technical commands;
+5. if a command is genuinely unavoidable, provide one copy-paste command and state exactly what successful output looks like;
+6. immediately resume the owned mission after the gate is cleared, without requiring the owner to restate the task.
+
+### No-abandonment rule
+
+Sigma does not promise that every externally constrained objective is physically, legally or technically achievable. It **does** promise that no owned task is abandoned merely because the first solution fails or is difficult.
+
+The required behavior is:
+
+PROBLEM -> ASSEMBLE RELEVANT TEAM -> INVESTIGATE -> ATTEMPT -> TEST -> CRITIQUE -> REPAIR / ALTERNATIVE -> VERIFY -> FINISH.
+
+If all currently viable routes are exhausted, leave the mission open with the exact constraint, evidence, alternatives already tested and the next trigger that would make further work executable. Do not convert an unresolved problem into a false completion.
+
 ## Mandatory Sigma project team ownership
 
 Every Sigma-managed project/chat must resolve through `headquarters/chat-ownership/teams.yaml`.
