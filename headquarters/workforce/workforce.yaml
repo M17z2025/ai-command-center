@@ -93,3 +93,67 @@ dashboard_contract:
     - agent drill-down with parent, children, scope, sources, benchmarks, freshness and history
     - gaps/recruitment queue
   source_of_truth: "GitHub definitions plus runtime evidence store"
+
+
+universal_scope:
+  rule: "Sigma is a universal professional and advisory workforce. Software development is one division, not the purpose of the workforce as a whole."
+  sectors_include:
+    - science and mathematics
+    - computing, AI and cyber security
+    - engineering, industry and technology
+    - medicine, surgery and health sciences
+    - veterinary, agriculture and environment
+    - business, economics, finance, accounting and investment
+    - executive leadership including CEO, CFO, CTO, COO and board governance
+    - law, legal practice, regulation and compliance
+    - public policy, government, geopolitics and political-systems analysis
+    - education, teaching, lecturing, curriculum and learning science
+    - recruitment, HR, people operations and organisational design
+    - research, intelligence, evidence and decision science
+    - mining, geology, resources, commodities and metallurgy
+    - marketing, sales, commercial strategy and customer success
+    - arts, media, film, writing, music, design and fashion
+    - architecture, built environment and product design
+    - any additional material profession or sector identified by the coverage-gap process
+  rule_for_new_sectors: "Unknown or under-covered sectors create a governed recruitment gap; they are never silently treated as covered by a generic software agent."
+
+black_belt_boards:
+  enabled: true
+  purpose: "Each sector's strongest independently certified Black Belt agents govern capability quality, workforce design, training depth and sector coverage."
+  board_is_not_owner_authority: true
+  boards_do_not_self_certify: true
+  required_functions:
+    - "review sector mission demand, failures and unresolved work"
+    - "identify missing professions, disciplines, jurisdictions and specialist skills"
+    - "approve recruitment proposals subject to independent evaluation"
+    - "design training curricula and authoritative source requirements"
+    - "review benchmark, task-success, critic, security and user-outcome evidence"
+    - "recommend promotion, retraining, consolidation, demotion or retirement"
+    - "plan team structures, succession and leadership depth"
+    - "keep knowledge current and trigger recertification"
+    - "allocate the smallest sufficient expert teams to real missions"
+    - "publish sector capability gaps and next recruitment priorities"
+  cadence:
+    continuous_gap_scan: "daily"
+    formal_sector_board: "weekly"
+    executive_cross_sector_council: "weekly"
+    strategic_workforce_review: "monthly"
+  quorum:
+    target_black_belts: 5
+    provisional_until_quorum: true
+    provisional_rule: "Until five independently certified Black Belts exist, the highest-evidence qualified/advanced specialists plus independent critic/evidence verifier may hold a provisional board; it cannot award its own Black Belt status."
+  board_evidence:
+    - "agenda"
+    - "attendance by agent_id and version"
+    - "sector metrics"
+    - "gaps identified"
+    - "decisions and dissent"
+    - "recruitment/training actions"
+    - "recertification actions"
+    - "next review date"
+  prohibited:
+    - "vanity headcount targets overriding quality"
+    - "self-certification"
+    - "leader title without evidence"
+    - "ignoring a sector because no existing agent covers it"
+    - "using software-development performance as a proxy for non-software professional competence"
