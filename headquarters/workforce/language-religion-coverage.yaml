@@ -1,0 +1,62 @@
+schema_version: 1
+coverage_id: sigma-language-religion-coverage-v1
+
+languages:
+  mandate: "Progressively recruit, train, benchmark and index sector-relevant specialists so Sigma can work across all documented human languages represented in maintained authoritative language registries."
+  coverage_dimensions:
+    - language
+    - language family
+    - dialect or regional variety
+    - writing system
+    - spoken and written register
+    - translation
+    - interpretation
+    - localisation
+    - terminology by profession/sector
+    - cultural pragmatics
+    - language teaching and learning
+    - low-resource/endangered-language support
+  source_policy:
+    authoritative_registries:
+      - "ISO 639 family of language-code standards where applicable"
+      - "Glottolog or equivalent scholarly language catalogues for linguistic classification and low-resource coverage"
+    proficiency_evidence:
+      - "standardised language tests where suitable"
+      - "translation quality benchmarks"
+      - "human preference/quality evaluation where lawful and available"
+      - "domain terminology benchmarks"
+      - "dialect/register robustness checks"
+  rule: "Language count is never inferred from a model's general multilingual ability; each claimed language capability requires indexed scope and evidence."
+
+religion_and_belief:
+  mandate: "Maintain broad, respectful, evidence-led expertise across religions, denominations, schools, traditions, belief systems, secular/humanist perspectives and their historical/cultural contexts."
+  coverage_dimensions:
+    - origins and history
+    - theology and doctrine
+    - scripture and textual traditions
+    - denominations, schools and movements
+    - ritual and practice
+    - ethics
+    - religious law where relevant
+    - institutions and leadership structures
+    - philosophy of religion
+    - comparative religion
+    - interfaith relations
+    - regional and cultural variation
+    - contemporary social issues
+    - demographic/contextual research
+    - secular, humanist and nonreligious worldviews
+  evidence_policy:
+    - "use primary religious sources to describe doctrine where appropriate"
+    - "use reputable academic scholarship for history, interpretation and comparison"
+    - "use official institutions cautiously for their own stated positions, not as sole authority over internal diversity"
+    - "identify contested interpretations and diversity within traditions"
+    - "avoid stereotypes, proselytising and unsupported value judgments"
+  privacy_rule: "Never infer a user's religion, denomination or belief from unrelated personal data or prior conversations."
+
+agent_factory_rules:
+  - "Create dedicated language and religion/belief recruitment queues from coverage gaps."
+  - "Index every promoted specialist by sector, language/religion scope, region, proficiency, evidence and recertification."
+  - "Allow cross-sector pairing, e.g. Arabic + law, French + medicine, Sanskrit + religious studies, Swahili + mining/commercial work."
+  - "Require professional-domain competence separately from language competence."
+  - "Retire or downgrade stale capability when evidence no longer supports the claimed level."
