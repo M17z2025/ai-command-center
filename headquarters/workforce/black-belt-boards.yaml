@@ -1,0 +1,120 @@
+schema_version: 1
+board_system_id: sigma-black-belt-sector-boards-v1
+root_authority: Mitesh
+executive_owner: sigma-governor
+scope: "Universal professional/advisory workforce. Software development is one division among many."
+
+meeting_model:
+  daily:
+    type: "asynchronous capability-gap scan"
+    outputs: ["new gaps","stale knowledge","mission failures","training demand","recruitment priorities"]
+  weekly:
+    type: "formal sector board"
+    outputs: ["board minutes","workforce decisions","training decisions","gap register","team allocation","succession actions"]
+  weekly_cross_sector:
+    type: "Sigma Black Belt Executive Council"
+    outputs: ["cross-sector gaps","shared capability investments","leader succession","portfolio-wide standards"]
+  monthly:
+    type: "strategic workforce review"
+    outputs: ["sector balance","quality trends","growth quality","retirement/consolidation","next-month priorities"]
+
+board_membership:
+  permanent_assurance:
+    - sigma-independent-critic
+    - sigma-evidence-verifier
+    - evaluation-evolution-controller
+  sector_members:
+    minimum_black_belts: 5
+    selection: "highest-performing independently certified Black Belts relevant to the sector"
+    leader: "highest-performing eligible sector leader; leadership subject to continuous review"
+  provisional_board:
+    allowed: true
+    condition: "fewer than five sector Black Belts"
+    members: "highest-evidence ADVANCED/QUALIFIED specialists plus independent assurance"
+    restriction: "may propose but cannot self-award Black Belt certification"
+
+boards:
+  - id: formal-natural-sciences-board
+    name: "Formal & Natural Sciences Black Belt Board"
+    sector: formal-natural-sciences
+    professions: ["mathematicians","physicists","chemists","earth scientists","biologists","research scientists"]
+
+  - id: computing-information-cyber-board
+    name: "Computing, AI, IT & Cyber Security Black Belt Board"
+    sector: computing-information-cyber
+    professions: ["AI scientists","software engineers","computer scientists","data engineers","cybersecurity specialists","cloud/infrastructure specialists"]
+
+  - id: engineering-industry-design-board
+    name: "Engineering, Industry & Technology Black Belt Board"
+    sector: engineering-industry-design
+    professions: ["aerospace engineers","mechanical engineers","electrical engineers","civil/structural engineers","process engineers","materials/metallurgy specialists","industrial engineers"]
+
+  - id: health-medical-sciences-board
+    name: "Health & Medical Sciences Black Belt Board"
+    sector: health-medical-sciences
+    professions: ["physicians","surgeons","anaesthesia specialists","pathology/laboratory specialists","pharmacology/medicines specialists","genetics specialists","oncology/immunology specialists","neuroscience specialists","public-health specialists"]
+
+  - id: agriculture-environment-veterinary-board
+    name: "Agriculture, Veterinary & Environmental Sciences Black Belt Board"
+    sector: agriculture-environment-veterinary
+    professions: ["veterinary specialists","agronomists","food scientists","environmental scientists","natural-resource specialists"]
+
+  - id: business-finance-economics-board
+    name: "Business, Finance & Economics Black Belt Board"
+    sector: business-finance-economics
+    professions: ["CEOs","CFOs","COOs","CTOs","board-governance specialists","strategists","economists","accountants","tax specialists","banking/investment specialists","actuarial/insurance specialists","sales leaders","marketing leaders","HR/recruitment leaders"]
+
+  - id: law-governance-geopolitics-board
+    name: "Law, Governance & Geopolitics Black Belt Board"
+    sector: law-governance-geopolitics
+    professions: ["lawyers","legal/compliance specialists","regulatory specialists","public-policy specialists","government/public-administration specialists","geopolitics/international-relations specialists","political-systems analysts","intelligence analysts"]
+
+  - id: humanities-social-sciences-board
+    name: "Humanities, Social Sciences & Education Black Belt Board"
+    sector: humanities-social-sciences
+    professions: ["historians","anthropologists","sociologists","psychologists","geographers","philosophers","educators","teachers","lecturers","curriculum specialists"]
+
+  - id: languages-cultures-board
+    name: "Languages, Linguistics, Translation & Cultures Black Belt Board"
+    sector: humanities-social-sciences
+    special_scope: languages
+    professions: ["linguists","translators","interpreters","philologists","dialect specialists","localisation specialists","cultural-context specialists"]
+    mandate:
+      - "progressively cover every language in the maintained authoritative language registry"
+      - "distinguish language, dialect, writing system, region, register and cultural context"
+      - "build translation, interpretation, localisation and language-teaching capability"
+      - "track low-resource and endangered-language gaps explicitly"
+      - "never claim native-level mastery without benchmark evidence"
+
+  - id: religion-belief-board
+    name: "Religion, Theology, Philosophy of Religion & Belief Systems Black Belt Board"
+    sector: humanities-social-sciences
+    special_scope: religion-belief
+    professions: ["religious-studies scholars","theologians","historians of religion","scriptural/textual scholars","comparative-religion specialists","interfaith specialists","philosophy-of-religion specialists"]
+    mandate:
+      - "cover major and minor religions, denominations, traditions, schools and regional variants"
+      - "cover historical development, theology, texts, ritual, practice, law, ethics, institutions, culture and contemporary issues"
+      - "include nonreligious, secular and humanist worldviews where relevant"
+      - "distinguish primary-source doctrine from academic interpretation and lived practice"
+      - "represent internal diversity and disagreement rather than treating a religion as monolithic"
+      - "remain neutral and evidence-led; never infer the owner's or user's religion"
+
+  - id: arts-media-creative-board
+    name: "Arts, Media & Creative Expression Black Belt Board"
+    sector: arts-media-creative
+    professions: ["writers","screenwriters","film directors","film producers","editors","photographers","designers","fashion specialists","musicians","creative directors","architectural designers"]
+
+  - id: cross-domain-meta-board
+    name: "Research, Evidence, Decision & Assurance Black Belt Board"
+    sector: cross-domain-meta
+    professions: ["researchers","evidence specialists","systems/decision scientists","ethics/safety specialists","foresight specialists","independent critics","verification specialists"]
+
+board_rules:
+  - "Boards manage capability quality and workforce design; they do not override root authority."
+  - "Boards do not self-certify."
+  - "Every board continuously seeks gaps instead of assuming the taxonomy is complete."
+  - "Board decisions become recruitment/training/evaluation work items with evidence."
+  - "Boards compare leaders and specialists using real performance, not titles or prestige."
+  - "High-impact medical, legal, financial and public-policy work retains applicable human/professional gates."
+  - "Political/public-policy work remains neutral, factual and evidence-led."
+  - "Religion and culture work must preserve internal diversity, avoid stereotypes and distinguish facts from interpretation."
