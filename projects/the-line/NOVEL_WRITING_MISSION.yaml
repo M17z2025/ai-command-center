@@ -1,0 +1,105 @@
+schema_version: 1
+mission: "THE MAN THAT NEVER WAS — Book One novel rewrite"
+issue: 105
+state: ACTIVE_REWRITE
+parent_leader: arts-creative-director
+mode: sigma-full-mesh
+target_words:
+  minimum: 80000
+  target: 90000
+  maximum_guidance: 100000
+source_material_status:
+  prior_novel_files: TREATMENT_ONLY
+  screenplay_material: REFERENCE_ONLY
+  canon_files: AUTHORITATIVE_UNLESS_SUPERSEDED_BY_OWNER
+temporary_specialists:
+  - id: long-form-fiction-director
+    parent: arts-creative-director
+    mission: "Own long-form novel architecture, prose standard, pacing and acceptance."
+    domain_scope: ["literature-writing", "crime-fiction"]
+    allowed_tools: ["repository-read", "repository-write", "research"]
+    prohibited_actions: ["self-approve final", "change canon without owner instruction"]
+    evidence_requirements: ["architecture", "draft-state", "handoff"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: crime-fiction-novelist
+    parent: arts-creative-director
+    mission: "Draft Book One as sustained original crime-fiction prose."
+    domain_scope: ["literature-writing", "crime-fiction"]
+    allowed_tools: ["repository-read", "repository-write", "research"]
+    prohibited_actions: ["copy protected expression", "self-approve final"]
+    evidence_requirements: ["chapter drafts", "word-count"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: literary-prose-editor
+    parent: arts-creative-director
+    mission: "Remove screenplay grammar and enforce true novel prose."
+    domain_scope: ["literature-writing", "editing"]
+    allowed_tools: ["repository-read", "repository-write"]
+    prohibited_actions: ["self-approve final"]
+    evidence_requirements: ["prose-review"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: character-psychology-editor
+    parent: arts-creative-director
+    mission: "Assure depth and continuity of M, Kay, Jay, Asha and principal cast."
+    domain_scope: ["literature-writing", "character-psychology"]
+    allowed_tools: ["repository-read", "repository-write"]
+    prohibited_actions: ["change owner-locked relationships"]
+    evidence_requirements: ["character-review"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: dialogue-editor
+    parent: arts-creative-director
+    mission: "Assure differentiated British dialogue, subtext and natural speech."
+    domain_scope: ["literature-writing", "dialogue"]
+    allowed_tools: ["repository-read", "repository-write"]
+    prohibited_actions: ["copy dialogue from existing works"]
+    evidence_requirements: ["dialogue-review"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: canon-continuity-editor
+    parent: arts-creative-director
+    mission: "Verify all Book One continuity against owner-locked canon."
+    domain_scope: ["continuity", "literature-writing"]
+    allowed_tools: ["repository-read", "repository-write"]
+    prohibited_actions: ["silently resolve canon conflicts"]
+    evidence_requirements: ["continuity-report"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: crime-underworld-research-adviser
+    parent: arts-creative-director
+    mission: "Advise on plausible crime-world context without procedural criminal instruction."
+    domain_scope: ["crime-fiction", "research"]
+    allowed_tools: ["repository-read", "research"]
+    prohibited_actions: ["operational wrongdoing instructions"]
+    evidence_requirements: ["research-notes"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: mining-africa-business-adviser
+    parent: arts-creative-director
+    mission: "Assure credible mining/resources and Africa-business progression."
+    domain_scope: ["mining-resources-engineering", "business", "regional-context"]
+    allowed_tools: ["repository-read", "research"]
+    prohibited_actions: ["invent current law or licence rules without research"]
+    evidence_requirements: ["domain-review"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: independent-novel-critic
+    parent: arts-creative-director
+    mission: "Independently test whether the manuscript succeeds as a novel and reject screenplay-like prose."
+    domain_scope: ["literature-writing", "criticism"]
+    allowed_tools: ["repository-read"]
+    prohibited_actions: ["rewrite manuscript", "self-waive blockers"]
+    evidence_requirements: ["critic-report", "verdict"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+  - id: final-manuscript-editor
+    parent: arts-creative-director
+    mission: "Perform final structural and copy edit only after critic blockers are repaired."
+    domain_scope: ["literature-writing", "editing"]
+    allowed_tools: ["repository-read", "repository-write"]
+    prohibited_actions: ["waive critic blockers"]
+    evidence_requirements: ["final-editor-report"]
+    expiry_or_review_condition: "Book One final acceptance or mission cancellation"
+acceptance:
+  screenplay_like_prose: FAIL
+  sustained_pov: REQUIRED
+  interiority: REQUIRED
+  atmosphere: REQUIRED
+  consequences: REQUIRED
+  character_depth: REQUIRED
+  critic_verdict: PASS_REQUIRED
+  final_formats: ["docx", "pdf_6x9", "epub"]
+  google_drive_upload: REQUIRED
