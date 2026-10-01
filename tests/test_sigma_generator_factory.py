@@ -3,6 +3,8 @@ from pathlib import Path
 import unittest
 import tempfile
 
+import yaml
+
 from sigma_runtime.generator_factory import GeneratorFactory, GeneratorFactoryError
 
 
@@ -142,6 +144,32 @@ class SigmaGeneratorFactoryTests(unittest.TestCase):
         self.assertTrue(
             any("max_definition_bytes" in reason for reason in decision.reasons)
         )
+
+
+    def test_owner_supplied_github_source_registry(self):
+        path = ROOT / "headquarters" / "generator-factory" / "user-github-sources.yaml"
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        self.assertEqual(data["schema_version"], 1)
+
+        sources = data["sources"]
+        urls = [item["url"] for item in sources]
+
+        self.assertEqual(len(urls), 40)
+        self.assertEqual(len(urls), len(set(urls)))
+        self.assertTrue(all(url.startswith("https://github.com/") for url in urls))
+        self.assertTrue(
+            all(item["state"] in {"REVIEW", "EVIDENCE"} for item in sources)
+        )
+
+        required = {
+            "https://github.com/JustVugg/colibri",
+            "https://github.com/OpenHands/OpenHands",
+            "https://github.com/HKUDS/DeepTutor",
+            "https://github.com/pipecat-ai/pipecat",
+            "https://github.com/M17z2025/ai-command-center",
+            "https://github.com/M17z2025/mi7z-web",
+        }
+        self.assertTrue(required.issubset(set(urls)))
 
 
 if __name__ == "__main__":
