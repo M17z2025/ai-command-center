@@ -151,6 +151,12 @@ class GeneratorFactory:
             default_count = config.get("default_count", 1)
             if not isinstance(default_count, int) or isinstance(default_count, bool) or default_count < 1:
                 reasons.append(f"{op_type} default_count must be a positive integer")
+            if (
+                op_type == "choice"
+                and "with_replacement" in config
+                and not isinstance(config["with_replacement"], bool)
+            ):
+                reasons.append("choice with_replacement must be a boolean")
 
         elif op_type == "combine":
             fields = config.get("fields")
@@ -240,14 +246,22 @@ class GeneratorFactory:
 
     def validate_spec_file(self, path: Path | str) -> GeneratorDecision:
         candidate_path = Path(path)
-        data = self._load(candidate_path)
-        encoded_size = len(candidate_path.read_bytes())
-        if encoded_size > int(self.policy.get("limits", {}).get("max_definition_bytes", 131072)):
+        limit = int(
+            self.policy.get("limits", {}).get("max_definition_bytes", 131072)
+        )
+        try:
+            encoded_size = candidate_path.stat().st_size
+        except OSError as exc:
+            raise GeneratorFactoryError(
+                f"cannot inspect generator spec {candidate_path}: {exc}"
+            ) from exc
+        if encoded_size > limit:
             return GeneratorDecision(
-                str(data.get("id", "<missing-id>")),
+                "<oversize>",
                 "DRAFT",
                 ("definition exceeds max_definition_bytes",),
             )
+        data = self._load(candidate_path)
         return self.validate_definition(data)
 
     def draft_definition(
@@ -418,6 +432,10 @@ class GeneratorFactory:
         if len(template) > self.max_template_chars:
             raise GeneratorFactoryError("template exceeds max_template_chars")
 
+        unsupported = _PLACEHOLDER_RE.sub("", template)
+        if "{{" in unsupported or "}}" in unsupported:
+            raise GeneratorFactoryError("template contains unsupported placeholder syntax")
+
         fields = _PLACEHOLDER_RE.findall(template)
         missing = sorted({field for field in fields if field not in values})
         if missing:
@@ -434,8 +452,6 @@ class GeneratorFactory:
             return str(value)
 
         rendered = _PLACEHOLDER_RE.sub(replace, template)
-        if "{{" in rendered or "}}" in rendered:
-            raise GeneratorFactoryError("template contains unsupported placeholder syntax")
         if len(rendered) > self.max_rendered_chars:
             raise GeneratorFactoryError("rendered output exceeds max_rendered_chars")
         return rendered
