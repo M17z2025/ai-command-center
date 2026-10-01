@@ -63,3 +63,4 @@ No agent should guess project state. Read the repository, manifest, current stat
 
 - [Sigma Chat Build Ownership](./headquarters/chat-ownership/README.md) keeps all development chats for the same product on one accountable team and repository-backed backlog.
 - [Sigma Scouter](./headquarters/scouter/README.md) discovers reusable open-source code and unlimited-free/self-hosted APIs under a strict licence/quota evidence gate.
+- [Sigma Generator Factory](./headquarters/generator-factory/README.md) turns recurring generator needs into governed Sigma-owned declarative micro-tools.
