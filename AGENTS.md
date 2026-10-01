@@ -134,6 +134,7 @@ Rules:
 - V1 generator capabilities remain empty: no network, secrets, shell/subprocess, eval/exec, dynamic imports, arbitrary filesystem or production writes;
 - generator creation never grants the requesting agent additional authority;
 - external generator sites are inspiration/research sources unless a separately reviewed authorised API exists;
+- owner-supplied GitHub URLs must be persisted and deduplicated in `headquarters/generator-factory/user-github-sources.yaml`; external links remain REVIEW until Scouter evidence clears them, while internal M17z2025 links are evidence/history rather than adoption candidates;
 - material product integration still requires normal engineering, security and user-test gates.
 
 ## Mandatory Sigma Engineering Support Desk / Rescue Mode
