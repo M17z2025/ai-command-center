@@ -48,7 +48,7 @@ Sigma needs to create many small generators quickly across departments without r
 - generator-spec file size capped for standalone validation;
 - seeded PRNG used for reproducible choice behaviour.
 
-## Correctness evidence planned
+## Correctness evidence
 
 Unit tests cover:
 - registry validity;
@@ -71,8 +71,18 @@ Unit tests cover:
 - arbitrary HTTP URL execution;
 - environment-variable interpolation for secrets.
 
+## Automated evidence
+
+Tested code head: `49e1fa0318101448dea930318811d75dd0137612`.
+
+- unit tests: SUCCESS;
+- control-plane validator: SUCCESS;
+- deterministic mesh smoke: SUCCESS.
+
+The implementation was hardened after adversarial review to validate `with_replacement` as a boolean, reject oversized standalone specs before YAML parsing, and distinguish unsupported template syntax from literal braces supplied in input values.
+
 ## Current verdict
 
-**SOURCE CANDIDATE — VERIFICATION PENDING.**
+**SOURCE CANDIDATE — AUTOMATED VERIFICATION GREEN; INDEPENDENT SOLUTION JUDGE PENDING.**
 
-The selected architecture is the strongest bounded V1 candidate under the stated constraints. Exact-head CI and independent review are still required before release classification.
+The selected architecture is the strongest bounded V1 candidate under the stated constraints. The implementing path does not self-certify the required independent judge.
