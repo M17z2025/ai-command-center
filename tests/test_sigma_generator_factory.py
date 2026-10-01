@@ -1,6 +1,7 @@
 from copy import deepcopy
 from pathlib import Path
 import unittest
+import tempfile
 
 from sigma_runtime.generator_factory import GeneratorFactory, GeneratorFactoryError
 
@@ -113,6 +114,34 @@ class SigmaGeneratorFactoryTests(unittest.TestCase):
         )
         self.assertEqual(draft["state"], "DRAFT")
         self.assertEqual(draft["capabilities"], [])
+
+
+    def test_choice_with_replacement_must_be_boolean(self):
+        definition = deepcopy(self.factory.get_definition("sigma-random-picker"))
+        definition["id"] = "invalid-choice-config"
+        definition["operation"]["config"]["with_replacement"] = "false"
+        decision = self.factory.validate_definition(definition)
+        self.assertTrue(
+            any("with_replacement must be a boolean" in reason for reason in decision.reasons)
+        )
+
+    def test_template_preserves_braces_inside_input_values(self):
+        result = self.factory.execute(
+            "sigma-text-template",
+            {"text": "Example {{literal}} text"},
+        )
+        self.assertEqual(result, "Example {{literal}} text")
+
+    def test_standalone_spec_size_is_checked_before_parse(self):
+        limit = int(self.factory.policy["limits"]["max_definition_bytes"])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "oversize.yaml"
+            path.write_text("x" * (limit + 1), encoding="utf-8")
+            decision = self.factory.validate_spec_file(path)
+        self.assertEqual(decision.generator_id, "<oversize>")
+        self.assertTrue(
+            any("max_definition_bytes" in reason for reason in decision.reasons)
+        )
 
 
 if __name__ == "__main__":
