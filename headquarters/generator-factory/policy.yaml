@@ -1,0 +1,92 @@
+schema_version: 1
+policy_id: sigma-generator-factory-v1
+owner: "Mitesh"
+controller_agent: "sigma-generator-factory-controller"
+
+mission:
+  - "Rapidly create small specialist generators for any Sigma department using governed declarative definitions."
+  - "Turn validated patterns discovered by Sigma Scouter or requested by Sigma teams into reusable internal tools."
+  - "Prefer deterministic, testable, self-hosted capability over third-party generator dependencies."
+
+states:
+  DRAFT:
+    description: "Definition exists but has no execution authority."
+  APPROVED:
+    description: "Definition passed factory validation and may execute only through the fixed operation runtime."
+  DISABLED:
+    description: "Definition is retained for audit/history but cannot execute."
+
+allowed_operations:
+  - template
+  - choice
+  - weighted_choice
+  - combine
+  - synthetic_records
+
+required_definition_fields:
+  - id
+  - name
+  - department
+  - description
+  - state
+  - operation
+  - required_inputs
+  - capabilities
+  - provenance
+  - tests
+
+limits:
+  max_output_items: 1000
+  max_input_items: 10000
+  max_template_chars: 10000
+  max_rendered_chars: 50000
+  max_definition_bytes: 131072
+
+security:
+  default_capabilities: []
+  forbidden_capabilities:
+    - network
+    - shell
+    - subprocess
+    - eval
+    - exec
+    - dynamic_import
+    - secrets
+    - credential_access
+    - arbitrary_filesystem
+    - production_write
+    - external_service
+  rules:
+    - "Definitions are data, never executable source code."
+    - "Unknown operations fail closed."
+    - "Only APPROVED definitions with zero validation findings may execute."
+    - "Generated definitions never inherit authority from the requesting agent."
+    - "No definition may access environment variables, secrets, network services, subprocesses or arbitrary filesystem paths."
+    - "Draft output may be written only to an explicit operator-supplied path by the CLI."
+    - "Random operations must accept an explicit seed for reproducible test evidence."
+    - "Every operation enforces bounded input and output sizes."
+
+adoption_flow:
+  - "DISCOVER_OR_REQUEST"
+  - "DRAFT"
+  - "VALIDATE"
+  - "ENGINEERING_TEST"
+  - "SECURITY_REVIEW"
+  - "APPROVE"
+  - "REGISTER"
+  - "OBSERVE"
+  - "REVISE_OR_DISABLE"
+
+external_services:
+  perchance:
+    policy: "inspiration_only"
+    automation_allowed: false
+    reason: "Do not automate access unless future Perchance terms explicitly permit bot/script/API access."
+  rule: "External generator sites may inspire requirements; Sigma builds and runs its own governed implementation."
+
+approval:
+  approver_roles:
+    - "algorithmic-engineering-director"
+    - "sigma-solution-judge"
+    - "sigma-security-gatekeeper"
+  note: "Repository state APPROVED does not replace independent release/security evidence required by Sigma governance."
