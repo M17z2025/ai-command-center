@@ -112,6 +112,21 @@ Validate a standalone draft:
 python scripts/sigma_generator_factory.py check-spec /tmp/legal-review-scenarios.yaml
 \`\`\`
 
+## Owner-supplied GitHub source registry
+
+`user-github-sources.yaml` is the durable owner-supplied GitHub source index.
+
+Current baseline: **40 exact GitHub URLs recovered from owner messages** across prior Sigma/project conversations.
+
+Rules:
+- exact URLs are deduplicated;
+- external repositories/topics/organisations enter `REVIEW`, never automatic install or execution;
+- M17z2025 repository/PR/issue/action URLs are preserved as `EVIDENCE`;
+- links introduced only by an assistant are not represented as owner-supplied unless the owner also sent them;
+- external repositories must pass Sigma Scouter licence/commercial-use/maintenance/security/integration review before adoption;
+- useful patterns can be converted into Sigma-owned Generator Factory definitions without inheriting external runtime authority;
+- future GitHub links supplied by the owner in Sigma-connected work must be appended/deduplicated into this registry as durable project knowledge.
+
 ## Perchance boundary
 
 Perchance can be used by humans as inspiration/research where its terms permit. Sigma Generator Factory does not automate Perchance, scrape it, treat it as a production dependency, or send confidential Sigma information to public generators.
