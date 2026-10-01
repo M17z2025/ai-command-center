@@ -7,6 +7,7 @@
 The Generator Factory source candidate is implemented on `feat/103-sigma-generator-factory` and proposed in PR #104.
 
 Implemented:
+- owner-supplied GitHub source registry with 40 exact recovered URLs, deduplicated and separated into external `REVIEW` candidates versus internal M17z2025 `EVIDENCE` links;
 - governed policy + registry under `headquarters/generator-factory/`;
 - permanent `sigma-generator-factory-controller` registration and mesh routing;
 - fixed declarative operations: template, choice, weighted_choice, combine and synthetic_records;
@@ -21,6 +22,10 @@ Implemented:
 Tested code head: `49e1fa0318101448dea930318811d75dd0137612`.
 
 Evidence:
+- Owner-source registry verification head `e4130ecfecf16d7ab5d36ec78566093e52d6d7c7`:
+  - Sigma control-plane validation run `36871979380`: **SUCCESS**;
+  - Sigma mesh runtime run `36871979599`: **SUCCESS**;
+  - owner GitHub registry regression test: **SUCCESS**;
 - Sigma control-plane validation run `36869166258`: **SUCCESS**;
 - unit-test step: **SUCCESS**;
 - `scripts/validate_control_plane.py`: **SUCCESS**;
