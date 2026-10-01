@@ -1,0 +1,178 @@
+schema_version: 1
+registry_id: sigma-user-github-sources-v1
+generated_on: "2026-10-01"
+owner: "Mitesh"
+purpose: "Durable index of exact GitHub URLs supplied by the product owner across prior Sigma/project conversations. Presence here means 'preserve and review', not 'approved for adoption'."
+
+policy:
+  default_state: REVIEW
+  deduplicate_exact_urls: true
+  never_auto_execute: true
+  never_auto_install: true
+  never_assume_licence: true
+  route_external_repositories_through: "headquarters/scouter/policy.yaml"
+  route_internal_sigma_links_as: "project evidence / implementation history"
+  promotion_rule: "External code may move beyond REVIEW only after licence, commercial-use, maintenance, security/supply-chain and integration-fit evidence is recorded."
+  generator_factory_rule: "Useful patterns may inspire Sigma-owned declarative generators, but source links do not grant runtime authority."
+
+sources:
+  - url: "https://github.com/calcom/cal.diy"
+    kind: repository
+    area: scheduling
+    state: REVIEW
+  - url: "https://github.com/n8n-io/n8n"
+    kind: repository
+    area: automation
+    state: REVIEW
+  - url: "https://github.com/plausible/analytics"
+    kind: repository
+    area: analytics
+    state: REVIEW
+  - url: "https://github.com/knadh/listmonk"
+    kind: repository
+    area: marketing-email
+    state: REVIEW
+  - url: "https://github.com/every-app/open-seo"
+    kind: repository
+    area: seo
+    state: REVIEW
+  - url: "https://github.com/anil-matcha/open-generative-ai"
+    kind: repository
+    area: generative-ai
+    state: REVIEW
+  - url: "https://github.com/Open-Generative-AI"
+    kind: github-organization
+    area: generative-ai
+    state: REVIEW
+  - url: "https://github.com/diegosouzapw/OmniRoute"
+    kind: repository
+    area: ai-routing
+    state: REVIEW
+  - url: "https://github.com/OpenHands/OpenHands"
+    kind: repository
+    area: coding-agents
+    state: REVIEW
+  - url: "https://github.com/Pythagora-io/gpt-pilot"
+    kind: repository
+    area: coding-agents
+    state: REVIEW
+  - url: "https://github.com/surrealdb/surrealdb"
+    kind: repository
+    area: database
+    state: REVIEW
+  - url: "https://github.com/ShubhamSKadam/Big-List-of-400-Free-Tools"
+    kind: repository
+    area: discovery-catalogue
+    state: REVIEW
+  - url: "https://github.com/zebbern/no-cost-ai"
+    kind: repository
+    area: free-ai-catalogue
+    state: REVIEW
+  - url: "https://github.com/tinyhumansai/openhuman"
+    kind: repository
+    area: personal-ai-agents
+    state: REVIEW
+  - url: "https://github.com/HKUDS/DeepTutor"
+    kind: repository
+    area: education-ai
+    state: REVIEW
+  - url: "https://github.com/HunxByts/GhostTrack"
+    kind: repository
+    area: osint
+    state: REVIEW
+  - url: "https://github.com/reconurge/flowsint"
+    kind: repository
+    area: osint
+    state: REVIEW
+  - url: "https://github.com/cipher387/API-s-for-OSINT"
+    kind: repository
+    area: osint-catalogue
+    state: REVIEW
+  - url: "https://github.com/magnitudedev/magnitude"
+    kind: repository
+    area: browser-coding-agents
+    state: REVIEW
+  - url: "https://github.com/topics/commodities-api"
+    kind: github-topic
+    area: commodities-data
+    state: REVIEW
+  - url: "https://github.com/topics/financial-api"
+    kind: github-topic
+    area: financial-data
+    state: REVIEW
+  - url: "https://github.com/freqtrade/freqtrade"
+    kind: repository
+    area: trading
+    state: REVIEW
+  - url: "https://github.com/hummingbot/hummingbot"
+    kind: repository
+    area: trading
+    state: REVIEW
+  - url: "https://github.com/nautechsystems/nautilus_trader"
+    kind: repository
+    area: trading
+    state: REVIEW
+  - url: "https://github.com/pipecat-ai/pipecat"
+    kind: repository
+    area: realtime-voice-agents
+    state: REVIEW
+  - url: "https://github.com/kirklandsig/AIReceptionist"
+    kind: repository
+    area: voice-agents
+    state: REVIEW
+  - url: "https://github.com/livekit/agents"
+    kind: repository
+    area: realtime-agents
+    state: REVIEW
+  - url: "https://github.com/bolna-ai/bolna"
+    kind: repository
+    area: voice-agents
+    state: REVIEW
+  - url: "https://github.com/JustVugg/colibri"
+    kind: repository
+    area: ai-agent-tooling
+    state: REVIEW
+  - url: "https://github.com/M17z2025/mi7z-web"
+    kind: internal-repository
+    area: sigma-portfolio
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center"
+    kind: internal-repository
+    area: sigma-control-plane
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/pull/66"
+    kind: internal-pull-request
+    area: sigma-control-plane
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/pull/67"
+    kind: internal-pull-request
+    area: sigma-control-plane
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/pull/68"
+    kind: internal-pull-request
+    area: sigma-control-plane
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/pull/74"
+    kind: internal-pull-request
+    area: sigma-control-plane
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/issues/78"
+    kind: internal-issue
+    area: sigma-runner
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/issues/80"
+    kind: internal-issue
+    area: sigma-worker
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/alisha-ai-platform/actions/runs/36675112295"
+    kind: internal-action-run
+    area: alysha
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/issues/99"
+    kind: internal-issue
+    area: sigma-agent-factory
+    state: EVIDENCE
+  - url: "https://github.com/M17z2025/ai-command-center/issues/53"
+    kind: internal-issue
+    area: sigma-knowledge
+    state: EVIDENCE
