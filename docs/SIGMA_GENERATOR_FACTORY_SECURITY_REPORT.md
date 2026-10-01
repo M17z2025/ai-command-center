@@ -38,7 +38,7 @@ Trusted code boundary:
 Mitigation: definitions contain no executable expression language. Placeholder rendering accepts field identifiers only.
 
 ### Resource exhaustion
-Mitigation: list, output and template size caps; Cartesian size checked before full result creation.
+Mitigation: list, output and template size caps; Cartesian size checked before full result creation; standalone draft size is checked before YAML parsing.
 
 ### Authority escalation
 Mitigation: generator specs do not carry agent permissions and V1 capabilities must be empty.
@@ -54,7 +54,7 @@ Mitigation: Perchance and other external generator sites are not runtime depende
 
 ## Open assurance items
 
-- exact-head CI/test/control-plane result;
+- exact-head automated CI/test/control-plane result: SUCCESS on tested code head `49e1fa0318101448dea930318811d75dd0137612`;
 - independent Sigma Solution Judge review;
 - independent Sigma Security Gatekeeper verdict.
 
