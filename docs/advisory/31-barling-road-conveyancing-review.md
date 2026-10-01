@@ -191,3 +191,108 @@ The following have not been obtained from the public records reviewed:
 - structural engineer evidence on the outbuilding roofs.
 
 **NO EVIDENCE = NO PROGRESS.**
+
+
+## Remediation blueprint from the planning documents
+
+### House A — physical regularisation target under 22/01114/FUL
+The February 2023 officer report describes 22/01114/FUL as **part demolition of the dwelling on site and rebuilding to a reduced scale and massing**. The report's comparison table shows the following approximate change from the unlawful on-site building to the proposed scheme considered acceptable:
+
+| Measure | On-site / unlawful building | 22/01114 proposed target | Buyer verification |
+|---|---:|---:|---|
+| Ground-floor area | 259.12 m² | 160.00 m² | Measured as-built survey required |
+| First-floor area | 160.95 m² | 158.87 m² | Measured as-built survey required |
+| First + ground total | 420.00 m² | 318.87 m² | Measured as-built survey required |
+| Second-floor area | 72.40 m² | 65.20 m² | Confirm non-habitable/storage area where shown |
+| Total floor area | 492.50 m² | 384.07 m² | Measured as-built survey required |
+| Eaves height | approx. 6.60 m | approx. 6.52 m | Laser survey |
+| Maximum depth | approx. 15.00 m | approx. 11.37 m | Laser survey / overlay |
+| Minimum depth | approx. 11.34 m | approx. 10.48 m | Laser survey / overlay |
+| Width | report records approx. 20.75 m ground / 16.85 m first on-site | approx. 16.88 m proposed | Confirm against stamped drawings |
+| Ridge height | report could not directly measure on-site in its table; refused scheme was 10.54 m | approx. 9.69 m proposed | Current ridge to be independently surveyed |
+
+The officer report specifically concluded that reducing **ridge height, eaves height, overall floor space and footprint** would overcome the earlier objections. It also records that the rear gable-end area beneath a retained window was not to be usable as a habitable room because the revised ridge height would be insufficient, and the agent described it as storage.
+
+### Approved-plan / condition target
+The committee recommendation required complete accordance with plans:
+**100a, 101, 102, 250a, 251a, 252a, 253a, 254a, 255a, 256a, 257a, 258a, 259.**
+
+The report also proposed:
+- materials/finishes as detailed in the application;
+- an agreed landscaping scheme including levels, boundaries, parking/access and planting;
+- first-floor en-suite windows on drawing 256a to be obscure glazed and non-opening below 1.7 m;
+- removal of normal Class A/B permitted-development extension rights, so later extensions cannot simply be assumed permitted.
+
+The current public register shows permission issued 23 May 2023 and an expiry date of 23 May 2026. The final signed decision notice must be obtained because the committee report's proposed time condition predates the actual issue date and the final notice may differ.
+
+### Outbuildings B and C — enforcement works
+The Inspector upheld the following requirements independently of the house alteration:
+- remove the wall and dual-pitched roof canopy linking house A and building B;
+- reduce building B to maximum overall height 4 m;
+- remove stairwell/access to first-floor roof void in building B;
+- reduce building C to maximum overall height 4 m;
+- remove resultant debris.
+
+The later committee report continued to state that the canopy was required to be removed and outbuildings reduced in size. These items must therefore be physically measured and matched to any later permission/variation before a purchaser accepts them as lawful.
+
+### 22/00868/FUL extensions
+The council register records 22/00868/FUL (ground-floor side and rear extensions) as permitted. This means the final as-built overlay must not compare only to 22/01114/FUL; it must reconstruct the lawful composite scheme using:
+1. the final 22/01114/FUL approved set,
+2. the final 22/00868/FUL approved set,
+3. all subsequent approved amendments/condition discharges.
+
+No seller statement should be accepted in place of this composite drawing exercise.
+
+## Mortgageability / lender-security analysis
+
+Sigma should treat the property as **not demonstrated mortgageable on the current evidence**, rather than claiming that every lender would refuse it.
+
+UK Finance Lenders' Handbook Part 1, section 5.5 requires a lender's conveyancer to take reasonable steps to ensure:
+- necessary planning consents and Building Regulations approvals exist for construction and later changes;
+- there is no evidence of breach of consent/conditions; and
+- there is no matter which could expose the property to enforcement action.
+
+Where evidence of breach exists and outstanding conditions will not be satisfied by completion, the conveyancer must report to the lender if an unqualified certificate of title cannot be given.
+
+For this property the historic enforcement notice, absence of historic accurate as-built plans, unresolved evidence of current compliance, and unknown Building Control position mean a purchaser should not assume that an unqualified lender certificate of title can presently be issued.
+
+Some lenders' current Part 2 requirements go further: for example Accord Mortgages states that where a planning/building-regulations breach remains within an applicable enforcement period it requires formal confirmation that the property is structurally sound and remains suitable security, and says indemnity insurance does not replace that check.
+
+Accordingly, the remediation target for mortgageability is:
+1. planning legality demonstrated;
+2. Building Regulations legality demonstrated;
+3. structural soundness independently demonstrated;
+4. title and enforcement/local-land-charge position cleared;
+5. lender's valuer accepts the property as suitable security;
+6. lender's conveyancer can issue the lender-required certificate/report without unresolved qualification.
+
+## Building integrity / approval protection protocol
+
+Planning permission does **not** establish construction quality. Building Regulations approval is separate.
+
+Before the buyer relies on the building itself:
+- obtain the entire Building Control file for the main house and every later extension/alteration/outbuilding;
+- identify whether approval was by full plans, building notice, approved inspector/registered building control approver, or not at all;
+- obtain completion/final certificates and all inspection records;
+- obtain structural calculations and designer/engineer details for foundations, steelwork, roof structures, openings and major alterations;
+- obtain electrical, gas, glazing, drainage, heating and other competent-person certificates as applicable;
+- commission an independent Level 3 / building survey suitable for a substantially rebuilt high-value property;
+- commission an independent structural engineer specifically for the main-house alterations and the outbuilding roof concerns;
+- require intrusive opening-up where the engineer considers concealed structure cannot otherwise be verified;
+- compare actual construction against both planning drawings and Building Regulations drawings;
+- create a schedule of every departure and require either evidence of approval or seller-funded regularisation/remediation before exchange.
+
+Where building work was carried out without the necessary Building Regulations approval, GOV.UK confirms that a local-authority Building Control Body can consider a retrospective **regularisation** application for qualifying post-1985 work, and may require alterations before issuing a regularisation certificate.
+
+## Buyer protection position
+
+Until the above is evidenced, the buyer should treat the property commercially as a cash / non-standard-security proposition and should not price it as a fully compliant, readily mortgageable residence.
+
+Any offer should be:
+- subject to contract;
+- subject to satisfactory planning/enforcement verification;
+- subject to satisfactory Building Control and structural evidence;
+- subject to an independent measured as-built/planning overlay;
+- subject to title, searches and secured-creditor/receiver authority;
+- expressly subject to repricing or withdrawal if the cost/risk of regularisation differs from what is represented.
+
