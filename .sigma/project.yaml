@@ -74,6 +74,7 @@ documentation:
   engineering_rescue_report: "templates/SIGMA_ENGINEERING_RESCUE_REPORT.md"
   mesh_runtime: "docs/SIGMA_MESH_RUNTIME.md"
   generator_factory: "headquarters/generator-factory/README.md"
+  user_github_sources: "headquarters/generator-factory/user-github-sources.yaml"
 
 integrations:
   - "GitHub"
