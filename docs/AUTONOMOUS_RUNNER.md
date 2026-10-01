@@ -1,5 +1,10 @@
 # Autonomous Execution Runner
 
+For durable GitHub events, project schedules, recovery and the controlled gstack
+integration, use the optional [VPS automation overlay](SIGMA_AUTOMATION.md). It
+replaces `sigma_runner_daemon.py` as the Docker runner command; do not run both.
+Live commissioning and worker isolation remain evidence gates.
+
 The command center stores state and rules. Continuous autonomous execution requires a separate runner.
 
 ## Target architecture

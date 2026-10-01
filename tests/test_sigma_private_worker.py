@@ -1,6 +1,7 @@
 import importlib.util
 import os
 from pathlib import Path
+import tempfile
 import unittest
 
 
@@ -45,6 +46,8 @@ class SigmaPrivateWorkerTests(unittest.TestCase):
             "destructive_actions",
             "paid_spend",
             "direct_main_push",
+            "secret_management",
+            "security_control_reduction",
         ):
             with self.subTest(key=key):
                 with self.assertRaises(MOD.WorkerError):
@@ -56,6 +59,44 @@ class SigmaPrivateWorkerTests(unittest.TestCase):
                             "authority": {key: True},
                         }
                     )
+
+    def test_public_read_only_git_env_needs_no_persistent_github_token(self):
+        previous = {
+            key: os.environ.get(key)
+            for key in ("SIGMA_GITHUB_TOKEN", "SIGMA_WORKER_ALLOW_WRITE", "SIGMA_WORKER_ROOT")
+        }
+        try:
+            os.environ.pop("SIGMA_GITHUB_TOKEN", None)
+            os.environ["SIGMA_WORKER_ALLOW_WRITE"] = "0"
+            with tempfile.TemporaryDirectory() as directory:
+                os.environ["SIGMA_WORKER_ROOT"] = directory
+                env, askpass = MOD._git_env()
+            self.assertIsNone(askpass)
+            self.assertNotIn("SIGMA_GITHUB_TOKEN", env)
+            self.assertNotIn("GIT_ASKPASS", env)
+        finally:
+            for key, value in previous.items():
+                if value is None:
+                    os.environ.pop(key, None)
+                else:
+                    os.environ[key] = value
+
+    def test_write_mode_still_requires_github_token(self):
+        previous = {
+            key: os.environ.get(key)
+            for key in ("SIGMA_GITHUB_TOKEN", "SIGMA_WORKER_ALLOW_WRITE")
+        }
+        try:
+            os.environ.pop("SIGMA_GITHUB_TOKEN", None)
+            os.environ["SIGMA_WORKER_ALLOW_WRITE"] = "1"
+            with self.assertRaises(MOD.WorkerError):
+                MOD._git_env()
+        finally:
+            for key, value in previous.items():
+                if value is None:
+                    os.environ.pop(key, None)
+                else:
+                    os.environ[key] = value
 
     def test_prompt_forbids_worker_git_and_release_authority(self):
         prompt = MOD._mission_prompt(

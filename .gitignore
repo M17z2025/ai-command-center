@@ -8,3 +8,8 @@ artifacts/sigma-runtime/
 *.db-wal
 
 deploy/sigma-stack/.env
+.test-deps/
+.sigma/gstack/
+.runtime-gstack-verification/
+*.automation.lock
+test-results*.txt

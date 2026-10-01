@@ -1,5 +1,54 @@
 # Sigma Development Command Center Status
 
+## 29 September 2026 — Live access verified; worker activation still gated
+
+The existing GitHub runner reaches the OVH host. Fresh audit run `36563998576`
+locates Sigma at `/opt/ai-command-center/deploy/sigma-stack`; health is 200.
+The running scheduler has no GitHub credential, worker credential or endpoint.
+Its protected `.env` cannot be read by the runner. This supersedes earlier claims
+that missing local SSH or an unknown host path prevented progress.
+
+PR #98 now isolates agent execution and verification from the credential broker,
+pins source SHA, bounds inference and recovers orphan job containers. Independent
+source review completed. Real Docker hostile tests and production worker image
+build/startup checks pass in CI at `7f58e4928dfe503c5a5fe329859bc0a6ab459b17`.
+Unattended OVH execution remains unverified.
+Owner/admin service credential provisioning is required; then commission the exact
+reviewed images and record a real scheduled branch/PR task and restart recovery.
+Evidence and remaining gates: issue #97 and `docs/SIGMA_AUTOMATION_EVIDENCE.md`.
+
+## 29 September 2026 — Sigma + gstack durable automation candidate (#97)
+
+**SOURCE CANDIDATE; LIVE OVH DEPLOYMENT AND WRITE COMMISSIONING NOT VERIFIED.**
+
+- Adds persistent per-project queue/schedules, signed webhook intake, replay protection,
+  supervised worker, bounded retry/recovery holds, private status/provenance and optional
+  safe GitHub status outbox around the existing portfolio runner.
+- Adds pinned, integrity-checked gstack review references; upstream code/installer and
+  release authority are excluded. Context is opt-in and capped at 4,000 characters.
+- Existing OVH Docker overlay replaces the old timer, runs non-root with bounded
+  resources, and includes health checks plus a host watchdog timer.
+- Execution remains disabled by default and requires local project policy, global
+  write/execute switches, product contract and current `sigma:autonomous` issue opt-in.
+- Independent review identified an existing credential-bearing OpenHands execution
+  boundary and absent source-head enforcement. Isolated credential-free execution,
+  brokered writes and independent evidence are required before unattended writes.
+- PR #96 / #89 retains CI-supervisor ownership. No automatic merge, deployed product
+  certification or end-to-end project completion is claimed.
+
+Runbook, recovery and exact commissioning checklist: `docs/SIGMA_AUTOMATION.md`.
+Source candidate PR #98 passed all three GitHub workflows at commit
+`3719228204ee83debaa442bec16a49f7239197e9`, including Docker build and real Linux
+process tests. Exact links/image ID and the live deployment boundary are recorded
+in `docs/SIGMA_AUTOMATION_EVIDENCE.md`.
+Independent advisory/security reports accompany this candidate. Test/CI commit
+identities and deployment gates are recorded on issue #97 and its pull request.
+
+Next gated action: inspect exact-head CI and independent security evidence, obtain
+approved OVH host access and runtime-only webhook secret, commission planning-only
+services, and attach real webhook/restart/scheduled-cycle evidence to #97. Keep write
+mode disabled until the worker isolation gate is cleared.
+
 ## 28 September 2026 — P0 recovery audit: Sigma cannot yet finish projects autonomously
 
 **CURRENT CLASSIFICATION: SOURCE COMPONENTS STRONG; END-TO-END AUTONOMOUS PROJECT COMPLETION NOT YET PROVEN.**

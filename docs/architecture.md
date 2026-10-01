@@ -1,5 +1,13 @@
 # Sigma Command Center Architecture
 
+## Durable VPS automation
+
+The optional [Sigma + gstack automation](SIGMA_AUTOMATION.md) overlay adds a
+private SQLite event queue, signed GitHub intake, per-project schedules and a
+supervised worker around the existing portfolio runner. Reviewed project opt-in
+and existing authority gates remain required. gstack supplies pinned advisory
+review references. See the linked runbook for live commissioning evidence and gates.
+
 ## Purpose and boundary
 
 The Sigma Development Command Center is a GitHub-hosted engineering control plane. It coordinates repository contracts, portfolio status, development rules, security baselines, handoffs and verification policy across managed Mi7z/Lycia products.
