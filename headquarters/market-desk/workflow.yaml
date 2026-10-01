@@ -1,0 +1,100 @@
+schema_version: 1
+name: sigma-market-desk
+status: changed_not_tested
+launch_target: "2026-10-03"
+tracking_issue: 106
+flagship_market: XAU/USD
+markets:
+  - XAU/USD
+  - XAG/USD
+  - BTC/USD
+  - GBP/USD
+  - EUR/USD
+  - NASDAQ
+  - S&P_500
+  - BRENT_WTI
+mode:
+  production: autonomous
+  public_publish: hold_before_publish
+stages:
+  - market_scanner
+  - story_selector
+  - researcher
+  - market_analyst
+  - writer
+  - fact_checker
+  - compliance
+  - director
+  - media_generation
+  - voice_audio
+  - renderer
+  - independent_critic
+  - publish_gate
+  - youtube_publisher
+  - analytics_learning
+story_score:
+  dimensions:
+    market_significance: 0.30
+    audience_interest: 0.20
+    timeliness: 0.20
+    explanatory_value: 0.20
+    originality: 0.10
+  minimum_publish_candidate_score: 0.70
+gates:
+  evidence:
+    required: true
+    fail_closed: true
+  factual_accuracy:
+    required: true
+    fail_closed: true
+  financial_compliance:
+    required: true
+    fail_closed: true
+  copyright_originality:
+    required: true
+    fail_closed: true
+  av_quality:
+    required: true
+    fail_closed: true
+  security:
+    required_before_autonomous_public_publish: true
+integrations:
+  market_data:
+    adapter_required: true
+    provider: null
+  news_and_calendar:
+    adapter_required: true
+    provider: null
+  video_generation:
+    adapter_required: true
+    provider: null
+  voice_audio:
+    adapter_required: true
+    provider: null
+  renderer:
+    preferred: ffmpeg
+  youtube_data_api:
+    required: true
+    credentials_from_environment_only: true
+  youtube_analytics_api:
+    required: true
+    credentials_from_environment_only: true
+evidence_record:
+  required_fields:
+    - source
+    - retrieved_at
+    - as_of
+    - claim
+    - source_type
+    - confidence
+analytics:
+  metrics:
+    - impressions
+    - click_through_rate
+    - first_30_second_retention
+    - average_view_duration
+    - average_percentage_viewed
+    - watch_time
+    - subscribers_gained
+    - returning_viewers
+    - revenue_when_available
