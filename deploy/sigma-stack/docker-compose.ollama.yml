@@ -27,7 +27,8 @@ services:
       - >
         until ollama list >/dev/null 2>&1; do sleep 2; done;
         ollama pull "${OLLAMA_MODEL}";
-        ollama pull "${OLLAMA_EMBEDDING_MODEL}"
+        ollama pull "${OLLAMA_EMBEDDING_MODEL}";
+        ollama pull "${OLLAMA_WORKER_MODEL}"
     depends_on:
       - ollama
     networks:
