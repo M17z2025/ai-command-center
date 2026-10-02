@@ -75,6 +75,7 @@ documentation:
   mesh_runtime: "docs/SIGMA_MESH_RUNTIME.md"
   generator_factory: "headquarters/generator-factory/README.md"
   user_github_sources: "headquarters/generator-factory/user-github-sources.yaml"
+  user_github_review: "headquarters/generator-factory/user-github-review.yaml"
 
 integrations:
   - "GitHub"
