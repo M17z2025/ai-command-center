@@ -124,6 +124,19 @@ If a required artefact is missing, create or repair it as part of the work rathe
 - For migrations, provide forward migration, rollback/recovery notes and data-safety considerations.
 - For third-party integrations, document required environment variable names and failure behaviour.
 
+## Mandatory Sigma Generator Factory
+
+When a recurring need can be expressed as a bounded generator (templates, choices, weighted simulations, scenario matrices or synthetic test records), prefer the governed Sigma Generator Factory under `headquarters/generator-factory/` over one-off arbitrary scripts or automated dependence on third-party generator websites.
+
+Rules:
+- new generator definitions start as `DRAFT`;
+- only `APPROVED` definitions with zero validation findings may execute;
+- V1 generator capabilities remain empty: no network, secrets, shell/subprocess, eval/exec, dynamic imports, arbitrary filesystem or production writes;
+- generator creation never grants the requesting agent additional authority;
+- external generator sites are inspiration/research sources unless a separately reviewed authorised API exists;
+- owner-supplied GitHub URLs must be persisted and deduplicated in `headquarters/generator-factory/user-github-sources.yaml`; external links remain REVIEW until Scouter evidence clears them, while internal M17z2025 links are evidence/history rather than adoption candidates;
+- material product integration still requires normal engineering, security and user-test gates.
+
 ## Mandatory Sigma Engineering Support Desk / Rescue Mode
 
 Any confirmed broken, regressed or user-journey-failing Sigma-managed product enters Engineering Rescue Mode under `sigma-engineering-support-desk`.
