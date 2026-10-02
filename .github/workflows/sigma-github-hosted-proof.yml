@@ -1,0 +1,140 @@
+name: Sigma GitHub-hosted autonomous proof
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "sigma_runtime/delivery_supervisor.py"
+      - "sigma_runtime/portfolio_runner.py"
+      - "scripts/sigma_openhands_worker_service.py"
+      - "scripts/sigma_end_to_end_probe.py"
+      - "deploy/sigma-stack/docker-compose.ollama.yml"
+      - ".github/workflows/sigma-control-plane.yml"
+      - ".github/workflows/sigma-github-hosted-proof.yml"
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: sigma-github-hosted-autonomous-proof
+  cancel-in-progress: false
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout Sigma exact source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Configure zero-paid hosted proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          runtime_token="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+          worker_token="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+          cat > deploy/sigma-stack/.env <<EOF
+          SIGMA_RUNTIME_PORT=8080
+          SIGMA_RUNTIME_TOKEN=$runtime_token
+          SIGMA_RUNTIME_PROVIDER=http
+          SIGMA_LLM_ENDPOINT=http://ollama:11434/api/chat
+          SIGMA_LLM_MODEL=qwen2.5-coder:3b
+          SIGMA_LLM_PROTOCOL=ollama-chat
+          SIGMA_LLM_API_KEY=
+          SIGMA_LLM_TIMEOUT_SECONDS=600
+          SIGMA_LLM_MAX_TOKENS=1024
+          SIGMA_LLM_CONTEXT_TOKENS=8192
+          SIGMA_LLM_DISABLE_THINKING=1
+          SIGMA_MAX_PARALLEL_SPECIALISTS=1
+          OLLAMA_MODEL=qwen2.5-coder:3b
+          OLLAMA_EMBEDDING_MODEL=qwen2.5-coder:3b
+          OLLAMA_WORKER_MODEL=qwen2.5-coder:3b
+          SIGMA_GITHUB_TOKEN=$GITHUB_TOKEN
+          SIGMA_RUNNER_ALLOW_WRITE=1
+          SIGMA_RUNNER_EXECUTE=1
+          SIGMA_RUNNER_INTERVAL_SECONDS=60
+          SIGMA_RUNNER_CI_POLL_SECONDS=5
+          SIGMA_RUNNER_CI_TIMEOUT_SECONDS=1200
+          SIGMA_RUNNER_MAX_REPAIRS=2
+          SIGMA_RUNNER_CI_WORKFLOWS=sigma-control-plane.yml,sigma-mesh-runtime.yml
+          SIGMA_WORKER_ENDPOINT=http://sigma-worker:8091/missions
+          SIGMA_WORKER_TOKEN=$worker_token
+          SIGMA_WORKER_TIMEOUT_SECONDS=1200
+          SIGMA_WORKER_ALLOW_WRITE=1
+          SIGMA_WORKER_ALLOWED_REPOSITORIES=M17z2025/ai-command-center
+          SIGMA_WORKER_MODEL_TIMEOUT_SECONDS=1200
+          SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS=1200
+          SIGMA_WORKER_KEEP_WORKSPACE=0
+          EOF
+          chmod 600 deploy/sigma-stack/.env
+
+      - name: Start local open-weight inference and governed worker
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+          )
+          "${COMPOSE[@]}" up -d --build ollama
+          "${COMPOSE[@]}" run --rm ollama-model-init
+          "${COMPOSE[@]}" up -d --build sigma-worker
+          for i in $(seq 1 60); do
+            if "${COMPOSE[@]}" exec -T sigma-worker python - <<'PY' 2>/dev/null
+          import json
+          import urllib.request
+          print(json.load(urllib.request.urlopen("http://127.0.0.1:8091/health", timeout=5))["status"])
+          PY
+            then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Sigma worker did not become healthy" >&2
+          "${COMPOSE[@]}" logs --tail 200 sigma-worker ollama >&2 || true
+          exit 31
+
+      - name: Execute real autonomous GitHub proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+          )
+          "${COMPOSE[@]}" run --rm sigma-runner             python scripts/sigma_end_to_end_probe.py | tee /tmp/sigma-proof.json
+          python - <<'PY'
+          import json
+          text = open("/tmp/sigma-proof.json", encoding="utf-8").read()
+          data = json.loads(text[text.find("{"):])
+          assert data["status"] == "PASS", data
+          assert data["delivery"]["state"] == "DONE", data
+          assert data["delivery"]["merge_sha"], data
+          print("SIGMA_GITHUB_HOSTED_AUTONOMOUS_PROOF=PASS")
+          print("SIGMA_PROOF_ISSUE=" + str(data["issue_number"]))
+          print("SIGMA_PROOF_PR=" + data["delivery"]["pull_request_url"])
+          print("SIGMA_PROOF_MERGE=" + data["delivery"]["merge_sha"])
+          PY
+
+      - name: Preserve failure evidence
+        if: failure()
+        shell: bash
+        run: |
+          set +e
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+          )
+          "${COMPOSE[@]}" ps
+          "${COMPOSE[@]}" logs --tail 250 sigma-worker ollama
