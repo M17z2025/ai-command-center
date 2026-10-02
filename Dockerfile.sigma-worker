@@ -8,7 +8,7 @@ RUN apt-get update \
        curl \
        nodejs \
        npm \
-       openjdk-17-jdk-headless \
+       default-jdk-headless \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
