@@ -23,7 +23,7 @@ import uuid
 import yaml
 
 from .orchestrator import SigmaOrchestrator
-from .pr_supervisor import PullRequestSupervisor
+from .delivery_supervisor import DeliverySupervisor
 
 
 def utcnow() -> str:
@@ -138,6 +138,48 @@ class GitHubClient:
         )
         runs = data.get("workflow_runs", []) if isinstance(data, dict) else []
         return [item for item in runs if item.get("head_sha") == head_sha]
+
+    def workflow_run_jobs(
+        self, repository: str, run_id: int
+    ) -> list[dict[str, Any]]:
+        data = self.request(
+            "GET", f"/repos/{repository}/actions/runs/{int(run_id)}/jobs?per_page=100"
+        )
+        return data.get("jobs", []) if isinstance(data, dict) else []
+
+    def pull_request_files(
+        self, repository: str, number: int
+    ) -> list[dict[str, Any]]:
+        data = self.request(
+            "GET", f"/repos/{repository}/pulls/{int(number)}/files?per_page=100"
+        )
+        return data if isinstance(data, list) else []
+
+    def merge_pull_request(
+        self, repository: str, number: int, expected_head_sha: str
+    ) -> dict[str, Any]:
+        return self.request(
+            "PUT",
+            f"/repos/{repository}/pulls/{int(number)}/merge",
+            payload={
+                "sha": expected_head_sha,
+                "merge_method": "squash",
+            },
+        )
+
+    def comment_issue(self, repository: str, number: int, body: str) -> None:
+        self.request(
+            "POST",
+            f"/repos/{repository}/issues/{int(number)}/comments",
+            payload={"body": body},
+        )
+
+    def close_issue(self, repository: str, number: int) -> None:
+        self.request(
+            "PATCH",
+            f"/repos/{repository}/issues/{int(number)}",
+            payload={"state": "closed", "state_reason": "completed"},
+        )
 
     def create_issue(
         self, repository: str, title: str, body: str, labels: list[str] | None = None
@@ -761,14 +803,31 @@ class PortfolioRunner:
                     "pull_request_url evidence."
                 )
 
-            pr_assessment = None
+            delivery_result = None
             if final_status == "WORKER_CHANGED":
-                supervisor = PullRequestSupervisor(self.github)
-                pr_assessment = supervisor.assess(
-                    selected.repository,
-                    str(worker_result.get("pull_request_url", "")),
+                delivery = DeliverySupervisor(
+                    self.github,
+                    self.worker,
+                    self.orchestrator,
+                    poll_seconds=float(
+                        os.getenv("SIGMA_RUNNER_CI_POLL_SECONDS", "10")
+                    ),
+                    ci_timeout_seconds=int(
+                        os.getenv("SIGMA_RUNNER_CI_TIMEOUT_SECONDS", "900")
+                    ),
+                    max_repairs=int(
+                        os.getenv("SIGMA_RUNNER_MAX_REPAIRS", "2")
+                    ),
                 )
-                final_status = pr_assessment.state
+                delivery_result = delivery.finish(
+                    repository=selected.repository,
+                    issue_number=selected.issue_number,
+                    mission_id=str(mission_id or cycle_id),
+                    objective=selected.title,
+                    issue_body=selected.body,
+                    worker_result=worker_result,
+                )
+                final_status = delivery_result.state
 
             payload = {
                 "cycle_id": cycle_id,
@@ -777,13 +836,19 @@ class PortfolioRunner:
                 "mission_id": mission_id,
                 "discovery": discovery_summary,
                 "worker": worker_result,
-                "pr_assessment": (
-                    pr_assessment.as_dict() if pr_assessment is not None else None
+                "delivery": (
+                    delivery_result.as_dict()
+                    if delivery_result is not None
+                    else None
                 ),
                 "next_gate": (
-                    pr_assessment.next_gate
-                    if pr_assessment is not None
-                    else "worker blocker resolution"
+                    "next executable portfolio task"
+                    if final_status == "DONE"
+                    else (
+                        delivery_result.blocker
+                        if delivery_result is not None
+                        else "worker blocker resolution"
+                    )
                 ),
             }
             self.store.finish(
