@@ -10,6 +10,8 @@ from sigma_runtime.portfolio_runner import (
     RepositorySnapshot,
     RunnerStore,
     WorkItem,
+    _issue_numbers_with_open_prs,
+    _work_item,
 )
 
 
@@ -87,6 +89,44 @@ class PortfolioRunnerTests(unittest.TestCase):
             ),
         ]
         self.assertEqual(PortfolioRunner.select(snaps), executable)
+
+
+    def test_issue_lifecycle_labels_fail_closed(self):
+        source_complete = _work_item(
+            "owner/repo",
+            {
+                "number": 10,
+                "title": "Already implemented",
+                "body": "historical work",
+                "labels": [{"name": "source-complete"}],
+            },
+        )
+        owner_blocked = _work_item(
+            "owner/repo",
+            {
+                "number": 11,
+                "title": "Needs owner",
+                "body": "waiting",
+                "labels": [{"name": "blocked-owner"}],
+            },
+        )
+        self.assertFalse(source_complete.executable)
+        self.assertEqual(source_complete.state, "SOURCE_COMPLETE")
+        self.assertFalse(owner_blocked.executable)
+        self.assertEqual(owner_blocked.state, "BLOCKED_OWNER")
+
+    def test_open_pr_issue_reference_is_detected(self):
+        pulls = [
+            {
+                "title": "Sigma worker: implement feature",
+                "body": "Automated change. Issue: #17",
+            },
+            {
+                "title": "Fixes #21",
+                "body": "",
+            },
+        ]
+        self.assertEqual(_issue_numbers_with_open_prs(pulls), {17, 21})
 
     def test_runner_store_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
