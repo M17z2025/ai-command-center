@@ -188,9 +188,9 @@ reviews:
 
 summary:
   accept_for_deep_review: 13
-  fork_or_service_boundary: 7
-  reference_only: 4
+  fork_or_service_boundary: 6
+  reference_only: 3
   restricted_license: 3
   licence_unverified: 1
   discovery_only: 3
-  note: "Counts cover the 31 external entries currently represented in this review file, including repository and discovery-surface links."
+  note: "Counts cover all 29 external entries in the owner-supplied source registry: 26 repositories plus one GitHub organisation and two GitHub topic discovery surfaces."
