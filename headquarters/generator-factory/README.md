@@ -116,7 +116,7 @@ python scripts/sigma_generator_factory.py check-spec /tmp/legal-review-scenarios
 
 `user-github-sources.yaml` is the durable owner-supplied GitHub source index.
 
-Current baseline: **40 exact GitHub URLs recovered from owner messages** across prior Sigma/project conversations.
+Current baseline: **40 exact GitHub URLs recovered from owner messages** across prior Sigma/project conversations. Of the 29 external entries, the current licence screen identifies **13 permissive candidates for deeper review, 6 copyleft candidates requiring a deliberate fork/service boundary, 3 reference-only sources, 3 restricted-licence sources, 1 licence-unverified repository and 3 discovery-only surfaces**.
 
 Rules:
 - exact URLs are deduplicated;
