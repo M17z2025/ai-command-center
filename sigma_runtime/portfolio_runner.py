@@ -544,7 +544,7 @@ _BLOCKED_LABEL_STATES = {
     "blocked:external": "BLOCKED_EXTERNAL",
 }
 _PR_ISSUE_RE = re.compile(
-    r"(?i)\\b(?:closes?|fixes?|resolves?|issue)\\s*:?[ ]*#(\\d+)\\b"
+    r"(?i)\b(?:closes?|fixes?|resolves?|issue)\s*:?[ ]*#(\d+)\b"
 )
 
 
