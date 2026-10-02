@@ -19,7 +19,11 @@ class FakeOrchestrator:
 
 
 class FakeGitHub:
-    pass
+    def pull_request(self, repository, number):
+        return {"number": number, "head": {"sha": "abc123"}}
+
+    def workflow_runs_for_head(self, repository, head_sha):
+        return [{"id": 1, "head_sha": head_sha, "status": "completed", "conclusion": "success"}]
 
 
 class FakeWorker:
@@ -137,7 +141,7 @@ class PortfolioRunnerTests(unittest.TestCase):
             self.assertEqual(result["state"], "BLOCKED")
             self.assertIn("runner_rejection", result["worker"])
 
-    def test_worker_changed_still_requires_independent_gate(self):
+    def test_worker_pr_advances_to_ci_passed_but_still_requires_independent_gate(self):
         selected = WorkItem(
             "owner/repo", 7, "Implement feature", "criteria", 1, (), True, ()
         )
@@ -156,8 +160,9 @@ class PortfolioRunnerTests(unittest.TestCase):
             )
             runner.discover = lambda: [snap]
             result = runner.cycle(trigger="test", execute=True)
-            self.assertEqual(result["state"], "WORKER_CHANGED")
+            self.assertEqual(result["state"], "CI_PASSED")
             self.assertIn("independent", result["next_gate"])
+            self.assertEqual(result["pr_assessment"]["head_sha"], "abc123")
 
     def test_second_cycle_is_skipped_when_lease_is_active(self):
         with tempfile.TemporaryDirectory() as tmp:
