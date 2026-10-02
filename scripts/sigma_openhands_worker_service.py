@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import os
@@ -14,11 +15,18 @@ import threading
 from typing import Any
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
-import uuid
+
+import yaml
 
 
 MAX_BODY = 500_000
 BRANCH_RE = re.compile(r"[^a-zA-Z0-9._/-]+")
+_SECRET_ENV_NAMES = (
+    "SIGMA_GITHUB_TOKEN",
+    "SIGMA_WORKER_TOKEN",
+    "SIGMA_RUNTIME_TOKEN",
+    "SIGMA_LLM_API_KEY",
+)
 
 
 class WorkerError(RuntimeError):
@@ -71,6 +79,29 @@ def _git_env() -> tuple[dict[str, str], Path]:
     return env, askpass
 
 
+def _safe_exec_env() -> dict[str, str]:
+    env = os.environ.copy()
+    for name in _SECRET_ENV_NAMES:
+        env.pop(name, None)
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    return env
+
+
+@contextmanager
+def _secrets_hidden_from_agent():
+    saved = {name: os.environ.get(name) for name in _SECRET_ENV_NAMES}
+    try:
+        for name in _SECRET_ENV_NAMES:
+            os.environ.pop(name, None)
+        yield
+    finally:
+        for name, value in saved.items():
+            if value is not None:
+                os.environ[name] = value
+            else:
+                os.environ.pop(name, None)
+
+
 def _run(
     args: list[str],
     *,
@@ -89,15 +120,45 @@ def _run(
     )
 
 
-def _verify_command(repository: str) -> list[str]:
-    if repository == "M17z2025/ai-command-center":
-        return [
-            "bash",
-            "-lc",
-            "python -m unittest discover -s tests -p 'test_*.py' "
-            "&& python scripts/validate_control_plane.py",
-        ]
-    raise WorkerError(f"No independent verification command registered for {repository}")
+def _verification_commands(workspace: Path) -> list[str]:
+    manifest_path = workspace / ".sigma" / "project.yaml"
+    if not manifest_path.exists():
+        raise WorkerError("Repository is missing .sigma/project.yaml")
+    try:
+        manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise WorkerError("Repository Sigma manifest is invalid YAML") from exc
+    commands = manifest.get("commands", {}) if isinstance(manifest, dict) else {}
+    if not isinstance(commands, dict):
+        raise WorkerError("Repository Sigma manifest commands section is invalid")
+
+    ordered_keys = ["install", "lint", "typecheck", "test"]
+    selected: list[str] = []
+    for key in ordered_keys:
+        value = commands.get(key)
+        if isinstance(value, str) and value.strip() and value.strip() not in selected:
+            selected.append(value.strip())
+
+    # If a repository has no normal verification command but does define a build,
+    # use the build as the independent gate. Otherwise fail closed.
+    if not any(
+        isinstance(commands.get(key), str) and str(commands.get(key)).strip()
+        for key in ("lint", "typecheck", "test")
+    ):
+        build = commands.get("build")
+        if isinstance(build, str) and build.strip():
+            selected.append(build.strip())
+
+    verification = [
+        item
+        for item in selected
+        if item != str(commands.get("install") or "").strip()
+    ]
+    if not verification:
+        raise WorkerError(
+            "Repository manifest has no independent lint/typecheck/test/build command"
+        )
+    return selected
 
 
 def _github_pr(
@@ -125,7 +186,7 @@ def _github_pr(
             "Accept": "application/vnd.github+json",
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "sigma-openhands-worker/1",
+            "User-Agent": "sigma-openhands-worker/2",
             "X-GitHub-Api-Version": "2022-11-28",
         },
     )
@@ -134,7 +195,9 @@ def _github_pr(
             return json.loads(response.read().decode("utf-8"))
     except HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:800]
-        raise WorkerError(f"GitHub PR creation failed HTTP {exc.code}: {detail}") from exc
+        raise WorkerError(
+            f"GitHub PR creation failed HTTP {exc.code}: {detail}"
+        ) from exc
 
 
 def _open_hands_edit(workspace: Path, prompt: str, mission_id: str) -> dict[str, Any]:
@@ -171,18 +234,20 @@ def _open_hands_edit(workspace: Path, prompt: str, mission_id: str) -> dict[str,
     def callback(event: Any) -> None:
         events.append(type(event).__name__)
 
-    with LocalWorkspace(working_dir=workspace) as local_workspace:
-        conversation = Conversation(
-            agent=agent,
-            workspace=local_workspace,
-            callbacks=[callback],
-        )
-        try:
-            conversation.send_message(prompt)
-            conversation.run()
-            status = str(conversation.state.execution_status)
-        finally:
-            conversation.close()
+    # The agent edits source but never receives wrapper-held GitHub/runtime secrets.
+    with _secrets_hidden_from_agent():
+        with LocalWorkspace(working_dir=workspace) as local_workspace:
+            conversation = Conversation(
+                agent=agent,
+                workspace=local_workspace,
+                callbacks=[callback],
+            )
+            try:
+                conversation.send_message(prompt)
+                conversation.run()
+                status = str(conversation.state.execution_status)
+            finally:
+                conversation.close()
 
     return {"status": status, "events": len(events)}
 
@@ -192,22 +257,37 @@ def _mission_prompt(payload: dict[str, Any]) -> str:
     issue_body = str(payload.get("issue_body", "")).strip()
     if not objective:
         raise WorkerError("objective is required")
+    failure_evidence = payload.get("failure_evidence") or []
+    repair_attempt = payload.get("repair_attempt")
+    repair_text = ""
+    if failure_evidence:
+        repair_text = (
+            "\nTHIS IS A REPAIR PASS. Diagnose and fix the supplied exact-head CI "
+            "failures without broadening scope.\n"
+            f"REPAIR ATTEMPT: {repair_attempt}\n"
+            f"FAILURE EVIDENCE:\n{json.dumps(failure_evidence, ensure_ascii=False)[:12000]}\n"
+        )
     return (
         "You are a bounded coding worker under Sigma authority.\n"
         "Work only in the current repository checkout.\n"
         "Do not deploy, manage secrets, change repository settings, push branches, "
         "open pull requests, or modify production systems. The wrapper handles GitHub.\n"
         "Make the smallest correct code change needed for the task.\n"
-        "Run relevant local tests where useful, but do not claim VERIFIED or RELEASED.\n\n"
+        "Use the repository .sigma/project.yaml commands and existing tests as the "
+        "source of truth. Update PROJECT_STATUS.md when the task materially changes "
+        "project state. Do not claim VERIFIED or RELEASED.\n\n"
         f"OBJECTIVE:\n{objective}\n\n"
         f"ISSUE DETAILS:\n{issue_body[:16000]}\n"
+        f"{repair_text}"
     )
 
 
 def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     repository = str(payload.get("repository", "")).strip()
     if repository not in _allowed_repositories():
-        raise WorkerError("Repository is not in SIGMA_WORKER_ALLOWED_REPOSITORIES")
+        raise WorkerError(
+            "Repository is not in SIGMA_WORKER_ALLOWED_REPOSITORIES"
+        )
 
     authority = payload.get("authority") or {}
     for forbidden in (
@@ -223,9 +303,16 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     if not mission_id:
         raise WorkerError("mission_id is required")
     issue_number = payload.get("issue_number")
-    branch = _branch_name(
-        int(issue_number) if issue_number is not None else None,
-        mission_id,
+    existing_branch = str(payload.get("existing_branch") or "").strip()
+    existing_pr = str(payload.get("pull_request_url") or "").strip()
+    repair_mode = bool(existing_branch and existing_pr)
+    branch = (
+        existing_branch
+        if repair_mode
+        else _branch_name(
+            int(issue_number) if issue_number is not None else None,
+            mission_id,
+        )
     )
 
     worker_root = Path(os.getenv("SIGMA_WORKER_ROOT", "/workspaces")).resolve()
@@ -235,18 +322,25 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     if workspace.exists():
         shutil.rmtree(workspace)
 
-    env, _ = _git_env()
-    clone = _run(
-        ["git", "clone", "--depth", "1", f"https://github.com/{repository}.git", str(workspace)],
-        env=env,
-        timeout=300,
-    )
+    git_env, _ = _git_env()
+    clone_args = ["git", "clone", "--depth", "1"]
+    if repair_mode:
+        clone_args.extend(["--branch", branch, "--single-branch"])
+    clone_args.extend([f"https://github.com/{repository}.git", str(workspace)])
+    clone = _run(clone_args, env=git_env, timeout=300)
     if clone.returncode != 0:
         raise WorkerError(f"git clone failed: {clone.stderr[-800:]}")
 
-    checkout = _run(["git", "checkout", "-b", branch], cwd=workspace, env=env)
-    if checkout.returncode != 0:
-        raise WorkerError(f"branch creation failed: {checkout.stderr[-800:]}")
+    if not repair_mode:
+        checkout = _run(
+            ["git", "checkout", "-b", branch],
+            cwd=workspace,
+            env=git_env,
+        )
+        if checkout.returncode != 0:
+            raise WorkerError(
+                f"branch creation failed: {checkout.stderr[-800:]}"
+            )
 
     agent_result = _open_hands_edit(
         workspace,
@@ -254,47 +348,75 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
         mission_id,
     )
 
-    diff_check = _run(["git", "diff", "--check"], cwd=workspace, env=env)
+    diff_check = _run(
+        ["git", "diff", "--check"],
+        cwd=workspace,
+        env=_safe_exec_env(),
+    )
     if diff_check.returncode != 0:
         return {
             "status": "BLOCKED",
             "mission_id": mission_id,
+            "branch": branch,
+            "pull_request_url": existing_pr or None,
             "unresolved_failures": ["git diff --check failed"],
             "evidence": [diff_check.stderr[-1200:]],
         }
 
-    status = _run(["git", "status", "--porcelain"], cwd=workspace, env=env)
+    status = _run(
+        ["git", "status", "--porcelain"],
+        cwd=workspace,
+        env=_safe_exec_env(),
+    )
     changed = [line for line in status.stdout.splitlines() if line.strip()]
     if not changed:
         return {
             "status": "BLOCKED",
             "mission_id": mission_id,
+            "branch": branch,
+            "pull_request_url": existing_pr or None,
             "unresolved_failures": ["OpenHands produced no repository changes"],
             "evidence": [f"openhands_status={agent_result['status']}"],
         }
 
-    verify_args = _verify_command(repository)
-    verification = _run(
-        verify_args,
-        cwd=workspace,
-        env=env,
-        timeout=int(os.getenv("SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS", "900")),
-    )
-    tests_passed = verification.returncode == 0
+    verify_commands = _verification_commands(workspace)
+    verification_outputs: list[str] = []
+    tests_executed: list[str] = []
+    verification_exit = 0
+    for command in verify_commands:
+        tests_executed.append(command)
+        completed = _run(
+            ["bash", "-lc", command],
+            cwd=workspace,
+            env=_safe_exec_env(),
+            timeout=int(
+                os.getenv("SIGMA_WORKER_VERIFY_TIMEOUT_SECONDS", "900")
+            ),
+        )
+        verification_outputs.append(
+            f"$ {command}\n{(completed.stdout + completed.stderr)[-4000:]}"
+        )
+        if completed.returncode != 0:
+            verification_exit = completed.returncode
+            break
+
     evidence = [
         f"openhands_status={agent_result['status']}",
         f"openhands_events={agent_result['events']}",
         f"changed_files={len(changed)}",
-        f"verification_exit={verification.returncode}",
+        f"verification_exit={verification_exit}",
+        f"verification_commands={len(tests_executed)}",
+        "agent_secret_exposure=blocked_by_wrapper",
     ]
-    if not tests_passed:
+    if verification_exit != 0:
         return {
             "status": "BLOCKED",
             "mission_id": mission_id,
             "branch": branch,
-            "tests_executed": [" ".join(verify_args)],
-            "unresolved_failures": ["Independent verification failed"],
-            "evidence": evidence + [(verification.stdout + verification.stderr)[-3000:]],
+            "pull_request_url": existing_pr or None,
+            "tests_executed": tests_executed,
+            "unresolved_failures": ["Independent manifest verification failed"],
+            "evidence": evidence + verification_outputs[-2:],
         }
 
     if os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") != "1":
@@ -302,40 +424,70 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
             "status": "TESTED",
             "mission_id": mission_id,
             "branch": branch,
-            "tests_executed": [" ".join(verify_args)],
+            "pull_request_url": existing_pr or None,
+            "tests_executed": tests_executed,
             "evidence": evidence + ["write_mode=disabled"],
-            "next_action": "Enable SIGMA_WORKER_ALLOW_WRITE only after worker proof review.",
+            "next_action": (
+                "Enable SIGMA_WORKER_ALLOW_WRITE only after worker proof review."
+            ),
         }
 
-    add = _run(["git", "add", "-A"], cwd=workspace, env=env)
+    add = _run(["git", "add", "-A"], cwd=workspace, env=git_env)
     if add.returncode != 0:
         raise WorkerError("git add failed")
     commit = _run(
-        ["git", "commit", "-m", f"Sigma worker: {payload.get('objective', 'bounded change')[:80]}"],
+        [
+            "git",
+            "commit",
+            "-m",
+            (
+                "Sigma repair: "
+                if repair_mode
+                else "Sigma worker: "
+            )
+            + str(payload.get("objective", "bounded change"))[:80],
+        ],
         cwd=workspace,
-        env=env,
+        env=git_env,
     )
     if commit.returncode != 0:
         raise WorkerError(f"git commit failed: {commit.stderr[-800:]}")
-    sha = _run(["git", "rev-parse", "HEAD"], cwd=workspace, env=env).stdout.strip()
+    sha = _run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=workspace,
+        env=_safe_exec_env(),
+    ).stdout.strip()
 
-    push = _run(["git", "push", "-u", "origin", branch], cwd=workspace, env=env, timeout=300)
+    push = _run(
+        ["git", "push", "-u", "origin", branch],
+        cwd=workspace,
+        env=git_env,
+        timeout=300,
+    )
     if push.returncode != 0:
         raise WorkerError(f"git push failed: {push.stderr[-1200:]}")
 
-    token = os.getenv("SIGMA_GITHUB_TOKEN", "")
-    pr = _github_pr(
-        repository,
-        branch=branch,
-        title=f"Sigma worker: {payload.get('objective', 'bounded change')[:100]}",
-        body=(
-            f"Automated bounded worker change for mission {mission_id}.\n\n"
-            f"Issue: #{issue_number}\n\n"
-            "Independent verification executed by the worker wrapper before push. "
-            "This PR is not VERIFIED/RELEASED until Sigma's independent gates complete."
-        ),
-        token=token,
-    )
+    if repair_mode:
+        pr_url = existing_pr
+    else:
+        token = os.getenv("SIGMA_GITHUB_TOKEN", "")
+        pr = _github_pr(
+            repository,
+            branch=branch,
+            title=(
+                f"Sigma worker: "
+                f"{str(payload.get('objective', 'bounded change'))[:100]}"
+            ),
+            body=(
+                f"Automated bounded worker change for mission {mission_id}.\n\n"
+                f"Issue: #{issue_number}\n\n"
+                "Independent manifest verification executed by the worker wrapper "
+                "before push. This PR is not VERIFIED/RELEASED until Sigma's "
+                "independent gates complete."
+            ),
+            token=token,
+        )
+        pr_url = str(pr.get("html_url") or "")
 
     keep = os.getenv("SIGMA_WORKER_KEEP_WORKSPACE", "0") == "1"
     if not keep:
@@ -346,10 +498,11 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
         "mission_id": mission_id,
         "branch": branch,
         "commit_sha": sha,
-        "pull_request_url": pr.get("html_url"),
-        "tests_executed": [" ".join(verify_args)],
+        "pull_request_url": pr_url,
+        "tests_executed": tests_executed,
         "evidence": evidence,
-        "next_action": "Sigma independent critic/security/evidence review.",
+        "repair_mode": repair_mode,
+        "next_action": "Sigma delivery supervisor exact-head CI and independent gates.",
     }
 
 
@@ -358,11 +511,13 @@ def build_server() -> ThreadingHTTPServer:
     port = int(os.getenv("SIGMA_WORKER_PORT", "8091"))
     token = os.getenv("SIGMA_WORKER_TOKEN", "")
     if host not in {"127.0.0.1", "localhost", "::1"} and not token:
-        raise WorkerError("SIGMA_WORKER_TOKEN is required for non-loopback binding")
+        raise WorkerError(
+            "SIGMA_WORKER_TOKEN is required for non-loopback binding"
+        )
     lock = threading.Lock()
 
     class Handler(BaseHTTPRequestHandler):
-        server_version = "SigmaWorker/1"
+        server_version = "SigmaWorker/2"
 
         def _json(self, status: int, payload: Any) -> None:
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -373,7 +528,10 @@ def build_server() -> ThreadingHTTPServer:
             self.wfile.write(body)
 
         def _authorized(self) -> bool:
-            return not token or self.headers.get("Authorization") == f"Bearer {token}"
+            return (
+                not token
+                or self.headers.get("Authorization") == f"Bearer {token}"
+            )
 
         def do_GET(self) -> None:
             if self.path == "/health":
@@ -382,8 +540,16 @@ def build_server() -> ThreadingHTTPServer:
                     {
                         "status": "ok",
                         "worker": "openhands-local",
-                        "write_enabled": os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") == "1",
-                        "allowed_repositories": sorted(_allowed_repositories()),
+                        "version": 2,
+                        "write_enabled": (
+                            os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") == "1"
+                        ),
+                        "allowed_repositories": sorted(
+                            _allowed_repositories()
+                        ),
+                        "manifest_verification": True,
+                        "repair_existing_pr": True,
+                        "agent_secret_exposure": False,
                     },
                 )
                 return
@@ -397,23 +563,34 @@ def build_server() -> ThreadingHTTPServer:
                 self._json(401, {"error": "unauthorized"})
                 return
             if not lock.acquire(blocking=False):
-                self._json(409, {"status": "BLOCKED", "error": "worker is busy"})
+                self._json(
+                    409,
+                    {"status": "BLOCKED", "error": "worker is busy"},
+                )
                 return
             try:
                 length = int(self.headers.get("Content-Length", "0"))
                 if length <= 0 or length > MAX_BODY:
                     self._json(400, {"error": "invalid request size"})
                     return
-                payload = json.loads(self.rfile.read(length).decode("utf-8"))
+                payload = json.loads(
+                    self.rfile.read(length).decode("utf-8")
+                )
                 if not isinstance(payload, dict):
                     self._json(400, {"error": "JSON object required"})
                     return
                 result = run_mission(payload)
                 self._json(200, result)
             except WorkerError as exc:
-                self._json(409, {"status": "BLOCKED", "error": str(exc)})
+                self._json(
+                    409,
+                    {"status": "BLOCKED", "error": str(exc)},
+                )
             except Exception as exc:
-                self._json(500, {"status": "BLOCKED", "error": type(exc).__name__})
+                self._json(
+                    500,
+                    {"status": "BLOCKED", "error": type(exc).__name__},
+                )
             finally:
                 lock.release()
 
@@ -426,7 +603,10 @@ def build_server() -> ThreadingHTTPServer:
 
 def main() -> int:
     server = build_server()
-    print(f"Sigma worker listening on {server.server_address}", flush=True)
+    print(
+        f"Sigma worker listening on {server.server_address}",
+        flush=True,
+    )
     try:
         server.serve_forever()
     finally:
