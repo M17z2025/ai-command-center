@@ -6,7 +6,7 @@ authority. Mutations and worker execution require explicit runtime configuration
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone, timedelta
 import base64
 import json
@@ -200,6 +200,7 @@ class WorkItem:
     labels: tuple[str, ...]
     executable: bool
     blockers: tuple[str, ...] = ()
+    state: str = "EXECUTABLE"
 
 
 @dataclass
@@ -529,6 +530,23 @@ _BLOCK_WORDS = (
     "external approval",
 )
 
+_TERMINAL_LABEL_STATES = {
+    "done": "DONE",
+    "source-complete": "SOURCE_COMPLETE",
+    "source complete": "SOURCE_COMPLETE",
+    "superseded": "SUPERSEDED",
+    "duplicate": "SUPERSEDED",
+}
+_BLOCKED_LABEL_STATES = {
+    "blocked-owner": "BLOCKED_OWNER",
+    "blocked:owner": "BLOCKED_OWNER",
+    "blocked-external": "BLOCKED_EXTERNAL",
+    "blocked:external": "BLOCKED_EXTERNAL",
+}
+_PR_ISSUE_RE = re.compile(
+    r"(?i)\\b(?:closes?|fixes?|resolves?|issue)\\s*:?[ ]*#(\\d+)\\b"
+)
+
 
 def _priority(issue: dict[str, Any]) -> int:
     labels = [str(item.get("name", "")).lower() for item in issue.get("labels", [])]
@@ -551,10 +569,25 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
     labels = tuple(
         str(item.get("name", "")) for item in issue.get("labels", []) if item.get("name")
     )
+    labels_lower = {item.lower() for item in labels}
     combined = f"{title}\n{body}".lower()
     blockers = [word for word in _BLOCK_WORDS if word in combined]
     has_objective = bool(body.strip()) or bool(title.strip())
-    executable = has_objective and not blockers
+
+    state = "EXECUTABLE"
+    for label, terminal_state in _TERMINAL_LABEL_STATES.items():
+        if label in labels_lower:
+            state = terminal_state
+            break
+    if state == "EXECUTABLE":
+        for label, blocked_state in _BLOCKED_LABEL_STATES.items():
+            if label in labels_lower:
+                state = blocked_state
+                break
+    if state == "EXECUTABLE" and blockers:
+        state = "BLOCKED_EXTERNAL"
+
+    executable = has_objective and state == "EXECUTABLE"
     return WorkItem(
         repository=repository,
         issue_number=int(issue["number"]),
@@ -564,7 +597,17 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
         labels=labels,
         executable=executable,
         blockers=tuple(blockers),
+        state=state,
     )
+
+
+def _issue_numbers_with_open_prs(pulls: list[dict[str, Any]]) -> set[int]:
+    issue_numbers: set[int] = set()
+    for pull in pulls:
+        text = f"{pull.get('title') or ''}\n{pull.get('body') or ''}"
+        for match in _PR_ISSUE_RE.finditer(text):
+            issue_numbers.add(int(match.group(1)))
+    return issue_numbers
 
 
 def load_registry(path: str | Path) -> list[dict[str, str]]:
@@ -629,14 +672,23 @@ class PortfolioRunner:
             )
             snap.status_present = status is not None
             snap.status_text = status or ""
-            snap.open_prs = len(self.github.open_pulls(snap.repository))
+            open_pulls = self.github.open_pulls(snap.repository)
+            snap.open_prs = len(open_pulls)
+            issues_with_prs = _issue_numbers_with_open_prs(open_pulls)
             latest = self.github.latest_commit(snap.repository, snap.default_branch)
             if latest:
                 snap.latest_commit_sha = latest.get("sha", "")
-            snap.work_items = [
-                _work_item(snap.repository, issue)
-                for issue in self.github.open_issues(snap.repository)
-            ]
+            snap.work_items = []
+            for issue in self.github.open_issues(snap.repository):
+                item = _work_item(snap.repository, issue)
+                if item.issue_number in issues_with_prs and item.executable:
+                    item = replace(
+                        item,
+                        executable=False,
+                        blockers=(*item.blockers, "open pull request"),
+                        state="PR_OPEN",
+                    )
+                snap.work_items.append(item)
         except Exception as exc:
             snap.errors.append(str(exc))
         return snap
