@@ -20,7 +20,7 @@ from sigma_runtime.memory import memory_from_env
 
 
 def main() -> int:
-    interval = max(300, int(os.getenv("SIGMA_RUNNER_INTERVAL_SECONDS", "900")))
+    interval = max(60, int(os.getenv("SIGMA_RUNNER_INTERVAL_SECONDS", "60")))
     execute = os.getenv("SIGMA_RUNNER_EXECUTE", "0") == "1"
     db = os.getenv("SIGMA_RUNTIME_DB", "/data/sigma-runtime.db")
     root = Path(os.getenv("SIGMA_REPO_ROOT", ".")).resolve()
