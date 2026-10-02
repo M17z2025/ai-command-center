@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 import time
 from typing import Any, Protocol
 
@@ -133,7 +134,7 @@ class DeliverySupervisor:
 
         while True:
             assessment = self._wait_for_ci(
-                supervisor, repository, pull_request_url
+                supervisor, repository, pull_request_url, branch
             )
             if assessment.state == "CI_PENDING":
                 return DeliveryResult(
@@ -343,12 +344,29 @@ class DeliverySupervisor:
         supervisor: PullRequestSupervisor,
         repository: str,
         pull_request_url: str,
+        branch: str,
     ) -> PullRequestAssessment:
         deadline = time.monotonic() + self.ci_timeout_seconds
+        dispatched = False
         while True:
             assessment = supervisor.assess(repository, pull_request_url)
             if assessment.state != "CI_PENDING":
                 return assessment
+
+            if not assessment.workflow_runs and not dispatched:
+                configured = [
+                    item.strip()
+                    for item in os.getenv(
+                        "SIGMA_RUNNER_CI_WORKFLOWS", ""
+                    ).split(",")
+                    if item.strip()
+                ]
+                dispatcher = getattr(self.github, "dispatch_workflow", None)
+                if configured and callable(dispatcher):
+                    for workflow_id in configured:
+                        dispatcher(repository, workflow_id, branch)
+                    dispatched = True
+
             if time.monotonic() >= deadline:
                 return assessment
             time.sleep(self.poll_seconds)
