@@ -139,6 +139,16 @@ class GitHubClient:
         runs = data.get("workflow_runs", []) if isinstance(data, dict) else []
         return [item for item in runs if item.get("head_sha") == head_sha]
 
+    def dispatch_workflow(
+        self, repository: str, workflow_id: str, ref: str
+    ) -> None:
+        workflow = quote(workflow_id, safe="")
+        self.request(
+            "POST",
+            f"/repos/{repository}/actions/workflows/{workflow}/dispatches",
+            payload={"ref": ref},
+        )
+
     def workflow_run_jobs(
         self, repository: str, run_id: int
     ) -> list[dict[str, Any]]:
