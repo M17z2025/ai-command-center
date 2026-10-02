@@ -19,11 +19,34 @@ class FakeOrchestrator:
 
 
 class FakeGitHub:
+    allow_write = True
+
+    def __init__(self):
+        self.comments = []
+        self.closed = []
+        self.merges = []
+
     def pull_request(self, repository, number):
         return {"number": number, "head": {"sha": "abc123"}}
 
     def workflow_runs_for_head(self, repository, head_sha):
         return [{"id": 1, "head_sha": head_sha, "status": "completed", "conclusion": "success"}]
+
+    def workflow_run_jobs(self, repository, run_id):
+        return [{"id": 11, "name": "tests", "conclusion": "success", "steps": []}]
+
+    def pull_request_files(self, repository, number):
+        return [{"filename": "app.py", "status": "modified", "additions": 1, "deletions": 0, "patch": "+pass"}]
+
+    def merge_pull_request(self, repository, number, expected_head_sha):
+        self.merges.append((repository, number, expected_head_sha))
+        return {"merged": True, "sha": "merge123", "message": "merged"}
+
+    def comment_issue(self, repository, number, body):
+        self.comments.append((repository, number, body))
+
+    def close_issue(self, repository, number):
+        self.closed.append((repository, number))
 
 
 class FakeWorker:
@@ -141,7 +164,7 @@ class PortfolioRunnerTests(unittest.TestCase):
             self.assertEqual(result["state"], "BLOCKED")
             self.assertIn("runner_rejection", result["worker"])
 
-    def test_worker_pr_advances_to_ci_passed_but_still_requires_independent_gate(self):
+    def test_worker_pr_completes_delivery_after_independent_gates(self):
         selected = WorkItem(
             "owner/repo", 7, "Implement feature", "criteria", 1, (), True, ()
         )
@@ -160,9 +183,10 @@ class PortfolioRunnerTests(unittest.TestCase):
             )
             runner.discover = lambda: [snap]
             result = runner.cycle(trigger="test", execute=True)
-            self.assertEqual(result["state"], "CI_PASSED")
-            self.assertIn("independent", result["next_gate"])
-            self.assertEqual(result["pr_assessment"]["head_sha"], "abc123")
+            self.assertEqual(result["state"], "DONE")
+            self.assertEqual(result["next_gate"], "next executable portfolio task")
+            self.assertEqual(result["delivery"]["head_sha"], "abc123")
+            self.assertEqual(result["delivery"]["merge_sha"], "merge123")
 
     def test_second_cycle_is_skipped_when_lease_is_active(self):
         with tempfile.TemporaryDirectory() as tmp:
