@@ -1,0 +1,196 @@
+schema_version: 1
+review_id: sigma-owner-github-source-review-v1
+reviewed_on: "2026-10-02"
+source_registry: "headquarters/generator-factory/user-github-sources.yaml"
+scope: "All external GitHub links currently preserved in the owner-supplied source registry."
+
+decision_meaning:
+  ACCEPT_FOR_DEEP_REVIEW: "Repository licence is compatible with commercial modification/integration on the evidence checked; still requires security, dependency and architectural review before adoption."
+  FORK_OR_SERVICE_BOUNDARY: "Useful open code, but copyleft obligations make a deliberate fork/service boundary and legal review necessary before proprietary integration."
+  REFERENCE_ONLY: "Useful as a catalogue, pattern or research source rather than a runtime dependency."
+  RESTRICTED_LICENSE: "Source is available, but current repository licence has material field-of-use/competing-use/internal-use restrictions or is not OSI-open; do not present as unrestricted open source."
+  LICENCE_UNVERIFIED: "A repository licence could not be verified from the standard licence-file locations checked; do not adopt until resolved."
+  DISCOVERY_ONLY: "GitHub organisation/topic link is a discovery surface, not a single adoptable code artefact."
+
+reviews:
+  - repository: "calcom/cal.diy"
+    source_url: "https://github.com/calcom/cal.diy"
+    licence: "MIT"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["scheduling", "bookings", "Alysha", "business apps"]
+    evidence: "Upstream LICENSE on current default branch."
+  - repository: "n8n-io/n8n"
+    source_url: "https://github.com/n8n-io/n8n"
+    licence: "Sustainable Use License + enterprise exclusions"
+    decision: RESTRICTED_LICENSE
+    sigma_fit: ["workflow-pattern-reference"]
+    evidence: "LICENSE.md limits use/modification to internal business or non-commercial/personal purposes and excludes .ee enterprise source."
+    action: "Do not classify as unrestricted open source; use only within exact licence boundaries or replace with a permissive/self-hosted alternative."
+  - repository: "plausible/analytics"
+    source_url: "https://github.com/plausible/analytics"
+    licence: "AGPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["analytics", "self-hosted product telemetry"]
+    evidence: "Upstream LICENSE.md."
+  - repository: "knadh/listmonk"
+    source_url: "https://github.com/knadh/listmonk"
+    licence: "AGPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["email campaigns", "notifications", "marketing"]
+    evidence: "Upstream LICENSE."
+  - repository: "every-app/open-seo"
+    source_url: "https://github.com/every-app/open-seo"
+    licence: "MIT"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["SEO", "web projects", "Marketit"]
+    evidence: "Upstream LICENSE."
+  - repository: "Anil-matcha/Open-Generative-AI"
+    source_url: "https://github.com/anil-matcha/open-generative-ai"
+    licence: "MIT"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["generative AI patterns", "creative tooling"]
+    evidence: "Upstream LICENSE."
+  - source_url: "https://github.com/Open-Generative-AI"
+    kind: "github-organization"
+    decision: DISCOVERY_ONLY
+    sigma_fit: ["generative AI discovery"]
+    action: "Assess individual repositories separately; organisation membership does not establish a common licence."
+  - repository: "diegosouzapw/OmniRoute"
+    source_url: "https://github.com/diegosouzapw/OmniRoute"
+    licence: "MIT"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["AI routing", "provider/model routing"]
+    evidence: "Upstream LICENSE."
+  - repository: "OpenHands/OpenHands"
+    source_url: "https://github.com/OpenHands/OpenHands"
+    licence: "MIT"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["Sigma coding worker"]
+    evidence: "Upstream LICENSE; already separately audited in Sigma's open-agent framework review."
+  - repository: "Pythagora-io/gpt-pilot"
+    source_url: "https://github.com/Pythagora-io/gpt-pilot"
+    licence: "FSL-1.1-MIT"
+    decision: RESTRICTED_LICENSE
+    sigma_fit: ["coding-agent pattern reference"]
+    evidence: "Upstream LICENSE prohibits competing use until the future licence conversion."
+  - repository: "surrealdb/surrealdb"
+    source_url: "https://github.com/surrealdb/surrealdb"
+    licence: "BUSL-1.1 with additional-use restriction; future Apache-2.0 change date"
+    decision: RESTRICTED_LICENSE
+    sigma_fit: ["database pattern reference"]
+    evidence: "Upstream LICENSE explicitly states BSL is not an Open Source licence and restricts Database Service use."
+  - repository: "ShubhamSKadam/Big-List-of-400-Free-Tools"
+    source_url: "https://github.com/ShubhamSKadam/Big-List-of-400-Free-Tools"
+    licence: "MIT"
+    decision: REFERENCE_ONLY
+    sigma_fit: ["Scouter discovery feed"]
+    evidence: "Upstream LICENSE."
+  - repository: "zebbern/no-cost-ai"
+    source_url: "https://github.com/zebbern/no-cost-ai"
+    licence: "MIT"
+    decision: REFERENCE_ONLY
+    sigma_fit: ["free-AI discovery feed"]
+    evidence: "Upstream LICENSE."
+  - repository: "tinyhumansai/openhuman"
+    source_url: "https://github.com/tinyhumansai/openhuman"
+    licence: "GPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["personal AI / Alysha architecture reference"]
+    evidence: "Upstream LICENSE."
+  - repository: "HKUDS/DeepTutor"
+    source_url: "https://github.com/HKUDS/DeepTutor"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["Humanit", "education AI", "tutoring workflows"]
+    evidence: "Upstream LICENSE."
+  - repository: "HunxByts/GhostTrack"
+    source_url: "https://github.com/HunxByts/GhostTrack"
+    licence: "UNVERIFIED"
+    decision: LICENCE_UNVERIFIED
+    sigma_fit: ["OSINT pattern reference only until licence resolved"]
+    evidence: "No standard LICENSE/LICENSE.md/LICENSE.txt/COPYING file verified in the connected GitHub inspection."
+  - repository: "reconurge/flowsint"
+    source_url: "https://github.com/reconurge/flowsint"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["OSINT", "investigation tooling"]
+    evidence: "Upstream LICENSE."
+  - repository: "cipher387/API-s-for-OSINT"
+    source_url: "https://github.com/cipher387/API-s-for-OSINT"
+    licence: "CC0-1.0"
+    decision: REFERENCE_ONLY
+    sigma_fit: ["OSINT/API discovery feed"]
+    evidence: "Upstream LICENSE.md."
+  - repository: "magnitudedev/magnitude"
+    source_url: "https://github.com/magnitudedev/magnitude"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["browser agents", "Sigma User Tester", "computer-use automation"]
+    evidence: "Upstream LICENSE."
+  - source_url: "https://github.com/topics/commodities-api"
+    kind: "github-topic"
+    decision: DISCOVERY_ONLY
+    sigma_fit: ["Lycia commodities", "AutoHedge market data discovery"]
+    action: "Scouter must evaluate each repository/API independently."
+  - source_url: "https://github.com/topics/financial-api"
+    kind: "github-topic"
+    decision: DISCOVERY_ONLY
+    sigma_fit: ["finance/data API discovery"]
+    action: "Scouter must evaluate each repository/API independently."
+  - repository: "freqtrade/freqtrade"
+    source_url: "https://github.com/freqtrade/freqtrade"
+    licence: "GPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["AutoHedge research/backtesting"]
+    evidence: "Upstream LICENSE."
+  - repository: "hummingbot/hummingbot"
+    source_url: "https://github.com/hummingbot/hummingbot"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["AutoHedge execution/connectors"]
+    evidence: "Upstream LICENSE."
+  - repository: "nautechsystems/nautilus_trader"
+    source_url: "https://github.com/nautechsystems/nautilus_trader"
+    licence: "LGPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["AutoHedge event-driven trading architecture"]
+    evidence: "Upstream LICENSE."
+  - repository: "pipecat-ai/pipecat"
+    source_url: "https://github.com/pipecat-ai/pipecat"
+    licence: "BSD-2-Clause"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["Alysha realtime voice"]
+    evidence: "Upstream LICENSE."
+  - repository: "kirklandsig/AIReceptionist"
+    source_url: "https://github.com/kirklandsig/AIReceptionist"
+    licence: "AGPL-3.0"
+    decision: FORK_OR_SERVICE_BOUNDARY
+    sigma_fit: ["Alysha receptionist/voice workflow reference"]
+    evidence: "Upstream LICENSE."
+  - repository: "livekit/agents"
+    source_url: "https://github.com/livekit/agents"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["Alysha realtime agents", "Humanit voice"]
+    evidence: "Upstream LICENSE."
+  - repository: "bolna-ai/bolna"
+    source_url: "https://github.com/bolna-ai/bolna"
+    licence: "MIT-style licence"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["Alysha voice orchestration"]
+    evidence: "Upstream LICENSE grants MIT-style unrestricted software rights."
+  - repository: "JustVugg/colibri"
+    source_url: "https://github.com/JustVugg/colibri"
+    licence: "Apache-2.0"
+    decision: ACCEPT_FOR_DEEP_REVIEW
+    sigma_fit: ["AI agent/tooling architecture"]
+    evidence: "Upstream LICENSE."
+
+summary:
+  accept_for_deep_review: 13
+  fork_or_service_boundary: 7
+  reference_only: 4
+  restricted_license: 3
+  licence_unverified: 1
+  discovery_only: 3
+  note: "Counts cover the 31 external entries currently represented in this review file, including repository and discovery-surface links."
