@@ -8,6 +8,7 @@ on:
       - "sigma_runtime/delivery_supervisor.py"
       - "sigma_runtime/portfolio_runner.py"
       - "scripts/sigma_openhands_worker_service.py"
+      - "Dockerfile.sigma-worker"
       - "scripts/sigma_end_to_end_probe.py"
       - "deploy/sigma-stack/docker-compose.ollama.yml"
       - ".github/workflows/sigma-control-plane.yml"
