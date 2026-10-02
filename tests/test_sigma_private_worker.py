@@ -1,6 +1,7 @@
 import importlib.util
 import os
 from pathlib import Path
+import tempfile
 import unittest
 
 
@@ -69,10 +70,56 @@ class SigmaPrivateWorkerTests(unittest.TestCase):
         self.assertIn("open pull requests", prompt)
         self.assertIn("VERIFIED", prompt)
 
+
+    def test_manifest_driven_verification_commands(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".sigma").mkdir()
+            (root / ".sigma" / "project.yaml").write_text(
+                """
+commands:
+  install: npm ci
+  lint: npm run lint
+  typecheck: npm run typecheck
+  test: npm test
+""".strip(),
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                MOD._verification_commands(root),
+                ["npm ci", "npm run lint", "npm run typecheck", "npm test"],
+            )
+
+    def test_agent_environment_hides_wrapper_secrets(self):
+        old = os.environ.get("SIGMA_GITHUB_TOKEN")
+        os.environ["SIGMA_GITHUB_TOKEN"] = "secret-value"
+        try:
+            with MOD._secrets_hidden_from_agent():
+                self.assertNotIn("SIGMA_GITHUB_TOKEN", os.environ)
+            self.assertEqual(os.environ.get("SIGMA_GITHUB_TOKEN"), "secret-value")
+        finally:
+            if old is None:
+                os.environ.pop("SIGMA_GITHUB_TOKEN", None)
+            else:
+                os.environ["SIGMA_GITHUB_TOKEN"] = old
+
+    def test_repair_prompt_carries_failure_evidence(self):
+        prompt = MOD._mission_prompt(
+            {
+                "objective": "Fix feature",
+                "issue_body": "criteria",
+                "repair_attempt": 1,
+                "failure_evidence": ["tests failed"],
+            }
+        )
+        self.assertIn("THIS IS A REPAIR PASS", prompt)
+        self.assertIn("tests failed", prompt)
+
     def test_worker_dependencies_are_pinned(self):
         text = (ROOT / "requirements-worker.txt").read_text(encoding="utf-8")
         self.assertIn("openhands-sdk==1.49.6", text)
         self.assertIn("openhands-tools==1.49.6", text)
+        self.assertIn("PyYAML==6.0.2", text)
 
     def test_worker_compose_is_private_and_write_disabled_by_default(self):
         text = (

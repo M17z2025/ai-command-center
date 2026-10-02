@@ -1,0 +1,252 @@
+name: Sigma self-hosted commissioning
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sigma_runtime/**"
+      - "scripts/sigma_openhands_worker_service.py"
+      - "scripts/sigma_end_to_end_probe.py"
+      - "scripts/sigma_runner_daemon.py"
+      - "scripts/sigma_live_probe.py"
+      - "scripts/sigma_one_shot_commission.py"
+      - "scripts/sigma_one_shot_commission.sh"
+      - "deploy/sigma-stack/**"
+      - "Dockerfile.sigma-runtime"
+      - "Dockerfile.sigma-worker"
+      - "requirements-control.txt"
+      - "requirements-worker.txt"
+      - ".github/workflows/sigma-selfhosted-commission.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sigma-selfhosted-commission
+  cancel-in-progress: false
+
+jobs:
+  commission:
+    runs-on: self-hosted
+    timeout-minutes: 90
+    env:
+      HOST_ENV_FILE: /opt/ai-command-center/deploy/sigma-stack/.env
+      GITHUB_TOKEN: ${{ github.token }}
+      PROOF_OUTPUT: /tmp/sigma-end-to-end-proof.json
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Preflight private host
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v docker >/dev/null
+          docker compose version >/dev/null
+          test -f "$HOST_ENV_FILE"
+          for key in SIGMA_RUNTIME_TOKEN SIGMA_GITHUB_TOKEN SIGMA_WORKER_TOKEN OLLAMA_MODEL OLLAMA_EMBEDDING_MODEL; do
+            if ! grep -Eq "^$key=.+$" "$HOST_ENV_FILE"; then
+              echo "Missing required private runtime setting: $key" >&2
+              exit 21
+            fi
+          done
+
+      - name: Prepare isolated checkout environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp "$HOST_ENV_FILE" deploy/sigma-stack/.env
+          chmod 600 deploy/sigma-stack/.env
+
+          set_env() {
+            key="$1"
+            value="$2"
+            file="deploy/sigma-stack/.env"
+            if grep -q "^$key=" "$file"; then
+              sed -i "s|^$key=.*|$key=$value|" "$file"
+            else
+              printf '%s=%s\n' "$key" "$value" >> "$file"
+            fi
+          }
+
+          # Commission advisory/memory stages first with write execution disabled.
+          set_env SIGMA_RUNNER_ALLOW_WRITE 0
+          set_env SIGMA_RUNNER_EXECUTE 0
+          set_env SIGMA_WORKER_ALLOW_WRITE 0
+          set_env SIGMA_RUNNER_INTERVAL_SECONDS 60
+          set_env SIGMA_RUNNER_CI_POLL_SECONDS 5
+          set_env SIGMA_RUNNER_CI_TIMEOUT_SECONDS 1200
+          set_env SIGMA_RUNNER_MAX_REPAIRS 2
+          set_env OLLAMA_WORKER_MODEL "${OLLAMA_WORKER_MODEL:-qwen2.5:7b}"
+
+      - name: Build and start private Sigma foundation
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+            -f deploy/sigma-stack/docker-compose.memory.yml
+          )
+          "${COMPOSE[@]}" up -d --build ollama ollama-model-init sigma-memory sigma-runtime
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8080/health >/tmp/sigma-health.json 2>/dev/null; then
+              break
+            fi
+            sleep 5
+          done
+          test -s /tmp/sigma-health.json
+
+      - name: Prove live model mission
+        shell: bash
+        run: |
+          set -euo pipefail
+          set -a
+          . deploy/sigma-stack/.env
+          set +a
+          python scripts/sigma_live_probe.py             --url "http://127.0.0.1:${SIGMA_RUNTIME_PORT:-8080}"             --prompt "Sigma commissioning proof. Analyse whether a bounded repository task should require exact-head CI, independent review, security verification and durable evidence. Do not make external factual claims."             --timeout 1200             --max-cycles 1
+
+      - name: Prove memory persistence
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/sigma_one_shot_commission.sh
+
+      - name: Enable governed repository execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          set_env() {
+            key="$1"
+            value="$2"
+            file="deploy/sigma-stack/.env"
+            if grep -q "^$key=" "$file"; then
+              sed -i "s|^$key=.*|$key=$value|" "$file"
+            else
+              printf '%s=%s\n' "$key" "$value" >> "$file"
+            fi
+          }
+          set_env SIGMA_RUNNER_ALLOW_WRITE 1
+          set_env SIGMA_RUNNER_EXECUTE 1
+          set_env SIGMA_WORKER_ALLOW_WRITE 1
+          set_env SIGMA_WORKER_ALLOWED_REPOSITORIES "M17z2025/ai-command-center,M17z2025/mi7z-web,M17z2025/alisha-ai-platform,M17z2025/invoiceit-by-mi7z,M17z2025/lycia-zambia,M17z2025/umarketit,M17z2025/total-mining-intelligence,M17z2025/mybodyfit,M17z2025/tattooit,M17z2025/legalit,M17z2025/signit-by-mi7z,M17z2025/ihumanit,M17z2025/designit-ai-platform,M17z2025/synergy-ai-pay,M17z2025/lycia-limited"
+
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+            -f deploy/sigma-stack/docker-compose.memory.yml
+          )
+          "${COMPOSE[@]}" stop sigma-runner >/dev/null 2>&1 || true
+          "${COMPOSE[@]}" up -d --build sigma-worker sigma-runtime
+          for i in $(seq 1 60); do
+            if "${COMPOSE[@]}" exec -T sigma-runtime python -c               "import json,urllib.request; print(json.load(urllib.request.urlopen('http://sigma-worker:8091/health', timeout=5))['status'])"               2>/dev/null | grep -q ok; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Sigma worker health did not become ready" >&2
+          exit 22
+
+      - name: Execute real autonomous repository proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+            -f deploy/sigma-stack/docker-compose.memory.yml
+          )
+          "${COMPOSE[@]}" run --rm sigma-runner             python scripts/sigma_end_to_end_probe.py | tee "$PROOF_OUTPUT"
+          python - <<'PY'
+          import json, os
+          path = os.environ["PROOF_OUTPUT"]
+          text = open(path, encoding="utf-8").read()
+          start = text.find("{")
+          data = json.loads(text[start:])
+          assert data["status"] == "PASS", data
+          assert data["delivery"]["state"] == "DONE", data
+          assert data["delivery"]["merge_sha"], data
+          PY
+
+      - name: Start continuous Sigma runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.ollama.yml
+            -f deploy/sigma-stack/docker-compose.memory.yml
+          )
+          "${COMPOSE[@]}" up -d sigma-runner
+          sleep 5
+          "${COMPOSE[@]}" ps
+
+      - name: Record commissioned evidence in recovery issue
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, urllib.request
+          text = open(os.environ["PROOF_OUTPUT"], encoding="utf-8").read()
+          proof = json.loads(text[text.find("{"):])
+          delivery = proof["delivery"]
+          body = (
+              "SIGMA SELF-HOSTED COMMISSIONING: PASS\n\n"
+              f"- source commit: {os.environ['GITHUB_SHA']}\n"
+              f"- autonomous proof issue: #{proof['issue_number']}\n"
+              f"- autonomous proof PR: {delivery['pull_request_url']}\n"
+              f"- exact PR head: {delivery['head_sha']}\n"
+              f"- merge commit: {delivery['merge_sha']}\n"
+              f"- repair attempts: {delivery['repair_attempts']}\n"
+              f"- planning mission: {proof['planning_mission_id']}\n"
+              f"- independent review mission: {delivery['review_mission_id']}\n"
+              f"- security mission: {delivery['security_mission_id']}\n"
+              "- live model mission: PASS\n"
+              "- memory restart/retrieval: PASS\n"
+              "- continuous runner: STARTED with execution/write enabled\n"
+          )
+          req = urllib.request.Request(
+              "https://api.github.com/repos/M17z2025/ai-command-center/issues/88/comments",
+              data=json.dumps({"body": body}).encode(),
+              method="POST",
+              headers={
+                  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+              },
+          )
+          urllib.request.urlopen(req, timeout=30).read()
+          PY
+
+      - name: Record commissioning failure
+        if: failure()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          body = (
+              "SIGMA SELF-HOSTED COMMISSIONING: FAILED\n\n"
+              f"- source commit: {os.environ['GITHUB_SHA']}\n"
+              f"- workflow run: https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}\n"
+              "- Sigma is NOT commissioned. Inspect the failed workflow step; do not report it as operational.\n"
+          )
+          req = urllib.request.Request(
+              "https://api.github.com/repos/M17z2025/ai-command-center/issues/88/comments",
+              data=json.dumps({"body": body}).encode(),
+              method="POST",
+              headers={
+                  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+              },
+          )
+          urllib.request.urlopen(req, timeout=30).read()
+          PY

@@ -6,7 +6,7 @@ authority. Mutations and worker execution require explicit runtime configuration
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone, timedelta
 import base64
 import json
@@ -23,7 +23,7 @@ import uuid
 import yaml
 
 from .orchestrator import SigmaOrchestrator
-from .pr_supervisor import PullRequestSupervisor
+from .delivery_supervisor import DeliverySupervisor
 
 
 def utcnow() -> str:
@@ -139,6 +139,48 @@ class GitHubClient:
         runs = data.get("workflow_runs", []) if isinstance(data, dict) else []
         return [item for item in runs if item.get("head_sha") == head_sha]
 
+    def workflow_run_jobs(
+        self, repository: str, run_id: int
+    ) -> list[dict[str, Any]]:
+        data = self.request(
+            "GET", f"/repos/{repository}/actions/runs/{int(run_id)}/jobs?per_page=100"
+        )
+        return data.get("jobs", []) if isinstance(data, dict) else []
+
+    def pull_request_files(
+        self, repository: str, number: int
+    ) -> list[dict[str, Any]]:
+        data = self.request(
+            "GET", f"/repos/{repository}/pulls/{int(number)}/files?per_page=100"
+        )
+        return data if isinstance(data, list) else []
+
+    def merge_pull_request(
+        self, repository: str, number: int, expected_head_sha: str
+    ) -> dict[str, Any]:
+        return self.request(
+            "PUT",
+            f"/repos/{repository}/pulls/{int(number)}/merge",
+            payload={
+                "sha": expected_head_sha,
+                "merge_method": "squash",
+            },
+        )
+
+    def comment_issue(self, repository: str, number: int, body: str) -> None:
+        self.request(
+            "POST",
+            f"/repos/{repository}/issues/{int(number)}/comments",
+            payload={"body": body},
+        )
+
+    def close_issue(self, repository: str, number: int) -> None:
+        self.request(
+            "PATCH",
+            f"/repos/{repository}/issues/{int(number)}",
+            payload={"state": "closed", "state_reason": "completed"},
+        )
+
     def create_issue(
         self, repository: str, title: str, body: str, labels: list[str] | None = None
     ) -> dict[str, Any]:
@@ -158,6 +200,7 @@ class WorkItem:
     labels: tuple[str, ...]
     executable: bool
     blockers: tuple[str, ...] = ()
+    state: str = "EXECUTABLE"
 
 
 @dataclass
@@ -487,6 +530,23 @@ _BLOCK_WORDS = (
     "external approval",
 )
 
+_TERMINAL_LABEL_STATES = {
+    "done": "DONE",
+    "source-complete": "SOURCE_COMPLETE",
+    "source complete": "SOURCE_COMPLETE",
+    "superseded": "SUPERSEDED",
+    "duplicate": "SUPERSEDED",
+}
+_BLOCKED_LABEL_STATES = {
+    "blocked-owner": "BLOCKED_OWNER",
+    "blocked:owner": "BLOCKED_OWNER",
+    "blocked-external": "BLOCKED_EXTERNAL",
+    "blocked:external": "BLOCKED_EXTERNAL",
+}
+_PR_ISSUE_RE = re.compile(
+    r"(?i)\b(?:closes?|fixes?|resolves?|issue)\s*:?[ ]*#(\d+)\b"
+)
+
 
 def _priority(issue: dict[str, Any]) -> int:
     labels = [str(item.get("name", "")).lower() for item in issue.get("labels", [])]
@@ -509,10 +569,25 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
     labels = tuple(
         str(item.get("name", "")) for item in issue.get("labels", []) if item.get("name")
     )
+    labels_lower = {item.lower() for item in labels}
     combined = f"{title}\n{body}".lower()
     blockers = [word for word in _BLOCK_WORDS if word in combined]
     has_objective = bool(body.strip()) or bool(title.strip())
-    executable = has_objective and not blockers
+
+    state = "EXECUTABLE"
+    for label, terminal_state in _TERMINAL_LABEL_STATES.items():
+        if label in labels_lower:
+            state = terminal_state
+            break
+    if state == "EXECUTABLE":
+        for label, blocked_state in _BLOCKED_LABEL_STATES.items():
+            if label in labels_lower:
+                state = blocked_state
+                break
+    if state == "EXECUTABLE" and blockers:
+        state = "BLOCKED_EXTERNAL"
+
+    executable = has_objective and state == "EXECUTABLE"
     return WorkItem(
         repository=repository,
         issue_number=int(issue["number"]),
@@ -522,7 +597,17 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
         labels=labels,
         executable=executable,
         blockers=tuple(blockers),
+        state=state,
     )
+
+
+def _issue_numbers_with_open_prs(pulls: list[dict[str, Any]]) -> set[int]:
+    issue_numbers: set[int] = set()
+    for pull in pulls:
+        text = f"{pull.get('title') or ''}\n{pull.get('body') or ''}"
+        for match in _PR_ISSUE_RE.finditer(text):
+            issue_numbers.add(int(match.group(1)))
+    return issue_numbers
 
 
 def load_registry(path: str | Path) -> list[dict[str, str]]:
@@ -587,14 +672,23 @@ class PortfolioRunner:
             )
             snap.status_present = status is not None
             snap.status_text = status or ""
-            snap.open_prs = len(self.github.open_pulls(snap.repository))
+            open_pulls = self.github.open_pulls(snap.repository)
+            snap.open_prs = len(open_pulls)
+            issues_with_prs = _issue_numbers_with_open_prs(open_pulls)
             latest = self.github.latest_commit(snap.repository, snap.default_branch)
             if latest:
                 snap.latest_commit_sha = latest.get("sha", "")
-            snap.work_items = [
-                _work_item(snap.repository, issue)
-                for issue in self.github.open_issues(snap.repository)
-            ]
+            snap.work_items = []
+            for issue in self.github.open_issues(snap.repository):
+                item = _work_item(snap.repository, issue)
+                if item.issue_number in issues_with_prs and item.executable:
+                    item = replace(
+                        item,
+                        executable=False,
+                        blockers=(*item.blockers, "open pull request"),
+                        state="PR_OPEN",
+                    )
+                snap.work_items.append(item)
         except Exception as exc:
             snap.errors.append(str(exc))
         return snap
@@ -761,14 +855,31 @@ class PortfolioRunner:
                     "pull_request_url evidence."
                 )
 
-            pr_assessment = None
+            delivery_result = None
             if final_status == "WORKER_CHANGED":
-                supervisor = PullRequestSupervisor(self.github)
-                pr_assessment = supervisor.assess(
-                    selected.repository,
-                    str(worker_result.get("pull_request_url", "")),
+                delivery = DeliverySupervisor(
+                    self.github,
+                    self.worker,
+                    self.orchestrator,
+                    poll_seconds=float(
+                        os.getenv("SIGMA_RUNNER_CI_POLL_SECONDS", "10")
+                    ),
+                    ci_timeout_seconds=int(
+                        os.getenv("SIGMA_RUNNER_CI_TIMEOUT_SECONDS", "900")
+                    ),
+                    max_repairs=int(
+                        os.getenv("SIGMA_RUNNER_MAX_REPAIRS", "2")
+                    ),
                 )
-                final_status = pr_assessment.state
+                delivery_result = delivery.finish(
+                    repository=selected.repository,
+                    issue_number=selected.issue_number,
+                    mission_id=str(mission_id or cycle_id),
+                    objective=selected.title,
+                    issue_body=selected.body,
+                    worker_result=worker_result,
+                )
+                final_status = delivery_result.state
 
             payload = {
                 "cycle_id": cycle_id,
@@ -777,13 +888,19 @@ class PortfolioRunner:
                 "mission_id": mission_id,
                 "discovery": discovery_summary,
                 "worker": worker_result,
-                "pr_assessment": (
-                    pr_assessment.as_dict() if pr_assessment is not None else None
+                "delivery": (
+                    delivery_result.as_dict()
+                    if delivery_result is not None
+                    else None
                 ),
                 "next_gate": (
-                    pr_assessment.next_gate
-                    if pr_assessment is not None
-                    else "worker blocker resolution"
+                    "next executable portfolio task"
+                    if final_status == "DONE"
+                    else (
+                        delivery_result.blocker
+                        if delivery_result is not None
+                        else "worker blocker resolution"
+                    )
                 ),
             }
             self.store.finish(
