@@ -172,5 +172,42 @@ class SigmaGeneratorFactoryTests(unittest.TestCase):
         self.assertTrue(required.issubset(set(urls)))
 
 
+    def test_owner_github_review_covers_all_external_sources(self):
+        source_path = (
+            ROOT / "headquarters" / "generator-factory" / "user-github-sources.yaml"
+        )
+        review_path = (
+            ROOT / "headquarters" / "generator-factory" / "user-github-review.yaml"
+        )
+        source_data = yaml.safe_load(source_path.read_text(encoding="utf-8"))
+        review_data = yaml.safe_load(review_path.read_text(encoding="utf-8"))
+
+        external_urls = {
+            item["url"]
+            for item in source_data["sources"]
+            if not item["url"].startswith("https://github.com/M17z2025/")
+        }
+        reviewed_urls = {item["source_url"] for item in review_data["reviews"]}
+
+        self.assertEqual(len(external_urls), 29)
+        self.assertEqual(reviewed_urls, external_urls)
+
+        decisions = {}
+        for item in review_data["reviews"]:
+            decisions[item["decision"]] = decisions.get(item["decision"], 0) + 1
+
+        self.assertEqual(
+            decisions,
+            {
+                "ACCEPT_FOR_DEEP_REVIEW": 13,
+                "FORK_OR_SERVICE_BOUNDARY": 6,
+                "REFERENCE_ONLY": 3,
+                "RESTRICTED_LICENSE": 3,
+                "LICENCE_UNVERIFIED": 1,
+                "DISCOVERY_ONLY": 3,
+            },
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
