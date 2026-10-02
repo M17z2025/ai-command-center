@@ -1,7 +1,14 @@
 FROM python:3.12-slim
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git bash ca-certificates \
+    && apt-get install -y --no-install-recommends \
+       git \
+       bash \
+       ca-certificates \
+       curl \
+       nodejs \
+       npm \
+       openjdk-17-jdk-headless \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -18,6 +25,7 @@ RUN useradd --create-home --uid 10001 sigmaworker \
 USER sigmaworker
 
 ENV PYTHONUNBUFFERED=1
+ENV CI=1
 EXPOSE 8091
 
 CMD ["python", "scripts/sigma_openhands_worker_service.py"]
