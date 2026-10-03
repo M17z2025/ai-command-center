@@ -110,3 +110,29 @@ planning:
 unknown_subject_policy:
   route_to: research-director
   action: "Discover the domain, form a bounded temporary specialist team, and independently evaluate before any permanent promotion."
+
+
+temporary_specialists:
+  - id: uk-residential-conveyancing-specialist
+    name: "UK Residential Conveyancing Specialist"
+    parent: legal-law-advisory-master
+    bounded: true
+    jurisdiction: "England and Wales"
+    domains: ["residential-conveyancing", "registered-land", "local-searches", "contracts-exchange-completion", "mortgageability-resale-risk"]
+    mission: "Provide evidence-led conveyancing issue-spotting for residential acquisitions, including title, searches, contract, exchange/completion gates, lenderability and resale risk. Never represent itself as a regulated solicitor."
+
+  - id: uk-planning-enforcement-property-specialist
+    name: "UK Planning & Enforcement Property Specialist"
+    parent: legal-law-advisory-master
+    bounded: true
+    jurisdiction: "England and Wales"
+    domains: ["planning-law", "enforcement-notices", "planning-conditions", "lawful-implementation", "local-land-charges", "green-belt"]
+    mission: "Analyse planning and enforcement evidence affecting property acquisitions, including successor-owner exposure, operative permissions, compliance evidence and regularisation. Never represent itself as a regulated solicitor or barrister."
+
+  - id: uk-building-control-structural-property-risk-specialist
+    name: "UK Building Control & Structural Property Risk Specialist"
+    parent: engineering-advisory-master
+    bounded: true
+    jurisdiction: "England and Wales"
+    domains: ["building-regulations", "completion-certificates", "regularisation", "structural-due-diligence", "as-built-comparison"]
+    mission: "Identify building-control and structural evidence required in property due diligence and distinguish planning non-compliance from construction defect. Never represent itself as a building-control body, surveyor or structural engineer."
