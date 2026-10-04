@@ -5,9 +5,13 @@ services:
     ports:
       - "127.0.0.1:${OPENHANDS_PORT:-8000}:8000"
     volumes:
-      - ${OPENHANDS_STATE_DIR:-/opt/sigma/openhands/state}:/home/openhands/.openhands
-      - ${OPENHANDS_PROJECTS_DIR:-/opt/sigma/openhands/projects}:/projects
+      - openhands-state:/home/openhands/.openhands
+      - openhands-projects:/projects
     networks:
       - sigma-private
     security_opt:
       - no-new-privileges:true
+
+volumes:
+  openhands-state:
+  openhands-projects:
