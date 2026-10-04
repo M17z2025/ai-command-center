@@ -35,14 +35,12 @@ The Sigma repo is expected at `/opt/ai-command-center`.
 cd /opt/ai-command-center
 git pull --ff-only
 
-mkdir -p /opt/sigma/openhands/state /opt/sigma/openhands/projects
-
 # Add the OPENHANDS_* values from openhands.env.example to deploy/sigma-stack/.env
 chmod +x scripts/install_openhands_worker.sh
 ./scripts/install_openhands_worker.sh
 ```
 
-The service binds to `127.0.0.1:8000` by default.
+The service binds to `127.0.0.1:8000` by default. Agent Canvas state and project workspaces persist in dedicated Docker volumes, keeping them separate from the Sigma host filesystem.
 
 ## Access from another machine
 

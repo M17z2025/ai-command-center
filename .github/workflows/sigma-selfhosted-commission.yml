@@ -99,6 +99,26 @@ jobs:
           done
           test -s /tmp/sigma-health.json
 
+      - name: Start isolated OpenHands Agent Canvas
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANVAS_COMPOSE=(
+            docker compose --env-file deploy/sigma-stack/.env
+            -f deploy/sigma-stack/docker-compose.yml
+            -f deploy/sigma-stack/docker-compose.openhands.yml
+          )
+          "${CANVAS_COMPOSE[@]}" pull openhands
+          "${CANVAS_COMPOSE[@]}" up -d openhands
+          for i in $(seq 1 60); do
+            if curl -fsS "http://127.0.0.1:${OPENHANDS_PORT:-8000}/canvas" >/tmp/openhands-canvas.html 2>/dev/null; then
+              break
+            fi
+            sleep 5
+          done
+          test -s /tmp/openhands-canvas.html
+          "${CANVAS_COMPOSE[@]}" ps openhands
+
       - name: Prove live model mission
         shell: bash
         run: |
