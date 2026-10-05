@@ -34,6 +34,7 @@ class SigmaCodingHarnessTests(unittest.TestCase):
                 "src/../../outside.txt",
                 ".env",
                 ".env.production",
+                ".env.staging",
                 "private.pem",
                 ".git/config",
                 "node_modules/pkg/index.js",
