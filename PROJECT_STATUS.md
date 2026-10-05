@@ -341,3 +341,28 @@ Fresh default-branch commit review found no new repository evidence requiring a 
 ## Verification boundary
 
 READY/CHANGES REQUIRED/BLOCKED applies only to the exact repository/task evidence stated here. It does not imply production deployment, live-account success, physical-device acceptance, legal/compliance approval or complete end-user acceptance unless those gates are explicitly evidenced.
+
+
+## 5 October 2026 — critical awesome-ai-apps coding controls
+
+Issue #118 is the active implementation record for adopting the critical reusable
+patterns from `Arindam200/awesome-ai-apps` without adding Nebius/E2B/paid-provider
+dependencies or weakening Sigma authority.
+
+Branch `feat/awesome-ai-critical-harness` now contains a Sigma-native coding
+harness that maps the five critical patterns into the existing runtime:
+
+- Sigma orchestrator plan + bounded OpenHands worker + delivery supervisor;
+- locked repository context and deterministic manifest verification;
+- mechanical changed-path validation with traversal/symlink/secret/generated-tree denial;
+- private Docker worker execution instead of paid E2B;
+- trusted Sigma GitHub control-plane authority rather than model-held GitHub credentials.
+
+The live worker now receives `PLAN -> INSPECT -> EDIT -> SELF-REVIEW -> HANDOFF`,
+validates the exact model-produced change set before tests, rejects verification
+that mutates additional tracked source, and stages only the validated paths.
+
+Current classification: **CHANGED / NOT YET VERIFIED**. Exact-head pull-request
+CI, worker image build and GitHub-hosted autonomous proof are still required
+before merge or any VERIFIED claim. See
+`docs/AWESOME_AI_CRITICAL_INTEGRATION.md`.

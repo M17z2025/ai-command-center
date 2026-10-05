@@ -1,0 +1,70 @@
+name: Sigma critical worker smoke
+
+on:
+  pull_request:
+    paths:
+      - "scripts/sigma_coding_harness.py"
+      - "scripts/sigma_openhands_worker_service.py"
+      - "tests/test_sigma_coding_harness.py"
+      - "Dockerfile.sigma-worker"
+      - "requirements-worker.txt"
+      - ".github/workflows/sigma-critical-worker-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  worker-image-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build Sigma worker image
+        run: docker build -f Dockerfile.sigma-worker -t sigma-worker:critical-smoke .
+      - name: Start worker without write authority
+        run: |
+          set -euo pipefail
+          docker run -d --rm             --name sigma-worker-critical-smoke             -e SIGMA_WORKER_TOKEN=ci-smoke-token             -e SIGMA_WORKER_ALLOW_WRITE=0             -e SIGMA_WORKER_ALLOWED_REPOSITORIES=M17z2025/ai-command-center             -p 127.0.0.1:18091:8091             sigma-worker:critical-smoke
+      - name: Verify critical capabilities
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:18091/health > /tmp/worker-health.json; then
+              break
+            fi
+            sleep 2
+          done
+          python - <<'PY'
+          import json
+
+          with open("/tmp/worker-health.json", encoding="utf-8") as handle:
+              health = json.load(handle)
+
+          assert health["status"] == "ok", health
+          assert health["version"] >= 3, health
+          assert health["write_enabled"] is False, health
+          assert health["agent_secret_exposure"] is False, health
+
+          required = {
+              "multi_agent_coding_harness",
+              "coding_harness_starter",
+              "local_file_editing_agent",
+              "sandboxed_code_execution_mcp",
+              "github_mcp_agent",
+          }
+          capabilities = health["critical_capabilities"]
+          missing = required.difference(capabilities)
+          assert not missing, (missing, health)
+          assert capabilities["paid_external_dependencies"] is False, health
+          assert capabilities["agent_has_github_credentials"] is False, health
+
+          print("SIGMA_CRITICAL_WORKER_SMOKE=PASS")
+          print(json.dumps(health, sort_keys=True))
+          PY
+      - name: Preserve worker logs on failure
+        if: failure()
+        run: docker logs sigma-worker-critical-smoke || true
+      - name: Stop worker
+        if: always()
+        run: docker stop sigma-worker-critical-smoke || true
