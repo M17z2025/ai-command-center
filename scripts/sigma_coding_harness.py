@@ -43,7 +43,10 @@ _SENSITIVE_NAMES = {
     ".netrc",
     "id_rsa",
     "id_ed25519",
+    "id_ecdsa",
     "credentials.json",
+    "service-account.json",
+    "secrets.toml",
 }
 _SENSITIVE_SUFFIXES = {
     ".pem",
@@ -92,6 +95,14 @@ def _reject_sensitive(relative: PurePosixPath) -> None:
             f"Generated/VCS path is outside coding scope: {relative.as_posix()}"
         )
     name = lowered[-1]
+    if name.startswith(".env") and name not in {
+        ".env.example",
+        ".env.sample",
+        ".env.template",
+    }:
+        raise HarnessPolicyError(
+            f"Sensitive environment file is outside coding scope: {relative.as_posix()}"
+        )
     if name in _SENSITIVE_NAMES:
         raise HarnessPolicyError(
             f"Sensitive file is outside coding scope: {relative.as_posix()}"
