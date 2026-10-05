@@ -17,6 +17,7 @@ COPY requirements-worker.txt ./
 RUN pip install --no-cache-dir -r requirements-worker.txt
 
 COPY scripts/sigma_openhands_worker_service.py ./scripts/sigma_openhands_worker_service.py
+COPY scripts/sigma_coding_harness.py ./scripts/sigma_coding_harness.py
 
 RUN useradd --create-home --uid 10001 sigmaworker \
     && mkdir -p /workspaces \
