@@ -254,7 +254,7 @@ def build_mission_prompt(payload: dict[str, Any], context: str) -> str:
         "guess repository state.\n"
         "3. EDIT: make the smallest correct change inside the current checkout only. "
         "Do not touch .git, secrets, credential files, dependency/generated trees, "
-        "or paths outside the checkout. Do not deploy, push, open PRs, change repo "
+        "or paths outside the checkout. Do not deploy, push branches, open pull requests, change repo "
         "settings, manage secrets, or perform paid actions.\n"
         "4. SELF-REVIEW: inspect your diff against the issue and Sigma mission. "
         "Remove accidental/unrelated changes. You may run local diagnostics, but "
