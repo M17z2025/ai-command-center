@@ -18,6 +18,14 @@ from urllib.request import Request, urlopen
 
 import yaml
 
+from sigma_coding_harness import (
+    HarnessPolicyError,
+    build_mission_prompt,
+    critical_capability_profile,
+    repository_context,
+    validate_changed_paths,
+)
+
 
 MAX_BODY = 500_000
 BRANCH_RE = re.compile(r"[^a-zA-Z0-9._/-]+")
@@ -252,35 +260,41 @@ def _open_hands_edit(workspace: Path, prompt: str, mission_id: str) -> dict[str,
     return {"status": status, "events": len(events)}
 
 
-def _mission_prompt(payload: dict[str, Any]) -> str:
-    objective = str(payload.get("objective", "")).strip()
-    issue_body = str(payload.get("issue_body", "")).strip()
-    if not objective:
-        raise WorkerError("objective is required")
-    failure_evidence = payload.get("failure_evidence") or []
-    repair_attempt = payload.get("repair_attempt")
-    repair_text = ""
-    if failure_evidence:
-        repair_text = (
-            "\nTHIS IS A REPAIR PASS. Diagnose and fix the supplied exact-head CI "
-            "failures without broadening scope.\n"
-            f"REPAIR ATTEMPT: {repair_attempt}\n"
-            f"FAILURE EVIDENCE:\n{json.dumps(failure_evidence, ensure_ascii=False)[:12000]}\n"
-        )
-    return (
-        "You are a bounded coding worker under Sigma authority.\n"
-        "Work only in the current repository checkout.\n"
-        "Do not deploy, manage secrets, change repository settings, push branches, "
-        "open pull requests, or modify production systems. The wrapper handles GitHub.\n"
-        "Make the smallest correct code change needed for the task.\n"
-        "Use the repository .sigma/project.yaml commands and existing tests as the "
-        "source of truth. Update PROJECT_STATUS.md when the task materially changes "
-        "project state. Do not claim VERIFIED or RELEASED.\n\n"
-        f"OBJECTIVE:\n{objective}\n\n"
-        f"ISSUE DETAILS:\n{issue_body[:16000]}\n"
-        f"{repair_text}"
-    )
+def _mission_prompt(
+    payload: dict[str, Any],
+    context: str = "",
+) -> str:
+    try:
+        return build_mission_prompt(payload, context)
+    except HarnessPolicyError as exc:
+        raise WorkerError(str(exc)) from exc
 
+
+def _working_tree_paths(workspace: Path) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    tracked = _run(
+        ["git", "diff", "--name-only", "--no-renames", "-z", "HEAD"],
+        cwd=workspace,
+        env=_safe_exec_env(),
+    )
+    if tracked.returncode != 0:
+        raise WorkerError(f"git diff path scan failed: {tracked.stderr[-800:]}")
+    untracked = _run(
+        ["git", "ls-files", "--others", "--exclude-standard", "-z"],
+        cwd=workspace,
+        env=_safe_exec_env(),
+    )
+    if untracked.returncode != 0:
+        raise WorkerError(
+            f"git untracked path scan failed: {untracked.stderr[-800:]}"
+        )
+
+    tracked_paths = tuple(
+        item for item in tracked.stdout.split("\x00") if item.strip()
+    )
+    untracked_paths = tuple(
+        item for item in untracked.stdout.split("\x00") if item.strip()
+    )
+    return tracked_paths, untracked_paths
 
 def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     repository = str(payload.get("repository", "")).strip()
@@ -342,11 +356,31 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
                 f"branch creation failed: {checkout.stderr[-800:]}"
             )
 
+    locked_context = repository_context(workspace)
     agent_result = _open_hands_edit(
         workspace,
-        _mission_prompt(payload),
+        _mission_prompt(payload, locked_context),
         mission_id,
     )
+
+    tracked_paths, untracked_paths = _working_tree_paths(workspace)
+    try:
+        validated_paths = validate_changed_paths(
+            workspace,
+            (*tracked_paths, *untracked_paths),
+        )
+    except HarnessPolicyError as exc:
+        return {
+            "status": "BLOCKED",
+            "mission_id": mission_id,
+            "branch": branch,
+            "pull_request_url": existing_pr or None,
+            "unresolved_failures": ["Coding harness path policy rejected worker output"],
+            "evidence": [
+                f"harness_policy_error={exc}",
+                f"openhands_status={agent_result['status']}",
+            ],
+        }
 
     diff_check = _run(
         ["git", "diff", "--check"],
@@ -361,22 +395,6 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
             "pull_request_url": existing_pr or None,
             "unresolved_failures": ["git diff --check failed"],
             "evidence": [diff_check.stderr[-1200:]],
-        }
-
-    status = _run(
-        ["git", "status", "--porcelain"],
-        cwd=workspace,
-        env=_safe_exec_env(),
-    )
-    changed = [line for line in status.stdout.splitlines() if line.strip()]
-    if not changed:
-        return {
-            "status": "BLOCKED",
-            "mission_id": mission_id,
-            "branch": branch,
-            "pull_request_url": existing_pr or None,
-            "unresolved_failures": ["OpenHands produced no repository changes"],
-            "evidence": [f"openhands_status={agent_result['status']}"],
         }
 
     verify_commands = _verification_commands(workspace)
@@ -403,9 +421,14 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
     evidence = [
         f"openhands_status={agent_result['status']}",
         f"openhands_events={agent_result['events']}",
-        f"changed_files={len(changed)}",
+        f"changed_files={len(validated_paths)}",
+        f"validated_paths={','.join(validated_paths)[:2000]}",
+        f"harness_context_chars={len(locked_context)}",
         f"verification_exit={verification_exit}",
         f"verification_commands={len(tests_executed)}",
+        "coding_harness=plan-inspect-edit-test-review",
+        "github_authority=trusted-wrapper-only",
+        "sandbox_execution=private-docker-worker",
         "agent_secret_exposure=blocked_by_wrapper",
     ]
     if verification_exit != 0:
@@ -417,6 +440,32 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
             "tests_executed": tests_executed,
             "unresolved_failures": ["Independent manifest verification failed"],
             "evidence": evidence + verification_outputs[-2:],
+        }
+
+    post_tracked_paths, post_untracked_paths = _working_tree_paths(workspace)
+    validated_set = set(validated_paths)
+    post_change_set = set(post_tracked_paths).union(post_untracked_paths)
+    missing_model_changes = sorted(validated_set.difference(post_change_set))
+    unexpected_tracked_changes = sorted(
+        set(post_tracked_paths).difference(validated_set)
+    )
+    if missing_model_changes or unexpected_tracked_changes:
+        return {
+            "status": "BLOCKED",
+            "mission_id": mission_id,
+            "branch": branch,
+            "pull_request_url": existing_pr or None,
+            "tests_executed": tests_executed,
+            "unresolved_failures": [
+                "Verification changed the governed source change set"
+            ],
+            "evidence": evidence
+            + [
+                "missing_model_changes="
+                + ",".join(missing_model_changes)[:1200],
+                "unexpected_tracked_changes="
+                + ",".join(unexpected_tracked_changes)[:1200],
+            ],
         }
 
     if os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") != "1":
@@ -432,7 +481,11 @@ def run_mission(payload: dict[str, Any]) -> dict[str, Any]:
             ),
         }
 
-    add = _run(["git", "add", "-A"], cwd=workspace, env=git_env)
+    add = _run(
+        ["git", "add", "-A", "--", *validated_paths],
+        cwd=workspace,
+        env=git_env,
+    )
     if add.returncode != 0:
         raise WorkerError("git add failed")
     commit = _run(
@@ -517,7 +570,7 @@ def build_server() -> ThreadingHTTPServer:
     lock = threading.Lock()
 
     class Handler(BaseHTTPRequestHandler):
-        server_version = "SigmaWorker/2"
+        server_version = "SigmaWorker/3"
 
         def _json(self, status: int, payload: Any) -> None:
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -540,7 +593,7 @@ def build_server() -> ThreadingHTTPServer:
                     {
                         "status": "ok",
                         "worker": "openhands-local",
-                        "version": 2,
+                        "version": 3,
                         "write_enabled": (
                             os.getenv("SIGMA_WORKER_ALLOW_WRITE", "0") == "1"
                         ),
@@ -550,6 +603,7 @@ def build_server() -> ThreadingHTTPServer:
                         "manifest_verification": True,
                         "repair_existing_pr": True,
                         "agent_secret_exposure": False,
+                        "critical_capabilities": critical_capability_profile(),
                     },
                 )
                 return
