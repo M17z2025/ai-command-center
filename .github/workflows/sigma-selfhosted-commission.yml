@@ -6,6 +6,7 @@ on:
     paths:
       - "sigma_runtime/**"
       - "scripts/sigma_openhands_worker_service.py"
+      - "scripts/sigma_coding_harness.py"
       - "scripts/sigma_end_to_end_probe.py"
       - "scripts/sigma_runner_daemon.py"
       - "scripts/sigma_live_probe.py"
