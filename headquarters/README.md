@@ -122,3 +122,8 @@ The **Sigma Chat Build Steward** maintains persistent build ownership across dev
 ## Sigma Scouter
 
 The **Sigma Scouter** continuously researches reusable open-source applications, modifiable code and genuinely unlimited free/self-hosted APIs. Its strict admission policy rejects trials, credits, usage quotas, non-commercial restrictions and unverified licence claims. See [scouter/README.md](./scouter/README.md), [scouter/policy.yaml](./scouter/policy.yaml) and [scouter/catalog.yaml](./scouter/catalog.yaml).
+
+
+## Sigma Generator Factory
+
+The **Sigma Generator Factory** creates bounded declarative specialist micro-tools for any department. New definitions start as `DRAFT`; only validated `APPROVED` definitions may execute through the fixed safe operation runtime. See [generator-factory/README.md](./generator-factory/README.md), [generator-factory/policy.yaml](./generator-factory/policy.yaml) and [generator-factory/registry.yaml](./generator-factory/registry.yaml).

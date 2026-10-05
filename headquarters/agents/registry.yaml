@@ -43,6 +43,14 @@ agents:
     status: "registered"
     portfolio_wide: true
 
+  - id: "sigma-generator-factory-controller"
+    name: "Sigma Generator Factory Controller"
+    role: "Create, validate and govern bounded declarative specialist micro-tools for Sigma departments"
+    parent: "algorithmic-engineering-director"
+    status: "registered"
+    portfolio_wide: true
+    production_permission: false
+
   - id: "sigma-development-planning-director"
     name: "Sigma Development Planning Director"
     role: "Cross-disciplinary development advice, executable planning and ordered pull-plan handoff"

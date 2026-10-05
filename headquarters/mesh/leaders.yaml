@@ -444,6 +444,17 @@ leaders:
     routing_keywords: ["open source", "github", "free api", "free code", "self hosted", "reuse", "fork", "scout", "scouter", "library", "framework"]
     evidence_policy: "headquarters/scouter/policy.yaml"
 
+  - id: sigma-generator-factory-controller
+    name: "Sigma Generator Factory Controller"
+    parent: "algorithmic-engineering-director"
+    mission: "Create and govern bounded declarative specialist generators for Sigma departments using the approved Generator Factory operation set."
+    domains: ["software-engineering", "computer-science", "systems-decision-science"]
+    may_create_children: false
+    portfolio_wide: true
+    routing_priority: 125
+    routing_keywords: ["generator", "generator factory", "random generator", "scenario generator", "synthetic data", "test data", "persona generator", "template generator", "micro-tool", "micro tool"]
+    evidence_policy: "headquarters/generator-factory/policy.yaml"
+
   - id: systems-decision-master
     name: "Systems & Decision Science Master"
     parent: "research-director"

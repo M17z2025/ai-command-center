@@ -1,0 +1,121 @@
+schema_version: 1
+registry_id: sigma-generator-factory-registry-v1
+generated_on: "2026-10-01"
+
+generators:
+  - id: sigma-text-template
+    name: "Sigma Text Template"
+    department: "cross-portfolio"
+    description: "Render a bounded text template using explicit double-brace input fields."
+    state: APPROVED
+    operation:
+      type: template
+      config:
+        template: "{{text}}"
+    required_inputs: ["text"]
+    capabilities: []
+    provenance:
+      source: "Sigma Generator Factory v1"
+      created_on: "2026-10-01"
+      rationale: "Safe primitive for governed text assembly without eval or arbitrary formatting."
+    tests:
+      - "required input is enforced"
+      - "unknown placeholders fail closed"
+      - "rendered output is length bounded"
+
+  - id: sigma-random-picker
+    name: "Sigma Random Picker"
+    department: "cross-portfolio"
+    description: "Select one or more values from an operator-supplied list using deterministic seeded randomness."
+    state: APPROVED
+    operation:
+      type: choice
+      config:
+        source_field: "items"
+        count_field: "count"
+        default_count: 1
+        with_replacement: false
+    required_inputs: ["items"]
+    capabilities: []
+    provenance:
+      source: "Sigma Generator Factory v1"
+      created_on: "2026-10-01"
+      rationale: "Safe primitive for personas, scenarios, names and test-case selection."
+    tests:
+      - "same seed gives same output"
+      - "count is bounded"
+      - "empty input fails closed"
+
+  - id: sigma-weighted-picker
+    name: "Sigma Weighted Picker"
+    department: "cross-portfolio"
+    description: "Select values from weighted operator-supplied choices using deterministic seeded randomness."
+    state: APPROVED
+    operation:
+      type: weighted_choice
+      config:
+        source_field: "items"
+        count_field: "count"
+        default_count: 1
+    required_inputs: ["items"]
+    capabilities: []
+    provenance:
+      source: "Sigma Generator Factory v1"
+      created_on: "2026-10-01"
+      rationale: "Supports realistic scenario/test distributions without external services."
+    tests:
+      - "non-positive weights fail"
+      - "same seed gives same output"
+      - "count is bounded"
+
+  - id: sigma-scenario-matrix
+    name: "Sigma Scenario Matrix"
+    department: "quality-assurance"
+    description: "Create the bounded Cartesian product of named input dimensions for systematic scenario coverage."
+    state: APPROVED
+    operation:
+      type: combine
+      config:
+        fields: ["personas", "devices", "states"]
+    required_inputs: ["personas", "devices", "states"]
+    capabilities: []
+    provenance:
+      source: "Sigma Generator Factory v1"
+      created_on: "2026-10-01"
+      rationale: "Generates reproducible QA matrices while enforcing a hard output ceiling."
+    tests:
+      - "Cartesian product is correct"
+      - "output ceiling is enforced"
+      - "non-list dimensions fail"
+
+  - id: sigma-synthetic-records
+    name: "Sigma Synthetic Records"
+    department: "quality-assurance"
+    description: "Create bounded non-production synthetic records from safe field primitives."
+    state: APPROVED
+    operation:
+      type: synthetic_records
+      config:
+        count_field: "count"
+        default_count: 1
+        fields:
+          record_id:
+            type: sequence
+            start: 1
+            step: 1
+          label:
+            type: choice
+            source_field: "labels"
+          note:
+            type: template
+            template: "Synthetic {{prefix}} record {{_index}}"
+    required_inputs: ["labels", "prefix"]
+    capabilities: []
+    provenance:
+      source: "Sigma Generator Factory v1"
+      created_on: "2026-10-01"
+      rationale: "Provides safe test fixtures without customer or production data."
+    tests:
+      - "records are deterministic for a seed"
+      - "record count is bounded"
+      - "field primitives are restricted"
