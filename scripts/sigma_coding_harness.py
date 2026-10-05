@@ -246,7 +246,7 @@ def build_mission_prompt(payload: dict[str, Any], context: str) -> str:
     repair_text = ""
     if failure_evidence:
         repair_text = (
-            "\nTHIS IS A BOUNDED REPAIR PASS. Diagnose the supplied exact-head "
+            "\nTHIS IS A REPAIR PASS. This is a BOUNDED REPAIR PASS: diagnose the supplied exact-head "
             "failure evidence and repair only the demonstrated defect.\n"
             f"REPAIR ATTEMPT: {repair_attempt}\n"
             f"FAILURE EVIDENCE:\n"
