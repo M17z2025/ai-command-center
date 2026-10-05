@@ -18,13 +18,22 @@ from urllib.request import Request, urlopen
 
 import yaml
 
-from sigma_coding_harness import (
-    HarnessPolicyError,
-    build_mission_prompt,
-    critical_capability_profile,
-    repository_context,
-    validate_changed_paths,
-)
+try:
+    from sigma_coding_harness import (
+        HarnessPolicyError,
+        build_mission_prompt,
+        critical_capability_profile,
+        repository_context,
+        validate_changed_paths,
+    )
+except ModuleNotFoundError:  # Imported as a module by repository tests.
+    from scripts.sigma_coding_harness import (
+        HarnessPolicyError,
+        build_mission_prompt,
+        critical_capability_profile,
+        repository_context,
+        validate_changed_paths,
+    )
 
 
 MAX_BODY = 500_000
