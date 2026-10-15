@@ -366,3 +366,4 @@ Current classification: **CHANGED / NOT YET VERIFIED**. Exact-head pull-request
 CI, worker image build and GitHub-hosted autonomous proof are still required
 before merge or any VERIFIED claim. See
 `docs/AWESOME_AI_CRITICAL_INTEGRATION.md`.
+Proof nonce: aa9cacf6fe64
