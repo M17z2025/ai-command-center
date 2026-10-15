@@ -503,7 +503,7 @@ class RunnerStore:
             rows = conn.execute(
                 """SELECT selected_repository, selected_issue
                 FROM runner_cycles
-                WHERE status='BLOCKED'
+                WHERE status IN ('BLOCKED','FAILED')
                   AND created_at>=?
                   AND selected_repository IS NOT NULL
                   AND selected_issue IS NOT NULL
@@ -782,6 +782,7 @@ class PortfolioRunner:
             return payload
 
         self.store.start(trigger, cycle_id=cycle_id)
+        selected: WorkItem | None = None
         try:
             snapshots = self.discover()
             self.store.heartbeat(cycle_id)
@@ -978,8 +979,13 @@ class PortfolioRunner:
                 "state": "FAILED",
                 "error_type": type(exc).__name__,
                 "error": str(exc),
+                "selected": asdict(selected) if selected is not None else None,
             }
-            self.store.finish(cycle_id, "FAILED", payload)
+            self.store.finish(
+                cycle_id, "FAILED", payload,
+                repository=selected.repository if selected is not None else None,
+                issue_number=selected.issue_number if selected is not None else None,
+            )
             raise
         finally:
             self.store.release_lease(cycle_id)
