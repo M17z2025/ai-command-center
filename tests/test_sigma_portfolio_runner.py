@@ -91,6 +91,123 @@ class PortfolioRunnerTests(unittest.TestCase):
         self.assertEqual(PortfolioRunner.select(snaps), executable)
 
 
+    def test_code_ready_label_is_required_only_when_flag_enabled(self):
+        from unittest.mock import patch
+        issue = {"number": 128, "title": "[P0] Implement proof",
+                 "body": "Edit code and tests", "labels": []}
+        with patch.dict("os.environ", {"SIGMA_RUNNER_REQUIRE_READY_LABEL": "1"}):
+            self.assertEqual(_work_item("owner/repo", issue).state, "NOT_CODE_READY")
+            issue["labels"] = [{"name": "sigma:ready-for-code"}]
+            self.assertTrue(_work_item("owner/repo", issue).executable)
+        with patch.dict("os.environ", {"SIGMA_RUNNER_REQUIRE_READY_LABEL": "0"}):
+            issue["labels"] = []
+            self.assertTrue(_work_item("owner/repo", issue).executable)
+
+    def test_governance_issue_label_is_not_executable(self):
+        item = _work_item(
+            "owner/repo",
+            {
+                "number": 19,
+                "title": "[P0] Portfolio delivery policy",
+                "body": "The development team must adopt these user journey rules.",
+                "labels": [{"name": "sigma:non-executable"}],
+            },
+        )
+        self.assertFalse(item.executable)
+        self.assertEqual(item.state, "NON_EXECUTABLE")
+
+    def test_discovery_does_not_dispatch_uncommissioned_repositories(self):
+        runner = PortfolioRunner(FakeGitHub(), FakeOrchestrator(), None)
+        runner.registry_path = Path("unused")
+        import sigma_runtime.portfolio_runner as source
+        original = source.load_registry
+        try:
+            source.load_registry = lambda _: [
+                {"name": "Live", "repository": "owner/live", "lifecycle": "active", "category": "app"},
+                {"name": "Catalogue", "repository": "owner/catalogue", "lifecycle": "discovered", "category": "app"},
+            ]
+            runner._discover_one = lambda p: p["repository"]
+            self.assertEqual(runner.discover(), ["owner/live"])
+        finally:
+            source.load_registry = original
+
+    def test_repeated_blocked_issue_is_quarantined_but_other_work_proceeds(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            bad = WorkItem("owner/repo", 19, "Policy", "governance", 0, (), True, ())
+            good = WorkItem("owner/repo", 128, "Add proof", "edit source and run tests", 0, (), True, ())
+            snap = RepositorySnapshot(
+                "Repo", "owner/repo", "active", "control-plane",
+                accessible=True, default_branch="main",
+                manifest_present=True, status_present=True,
+                work_items=[bad, good],
+            )
+
+            class NoChangeWorker:
+                def dispatch(self, payload):
+                    return {"status": "BLOCKED", "unresolved_failures": ["OpenHands produced no repository changes"]}
+
+            runner = PortfolioRunner(
+                FakeGitHub(), FakeOrchestrator(), store, worker=NoChangeWorker()
+            )
+            runner.discover = lambda: [snap]
+            first = runner.cycle(trigger="test", execute=True)
+            second = runner.cycle(trigger="test", execute=True)
+            self.assertEqual([first["selected"]["issue_number"], second["selected"]["issue_number"]], [19, 19])
+            self.assertEqual(store.recently_blocked_issues(), {("owner/repo", 19)})
+            third = runner.cycle(trigger="test", execute=True)
+            self.assertEqual(third["selected"]["issue_number"], 128)
+            self.assertNotIn(("owner/repo", 128), store.recently_blocked_issues())
+            self.assertIsNone(store.active_lease())
+
+    def test_worker_exception_records_selected_issue_for_cooldown(self):
+        class TimeoutWorker:
+            def dispatch(self, payload):
+                raise TimeoutError("synthetic worker deadline exceeded")
+
+        item = WorkItem("owner/repo", 128, "Write proof", "Create file", 0, (), True)
+        snap = RepositorySnapshot(
+            "Repo", "owner/repo", "active", "control-plane",
+            accessible=True, default_branch="main",
+            manifest_present=True, status_present=True,
+            work_items=[item],
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            runner = PortfolioRunner(
+                FakeGitHub(), FakeOrchestrator(), store, worker=TimeoutWorker()
+            )
+            runner.discover = lambda: [snap]
+            for _ in range(2):
+                with self.assertRaises(TimeoutError):
+                    runner.cycle(trigger="test", execute=True)
+            latest = store.list(limit=1)[0]
+            self.assertEqual(latest["status"], "FAILED")
+            self.assertEqual(latest["selected_repository"], "owner/repo")
+            self.assertEqual(latest["selected_issue"], 128)
+            self.assertEqual(store.recently_blocked_issues(), {("owner/repo", 128)})
+            self.assertIsNone(store.active_lease())
+            self.assertEqual(
+                runner.cycle(trigger="test", execute=True)["state"],
+                "NO_EXECUTABLE_WORK",
+            )
+
+    def test_cooldown_only_tracks_blocked_issues_in_recent_window(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runner.db")
+            for _ in range(2):
+                cycle = store.start("test")
+                store.finish(cycle, "BLOCKED", {"state": "BLOCKED"},
+                             repository="owner/repo", issue_number=19)
+            self.assertEqual(store.recently_blocked_issues(), {("owner/repo", 19)})
+            self.assertEqual(store.recently_blocked_issues(attempts=3), set())
+            with store._connect() as conn:
+                conn.execute(
+                    "UPDATE runner_cycles SET created_at=? WHERE selected_issue=19",
+                    ((datetime.now(timezone.utc) - timedelta(hours=2)).isoformat(),),
+                )
+            self.assertEqual(store.recently_blocked_issues(), set())
+
     def test_issue_lifecycle_labels_fail_closed(self):
         source_complete = _work_item(
             "owner/repo",

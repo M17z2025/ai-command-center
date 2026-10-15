@@ -118,6 +118,18 @@ class SigmaCodingHarnessTests(unittest.TestCase):
             self.assertNotIn("node_modules/noise.js", context)
             self.assertLessEqual(len(context), 2000)
 
+    def test_missing_required_document_is_treated_as_edit_not_blocker(self):
+        prompt = build_mission_prompt(
+            {
+                "objective": "Create runtime-proof/SIGMA_AUTONOMOUS_PROOF.md",
+                "issue_body": "Add a proof marker and keep previous history.",
+            },
+            "FILES: runtime-proof absent on base branch",
+        )
+        self.assertIn("absence is expected, not a blocker", prompt)
+        self.assertIn("Create the required parent directory", prompt)
+        self.assertIn("Avoid exploring unrelated directories", prompt)
+
     def test_prompt_binds_sigma_plan_and_ordered_harness_phases(self):
         prompt = build_mission_prompt(
             {
