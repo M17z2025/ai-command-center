@@ -91,6 +91,18 @@ class PortfolioRunnerTests(unittest.TestCase):
         self.assertEqual(PortfolioRunner.select(snaps), executable)
 
 
+    def test_code_ready_label_is_required_only_when_flag_enabled(self):
+        from unittest.mock import patch
+        issue = {"number": 128, "title": "[P0] Implement proof",
+                 "body": "Edit code and tests", "labels": []}
+        with patch.dict("os.environ", {"SIGMA_RUNNER_REQUIRE_READY_LABEL": "1"}):
+            self.assertEqual(_work_item("owner/repo", issue).state, "NOT_CODE_READY")
+            issue["labels"] = [{"name": "sigma:ready-for-code"}]
+            self.assertTrue(_work_item("owner/repo", issue).executable)
+        with patch.dict("os.environ", {"SIGMA_RUNNER_REQUIRE_READY_LABEL": "0"}):
+            issue["labels"] = []
+            self.assertTrue(_work_item("owner/repo", issue).executable)
+
     def test_governance_issue_label_is_not_executable(self):
         item = _work_item(
             "owner/repo",
