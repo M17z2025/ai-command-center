@@ -160,6 +160,38 @@ class PortfolioRunnerTests(unittest.TestCase):
             self.assertNotIn(("owner/repo", 128), store.recently_blocked_issues())
             self.assertIsNone(store.active_lease())
 
+    def test_worker_exception_records_selected_issue_for_cooldown(self):
+        class TimeoutWorker:
+            def dispatch(self, payload):
+                raise TimeoutError("synthetic worker deadline exceeded")
+
+        item = WorkItem("owner/repo", 128, "Write proof", "Create file", 0, (), True)
+        snap = RepositorySnapshot(
+            "Repo", "owner/repo", "active", "control-plane",
+            accessible=True, default_branch="main",
+            manifest_present=True, status_present=True,
+            work_items=[item],
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            store = RunnerStore(Path(tmp) / "runtime.db")
+            runner = PortfolioRunner(
+                FakeGitHub(), FakeOrchestrator(), store, worker=TimeoutWorker()
+            )
+            runner.discover = lambda: [snap]
+            for _ in range(2):
+                with self.assertRaises(TimeoutError):
+                    runner.cycle(trigger="test", execute=True)
+            latest = store.list(limit=1)[0]
+            self.assertEqual(latest["status"], "FAILED")
+            self.assertEqual(latest["selected_repository"], "owner/repo")
+            self.assertEqual(latest["selected_issue"], 128)
+            self.assertEqual(store.recently_blocked_issues(), {("owner/repo", 128)})
+            self.assertIsNone(store.active_lease())
+            self.assertEqual(
+                runner.cycle(trigger="test", execute=True)["state"],
+                "NO_EXECUTABLE_WORK",
+            )
+
     def test_cooldown_only_tracks_blocked_issues_in_recent_window(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = RunnerStore(Path(tmp) / "runner.db")
