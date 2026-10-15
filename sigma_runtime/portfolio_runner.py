@@ -627,6 +627,10 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
                 break
     if state == "EXECUTABLE" and blockers:
         state = "BLOCKED_EXTERNAL"
+    if (state == "EXECUTABLE" and
+            os.getenv("SIGMA_RUNNER_REQUIRE_READY_LABEL", "0") == "1" and
+            "sigma:ready-for-code" not in labels_lower):
+        state = "NOT_CODE_READY"
 
     executable = has_objective and state == "EXECUTABLE"
     return WorkItem(
