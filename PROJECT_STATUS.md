@@ -1,5 +1,18 @@
 # Sigma Development Command Center Status
 
+## 30 October 2026 — Owner correction: Mitz PA merges into Sigma
+**SOURCE/OWNERSHIP CONSOLIDATED; LIVE PERSONAL ACTIONS NOT COMMISSIONED.**
+Mitz PA/Jarvis personal intelligence, owner tasks, project memory, approvals,
+and personal integrations are assigned to Sigma's existing private expert
+runtime. Friday retains the mobile/voice/telephony interface and all existing
+signed-Android and SIP production gates. The previous Mitz PA→Friday intake
+decision is superseded. See `docs/consolidations/2026-10-30-mitz-pa-into-sigma.md`.
+The new bounded `sigma_runtime/owner_pa.py` uses SigmaOrchestrator, but this
+source change does not activate Google connectors, messaging, real phone calls,
+production deployment, or a live authenticated cross-service gateway.
+Provider/model/runtime and independent security acceptance are outstanding.
+
+
 ## 28 September 2026 — P0 recovery audit: Sigma cannot yet finish projects autonomously
 
 **CURRENT CLASSIFICATION: SOURCE COMPONENTS STRONG; END-TO-END AUTONOMOUS PROJECT COMPLETION NOT YET PROVEN.**

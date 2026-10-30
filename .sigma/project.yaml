@@ -7,7 +7,7 @@ project:
   priority: "high"
 
 product:
-  purpose: "Portfolio-level engineering control plane plus governed operational expert-mesh runtime for the Mi7z/Lycia portfolio."
+  purpose: "Portfolio engineering control plane and governed expert-mesh runtime, including Mitz PA owner intelligence, memory and cross-app task planning, with Friday as separate voice/telephony interface."
   users:
     - "Product owner"
     - "Sigma agents"

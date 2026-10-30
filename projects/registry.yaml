@@ -40,7 +40,10 @@ projects:
     repository: "M17z2025/ai-command-center"
     lifecycle: active
     category: control-plane
-    notes: "Canonical owner of reusable repository automation; the legacy Alysha Repository Automation repository is superseded."
+    capabilities:
+      - "Sigma Mesh autonomous software-development governance and evidence"
+      - "Mitz PA owner personal operations and cross-app task orchestration"
+    notes: "Canonical owner of Mitz PA intelligence, memory, research, tasks, approval and connector-orchestration requirements and reusable repository automation. Friday remains the delegated voice/telephone/mobile edge; no separate Mitz PA runtime claimed."
 
   - name: "Mi7z Web"
     repository: "M17z2025/mi7z-web"
@@ -52,7 +55,7 @@ projects:
     display_name: "Friday AI"
     lifecycle: active
     category: ai-assistant
-    notes: "Canonical Friday product repository. Alysha OS designs preserved; Mitz PA merged into Friday under owner Decision 2 (2026-10-30); no separate Mitz PA build. Keep Android/SIP/release governance unchanged."
+    notes: "Canonical Friday product repository for the existing voice/telephone/Android interface; Sigma owns Mitz PA personal intelligence and cross-app orchestration per updated owner direction (2026-10-30). Preserve Android/SIP/release governance."
 
   - name: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
@@ -174,12 +177,15 @@ consolidated_repositories:
     status: "archive_pending"
     explanation: "README/control-only duplicate; no standalone automation worker found."
 
-# Decision 2 (2026-10-30): Mitz PA was an intake-only project, never a
-# registered GitHub application. Retain a single personal assistant product.
+# Revised owner instruction (2026-10-30): Mitz PA intelligence/tasks are
+# incorporated into Sigma; Friday is the existing voice/mobile/telephony edge.
+# Previous Decision 2 routing to Friday is superseded, not independently active.
 consolidated_products:
   - source_product: "Mitz PA"
-    canonical_product: "Alysha AI Platform"
-    display_name: "Friday AI"
-    canonical_repository: "M17z2025/alisha-ai-platform"
-    status: "merged_into_friday"
+    canonical_product: "Sigma Development Command Center"
+    display_name: "Sigma Mesh + Mitz PA"
+    canonical_repository: "M17z2025/ai-command-center"
+    status: "merged_into_sigma"
     standalone_repository: null
+    interface_repository: "M17z2025/alisha-ai-platform"
+    interface_role: "Existing Friday voice/telephony/mobile channel only; production bridging not yet verified"

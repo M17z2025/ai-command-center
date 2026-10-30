@@ -27,7 +27,7 @@ defaults:
 projects:
   - project: "Sigma Development Command Center"
     repository: "M17z2025/ai-command-center"
-    aliases: ["sigma", "sigma mesh", "command center", "sigma development command center", "sigma agent index", "cybersecurity team creation", "sigma scouter", "alysha repository automation", "alisha repository automation"]
+    aliases: ["sigma", "sigma mesh", "sigma pa", "sigma personal assistant", "mitz pa", "mitz personal assistant", "jarvis", "personal assistant", "command center", "sigma development command center", "sigma agent index", "cybersecurity team creation", "sigma scouter", "alysha repository automation", "alisha repository automation"]
     domain_team: ["chief-ai-scientist", "computing-ai-director", "systems-decision-master", "legal-law-advisory-master"]
   - project: "Mi7z Web"
     repository: "M17z2025/mi7z-web"
@@ -35,7 +35,7 @@ projects:
     domain_team: ["graphic-design-master", "marketing-brand-master", "business-operations-master"]
   - project: "Alysha AI Platform"
     repository: "M17z2025/alisha-ai-platform"
-    aliases: ["friday", "friday ai", "friday assistant", "mitz pa", "mitz personal assistant", "jarvis", "personal assistant", "alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app", "alysha os", "alisha os"]
+    aliases: ["friday", "friday ai", "friday assistant", "alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app", "alysha os", "alisha os"]
     domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "algorithmic-mobile-engineering-master", "api-mobile-integration-security-master", "legal-law-advisory-master"]
   - project: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
@@ -248,11 +248,12 @@ consolidated_repositories:
 
 consolidated_products:
   - source_product: "Mitz PA"
-    canonical_product: "Alysha AI Platform"
-    display_name: "Friday AI"
-    canonical_repository: "M17z2025/alisha-ai-platform"
-    disposition: "merged_into_friday"
+    canonical_product: "Sigma Development Command Center"
+    display_name: "Sigma Mesh + Mitz PA"
+    canonical_repository: "M17z2025/ai-command-center"
+    disposition: "merged_into_sigma"
     decision_date: "2026-10-30"
     legacy_repository: null
-    requirements: "docs/consolidations/2026-10-30-mitz-pa-into-friday.md"
-    note: "No separate app or GitHub repository; retain original Google Drive blueprints as historical references and implement remaining requirements in Friday."
+    interface_repository: "M17z2025/alisha-ai-platform"
+    requirements: "docs/consolidations/2026-10-30-mitz-pa-into-sigma.md"
+    note: "Owner superseded earlier Friday ownership. Sigma owns the Mitz PA brain, memory, owner tasks, connectors and action governance; Friday only its separate voice/telephony/mobile interface."
