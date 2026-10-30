@@ -6,6 +6,18 @@ The Sigma Development Command Center is a GitHub-hosted engineering control plan
 
 It is **not** a product runtime and does not contain managed-product application source code.
 
+## Owner-assistant role, without a second agent platform
+
+Owner instruction (2026-10-30): Mitz PA is now a **role inside Sigma Mesh**.
+Sigma is the authoritative intelligence, memory, task and consent/orchestration
+layer. Friday continues as the native mobile/voice/SIP interface and still owns
+its device and telephony trust boundaries. `sigma_runtime/owner_pa.py` and
+`scripts/sigma_owner_pa.py` reuse the existing expert mesh and private mission
+store and return **advisory only** results. A separately commissioned owner-
+authenticated Friday-to-Sigma action/response gateway is still required for
+production personal operations. Do not infer completed external actions from
+advisory status. See `docs/consolidations/2026-10-30-mitz-pa-into-sigma.md`.
+
 ## Source-of-truth layers
 
 ### Portfolio truth
