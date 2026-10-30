@@ -1,3 +1,5 @@
+> **SUPERSEDED by owner instruction, 30 October 2026.** Mitz PA is now part of **Sigma Mesh**, not Friday AI. This document is retained for historical provenance only. The current canonical design is [Mitz PA within Sigma](./2026-10-30-mitz-pa-into-sigma.md). Friday retains its own Android, voice and telephony implementation; this document must not be used as current ownership authority.
+
 # Decision 2 — Mitz PA consolidated into Friday AI
 **Owner instruction: Option A, 2026-10-30**
 
