@@ -65,7 +65,7 @@ The adapter, SDK runner contract and benchmark data model exist in source. A rea
 Sigma now has a dedicated `sigma-worker` service design for the first live autonomous engineering proof.
 
 Properties:
-- OpenHands SDK/tools pinned to `1.49.6`;
+- OpenHands SDK/tools pinned to `1.59.0`;
 - `LocalWorkspace` runs inside the dedicated worker container;
 - terminal-only OpenHands agent for small/local-model reliability;
 - private Ollama endpoint only;
@@ -95,3 +95,13 @@ The runner defaults its private endpoint to:
 `http://sigma-worker:8091/missions`
 
 Live write commissioning requires a least-privilege GitHub runtime token and deliberate `SIGMA_WORKER_ALLOW_WRITE=1`. This does not grant production-release authority.
+
+
+## 30 October 2026 — security and commissioning gate
+
+- The worker source pins matching `openhands-sdk` and `openhands-tools` versions to **1.59.0**, which is above the 1.52.0 fix threshold for CVE-2026-112346.
+- GitHub Advisory: https://github.com/advisories/GHSA-rp7h-crm7-h5qj
+- This commit alone **does not prove the OVH worker was rebuilt or restarted**; the deployed Python package version must be checked from the running container after rollout.
+- Required release gates: critical-worker image smoke builds and starts; the worker reports healthy with writes disabled; existing unit/CI workflows pass; then run a bounded real code-edit mission and independently verify its diff, tests and pull request.
+- Do not expose a sandbox Agent Server port to a public interface; maintain private-only worker ingress, credentials outside the agent process and disabled production-release authority.
+- Avoid automatically merging or deploying security fixes until image-build compatibility has been demonstrated. The self-hosted commissioning workflow can start services and enable writes, so operators must review its impact before enabling it.
