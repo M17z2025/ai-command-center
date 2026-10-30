@@ -20,12 +20,12 @@ from .provider import CompletionRequest, HTTPModelProvider, ModelProvider, Provi
 
 
 # Each endpoint must be deliberately reviewed before it is admitted.
-ALLOWED_HOSTS = frozenset({
-    "api.groq.com",
-    "api.cerebras.ai",
-    "integrate.api.nvidia.com",
-    "openrouter.ai",
-})
+ALLOWED_ENDPOINT_PATHS = {
+    "api.groq.com": "/openai/v1/chat/completions",
+    "api.cerebras.ai": "/v1/chat/completions",
+    "integrate.api.nvidia.com": "/v1/chat/completions",
+    "openrouter.ai": "/api/v1/chat/completions",
+}
 ALLOWED_KINDS = frozenset({"analysis", "postmortem"})
 
 
@@ -141,11 +141,11 @@ def free_tier_from_env(primary: ModelProvider) -> ModelProvider:
         parsed = urlsplit(endpoint)
         if (
             parsed.scheme != "https"
-            or parsed.hostname not in ALLOWED_HOSTS
+            or parsed.hostname not in ALLOWED_ENDPOINT_PATHS
             or parsed.username is not None
             or parsed.password is not None
             or parsed.port not in (None, 443)
-            or parsed.path != "/v1/chat/completions"
+            or parsed.path != ALLOWED_ENDPOINT_PATHS.get(parsed.hostname)
             or parsed.query or parsed.fragment
         ):
             raise ProviderError("Free-tier endpoint must be an approved HTTPS API")
