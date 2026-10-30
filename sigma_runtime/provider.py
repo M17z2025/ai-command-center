@@ -255,7 +255,7 @@ def provider_from_env(*, allow_test: bool = False) -> ModelProvider:
             "Live runtime requires SIGMA_LLM_ENDPOINT and SIGMA_LLM_MODEL. "
             "SIGMA_LLM_API_KEY is optional for authenticated/self-hosted endpoints."
         )
-    return HTTPModelProvider(
+    primary = HTTPModelProvider(
         endpoint=endpoint,
         model=model,
         api_key=os.getenv("SIGMA_LLM_API_KEY") or None,
@@ -265,3 +265,6 @@ def provider_from_env(*, allow_test: bool = False) -> ModelProvider:
         context_tokens=int(os.getenv("SIGMA_LLM_CONTEXT_TOKENS", "4096")),
         disable_thinking=os.getenv("SIGMA_LLM_DISABLE_THINKING", "0") == "1",
     )
+    from .free_tier import free_tier_from_env
+
+    return free_tier_from_env(primary)
