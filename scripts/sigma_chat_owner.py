@@ -29,9 +29,22 @@ def resolve(title: str, message: str = "", repository: str = "") -> dict:
     combined = f"{title} {message}".lower()
 
     if repository:
+        # Explicit references to retired GitHub repositories must never return
+        # them as independent build targets, even when a chat title says otherwise.
+        canonical = repository
+        consolidated = None
+        for legacy in cfg.get("consolidated_repositories", []):
+            if legacy.get("source", "").casefold() == repository.casefold():
+                canonical = legacy["canonical"]
+                consolidated = legacy
+                break
         for item in cfg.get("projects", []):
-            if item.get("repository", "").lower() == repository.lower():
-                return assignment(cfg, item, "repository")
+            if item.get("repository", "").casefold() == canonical.casefold():
+                result = assignment(cfg, item, "consolidated_repository" if consolidated else "repository")
+                if consolidated:
+                    result["superseded_repository"] = consolidated["source"]
+                    result["consolidation_state"] = consolidated["disposition"]
+                return result
 
     candidates = []
     for section in ("projects", "intake_projects"):

@@ -27,7 +27,7 @@ defaults:
 projects:
   - project: "Sigma Development Command Center"
     repository: "M17z2025/ai-command-center"
-    aliases: ["sigma", "sigma mesh", "command center", "sigma development command center", "sigma agent index", "cybersecurity team creation", "sigma scouter"]
+    aliases: ["sigma", "sigma mesh", "command center", "sigma development command center", "sigma agent index", "cybersecurity team creation", "sigma scouter", "alysha repository automation", "alisha repository automation"]
     domain_team: ["chief-ai-scientist", "computing-ai-director", "systems-decision-master", "legal-law-advisory-master"]
   - project: "Mi7z Web"
     repository: "M17z2025/mi7z-web"
@@ -35,16 +35,8 @@ projects:
     domain_team: ["graphic-design-master", "marketing-brand-master", "business-operations-master"]
   - project: "Alysha AI Platform"
     repository: "M17z2025/alisha-ai-platform"
-    aliases: ["alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app"]
+    aliases: ["friday", "friday ai", "friday assistant", "alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app", "alysha os", "alisha os"]
     domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "algorithmic-mobile-engineering-master", "api-mobile-integration-security-master", "legal-law-advisory-master"]
-  - project: "Alysha OS"
-    repository: "M17z2025/alisha-os"
-    aliases: ["alysha os", "alisha os"]
-    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "distributed-cloud-systems-master"]
-  - project: "Alysha Repository Automation"
-    repository: "M17z2025/alisha-repository-automation"
-    aliases: ["alysha repository automation", "alisha repository automation"]
-    domain_team: ["integration-automation-master", "developer-tooling-ci-master"]
   - project: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
     aliases: ["invoiceit", "invoiceit by mi7z", "invoiceit development loop"]
@@ -248,3 +240,13 @@ intake_team:
     - "sigma-scouter"
     - "research-director"
   rule: "Create/identify the real product repository and Sigma contract before source implementation is called continuous or complete."
+
+# Owner-approved Decision 1: explicit old repository references must route to
+# canonical build owners. No autonomous work may target a superseded source.
+consolidated_repositories:
+  - source: "M17z2025/alisha-os"
+    canonical: "M17z2025/alisha-ai-platform"
+    disposition: "archive_pending"
+  - source: "M17z2025/alisha-repository-automation"
+    canonical: "M17z2025/ai-command-center"
+    disposition: "archive_pending"

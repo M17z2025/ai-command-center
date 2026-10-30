@@ -33,6 +33,35 @@ class ChatOwnershipTests(unittest.TestCase):
         result = MOD.resolve("General development", repository="M17z2025/umarketit")
         self.assertEqual(result["project"], "Marketit")
 
+    def test_approved_consolidation_routes_to_canonical_owners(self):
+        friday = "M17z2025/alisha-ai-platform"
+        sigma = "M17z2025/ai-command-center"
+        for title in ("Friday AI", "Alysha OS", "Alisha OS"):
+            self.assertEqual(MOD.resolve(title)["repository"], friday)
+        for title in ("Alysha Repository Automation", "Alisha Repository Automation"):
+            self.assertEqual(MOD.resolve(title)["repository"], sigma)
+        old = MOD.resolve("General development", repository="M17z2025/alisha-os")
+        self.assertEqual(old["repository"], friday)
+        self.assertEqual(old["matched_by"], "consolidated_repository")
+        self.assertEqual(old["superseded_repository"], "M17z2025/alisha-os")
+        other = MOD.resolve("Friday development", repository="M17z2025/alisha-repository-automation")
+        self.assertEqual(other["repository"], sigma)
+        self.assertEqual(other["matched_by"], "consolidated_repository")
+
+    def test_retired_sources_not_active_registered_projects(self):
+        registry = yaml.safe_load((ROOT / "projects" / "registry.yaml").read_text(encoding="utf-8"))
+        registered = {item["repository"] for item in registry["projects"]}
+        redirects = registry["consolidated_repositories"]
+        for entry in redirects:
+            self.assertNotIn(entry["source"], registered)
+            self.assertIn(entry["canonical"], registered)
+            self.assertEqual(entry["status"], "archive_pending")
+        team_redirects = MOD.load_config()["consolidated_repositories"]
+        self.assertEqual(
+            {(x["source"], x["canonical"]) for x in redirects},
+            {(x["source"], x["canonical"]) for x in team_redirects},
+        )
+
     def test_every_registered_repository_has_chat_ownership(self):
         registry = yaml.safe_load((ROOT / "projects" / "registry.yaml").read_text(encoding="utf-8"))
         ownership = MOD.load_config()
