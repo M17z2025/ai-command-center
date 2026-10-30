@@ -22,6 +22,19 @@ jobs:
       - uses: actions/checkout@v7
       - name: Build Sigma worker image
         run: docker build -f Dockerfile.sigma-worker -t sigma-worker:critical-smoke .
+      - name: Verify patched OpenHands SDK API imports
+        run: |
+          set -euo pipefail
+          docker run --rm --entrypoint python sigma-worker:critical-smoke -c '
+          from importlib.metadata import version
+          from openhands.sdk import Agent, Conversation, LLM, LocalWorkspace
+          from openhands.sdk.tool import Tool
+          from openhands.tools.preset.default import register_default_tools
+          from openhands.tools.terminal import TerminalTool
+          assert version("openhands-sdk") == "1.59.0"
+          assert version("openhands-tools") == "1.59.0"
+          print("SIGMA_OPENHANDS_PATCHED_IMPORTS=PASS")
+          '
       - name: Start worker without write authority
         run: |
           set -euo pipefail
