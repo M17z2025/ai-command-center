@@ -62,6 +62,31 @@ class ChatOwnershipTests(unittest.TestCase):
             {(x["source"], x["canonical"]) for x in team_redirects},
         )
 
+    def test_mitz_pa_aliases_resolve_to_existing_friday_not_new_project(self):
+        repo = "M17z2025/alisha-ai-platform"
+        for title in ("Mitz PA", "Mitz personal assistant", "Jarvis", "Personal assistant"):
+            with self.subTest(title=title):
+                assignment = MOD.resolve(title)
+                self.assertEqual(assignment["repository"], repo)
+                self.assertEqual(assignment["project"], "Alysha AI Platform")
+                self.assertEqual(assignment["state"], "ASSIGNED")
+        self.assertNotIn(
+            "Mitz PA",
+            {x["project"] for x in MOD.load_config()["intake_projects"]},
+        )
+
+    def test_mitz_pa_consolidation_consistent_across_owner_registers(self):
+        registry = yaml.safe_load((ROOT / "projects" / "registry.yaml").read_text(encoding="utf-8"))
+        teams = MOD.load_config()
+        aliases = [x for x in teams["consolidated_products"] if x["source_product"] == "Mitz PA"]
+        product = [x for x in registry["consolidated_products"] if x["source_product"] == "Mitz PA"]
+        self.assertEqual(len(aliases), 1)
+        self.assertEqual(len(product), 1)
+        self.assertEqual(aliases[0]["canonical_repository"], "M17z2025/alisha-ai-platform")
+        self.assertEqual(product[0]["canonical_repository"], aliases[0]["canonical_repository"])
+        self.assertEqual(product[0]["status"], "merged_into_friday")
+        self.assertIsNone(product[0]["standalone_repository"])
+
     def test_every_registered_repository_has_chat_ownership(self):
         registry = yaml.safe_load((ROOT / "projects" / "registry.yaml").read_text(encoding="utf-8"))
         ownership = MOD.load_config()
@@ -127,7 +152,6 @@ class ChatOwnershipTests(unittest.TestCase):
             "Dormant Medicines Research",
             "Secure DX Zambia",
             "Alpha-Zulu Directory",
-            "Mitz PA",
             "White Rino",
             "AI Gaming",
             "UK AI HR & Employment Compliance",
