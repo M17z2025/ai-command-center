@@ -62,14 +62,20 @@ class ChatOwnershipTests(unittest.TestCase):
             {(x["source"], x["canonical"]) for x in team_redirects},
         )
 
-    def test_mitz_pa_aliases_resolve_to_existing_friday_not_new_project(self):
-        repo = "M17z2025/alisha-ai-platform"
-        for title in ("Mitz PA", "Mitz personal assistant", "Jarvis", "Personal assistant"):
+    def test_mitz_pa_aliases_route_to_sigma_and_friday_remains_separate(self):
+        sigma = "M17z2025/ai-command-center"
+        for title in ("Mitz PA", "Mitz personal assistant", "Jarvis", "Personal assistant", "Sigma PA"):
             with self.subTest(title=title):
                 assignment = MOD.resolve(title)
-                self.assertEqual(assignment["repository"], repo)
-                self.assertEqual(assignment["project"], "Alysha AI Platform")
+                self.assertEqual(assignment["repository"], sigma)
+                self.assertEqual(assignment["project"], "Sigma Development Command Center")
                 self.assertEqual(assignment["state"], "ASSIGNED")
+        for title in ("Friday", "Friday AI", "Friday assistant", "Alysha OS"):
+            with self.subTest(title=title):
+                self.assertEqual(
+                    MOD.resolve(title)["repository"],
+                    "M17z2025/alisha-ai-platform",
+                )
         self.assertNotIn(
             "Mitz PA",
             {x["project"] for x in MOD.load_config()["intake_projects"]},
@@ -82,9 +88,10 @@ class ChatOwnershipTests(unittest.TestCase):
         product = [x for x in registry["consolidated_products"] if x["source_product"] == "Mitz PA"]
         self.assertEqual(len(aliases), 1)
         self.assertEqual(len(product), 1)
-        self.assertEqual(aliases[0]["canonical_repository"], "M17z2025/alisha-ai-platform")
+        self.assertEqual(aliases[0]["canonical_repository"], "M17z2025/ai-command-center")
         self.assertEqual(product[0]["canonical_repository"], aliases[0]["canonical_repository"])
-        self.assertEqual(product[0]["status"], "merged_into_friday")
+        self.assertEqual(aliases[0]["interface_repository"], "M17z2025/alisha-ai-platform")
+        self.assertEqual(product[0]["status"], "merged_into_sigma")
         self.assertIsNone(product[0]["standalone_repository"])
 
     def test_every_registered_repository_has_chat_ownership(self):
