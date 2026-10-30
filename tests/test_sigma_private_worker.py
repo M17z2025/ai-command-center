@@ -1,5 +1,6 @@
 import importlib.util
 import os
+import re
 from pathlib import Path
 import tempfile
 import unittest
@@ -117,8 +118,19 @@ commands:
 
     def test_worker_dependencies_are_pinned(self):
         text = (ROOT / "requirements-worker.txt").read_text(encoding="utf-8")
-        self.assertIn("openhands-sdk==1.49.6", text)
-        self.assertIn("openhands-tools==1.49.6", text)
+        versions = {}
+        for package in ("openhands-sdk", "openhands-tools"):
+            match = re.search(
+                rf"(?m)^{re.escape(package)}==(\d+)\.(\d+)\.(\d+)$",
+                text,
+            )
+            self.assertIsNotNone(match, f"{package} must be pinned")
+            versions[package] = tuple(int(part) for part in match.groups())
+        self.assertEqual(versions["openhands-sdk"], versions["openhands-tools"])
+        self.assertGreaterEqual(
+            versions["openhands-sdk"], (1, 52, 0),
+            "CVE-2026-112346: vulnerable OpenHands versions must be rejected",
+        )
         self.assertIn("PyYAML==6.0.2", text)
 
     def test_worker_compose_is_private_and_write_disabled_by_default(self):

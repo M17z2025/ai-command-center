@@ -1,4 +1,4 @@
-openhands-sdk==1.49.6
-openhands-tools==1.49.6
-pydantic==2.12.5
+openhands-sdk==1.59.0
+openhands-tools==1.59.0
+pydantic==2.13.5
 PyYAML==6.0.2
