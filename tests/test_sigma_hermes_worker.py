@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import patch
 
 from sigma_runtime.workers.base import CapabilityPolicy, WorkerMission, WorkerStatus
-from sigma_runtime.workers.hermes import HermesWorkerAdapter, HermesWorkerConfig
+from sigma_runtime.workers.hermes import HermesWorkerAdapter, HermesWorkerConfig, _NoRedirects
 
 
 def mission(**overrides):
@@ -42,7 +42,7 @@ class HermesWorkerTests(unittest.TestCase):
         )
 
     def test_default_is_blocked_without_network(self):
-        with patch("sigma_runtime.workers.hermes.urlopen") as network:
+        with patch("sigma_runtime.workers.hermes.build_opener") as network:
             outcome = HermesWorkerAdapter().execute(mission())
         self.assertEqual(outcome.status, WorkerStatus.BLOCKED)
         network.assert_not_called()
@@ -77,7 +77,8 @@ class HermesWorkerTests(unittest.TestCase):
             return MockReply({"run_id": "run-123", "status": "completed",
                               "output": "Suggested patch. Tests not executed."})
         events = []
-        with patch("sigma_runtime.workers.hermes.urlopen", fake_urlopen):
+        with patch("sigma_runtime.workers.hermes.build_opener") as builder:
+            builder.return_value.open.side_effect = fake_urlopen
             result = HermesWorkerAdapter(self.config).execute(
                 mission(), audit_sink=lambda name, payload: events.append(name))
         self.assertEqual(result.status, WorkerStatus.PLANNED)
@@ -86,13 +87,18 @@ class HermesWorkerTests(unittest.TestCase):
         self.assertEqual(requests[0].get_header("Idempotency-key"), "sigma-hermes-proof-1")
         self.assertEqual(events, ["worker.started", "worker.finished"])
 
+    def test_bearer_is_not_forwarded_to_redirect(self):
+        self.assertIsNone(_NoRedirects().redirect_request(
+            None, None, 302, "redirect", {}, "https://untrusted.example"
+        ))
+
     def test_remote_failure_never_counts_as_success(self):
         replies = iter([
             {"run_id": "run-1", "status": "started"},
             {"run_id": "run-1", "status": "failed", "output": "failed"},
         ])
-        with patch("sigma_runtime.workers.hermes.urlopen",
-                   side_effect=lambda *_args, **_kw: MockReply(next(replies))):
+        with patch("sigma_runtime.workers.hermes.build_opener") as builder:
+            builder.return_value.open.side_effect = lambda *_args, **_kw: MockReply(next(replies))
             result = HermesWorkerAdapter(self.config).execute(mission())
         self.assertEqual(result.status, WorkerStatus.BLOCKED)
         self.assertFalse(result.evidence)
