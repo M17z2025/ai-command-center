@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "purpose": "ALISHA software factory: continuously verify, diagnose, repair and improve builds using multiple independent coding agents and objective quality gates.",
+  "principles": [
+    "GitHub is the source of truth",
+    "No agent can self-certify its own work",
+    "Every fix must reproduce the failure and add or update a regression test where practical",
+    "Use golden blueprints and proven components before generating new architecture",
+    "Run autonomous code in isolated workspaces",
+    "Production changes require passing quality gates and governed promotion",
+    "The repair loop is event-driven and persistent, not a permanently busy GPU process"
+  ],
+  "openSourceAgents": [
+    {
+      "id": "symphony",
+      "name": "OpenAI Symphony",
+      "upstream": "https://github.com/openai/symphony",
+      "role": "persistent work orchestration, issue intake, isolated workspace lifecycle and coding-agent dispatch",
+      "classification": "core-orchestrator",
+      "commercialGate": "verify current Apache-2.0 repository licence and dependencies before commercial release"
+    },
+    {
+      "id": "openhands",
+      "name": "OpenHands",
+      "upstream": "https://github.com/OpenHands/OpenHands",
+      "role": "principal autonomous implementation and repair agent",
+      "classification": "core-developer"
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "upstream": "https://github.com/block/goose",
+      "role": "independent developer, reviewer and repair challenger using local or approved external models",
+      "classification": "core-independent-reviewer",
+      "commercialGate": "verify current Apache-2.0 repository licence and dependencies before commercial release"
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "upstream": "https://github.com/cline/cline",
+      "role": "IDE/headless specialist agent for delegated coding, terminal work and parallel worktrees",
+      "classification": "specialist-developer",
+      "commercialGate": "verify current project and dependency licences before commercial release"
+    }
+  ],
+  "alishaOwnedControllers": [
+    {
+      "id": "software-factory-controller",
+      "role": "accept requirement, select blueprint, decompose work, assign agents, track evidence and govern promotion"
+    },
+    {
+      "id": "continuous-repair-controller",
+      "role": "consume failures from CI, staging, production, runtime logs and monitoring; reproduce, classify, repair, retest and open governed PRs"
+    },
+    {
+      "id": "blueprint-library",
+      "role": "versioned golden application architectures for web, mobile, game, AI, portal, CRM, marketplace, document and internal-admin products"
+    },
+    {
+      "id": "component-registry",
+      "role": "catalogue proven reusable auth, RLS, navigation, upload, email, payments, AI chat, permissions, audit, document and UI components"
+    },
+    {
+      "id": "quality-gate",
+      "role": "objective release proof across compile, types, lint, unit, integration, DB/RLS, API, browser, mobile, visual, security, accessibility, performance and smoke tests"
+    },
+    {
+      "id": "error-bus",
+      "role": "normalise application, CI, runtime, deployment, security, performance and visual failures into actionable repair events"
+    }
+  ],
+  "agentRoles": {
+    "engineeringDirector": "ALISHA planner/router",
+    "workOrchestrator": "Symphony",
+    "principalDeveloper": "OpenHands",
+    "independentDeveloperReviewer": "Goose",
+    "ideHeadlessSpecialist": "Cline",
+    "frontendSpecialist": "ALISHA-selected OpenHands/Goose worker with frontend blueprint",
+    "backendSpecialist": "ALISHA-selected OpenHands/Goose worker with backend blueprint",
+    "databaseSpecialist": "ALISHA-selected worker constrained by Supabase/Postgres/RLS standards",
+    "mobileSpecialist": "ALISHA-selected worker using React Native/Expo/Capacitor route",
+    "gameSpecialist": "ALISHA-selected worker using Godot toolchain",
+    "qaEngineer": "independent test agent",
+    "securityEngineer": "security scanning/red-team agent",
+    "performanceEngineer": "performance profiling and regression agent",
+    "repairEngineer": "continuous repair controller + selected independent coding agent",
+    "finalReviewer": "independent model/agent that did not author the final implementation"
+  },
+  "goldenBlueprints": [
+    "WEB-SIMPLE",
+    "WEB-SAAS",
+    "WEB-MULTITENANT",
+    "WEB-ECOMMERCE",
+    "WEB-CRM",
+    "WEB-DOCUMENT",
+    "WEB-AI",
+    "MOBILE-SIMPLE",
+    "MOBILE-SAAS",
+    "MOBILE-OFFLINE",
+    "MOBILE-AI",
+    "MOBILE-ASSISTANT",
+    "GAME-2D",
+    "GAME-3D",
+    "GAME-MULTIPLAYER",
+    "AI-CHAT",
+    "AI-RAG",
+    "AI-VOICE",
+    "AI-MOVIE",
+    "INTERNAL-ADMIN",
+    "CLIENT-PORTAL",
+    "MARKETPLACE"
+  ],
+  "qualityGates": [
+    "compile",
+    "typecheck",
+    "lint",
+    "unit-tests",
+    "integration-tests",
+    "database-tests",
+    "rls-tests",
+    "api-tests",
+    "browser-e2e",
+    "mobile-e2e-when-applicable",
+    "visual-regression",
+    "dependency-security-scan",
+    "application-security-tests",
+    "accessibility",
+    "performance-budget",
+    "staging-smoke-test",
+    "production-smoke-test-after-approved-promotion"
+  ],
+  "repairEvents": [
+    "commit-failure",
+    "ci-failure",
+    "deployment-failure",
+    "runtime-error",
+    "security-finding",
+    "dependency-regression",
+    "api-contract-failure",
+    "browser-e2e-failure",
+    "mobile-e2e-failure",
+    "visual-regression",
+    "performance-regression",
+    "health-check-failure"
+  ],
+  "repairLoop": [
+    "capture evidence",
+    "identify repository, release and owning capability",
+    "reproduce in isolated workspace",
+    "create or update failing regression test where practical",
+    "classify root cause",
+    "assign specialist implementation agent",
+    "independent reviewer challenges fix",
+    "run full relevant quality gates",
+    "open PR with evidence",
+    "deploy staging",
+    "run acceptance and smoke tests",
+    "promote only under configured governance",
+    "record incident, cause, fix and reusable lesson"
+  ],
+  "completionRule": "A job is not COMPLETE because an AI says it is complete. COMPLETE requires objective evidence that all applicable quality gates passed."
+}
