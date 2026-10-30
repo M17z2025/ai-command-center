@@ -1,7 +1,7 @@
 schema_version: 1
 policy_id: sigma-chat-build-ownership-v1
 owner: "Mitesh"
-updated: "2026-09-26"
+updated: "2026-10-30"
 
 defaults:
   accountable_build_steward: "sigma-chat-build-steward"
@@ -35,7 +35,7 @@ projects:
     domain_team: ["graphic-design-master", "marketing-brand-master", "business-operations-master"]
   - project: "Alysha AI Platform"
     repository: "M17z2025/alisha-ai-platform"
-    aliases: ["friday", "friday ai", "friday assistant", "alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app", "alysha os", "alisha os"]
+    aliases: ["friday", "friday ai", "friday assistant", "mitz pa", "mitz personal assistant", "jarvis", "personal assistant", "alysha", "alisha", "alysha ai", "alisha ai platform", "voice call agent", "phone app", "alysha os", "alisha os"]
     domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "algorithmic-mobile-engineering-master", "api-mobile-integration-security-master", "legal-law-advisory-master"]
   - project: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
@@ -159,11 +159,6 @@ intake_projects:
     aliases: ["alpha-zulu", "alpha zulu directory"]
     domain_team: ["business-operations-master", "marketing-brand-master", "legal-law-advisory-master", "privacy-data-security-master"]
 
-  - project: "Mitz PA"
-    repository: null
-    state: "PROJECT_REPOSITORY_REQUIRED"
-    aliases: ["mitz pa", "jarvis", "personal assistant"]
-    domain_team: ["chief-ai-scientist", "ai-agent-engineering-master", "mobile-app-engineering-master", "integration-automation-master", "privacy-data-security-master"]
   - project: "UK AI HR & Employment Compliance"
     repository: null
     state: "PROJECT_REPOSITORY_REQUIRED"
@@ -250,3 +245,14 @@ consolidated_repositories:
   - source: "M17z2025/alisha-repository-automation"
     canonical: "M17z2025/ai-command-center"
     disposition: "archive_pending"
+
+consolidated_products:
+  - source_product: "Mitz PA"
+    canonical_product: "Alysha AI Platform"
+    display_name: "Friday AI"
+    canonical_repository: "M17z2025/alisha-ai-platform"
+    disposition: "merged_into_friday"
+    decision_date: "2026-10-30"
+    legacy_repository: null
+    requirements: "docs/consolidations/2026-10-30-mitz-pa-into-friday.md"
+    note: "No separate app or GitHub repository; retain original Google Drive blueprints as historical references and implement remaining requirements in Friday."
