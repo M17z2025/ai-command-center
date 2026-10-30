@@ -52,7 +52,7 @@ projects:
     display_name: "Friday AI"
     lifecycle: active
     category: ai-assistant
-    notes: "Canonical Friday product repository. Legacy Alysha OS design references are preserved here; do not replace the governed Android/SIP/release implementation."
+    notes: "Canonical Friday product repository. Alysha OS designs preserved; Mitz PA merged into Friday under owner Decision 2 (2026-10-30); no separate Mitz PA build. Keep Android/SIP/release governance unchanged."
 
   - name: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
@@ -173,3 +173,13 @@ consolidated_repositories:
     owner_product: "Sigma Mesh"
     status: "archive_pending"
     explanation: "README/control-only duplicate; no standalone automation worker found."
+
+# Decision 2 (2026-10-30): Mitz PA was an intake-only project, never a
+# registered GitHub application. Retain a single personal assistant product.
+consolidated_products:
+  - source_product: "Mitz PA"
+    canonical_product: "Alysha AI Platform"
+    display_name: "Friday AI"
+    canonical_repository: "M17z2025/alisha-ai-platform"
+    status: "merged_into_friday"
+    standalone_repository: null
