@@ -40,6 +40,7 @@ projects:
     repository: "M17z2025/ai-command-center"
     lifecycle: active
     category: control-plane
+    notes: "Canonical owner of reusable repository automation; the legacy Alysha Repository Automation repository is superseded."
 
   - name: "Mi7z Web"
     repository: "M17z2025/mi7z-web"
@@ -48,19 +49,10 @@ projects:
 
   - name: "Alysha AI Platform"
     repository: "M17z2025/alisha-ai-platform"
+    display_name: "Friday AI"
     lifecycle: active
     category: ai-assistant
-
-  - name: "Alysha OS"
-    repository: "M17z2025/alisha-os"
-    lifecycle: discovered
-    category: ai-assistant
-    notes: "Relationship to alisha-ai-platform must be recorded before consolidation or archival."
-
-  - name: "Alysha Repository Automation"
-    repository: "M17z2025/alisha-repository-automation"
-    lifecycle: discovered
-    category: automation
+    notes: "Canonical Friday product repository. Legacy Alysha OS design references are preserved here; do not replace the governed Android/SIP/release implementation."
 
   - name: "Invoiceit by Mi7z"
     repository: "M17z2025/invoiceit-by-mi7z"
@@ -166,3 +158,18 @@ projects:
     repository: "M17z2025/mi7z_core_Intelliegence"
     lifecycle: discovered
     category: ai-platform
+
+# Decision 1 (2026-10-30): preserve historical repository identities as read-only
+# redirects. These are NOT active standalone build targets. Physical GitHub
+# archiving is independently gated until the migration PRs and sources are verified.
+consolidated_repositories:
+  - source: "M17z2025/alisha-os"
+    canonical: "M17z2025/alisha-ai-platform"
+    owner_product: "Friday AI"
+    status: "archive_pending"
+    explanation: "Static prototype and candidate capability catalogues, not a production assistant backend."
+  - source: "M17z2025/alisha-repository-automation"
+    canonical: "M17z2025/ai-command-center"
+    owner_product: "Sigma Mesh"
+    status: "archive_pending"
+    explanation: "README/control-only duplicate; no standalone automation worker found."
