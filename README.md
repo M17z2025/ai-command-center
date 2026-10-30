@@ -63,3 +63,8 @@ No agent should guess project state. Read the repository, manifest, current stat
 
 - [Sigma Chat Build Ownership](./headquarters/chat-ownership/README.md) keeps all development chats for the same product on one accountable team and repository-backed backlog.
 - [Sigma Scouter](./headquarters/scouter/README.md) discovers reusable open-source code and unlimited-free/self-hosted APIs under a strict licence/quota evidence gate.
+
+## Sigma Mesh + Mitz PA — one owner assistant intelligence layer
+As of the owner's corrected 30 October 2026 direction, **Sigma** also owns Mitz PA personal intelligence, project-scoped memory, task planning, approvals and cross-app operations. **Friday** remains its existing independent Android/voice/SIP telephone interface, not a second orchestration brain.
+Read the [canonical integration and acceptance contract](./docs/consolidations/2026-10-30-mitz-pa-into-sigma.md).
+A bounded Sigma-only advisory entry point now exists at `scripts/sigma_owner_pa.py`; it shares the existing Sigma mission model and private audit store, does not issue external actions and requires a commissioned private inference endpoint for real responses. The Friday↔Sigma live action bridge is not commissioned.
