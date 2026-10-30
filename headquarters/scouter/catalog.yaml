@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_id": "sigma-scouter-catalog-v1",
-  "generated_on": "2026-09-27",
+  "generated_on": "2026-10-30",
   "rule": "Only ACCEPT and FORK_CANDIDATE entries have verified open-code rights for the stated use; every adoption still requires project-specific engineering, legal/licence and security review.",
   "discovery_queries": [
     "site:github.com open source self hosted invoicing accounting TypeScript",
@@ -28,9 +28,39 @@
     "site:github.com open source observability monitoring logging self hosted",
     "site:github.com open source PaaS deployment VPS alternative Vercel self hosted",
     "site:github.com open source backup restore object storage S3 self hosted",
-    "\"no API key\" \"no rate limits\" open source API commercial use"
+    "\"no API key\" \"no rate limits\" open source API commercial use",
+    "site:github.com/open-free-llm-api/awesome-freellm-apis free inference provider pricing quotas"
   ],
   "candidates": [
+    {
+      "id": "awesome-freellm-apis",
+      "name": "awesome-freellm-apis",
+      "category": "ai-inference-directory",
+      "kind": "directory",
+      "upstream": "https://github.com/open-free-llm-api/awesome-freellm-apis",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "Directory metadata is MIT-licensed, but its listed hosted APIs have rate, account, credit or regional limits; none is represented as unlimited.",
+      "what_it_does": "Maintained provider/model listing and OpenAI-compatible endpoint configuration examples; discovery source, not an inference server.",
+      "portfolio_fit": [
+        "Sigma Mesh",
+        "Sigma Scouter",
+        "low-risk public research",
+        "cost-aware inference"
+      ],
+      "integration_strategy": "Use as reviewed discovery input only. Select explicit HTTPS endpoint allowlists and local quota caps in sigma_runtime/free_tier.py; classify payloads before external routing; independently recheck provider terms, model licenses and published free quotas.",
+      "verified_on": "2026-10-30",
+      "evidence": [
+        {
+          "source": "https://github.com/open-free-llm-api/awesome-freellm-apis",
+          "verified_on": "2026-10-30",
+          "note": "README and MIT licence inspected; upstream list claims daily refresh but provider free-tier terms must be independently verified."
+        }
+      ],
+      "requires_paid_core_dependency": false
+    },
     {
       "id": "supabase",
       "name": "Supabase",
