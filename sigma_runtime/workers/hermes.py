@@ -11,7 +11,7 @@ import json
 import time
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from .base import AuditSink, WorkerMission, WorkerResult, WorkerStatus, emit_audit
 
@@ -42,6 +42,13 @@ class HermesWorkerConfig:
             raise ValueError("poll_seconds must be positive")
 
 
+class _NoRedirects(HTTPRedirectHandler):
+    """Never forward a private Hermes bearer key to a redirect target."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
 class HermesWorkerAdapter:
     """Dispatch to Hermes Runs API, treating its output as UNVERIFIED candidate work."""
 
@@ -67,7 +74,7 @@ class HermesWorkerAdapter:
             method=method,
         )
         try:
-            with urlopen(request, timeout=20) as response:
+            with build_opener(_NoRedirects()).open(request, timeout=20) as response:
                 result = json.loads(response.read().decode("utf-8"))
             if not isinstance(result, dict):
                 raise ValueError("Invalid Hermes response shape")
