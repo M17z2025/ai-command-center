@@ -16,6 +16,20 @@ class SigmaScouterTests(unittest.TestCase):
         failures = [(d.candidate_id, d.reasons) for d in decisions if d.reasons]
         self.assertEqual(failures, [])
 
+    def test_owner_approved_shortlist_is_prioritised_but_not_deployed(self):
+        shortlist = self.scouter.owner_shortlist()
+        self.assertEqual(len(shortlist), 11)
+        self.assertEqual(shortlist[0]["id"], "cloudflare-security-audit")
+        self.assertEqual(shortlist[-1]["id"], "zero-breach")
+        self.assertEqual(len({item["id"] for item in shortlist}), len(shortlist))
+        self.assertTrue(all(item["state"] == "REVIEW" for item in shortlist))
+        self.assertTrue(all(
+            item["owner_shortlist"]["implementation_status"] == "NOT_INSTALLED_NOT_VERIFIED"
+            for item in shortlist
+        ))
+        self.assertEqual(len(self.scouter.owner_shortlist("PILOT")), 6)
+        self.assertEqual(len(self.scouter.owner_shortlist("BENCHMARK_ONLY")), 1)
+
     def test_accepted_public_api_requires_explicit_unlimited_evidence(self):
         candidate = {
             "id": "bad-public-api",
