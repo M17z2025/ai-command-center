@@ -18,6 +18,9 @@ def main() -> int:
     list_parser = sub.add_parser("list", help="List curated candidates")
     list_parser.add_argument("--state", choices=["ACCEPT", "FORK_CANDIDATE", "REVIEW", "REJECT"])
 
+    shortlist_parser = sub.add_parser("shortlist", help="List owner-approved evaluation candidates by priority")
+    shortlist_parser.add_argument("--decision", help="Filter owner decision such as PILOT or REFERENCE")
+
     sub.add_parser("queries", help="Print portfolio discovery queries")
 
     search_parser = sub.add_parser("search", help="Search through a configured private SearXNG endpoint")
@@ -39,6 +42,10 @@ def main() -> int:
 
     if args.command == "list":
         print(yaml_dump(policy.list_candidates(args.state)))
+        return 0
+
+    if args.command == "shortlist":
+        print(yaml_dump(policy.owner_shortlist(args.decision)))
         return 0
 
     if args.command == "queries":

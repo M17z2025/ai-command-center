@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_id": "sigma-scouter-catalog-v1",
-  "generated_on": "2026-09-27",
+  "generated_on": "2026-11-01",
   "rule": "Only ACCEPT and FORK_CANDIDATE entries have verified open-code rights for the stated use; every adoption still requires project-specific engineering, legal/licence and security review.",
   "discovery_queries": [
     "site:github.com open source self hosted invoicing accounting TypeScript",
@@ -1891,6 +1891,379 @@
       ],
       "requires_paid_core_dependency": false,
       "model_licence_separate": true
+    },
+    {
+      "id": "cloudflare-security-audit",
+      "name": "Cloudflare Security Audit Skill",
+      "category": "security",
+      "kind": "library",
+      "upstream": "https://github.com/cloudflare/security-audit-skill",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "public source code is inspectable; runtime and related model/provider costs require review",
+      "what_it_does": "Multi-phase AI coding-agent audit skill for authorized source security review.",
+      "portfolio_fit": [
+        "Sigma",
+        "all Mi7z apps"
+      ],
+      "integration_strategy": "Integrate into existing independent security review process, isolated and limited to authorised targets.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/cloudflare/security-audit-skill",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 1,
+        "decision": "PILOT",
+        "duplicate_guard": "Do not replace CI security scanning or claim complete penetration testing.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "moonshine-voice",
+      "name": "Moonshine Voice",
+      "category": "realtime-voice",
+      "kind": "engine",
+      "upstream": "https://github.com/moonshine-ai/moonshine",
+      "licence": "NOASSERTION",
+      "licence_class": "review_only",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "public source code is inspectable; runtime and related model/provider costs require review",
+      "what_it_does": "Low-latency speech processing engine for voice input.",
+      "portfolio_fit": [
+        "Friday AI"
+      ],
+      "integration_strategy": "Benchmark isolated streaming ASR on British telephone calls against incumbent stack; model/weights licence check.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/moonshine-ai/moonshine",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 2,
+        "decision": "PILOT",
+        "duplicate_guard": "Do not change SIP/OpenAI Realtime or production call routing without objective evidence.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "assistant-ui",
+      "name": "assistant-ui",
+      "category": "ai-frontend",
+      "kind": "library",
+      "upstream": "https://github.com/assistant-ui/assistant-ui",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "public source code is inspectable; runtime and related model/provider costs require review",
+      "what_it_does": "React/TypeScript AI assistant interface components.",
+      "portfolio_fit": [
+        "Sigma Mesh"
+      ],
+      "integration_strategy": "Prototype chat/tool status and owner approval UI against Sigma existing mission runtime.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/assistant-ui/assistant-ui",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 3,
+        "decision": "PILOT",
+        "duplicate_guard": "No second agent orchestration brain, memory or identity store.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "deep-tutor",
+      "name": "DeepTutor",
+      "category": "education",
+      "kind": "application",
+      "upstream": "https://github.com/HKUDS/DeepTutor",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted deployment may avoid vendor request quotas, subject to component and dependencies verification",
+      "what_it_does": "AI-based personalised tutoring and study workflows.",
+      "portfolio_fit": [
+        "Humanit"
+      ],
+      "integration_strategy": "Evaluate mastery/question scheduling components for Humanit 11+/GCSE 20-minute multi-subject study.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/HKUDS/DeepTutor",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 4,
+        "decision": "PILOT",
+        "duplicate_guard": "Respect child safety, age gates and curriculum validation; no duplicate learning platform.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "unstract",
+      "name": "Unstract",
+      "category": "document-extraction",
+      "kind": "application",
+      "upstream": "https://github.com/Zipstack/unstract",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "REVIEW",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted deployment may avoid vendor request quotas, subject to component and dependencies verification",
+      "what_it_does": "LLM-driven extraction of structured fields from documents.",
+      "portfolio_fit": [
+        "Invoiceit",
+        "Legalit",
+        "Sigma Investigation"
+      ],
+      "integration_strategy": "Private standalone document extraction service PoC with strict accuracy, privacy and copyleft assessment.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/Zipstack/unstract",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 5,
+        "decision": "PILOT",
+        "duplicate_guard": "Do not embed AGPL components in proprietary code without licence review or upload sensitive documents to unapproved hosts.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "morphic",
+      "name": "Morphic",
+      "category": "ai-search",
+      "kind": "application",
+      "upstream": "https://github.com/miurla/morphic",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted deployment may avoid vendor request quotas, subject to component and dependencies verification",
+      "what_it_does": "AI-powered web search and sourced-answer application.",
+      "portfolio_fit": [
+        "Sigma Mesh"
+      ],
+      "integration_strategy": "Evaluate retrieval and citation components against existing Sigma search; integrate selectively.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/miurla/morphic",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 6,
+        "decision": "SELECTIVE",
+        "duplicate_guard": "No duplicate research backend, index or state store.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "hallmark",
+      "name": "Hallmark",
+      "category": "ui-qa",
+      "kind": "library",
+      "upstream": "https://github.com/Nutlope/hallmark",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "public source code is inspectable; runtime and related model/provider costs require review",
+      "what_it_does": "Developer design-review guidance for AI coding agents.",
+      "portfolio_fit": [
+        "Mi7z Web",
+        "Winkday",
+        "Friday AI",
+        "BodyFit"
+      ],
+      "integration_strategy": "Pilot as developer-only Claude/Codex UI review skill in sandbox with brand and accessibility checks.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/Nutlope/hallmark",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 7,
+        "decision": "PILOT",
+        "duplicate_guard": "No automatic production design rewrites or override of approved identity.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "voicestudio",
+      "name": "VoiceStudio",
+      "category": "voice-production",
+      "kind": "application",
+      "upstream": "https://github.com/debpalash/VoiceStudio",
+      "licence": "AGPL-3.0",
+      "licence_class": "strong_copyleft",
+      "state": "REVIEW",
+      "self_hosted": true,
+      "unlimited_basis": "self-hosted deployment may avoid vendor request quotas, subject to component and dependencies verification",
+      "what_it_does": "Local audio production and voice generation studio.",
+      "portfolio_fit": [
+        "Friday AI",
+        "Winkday"
+      ],
+      "integration_strategy": "Evaluate local, non-live voice production with commercial model-weights and speaker-rights checks.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/debpalash/VoiceStudio",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 8,
+        "decision": "EVALUATE",
+        "duplicate_guard": "Not a proven real-time telephony synthesizer; do not collect unconsented voice samples.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false,
+      "model_licence_separate": true
+    },
+    {
+      "id": "public-apis-directory",
+      "name": "Public APIs",
+      "category": "api-discovery",
+      "kind": "reference_only",
+      "upstream": "https://github.com/public-apis/public-apis",
+      "licence": "MIT",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "reference directory or benchmark only; no vendor quota or cost assurance",
+      "what_it_does": "Public collection of third-party API listings.",
+      "portfolio_fit": [
+        "Sigma Scouter",
+        "Mi7z products"
+      ],
+      "integration_strategy": "Use as leads for provider-by-provider API assessment; prove rights, quotas and quality for each source.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/public-apis/public-apis",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 9,
+        "decision": "REFERENCE",
+        "duplicate_guard": "A directory is not a free/unlimited production API or SLA.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "deepagent-abacus",
+      "name": "DeepAgent by Abacus AI",
+      "category": "agent-benchmark",
+      "kind": "reference_only",
+      "upstream": "https://github.com/abacusai/DeepAgent",
+      "licence": "NOASSERTION",
+      "licence_class": "review_only",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "reference directory or benchmark only; no vendor quota or cost assurance",
+      "what_it_does": "Hosted agent development offering with public GitHub information.",
+      "portfolio_fit": [
+        "Sigma Mesh"
+      ],
+      "integration_strategy": "Benchmark only against existing coding agents; evaluate cost, privacy, portability before any vendor use.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/abacusai/DeepAgent",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 10,
+        "decision": "BENCHMARK_ONLY",
+        "duplicate_guard": "No second Sigma agent brain or assumption that public repo is self-hostable.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
+    },
+    {
+      "id": "zero-breach",
+      "name": "Zero Breach",
+      "category": "endpoint-security",
+      "kind": "engine",
+      "upstream": "https://github.com/interplains/zero-breach",
+      "licence": "Apache-2.0",
+      "licence_class": "permissive",
+      "state": "REVIEW",
+      "self_hosted": false,
+      "unlimited_basis": "public source code is inspectable; runtime and related model/provider costs require review",
+      "what_it_does": "Local scanner for specific spyware-related indicators.",
+      "portfolio_fit": [
+        "Sigma incident-response"
+      ],
+      "integration_strategy": "Retain as optional specialist endpoint forensic tool for authorised local investigations.",
+      "verified_on": "2026-11-01",
+      "evidence": [
+        {
+          "source": "https://github.com/interplains/zero-breach",
+          "verified_on": "2026-11-01",
+          "note": "GitHub repository existence and advertised licence metadata checked; technical, dependency, model/weights and usage-rights verification not yet completed."
+        }
+      ],
+      "owner_shortlist": {
+        "approved_for_evaluation": true,
+        "priority": 11,
+        "decision": "OPTIONAL",
+        "duplicate_guard": "Not a generic security scanner, not a permanent live service.",
+        "implementation_status": "NOT_INSTALLED_NOT_VERIFIED"
+      },
+      "requires_paid_core_dependency": false
     }
   ]
 }

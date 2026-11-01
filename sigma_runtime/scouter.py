@@ -127,6 +127,17 @@ class ScouterPolicy:
             items = [item for item in items if item.get("state") == state]
         return items
 
+    def owner_shortlist(self, decision: str | None = None) -> list[dict[str, Any]]:
+        """Owner-approved candidates, in priority order, without treating approval as deployment."""
+        items = [
+            item for item in self.list_candidates()
+            if isinstance(item.get("owner_shortlist"), dict)
+            and item["owner_shortlist"].get("approved_for_evaluation") is True
+        ]
+        if decision:
+            items = [item for item in items if item["owner_shortlist"].get("decision") == decision]
+        return sorted(items, key=lambda item: (item["owner_shortlist"].get("priority", 9999), item["id"]))
+
     def portfolio_queries(self) -> list[str]:
         return list(self.catalog.get("discovery_queries", []))
 
