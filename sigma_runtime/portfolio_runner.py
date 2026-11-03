@@ -488,6 +488,34 @@ class RunnerStore:
                 ),
             )
 
+    def recently_blocked_issues(
+        self, *, window_seconds: int = 3600, attempts: int = 2
+    ) -> set[tuple[str, int]]:
+        """Temporarily quarantine repeatedly blocked issue/repo pairs.
+
+        Avoid a worker retrying the same nonproductive work indefinitely.
+        Quarantine expires naturally; the issue is not closed or edited.
+        """
+        cutoff = (
+            datetime.now(timezone.utc) - timedelta(seconds=max(60, window_seconds))
+        ).isoformat()
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT selected_repository, selected_issue
+                FROM runner_cycles
+                WHERE status IN ('BLOCKED','FAILED')
+                  AND created_at>=?
+                  AND selected_repository IS NOT NULL
+                  AND selected_issue IS NOT NULL
+                GROUP BY selected_repository, selected_issue
+                HAVING COUNT(*)>=?""",
+                (cutoff, max(2, attempts)),
+            ).fetchall()
+        return {
+            (str(row["selected_repository"]), int(row["selected_issue"]))
+            for row in rows
+        }
+
     def list(self, limit: int = 50) -> list[dict[str, Any]]:
         limit = max(1, min(int(limit), 200))
         with self._connect() as conn:
@@ -546,6 +574,9 @@ _TERMINAL_LABEL_STATES = {
     "source complete": "SOURCE_COMPLETE",
     "superseded": "SUPERSEDED",
     "duplicate": "SUPERSEDED",
+    "sigma:non-executable": "NON_EXECUTABLE",
+    "governance-only": "NON_EXECUTABLE",
+    "policy-only": "NON_EXECUTABLE",
 }
 _BLOCKED_LABEL_STATES = {
     "blocked-owner": "BLOCKED_OWNER",
@@ -596,6 +627,10 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
                 break
     if state == "EXECUTABLE" and blockers:
         state = "BLOCKED_EXTERNAL"
+    if (state == "EXECUTABLE" and
+            os.getenv("SIGMA_RUNNER_REQUIRE_READY_LABEL", "0") == "1" and
+            "sigma:ready-for-code" not in labels_lower):
+        state = "NOT_CODE_READY"
 
     executable = has_objective and state == "EXECUTABLE"
     return WorkItem(
@@ -662,6 +697,8 @@ class PortfolioRunner:
     def discover(self) -> list[RepositorySnapshot]:
         snapshots = []
         for project in load_registry(self.registry_path):
+            if project["lifecycle"].lower() != "active":
+                continue  # catalogue-only repositories are not execution targets
             snapshots.append(self._discover_one(project))
         return snapshots
 
@@ -704,12 +741,20 @@ class PortfolioRunner:
         return snap
 
     @staticmethod
-    def select(snapshots: list[RepositorySnapshot]) -> WorkItem | None:
+    def select(
+        snapshots: list[RepositorySnapshot],
+        *,
+        excluded: set[tuple[str, int]] | None = None,
+    ) -> WorkItem | None:
         candidates: list[WorkItem] = []
+        excluded = excluded or set()
         for snap in snapshots:
             if snap.state != "DISCOVERED":
                 continue
-            candidates.extend(item for item in snap.work_items if item.executable)
+            candidates.extend(
+                item for item in snap.work_items
+                if item.executable and (item.repository, item.issue_number) not in excluded
+            )
         if not candidates:
             return None
         candidates.sort(key=lambda item: (item.priority, item.repository, item.issue_number))
@@ -737,12 +782,17 @@ class PortfolioRunner:
             return payload
 
         self.store.start(trigger, cycle_id=cycle_id)
+        selected: WorkItem | None = None
         try:
             snapshots = self.discover()
             self.store.heartbeat(cycle_id)
             self.store.renew_lease(cycle_id, self.lease_ttl_seconds)
 
-            selected = self.select(snapshots)
+            excluded = self.store.recently_blocked_issues(
+                window_seconds=int(os.getenv("SIGMA_RUNNER_RETRY_COOLDOWN_SECONDS", "3600")),
+                attempts=int(os.getenv("SIGMA_RUNNER_BLOCKED_RETRY_THRESHOLD", "2")),
+            )
+            selected = self.select(snapshots, excluded=excluded)
             discovery_summary = {
                 "repositories": len(snapshots),
                 "discovered": sum(
@@ -761,6 +811,7 @@ class PortfolioRunner:
                     "cycle_id": cycle_id,
                     "state": "NO_EXECUTABLE_WORK",
                     "discovery": discovery_summary,
+                    "cooldown_issues": len(excluded),
                 }
                 self.store.finish(cycle_id, "IDLE", payload)
                 return payload
@@ -928,8 +979,13 @@ class PortfolioRunner:
                 "state": "FAILED",
                 "error_type": type(exc).__name__,
                 "error": str(exc),
+                "selected": asdict(selected) if selected is not None else None,
             }
-            self.store.finish(cycle_id, "FAILED", payload)
+            self.store.finish(
+                cycle_id, "FAILED", payload,
+                repository=selected.repository if selected is not None else None,
+                issue_number=selected.issue_number if selected is not None else None,
+            )
             raise
         finally:
             self.store.release_lease(cycle_id)
