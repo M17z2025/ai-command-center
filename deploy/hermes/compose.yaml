@@ -1,0 +1,31 @@
+# Private, isolated Hermes agent; never attach a host Docker socket.
+# Run from a host approved for new service/resource allocation.
+# Configure the model via the private /opt/data profile before claiming readiness.
+services:
+  hermes:
+    image: nousresearch/hermes-agent:stable
+    restart: unless-stopped
+    command: ["gateway", "run"]
+    init: true
+    environment:
+      API_SERVER_ENABLED: "true"
+      API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_PORT: "8642"
+      API_SERVER_KEY: "${HERMES_API_KEY:?Set a private generated bearer key}"
+      # Omit CORS: browsers must call via server-side Friday/Marketit gateways.
+    ports:
+      - "127.0.0.1:8642:8642"
+    volumes:
+      - hermes-data:/opt/data
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 2g
+    cpus: "1.0"
+    networks:
+      - hermes-private
+networks:
+  hermes-private:
+    internal: false
+volumes:
+  hermes-data:
