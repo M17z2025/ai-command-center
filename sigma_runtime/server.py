@@ -106,8 +106,24 @@ def build_server(
                 if portfolio_runner is None:
                     self._json(503, {"error": "portfolio runner not configured"})
                 else:
-                    query = parse_qs(parsed.query)
-                    limit = int((query.get("limit") or ["50"])[0])
+                    values = parse_qs(parsed.query, keep_blank_values=True).get(
+                        "limit", ["50"]
+                    )
+                    if len(values) != 1:
+                        self._json(400, {"error": "limit must be an integer from 1 to 100"})
+                        return
+                    value = values[0]
+                    if (
+                        not value.isascii()
+                        or not value.isdecimal()
+                        or len(value) > 3
+                    ):
+                        self._json(400, {"error": "limit must be an integer from 1 to 100"})
+                        return
+                    limit = int(value)
+                    if limit < 1 or limit > 100:
+                        self._json(400, {"error": "limit must be an integer from 1 to 100"})
+                        return
                     self._json(200, {"cycles": portfolio_runner.store.list(limit)})
                 return
             if path.startswith("/runner/cycles/"):

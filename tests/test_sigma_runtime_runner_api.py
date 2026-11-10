@@ -97,6 +97,27 @@ class RuntimeRunnerAPITests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(body["cycles"][0]["id"], "cycle-1")
 
+    def test_runner_cycles_reject_invalid_limits_with_json(self):
+        for raw in ("abc", "0", "-1", "101", "", "1&limit=2"):
+            with self.subTest(limit=raw):
+                with self.assertRaises(HTTPError) as error:
+                    self.request("/runner/cycles?limit=" + raw)
+                self.assertEqual(error.exception.code, 400)
+                body = json.loads(error.exception.read().decode("utf-8"))
+                self.assertIn("error", body)
+
+    def test_runner_cycles_accept_valid_limits(self):
+        for raw in ("1", "50", "100"):
+            with self.subTest(limit=raw):
+                status, body = self.request("/runner/cycles?limit=" + raw)
+                self.assertEqual(status, 200)
+                self.assertEqual(body["cycles"][0]["id"], "cycle-1")
+
+    def test_runner_cycles_auth_checked_before_validation(self):
+        with self.assertRaises(HTTPError) as error:
+            self.request("/runner/cycles?limit=abc", auth=False)
+        self.assertEqual(error.exception.code, 401)
+
     def test_runner_cycle_trigger(self):
         status, body = self.request(
             "/runner/cycle",
