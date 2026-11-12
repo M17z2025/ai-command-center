@@ -221,6 +221,7 @@ def _open_hands_edit(workspace: Path, prompt: str, mission_id: str) -> dict[str,
     try:
         from pydantic import SecretStr
         from openhands.sdk import Agent, Conversation, LLM, LocalWorkspace
+        from openhands.sdk.context.condenser import LLMSummarizingCondenser
         from openhands.sdk.tool import Tool
         from openhands.tools.preset.default import register_default_tools
         from openhands.tools.terminal import TerminalTool
@@ -243,6 +244,7 @@ def _open_hands_edit(workspace: Path, prompt: str, mission_id: str) -> dict[str,
     register_default_tools(enable_browser=False)
     agent = Agent(
         llm=llm,
+        condenser=LLMSummarizingCondenser(llm=llm, max_size=16, keep_first=2),
         tools=[Tool(name=TerminalTool.name)],
         system_prompt_kwargs={"cli_mode": True},
     )
