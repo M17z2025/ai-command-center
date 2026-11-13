@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "project": {
+    "repository": "M17z2025/REPLACE_WITH_REPOSITORY",
+    "product_name": "REPLACE_WITH_PRODUCT",
+    "legal_entity": "REVIEW_REQUIRED",
+    "accountable_owner": "REVIEW_REQUIRED",
+    "lifecycle": "active",
+    "markets": [
+      "UK"
+    ],
+    "children_likely": null,
+    "personal_data": null,
+    "special_category_data": null,
+    "financial_transactions": null,
+    "autonomous_external_actions": null,
+    "education_assessment": null,
+    "regulated_health_purpose": null
+  },
+  "ai": {
+    "has_ai": null,
+    "roles": [],
+    "eu_ai_act_risk": "pending_assessment",
+    "systems": [],
+    "intended_use_assessment": "REVIEW_REQUIRED"
+  },
+  "legal": {
+    "status": "pending_review",
+    "reviewer": "",
+    "review_date": "",
+    "jurisdiction_decisions": [],
+    "sector_regulator_assessment": "REVIEW_REQUIRED"
+  },
+  "controls": {
+    "asset_and_vendor_inventory": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "privacy_data_mapping": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "lawful_basis_and_notices": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "data_subject_rights_and_retention": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "security_and_access": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "incident_and_recovery": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "ai_governance_and_testing": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "ai_transparency_and_synthetic_media": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "supplier_assurance": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "accessibility_and_consumer_rights": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "children_code": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "special_category_data": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "financial_regulatory_scoping": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "agent_action_governance": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "education_high_risk_scoping": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    },
+    "medical_device_scoping": {
+      "state": "not_verified",
+      "evidence": [],
+      "reviewer": "",
+      "rationale": ""
+    }
+  },
+  "review": {
+    "decision": "pending",
+    "independent_reviewer": "",
+    "date": "",
+    "release_ticket": ""
+  }
+}
