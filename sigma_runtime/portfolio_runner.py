@@ -589,6 +589,32 @@ _PR_ISSUE_RE = re.compile(
 )
 
 
+
+def _explicit_blockers(title: str, body: str) -> list[str]:
+    """Only explicit blockers, not words in requirements or failure examples.
+
+    An issue asking for a structured BLOCKED result is still code-ready.
+    Labels such as blocked-owner continue to override this helper separately.
+    """
+    found: list[str] = []
+    if re.search(r"\[(?:blocked|blocked-owner|blocked-external|owner-gated)\]", title, re.I):
+        found.append("blocked title tag")
+    for raw_line in body.splitlines():
+        line = re.sub(r"^[\s>*-]+", "", raw_line).strip()
+        lowered = line.lower()
+        if re.match(r"^(?:status|state)\s*:\s*(?:blocked|owner[- ]gated|external[- ]gated)\b", lowered):
+            found.append("blocked status")
+            continue
+        if re.match(
+            r"^(?:blockers?|blocked by|owner action|credential required|secret required|awaiting legal|external approval)\s*[:\-]",
+            lowered,
+        ):
+            detail = line.split(":", 1)[-1].strip(" *").lower() if ":" in line else line
+            if detail not in {"none", "n/a", "resolved", "no blockers"}:
+                found.append("explicit blocker")
+    return found
+
+
 def _priority(issue: dict[str, Any]) -> int:
     labels = [str(item.get("name", "")).lower() for item in issue.get("labels", [])]
     for index, name in enumerate(("p0", "priority:p0", "critical")):
@@ -611,8 +637,7 @@ def _work_item(repository: str, issue: dict[str, Any]) -> WorkItem:
         str(item.get("name", "")) for item in issue.get("labels", []) if item.get("name")
     )
     labels_lower = {item.lower() for item in labels}
-    combined = f"{title}\n{body}".lower()
-    blockers = [word for word in _BLOCK_WORDS if word in combined]
+    blockers = _explicit_blockers(title, body)
     has_objective = bool(body.strip()) or bool(title.strip())
 
     state = "EXECUTABLE"
