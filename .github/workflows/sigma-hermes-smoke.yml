@@ -1,0 +1,56 @@
+name: Hermes gateway container smoke
+on:
+  pull_request:
+    paths:
+      - "sigma_runtime/workers/hermes.py"
+      - "tests/test_sigma_hermes_worker.py"
+      - "deploy/hermes/**"
+      - ".github/workflows/sigma-hermes-smoke.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gateway-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check bounded worker unit tests
+        run: python -m unittest tests.test_sigma_hermes_worker -v
+      - name: Start official Hermes container (ephemeral, no inference credentials)
+        run: |
+          set -euo pipefail
+          token="$(openssl rand -hex 32)"
+          echo "::add-mask::$token"
+          echo "HERMES_CI_TOKEN=$token" >> "$GITHUB_ENV"
+          docker run -d --name hermes-ci --pull=always \
+            -p 127.0.0.1:8642:8642 \
+            -e API_SERVER_ENABLED=true -e API_SERVER_HOST=0.0.0.0 \
+            -e API_SERVER_KEY="$token" \
+            nousresearch/hermes-agent:stable gateway run
+      - name: Assert gateway liveness and authenticated API contract
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 90); do
+            if curl -fsS --max-time 3 http://127.0.0.1:8642/health -o /tmp/hermes-health.json; then break; fi
+            sleep 2
+          done
+          python - <<'PY'
+          import json
+          assert json.load(open("/tmp/hermes-health.json"))["status"] == "ok"
+          PY
+          curl -fsS --max-time 8 \
+            -H "Authorization: Bearer $HERMES_CI_TOKEN" \
+            http://127.0.0.1:8642/v1/models -o /tmp/hermes-models.json
+          python - <<'PY'
+          import json
+          models=json.load(open("/tmp/hermes-models.json"))
+          assert isinstance(models.get("data"), list), "expected OpenAI-compatible models list"
+          PY
+          echo "Gateway liveness and authenticated API verified. Model inference NOT verified."
+      - name: Capture diagnostic logs if failure
+        if: failure()
+        run: docker logs hermes-ci --tail=120 || true
+      - name: Stop ephemeral container
+        if: always()
+        run: docker rm -f hermes-ci || true
