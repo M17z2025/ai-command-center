@@ -63,6 +63,16 @@ A task is Done only when all applicable conditions are satisfied.
 - Data migration and rollback/recovery implications are documented.
 - Financial/audit records retain required integrity.
 
+## Regulatory compliance and AI governance
+For every material development and release:
+- Product/jurisdiction data and AI inventories are current, including roles and intended uses.
+- Applicable UK/EU rules and sector-specific requirements have been assessed rather than guessed; EU AI Act high-risk classification is separate from internal business priority.
+- Privacy/data flows, lawful bases, DPIA decisions, vendor/processor due diligence and data subject rights are documented where relevant.
+- AI transparency/synthetic-media notices, children's privacy, regulated financial/health/education/legal uses and autonomous-tool controls are assessed where relevant.
+- Required `compliance/PRODUCT_COMPLIANCE.json` control evidence is independently reviewed, approved and tied to the relevant release; fail-closed gate passes in the product CI after onboarding.
+- No pending, unknown or prohibited assessment is presented as compliant. Release and certification claims require real evidence, legal review and any required independent audit.
+- See `docs/compliance/README.md` and `scripts/compliance_gate.py`. A green structural validator is **not** a legal sign-off.
+
 ## UX
 - Loading, empty, error and success states exist.
 - Responsive/mobile behaviour is checked for user-facing web apps.

@@ -1,0 +1,38 @@
+name: Sigma compliance gate tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/compliance_gate.py'
+      - 'tests/test_compliance_gate.py'
+      - 'templates/PRODUCT_COMPLIANCE.json'
+      - '.github/workflows/compliance-gate-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/compliance_gate.py'
+      - 'tests/test_compliance_gate.py'
+      - 'templates/PRODUCT_COMPLIANCE.json'
+      - '.github/workflows/compliance-gate-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-validator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run deterministic compliance validator tests
+        run: python -m unittest discover -s tests -p 'test_compliance_gate.py' -v
+      - name: Confirm unapproved example fails closed
+        run: |
+          if python scripts/compliance_gate.py templates/PRODUCT_COMPLIANCE.json; then
+            echo "::error::Unreviewed template must fail compliance gate"
+            exit 1
+          fi
